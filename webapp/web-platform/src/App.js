@@ -25,15 +25,19 @@ import { MuiThemeProvider } from '@material-ui/core/styles';
 import theme from "./libraries/material-ui/theme"
 
 // screens
+
+// owner
 import Login from "./screens/owner/login/login.screen";
 import LoginSocialNetworks from "./screens/owner/loginSocialNetworks/loginSocialNetworks.screen";
 import PostsFromSocialNetworks from "./screens/owner/postsFromSocialNetworks/postsFromSocialNetworks.screen";
 import EditSNPostToProduct from "./screens/owner/editSNPostToProduct/editSNPostToProduct.screen";
 import ProductsToSell from "./screens/owner/productsToSale/productsToSale.screen";
+import Register from "./screens/owner/register/register.screen";
+
+// customer
 import ProductsCatalog from "./screens/customer/productsCatalog/productsCatalog.screen";
 import ProductDetails from "./screens/customer/productDetails/productDetails.screen";
 import SaleConfirmation from "./screens/customer/saleConfirmation/saleConfirmation.screen";
-
 // import WorkshopDetails from "./screens/workshopDetails/workshopDetails.screen";
 
 // import Login from "./screens/login/login.screen";
@@ -41,29 +45,40 @@ import SaleConfirmation from "./screens/customer/saleConfirmation/saleConfirmati
 // import TeacherHome from "./screens/teacherHome/teacherHome.screen";
 // import EditCourse from "./screens/editCourse/editCourse.screen";
 
-// // ifrebase
-// import { auth } from "./config/firebase";
+// ifrebase
+import { auth } from "./libraries/firebase/firebase";
 
 
 // Component 
 class App extends Component {
 
 
+  // constructor
+  constructor(props) {
+
+    // constructur of parent
+    super(props);
+
+    this.on_logout = this.on_logout.bind(this);
+
+  };
+
+
   // // logout from admin page
-  // on_logout() {
+  on_logout() {
 
-  //   // logout
-  //   auth.signOut().then(res => {
+    // logout
+    auth.signOut().then(res => {
 
-  //     alert("Your session has been closed");
+      alert("Has cerrado tu sesión");
 
-  //   }).catch(error => {
+    }).catch(error => {
 
-  //     console.log(error);
+      console.log(error);
 
-  //   });
+    });
 
-  // }
+  }
 
   // render method
   render() {
@@ -91,12 +106,25 @@ class App extends Component {
 
               </Link>
 
+
+              {/* Link without "to" because text has the functino to close session */}
+              <Link className="nav-link" style={{ textDecoration: "none" }}>
+
+                <Typography gutterBottom variant="h6" component="h6" onClick={this.on_logout}>
+
+                  Cerrar sesión
+
+							</Typography>
+
+              </Link>
+
             </Toolbar>
 
           </AppBar>
 
           {/* owner */}
           <Route path = "/login" exact component = {Login} />
+          <Route path="/register" exact component={Register} />
           <Route path="/loginSocialNetworks" exact component={LoginSocialNetworks} />
           <Route path="/postsFromSocialNetworks" exact component={PostsFromSocialNetworks} />
           <Route path="/editSNPostToProduct" exact component={EditSNPostToProduct} />

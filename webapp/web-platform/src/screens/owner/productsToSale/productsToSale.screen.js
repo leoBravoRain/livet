@@ -30,7 +30,7 @@ import PlayArrow from '@material-ui/icons/PlayArrow';
 // import Chip from '@material-ui/core/Chip';
 
 // firebase
-// import { auth } from "../../config/firebase";
+import { auth } from "../../../libraries/firebase/firebase";
 
 
 // prototype post
@@ -74,33 +74,32 @@ class ProductsToSell extends React.Component {
 
     componentDidMount() {
 
-        console.log(this.state.products);
+        this.setState({
+            loading: true,
+        });
 
-        // this.setState({
-        //     loading: true,
-        // });
+        // check if user is logged
+        auth.onAuthStateChanged((user) => {
 
-        // // check if user is logged
-        // auth.onAuthStateChanged((user) => {
+            if (user) {
 
-        //     if (user) {
+                // redirect
+                this.props.history.push('/productsToSell');
 
-        //         this.props.history.push('/');
+            }
 
-        //     }
+            else {
 
-        //     else {
+                // console.log("user no logged");
 
-        //         // console.log("user no logged");
+                this.props.history.push('/login');
+            }
 
-        //         // this.props.history.push('/ProductsToSell/');
-        //     }
+            this.setState({
+                loading: false,
+            });
 
-        //     this.setState({
-        //         loading: false,
-        //     });
-
-        // });
+        });
 
     }
 

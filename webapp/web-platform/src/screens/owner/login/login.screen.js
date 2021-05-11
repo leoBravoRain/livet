@@ -13,7 +13,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from '@material-ui/core/Grid';
 
 // firebase
-// import { auth } from "../../config/firebase";
+import { auth } from "../../../libraries/firebase/firebase";
 
 class Login extends React.Component {
 
@@ -36,31 +36,32 @@ class Login extends React.Component {
 
     componentDidMount() {
 
-        // this.setState({
-        //     loading: true,
-        // });
+        this.setState({
+            loading: true,
+        });
 
-        // // check if user is logged
-        // auth.onAuthStateChanged((user) => {
+        // check if user is logged
+        auth.onAuthStateChanged((user) => {
 
-        //     if (user) {
+            if (user) {
 
-        //         this.props.history.push('/');
+                // redirect
+                this.props.history.push('/productsToSell');
 
-        //     }
+            }
 
-        //     else {
+            else {
 
-        //         // console.log("user no logged");
+                // console.log("user no logged");
 
-        //         // this.props.history.push('/login/');
-        //     }
+                // this.props.history.push('/login/');
+            }
 
-        //     this.setState({
-        //         loading: false,
-        //     });
+            this.setState({
+                loading: false,
+            });
 
-        // });
+        });
 
     }
 
@@ -74,35 +75,36 @@ class Login extends React.Component {
         const email = this.state.email.trim();
         const password = this.state.password;
 
-        // prototype
-        this.props.history.push('/loginSocialNetworks');
+        // // prototype
+        // this.props.history.push('/loginSocialNetworks');
 
         // console.log(this);
-        // auth.signInWithEmailAndPassword(email, password)
+        auth.signInWithEmailAndPassword(email, password)
 
-        //     .then(res => {
+            .then(res => {
 
-        //         console.log("user logged!");
+                console.log("user logged!");
 
-        //         this.setState({
-        //             loading: false,
-        //         });
+                this.setState({
+                    loading: false,
+                });
 
-        //         this.props.history.push('/admin');
+                // redirect
+                this.props.history.push('/productsToSell');
 
-        //     })
+            })
 
-        //     .catch((error) => {
+            .catch((error) => {
 
-        //         this.setState({
-        //             loading: false,
-        //         });
+                this.setState({
+                    loading: false,
+                });
 
-        //         console.log(error.code);
+                // console.log(error.code);
 
-        //         alert(error.message);
+                alert(error.message);
 
-            // });
+            });
     }
 
     render() {
@@ -153,7 +155,7 @@ class Login extends React.Component {
                                 >
 
                                     <TextField
-                                        id="standard-uncontrolled"
+                                        // id="standard-uncontrolled"
                                         label="Email"
                                         // defaultValue="Correo electrónico"
                                         margin="normal"
@@ -162,9 +164,9 @@ class Login extends React.Component {
                                     />
 
                                     <TextField
-                                        id="standard-uncontrolled"
+                                        // id="standard-uncontrolled"
                                         label="Contraseña"
-                                        type="Contraseña"
+                                        type="password"
                                         // defaultValue="Correo electrónico"
                                         margin="normal"
                                         onChange={(e) => this.setState({ password: e.target.value })}
@@ -199,8 +201,8 @@ class Login extends React.Component {
                                     {/* register button */}
                                     <Button align="center" variant="contained" color="primary"
                                         onClick={() => {
-                                            // this.props.history.push('/register');
-                                            alert("go to register");
+                                            this.props.history.push('/register');
+                                            // alert("go to register");
                                         }}
                                     >
                                         Registrarme

@@ -13,7 +13,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from '@material-ui/core/Grid';
 
 // firebase
-// import { auth } from "../../config/firebase";
+import { auth } from "../../../libraries/firebase/firebase";
 
 class LoginSocialNetworks extends React.Component {
 
@@ -36,31 +36,32 @@ class LoginSocialNetworks extends React.Component {
 
     componentDidMount() {
 
-        // this.setState({
-        //     loading: true,
-        // });
+        this.setState({
+            loading: true,
+        });
 
-        // // check if user is logged
-        // auth.onAuthStateChanged((user) => {
+        // check if user is logged
+        auth.onAuthStateChanged((user) => {
 
-        //     if (user) {
+            if (user) {
 
-        //         this.props.history.push('/');
+                // redirect
+                this.props.history.push('/productsToSell');
 
-        //     }
+            }
 
-        //     else {
+            else {
 
-        //         // console.log("user no logged");
+                // console.log("user no logged");
 
-        //         // this.props.history.push('/loginSocialNetworks/');
-        //     }
+                this.props.history.push('/login');
+            }
 
-        //     this.setState({
-        //         loading: false,
-        //     });
+            this.setState({
+                loading: false,
+            });
 
-        // });
+        });
 
     }
 
