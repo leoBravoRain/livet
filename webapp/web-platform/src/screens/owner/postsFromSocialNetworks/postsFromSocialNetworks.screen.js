@@ -59,7 +59,7 @@ class PostsFromSocialNetworks extends React.Component {
         // initial states
         this.state = {
             loading: false,
-            posts: posts,
+            posts: [],
         }
 
     }
@@ -75,8 +75,17 @@ class PostsFromSocialNetworks extends React.Component {
 
             if (user) {
 
-                // redirect
-                this.props.history.push('/productsToSell');
+                // // redirect
+                // this.props.history.push('/productsToSell');
+
+                // get posts from IG (filter by store id)
+
+                // update posts
+                this.setState({
+                    posts: posts,
+                    loading: false,
+                });
+
 
             }
 
@@ -174,7 +183,7 @@ class PostsFromSocialNetworks extends React.Component {
                                                             // });
 
                                                             // alert("See details")
-                                                            this.props.history.push('/editSNPostToProduct');
+                                                            this.props.history.push('/editSNPostToProduct/' + this.props.match.params.store_id, {"post": post});
                                                         }}
                                                     >
 

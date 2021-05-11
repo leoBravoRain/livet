@@ -84,7 +84,7 @@ class ProductsToSell extends React.Component {
             if (user) {
 
                 // redirect
-                this.props.history.push('/productsToSell');
+                // this.props.history.push('/productsToSell');
 
             }
 

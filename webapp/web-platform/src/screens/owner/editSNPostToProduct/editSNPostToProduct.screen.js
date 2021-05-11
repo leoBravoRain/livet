@@ -30,22 +30,25 @@ import Grid from '@material-ui/core/Grid';
 // import Chip from '@material-ui/core/Chip';
 
 // firebase
-import { auth } from "../../../libraries/firebase/firebase";
+import { 
+    auth,
+    fs,
+} from "../../../libraries/firebase/firebase";
 
 
-// prototype post
-const posts = [
+// // prototype post
+// const posts = [
 
-    {
-        "text": "hello this is my first IG post",
-        "image": "https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg",
-    },
+//     {
+//         "text": "hello this is my first IG post",
+//         "image": "https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg",
+//     },
 
-    {
-        "text": "This is another IG post",
-        "image": "https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg",
-    },
-];
+//     {
+//         "text": "This is another IG post",
+//         "image": "https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg",
+//     },
+// ];
 
 
 class EditSNPostToProduct extends React.Component {
@@ -58,8 +61,8 @@ class EditSNPostToProduct extends React.Component {
 
         // initial states
         this.state = {
-            loading: false,
-            post: posts[0],
+            loading: true,
+            post: null,
 
             // product fields
             productName: null,
@@ -73,7 +76,7 @@ class EditSNPostToProduct extends React.Component {
 
         this.convert_to_product = this.convert_to_product.bind(this);
 
-    }
+    };
 
     componentDidMount() {
 
@@ -86,9 +89,12 @@ class EditSNPostToProduct extends React.Component {
 
             if (user) {
 
-                // redirect
-                this.props.history.push('/productsToSell');
-
+                // // redirect
+                // this.props.history.push('/productsToSell');
+                this.setState({
+                    post: this.props.location.state.post,
+                    loading: false,
+                });
             }
 
             else {
@@ -113,37 +119,45 @@ class EditSNPostToProduct extends React.Component {
             loading: true,
         });
 
-        // alert("convert to product");
+        // define store
+        const newProduct = {
+            "name": this.state.productName,
+            "description": this.state.productDescription,
+            "var1": this.state.productVar1,
+            "price": this.state.productPrice,
+            "image": this.state.productImage,
+            "extraInformation": this.state.productExtraInformation,
+        };
 
-        // prototype
-        this.props.history.push('/productsToSell');
+        // create store in DB 
+        fs.collection('stores').doc(this.props.match.params.store_id).collection("products")
+            .add(
+                newProduct
+            )
+            .then(ref_ => {
 
-        // console.log(this);
-        // auth.signInWithEmailAndPassword(email, password)
+                alert("El producto ha sido agregado exitosamente");
 
-        //     .then(res => {
+                this.setState({
+                    loading: false,
+                });
 
-        //         console.log("user logged!");
+                // navigate to products to sell
+                // + store id
+                this.props.history.push("/productsToSell");
 
-        //         this.setState({
-        //             loading: false,
-        //         });
+            })
 
-        //         this.props.history.push('/admin');
+            .catch(e => {
 
-        //     })
+                this.setState({
+                    loading: false
+                });
 
-        //     .catch((error) => {
 
-        //         this.setState({
-        //             loading: false,
-        //         });
+                alert("Tuvimos un error, inténtalo nuevamente porfavor");
 
-        //         console.log(error.code);
-
-        //         alert(error.message);
-
-        // });
+            });
     }
 
 
@@ -158,7 +172,7 @@ class EditSNPostToProduct extends React.Component {
 
 
                 {
-                    !this.state.loading
+                    (!this.state.loading)
 
                         ?
 

@@ -13,7 +13,14 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from '@material-ui/core/Grid';
 
 // firebase
-import { auth } from "../../../libraries/firebase/firebase";
+import { 
+    auth,
+    fs,
+} from "../../../libraries/firebase/firebase";
+
+
+// logged user
+var loggedUser = null;
 
 class LoginSocialNetworks extends React.Component {
 
@@ -26,8 +33,6 @@ class LoginSocialNetworks extends React.Component {
         // initial states
         this.state = {
             loading: false,
-            email: "",
-            password: "",
         }
 
         this.on_submit = this.on_submit.bind(this);
@@ -45,8 +50,11 @@ class LoginSocialNetworks extends React.Component {
 
             if (user) {
 
-                // redirect
-                this.props.history.push('/productsToSell');
+                // assign logged user to user var
+                loggedUser = user;
+
+                // // redirect
+                // this.props.history.push('/productsToSell');
 
             }
 
@@ -72,36 +80,46 @@ class LoginSocialNetworks extends React.Component {
             loading: true,
         });
 
-        const email = this.state.email.trim();
-        const password = this.state.password;
+        // define store
+        const newStore = {
+            "name": "Cami cooks",
+            "instagramUrl": "https://www.instagram.com/camicooks_/",
+            "profilePhoto": "https://instagram.fpuq3-1.fna.fbcdn.net/v/t51.2885-19/s320x320/97950066_1170349686638961_3025539464844804096_n.jpg?tp=1&_nc_ht=instagram.fpuq3-1.fna.fbcdn.net&_nc_ohc=gWikcq9ctcIAX8OQDqp&edm=ABfd0MgBAAAA&ccb=7-4&oh=b94a4bc8d14313227db5ff3db3795d06&oe=60BDCE66&_nc_sid=7bff83",
+            // owner store (user from DB)
+            "ownerId": loggedUser.uid,
+        };
 
-        // console.log(this);
-        // auth.signInWithEmailAndPassword(email, password)
+        // create store in DB 
+        fs.collection('stores')
+        .add(
+            newStore
+        )
+        .then(ref_ => {
 
-        //     .then(res => {
+            alert("Tu tienda ha sido creada exitosamente");
 
-        //         console.log("user logged!");
+            this.setState({ 
+                loading: false 
+            });
 
-        //         this.setState({
-        //             loading: false,
-        //         });
+            // navigate to post from social networks
+            // + store id
+            this.props.history.push("/postsFromSocialNetworks/" + ref_.id);
 
-        //         this.props.history.push('/admin');
+        })
+    
+        .catch (e => {
 
-        //     })
+            this.setState({ 
+                loading: false 
+            });
 
-        //     .catch((error) => {
 
-        //         this.setState({
-        //             loading: false,
-        //         });
+            alert("Tuvimos un error, inténtalo nuevamente porfavor");
 
-        //         console.log(error.code);
+        });
 
-        //         alert(error.message);
-
-        // });
-    }
+    };
 
     render() {
 
@@ -145,7 +163,10 @@ class LoginSocialNetworks extends React.Component {
 
                                 <Button align="center" variant="contained" color="primary"
                                     onClick={() => {
-                                        this.props.history.push('/postsFromSocialNetworks');
+
+                                        this.on_submit();
+
+                                        // this.props.history.push('/postsFromSocialNetworks');
                                         // alert("go to IG posts page");
                                     }}
                                 >

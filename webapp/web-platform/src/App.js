@@ -126,8 +126,8 @@ class App extends Component {
           <Route path = "/login" exact component = {Login} />
           <Route path="/register" exact component={Register} />
           <Route path="/loginSocialNetworks" exact component={LoginSocialNetworks} />
-          <Route path="/postsFromSocialNetworks" exact component={PostsFromSocialNetworks} />
-          <Route path="/editSNPostToProduct" exact component={EditSNPostToProduct} />
+          <Route path="/postsFromSocialNetworks/:store_id" exact component={PostsFromSocialNetworks} />
+          <Route path="/editSNPostToProduct/:store_id" exact component={EditSNPostToProduct} />
           <Route path="/productsToSell" exact component={ProductsToSell} />
 
           {/* customer */}

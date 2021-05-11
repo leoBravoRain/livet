@@ -33,23 +33,23 @@ class Register extends React.Component {
 
     componentDidMount() {
 
-        // check if user is logged
-        auth.onAuthStateChanged((user) => {
+        // // check if user is logged
+        // auth.onAuthStateChanged((user) => {
 
-            if (user) {
+        //     if (user) {
 
-                this.props.history.push('/productsToSell');
+        //         this.props.history.push('/productsToSell');
 
-            }
+        //     }
 
-            else {
+        //     else {
 
-                // console.log("user no logged");
+        //         // console.log("user no logged");
 
-                // this.props.history.push('/Register/');
-            }
+        //         // this.props.history.push('/Register/');
+        //     }
 
-        });
+        // });
 
     }
 
