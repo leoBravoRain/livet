@@ -32,6 +32,7 @@ import PlayArrow from '@material-ui/icons/PlayArrow';
 // firebase
 import { auth } from "../../../libraries/firebase/firebase";
 
+import MenuBar from "../generalComponents/menuBar.component";
 
 // prototype post
 const posts = [
@@ -113,6 +114,20 @@ class PostsFromSocialNetworks extends React.Component {
                 spacing={3}
             >
 
+                {/* menu */}
+                <MenuBar
+                    goToSocialNetworkPosts={() => {
+                        this.props.history.push("/postsFromSocialNetworks/" + this.props.match.params.store_id);
+                    }}
+
+                    goToProductsToSell={() => {
+                        this.props.history.push("/productsToSell/" + this.props.match.params.store_id);
+                    }}
+
+                    goToChooseStore={() => {
+                        this.props.history.push("/chooseStore");
+                    }}
+                />
 
                 {
                     !this.state.loading

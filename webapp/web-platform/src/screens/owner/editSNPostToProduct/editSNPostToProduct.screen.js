@@ -70,7 +70,7 @@ class EditSNPostToProduct extends React.Component {
             // this can be for example "size" or "units"
             productVar1: null,
             productPrice: null,
-            productImage: null,
+            productImage: "https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg",
             productExtraInformation: null,
         }
 
@@ -144,7 +144,7 @@ class EditSNPostToProduct extends React.Component {
 
                 // navigate to products to sell
                 // + store id
-                this.props.history.push("/productsToSell");
+                this.props.history.push("/productsToSell/" + this.props.match.params.store_id);
 
             })
 

@@ -18,7 +18,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 // import Modal from '@material-ui/core/Modal';
-import PlayArrow from '@material-ui/icons/PlayArrow';
+// import PlayArrow from '@material-ui/icons/PlayArrow';
 // import Schedule from '@material-ui/icons/Schedule';
 
 // import Select from '@material-ui/core/Select';
@@ -29,31 +29,36 @@ import PlayArrow from '@material-ui/icons/PlayArrow';
 // import DialogTitle from '@material-ui/core/DialogTitle';
 // import Chip from '@material-ui/core/Chip';
 
+import MenuBar from "../generalComponents/menuBar.component";
+
 // firebase
-import { auth } from "../../../libraries/firebase/firebase";
+import { 
+    auth,
+    fs,
+} from "../../../libraries/firebase/firebase";
 
 
-// prototype post
-const products = [
+// // prototype post
+// const products = [
 
-    {
-        "name": "Panqueques de queso crema",
-        "description": "Panqueques hechos con masa integral",
-        "var1": "10 unidades",
-        "price": 4500,
-        "image": "https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg",
-        "extraInformation": "•Pedidos con al menos 2 días de anticipación \n •Entrega Concón gratis. •Entrega Reñaca, Jardín del Mar, plan Viña $1.000. •Entrega otros sectores $1000 + cobro extra dependiendo del lugar."
-    },
+//     {
+//         "name": "Panqueques de queso crema",
+//         "description": "Panqueques hechos con masa integral",
+//         "var1": "10 unidades",
+//         "price": 4500,
+//         "image": "https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg",
+//         "extraInformation": "•Pedidos con al menos 2 días de anticipación \n •Entrega Concón gratis. •Entrega Reñaca, Jardín del Mar, plan Viña $1.000. •Entrega otros sectores $1000 + cobro extra dependiendo del lugar."
+//     },
 
-    {
-        "name": "Torta de manjar",
-        "productDescription": "Torta hecha con masa integral",
-        "var1": "18 cm",
-        "price": 9500,
-        "image": "https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg",
-        "extraInformation": "•Pedidos con al menos 2 días de anticipación \n •Entrega Concón gratis. •Entrega Reñaca, Jardín del Mar, plan Viña $1.000. •Entrega otros sectores $1000 + cobro extra dependiendo del lugar."
-    },
-];
+//     {
+//         "name": "Torta de manjar",
+//         "productDescription": "Torta hecha con masa integral",
+//         "var1": "18 cm",
+//         "price": 9500,
+//         "image": "https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg",
+//         "extraInformation": "•Pedidos con al menos 2 días de anticipación \n •Entrega Concón gratis. •Entrega Reñaca, Jardín del Mar, plan Viña $1.000. •Entrega otros sectores $1000 + cobro extra dependiendo del lugar."
+//     },
+// ];
 
 
 class ProductsToSell extends React.Component {
@@ -67,7 +72,7 @@ class ProductsToSell extends React.Component {
         // initial states
         this.state = {
             loading: false,
-            products: products,
+            products: [],
         }
 
     }
@@ -85,6 +90,35 @@ class ProductsToSell extends React.Component {
 
                 // redirect
                 // this.props.history.push('/productsToSell');
+                
+                // get products from store
+                fs.collection("stores").doc(this.props.match.params.store_id).collection("products")
+                .get()
+                .then(snapshotquery => {
+
+                    // // get data from API
+                    var products = [];
+
+                    // iterate over each item
+                    snapshotquery.forEach(doc => {
+
+                        // console.log(doc.data());
+                        let product = doc.data();
+                        product["id"] = doc.id;
+                        products.push(product);
+
+                    });
+
+                    // update state
+                    this.setState({
+
+                        // update products
+                        products: products,
+                        loading: false,
+
+                    });
+
+                })
 
             }
 
@@ -95,9 +129,9 @@ class ProductsToSell extends React.Component {
                 this.props.history.push('/login');
             }
 
-            this.setState({
-                loading: false,
-            });
+            // this.setState({
+            //     loading: false,
+            // });
 
         });
 
@@ -111,8 +145,23 @@ class ProductsToSell extends React.Component {
                 container
                 spacing={3}
             >
+                
+                {/* menu */}
+                <MenuBar
+                    goToSocialNetworkPosts = {() => {
+                        this.props.history.push("/postsFromSocialNetworks/" + this.props.match.params.store_id);
+                    }}
 
+                    goToProductsToSell={() => {
+                        this.props.history.push("/productsToSell/" + this.props.match.params.store_id);
+                    }}
 
+                    goToChooseStore = {() => {
+                        this.props.history.push("/chooseStore");
+                    }}
+                />
+
+                {/* list of products */}
                 {
                     !this.state.loading
 

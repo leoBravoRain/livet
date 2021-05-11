@@ -31,8 +31,9 @@ import Login from "./screens/owner/login/login.screen";
 import LoginSocialNetworks from "./screens/owner/loginSocialNetworks/loginSocialNetworks.screen";
 import PostsFromSocialNetworks from "./screens/owner/postsFromSocialNetworks/postsFromSocialNetworks.screen";
 import EditSNPostToProduct from "./screens/owner/editSNPostToProduct/editSNPostToProduct.screen";
-import ProductsToSell from "./screens/owner/productsToSale/productsToSale.screen";
+import ProductsToSell from "./screens/owner/productsToSell/productsToSell.screen";
 import Register from "./screens/owner/register/register.screen";
+import ChooseStore from "./screens/owner/chooseStore/chooseStore.screen";
 
 // customer
 import ProductsCatalog from "./screens/customer/productsCatalog/productsCatalog.screen";
@@ -128,8 +129,9 @@ class App extends Component {
           <Route path="/loginSocialNetworks" exact component={LoginSocialNetworks} />
           <Route path="/postsFromSocialNetworks/:store_id" exact component={PostsFromSocialNetworks} />
           <Route path="/editSNPostToProduct/:store_id" exact component={EditSNPostToProduct} />
-          <Route path="/productsToSell" exact component={ProductsToSell} />
-
+          <Route path="/productsToSell/:store_id" exact component={ProductsToSell} />
+          <Route path="/chooseStore" exact component={ChooseStore}/>
+          
           {/* customer */}
           <Route path="/" exact component={ProductsCatalog} />
           <Route path="/productDetails" exact component={ProductDetails} />
