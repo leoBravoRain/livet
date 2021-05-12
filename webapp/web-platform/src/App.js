@@ -133,7 +133,7 @@ class App extends Component {
           <Route path="/chooseStore" exact component={ChooseStore}/>
           
           {/* customer */}
-          <Route path="/" exact component={ProductsCatalog} />
+          <Route path="/:store_id" exact component={ProductsCatalog} />
           <Route path="/productDetails" exact component={ProductDetails} />
           <Route path="/saleConfirmation" exact component={SaleConfirmation} />
           {/* <Route path="/" exact component={Home} />

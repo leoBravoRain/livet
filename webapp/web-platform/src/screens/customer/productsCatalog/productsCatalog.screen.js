@@ -30,35 +30,36 @@ import PlayArrow from '@material-ui/icons/PlayArrow';
 // import Chip from '@material-ui/core/Chip';
 
 // firebase
-// import { auth } from "../../config/firebase";
+import { fs } from "../../../libraries/firebase/firebase";
 
-// store information prototype
-const store = {
-    "name":"Cami cooks",
-    "instagramUrl": "https://www.instagram.com/camicooks_/",
-    "profilePhoto": "https://instagram.fpuq3-1.fna.fbcdn.net/v/t51.2885-19/s320x320/97950066_1170349686638961_3025539464844804096_n.jpg?tp=1&_nc_ht=instagram.fpuq3-1.fna.fbcdn.net&_nc_ohc=gWikcq9ctcIAX8OQDqp&edm=ABfd0MgBAAAA&ccb=7-4&oh=b94a4bc8d14313227db5ff3db3795d06&oe=60BDCE66&_nc_sid=7bff83",
-}
-// prototype post
-const products = [
+// // store information prototype
+// const store = {
+//     "name":"Cami cooks",
+//     "instagramUrl": "https://www.instagram.com/camicooks_/",
+//     "profilePhoto": "https://instagram.fpuq3-1.fna.fbcdn.net/v/t51.2885-19/s320x320/97950066_1170349686638961_3025539464844804096_n.jpg?tp=1&_nc_ht=instagram.fpuq3-1.fna.fbcdn.net&_nc_ohc=gWikcq9ctcIAX8OQDqp&edm=ABfd0MgBAAAA&ccb=7-4&oh=b94a4bc8d14313227db5ff3db3795d06&oe=60BDCE66&_nc_sid=7bff83",
+// }
 
-    {
-        "name": "Panqueques de queso crema",
-        "description": "Panqueques hechos con masa integral",
-        "var1": "10 unidades",
-        "price": 4500,
-        "image": "https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg",
-        "extraInformation": "•Pedidos con al menos 2 días de anticipación \n •Entrega Concón gratis. •Entrega Reñaca, Jardín del Mar, plan Viña $1.000. •Entrega otros sectores $1000 + cobro extra dependiendo del lugar."
-    },
+// // prototype post
+// const products = [
 
-    {
-        "name": "Torta de manjar",
-        "productDescription": "Torta hecha con masa integral",
-        "var1": "18 cm",
-        "price": 9500,
-        "image": "https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg",
-        "extraInformation": "•Pedidos con al menos 2 días de anticipación \n •Entrega Concón gratis. •Entrega Reñaca, Jardín del Mar, plan Viña $1.000. •Entrega otros sectores $1000 + cobro extra dependiendo del lugar."
-    },
-];
+//     {
+//         "name": "Panqueques de queso crema",
+//         "description": "Panqueques hechos con masa integral",
+//         "var1": "10 unidades",
+//         "price": 4500,
+//         "image": "https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg",
+//         "extraInformation": "•Pedidos con al menos 2 días de anticipación \n •Entrega Concón gratis. •Entrega Reñaca, Jardín del Mar, plan Viña $1.000. •Entrega otros sectores $1000 + cobro extra dependiendo del lugar."
+//     },
+
+//     {
+//         "name": "Torta de manjar",
+//         "productDescription": "Torta hecha con masa integral",
+//         "var1": "18 cm",
+//         "price": 9500,
+//         "image": "https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg",
+//         "extraInformation": "•Pedidos con al menos 2 días de anticipación \n •Entrega Concón gratis. •Entrega Reñaca, Jardín del Mar, plan Viña $1.000. •Entrega otros sectores $1000 + cobro extra dependiendo del lugar."
+//     },
+// ];
 
 
 class ProductsCatalog extends React.Component {
@@ -71,42 +72,60 @@ class ProductsCatalog extends React.Component {
 
         // initial states
         this.state = {
-            loading: false,
-            products: products,
-            store: store,
+            loading: true,
+            products: [],
+            store: null,
         }
 
     }
 
     componentDidMount() {
 
-        console.log(this.state.products);
+        this.setState({
+            loading: true,
+        });
 
-        // this.setState({
-        //     loading: true,
-        // });
+        // get store data
+        fs.collection("stores").doc(this.props.match.params.store_id).get()
+        .then(doc => {
 
-        // // check if user is logged
-        // auth.onAuthStateChanged((user) => {
+            // if store exists
+            if(doc.exists) {
+                
+                // get store data
+                var store = doc.data();
+                store["id"] = doc.id;
+                // console.log(store);
 
-        //     if (user) {
+                // get store products
+                fs.collection("stores").doc(this.props.match.params.store_id).collection("products").get()
+                    .then(snapshotquery => {
 
-        //         this.props.history.push('/');
+                        // // get data from API
+                        var products = [];
 
-        //     }
+                        // iterate over each item
+                        snapshotquery.forEach(doc => {
 
-        //     else {
+                            // console.log(doc.data());
+                            let product = doc.data();
+                            product["id"] = doc.id;
+                            products.push(product);
 
-        //         // console.log("user no logged");
+                        });
 
-        //         // this.props.history.push('/ProductsCatalog/');
-        //     }
+                        // update state
+                        this.setState({
 
-        //     this.setState({
-        //         loading: false,
-        //     });
+                            // update products
+                            products: products,
+                            store: store,
+                            loading: false,
 
-        // });
+                        });
+                    });
+            }
+        })
 
     }
 
