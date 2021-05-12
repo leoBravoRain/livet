@@ -127,6 +127,7 @@ class EditSNPostToProduct extends React.Component {
             "price": this.state.productPrice,
             "image": this.state.productImage,
             "extraInformation": this.state.productExtraInformation,
+            "paymentUrl": "https://app.payku.cl/botonpago/index?idboton=14257&verif=0f7014ea",
         };
 
         // create store in DB 

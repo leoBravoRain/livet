@@ -177,7 +177,7 @@ class ProductDetails extends React.Component {
                                             // });
 
                                             // alert("Go to buy");
-                                            this.props.history.push('/saleConfirmation');
+                                            this.props.history.push('/saleConfirmation/' + this.props.match.params.store_id + "/" + this.props.match.params.product_id);
                                         }}
                                     >
 
