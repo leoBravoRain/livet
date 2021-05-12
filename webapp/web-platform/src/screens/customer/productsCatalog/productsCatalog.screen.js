@@ -233,7 +233,7 @@ class ProductsCatalog extends React.Component {
                                                             // });
 
                                                             // alert("See details")
-                                                            this.props.history.push('/productDetails');
+                                                            this.props.history.push('/productDetails/' + this.state.store.id + "/" + product.id);
                                                         }}
                                                     >
 

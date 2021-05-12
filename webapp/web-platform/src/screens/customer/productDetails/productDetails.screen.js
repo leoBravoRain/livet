@@ -30,18 +30,18 @@ import Grid from '@material-ui/core/Grid';
 // import Chip from '@material-ui/core/Chip';
 
 // firebase
-// import { auth } from "../../config/firebase";
+import { fs } from "../../../libraries/firebase/firebase";
 
 
-// prototype post
-const product = {
-    "name": "Panqueques de queso crema",
-    "description": "Panqueques hechos con masa integral",
-    "var1": "10 unidades",
-    "price": 4500,
-    "image": "https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg",
-    "extraInformation": "•Pedidos con al menos 2 días de anticipación \n •Entrega Concón gratis. •Entrega Reñaca, Jardín del Mar, plan Viña $1.000. •Entrega otros sectores $1000 + cobro extra dependiendo del lugar."
-};
+// // prototype post
+// const product = {
+//     "name": "Panqueques de queso crema",
+//     "description": "Panqueques hechos con masa integral",
+//     "var1": "10 unidades",
+//     "price": 4500,
+//     "image": "https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg",
+//     "extraInformation": "•Pedidos con al menos 2 días de anticipación \n •Entrega Concón gratis. •Entrega Reñaca, Jardín del Mar, plan Viña $1.000. •Entrega otros sectores $1000 + cobro extra dependiendo del lugar."
+// };
 
 
 class ProductDetails extends React.Component {
@@ -54,8 +54,8 @@ class ProductDetails extends React.Component {
 
         // initial states
         this.state = {
-            loading: false,
-            product: product,
+            loading: true,
+            product: null,
         }
 
         // this.convert_to_product = this.convert_to_product.bind(this);
@@ -64,75 +64,35 @@ class ProductDetails extends React.Component {
 
     componentDidMount() {
 
-        // console.log(this.state.posts);
+        this.setState({
+            loading: true,
+        });
 
-        // this.setState({
-        //     loading: true,
-        // });
+        // get store data
+        fs.collection("stores").doc(this.props.match.params.store_id).collection("products").doc(this.props.match.params.product_id).get()
+            .then(doc => {
 
-        // // check if user is logged
-        // auth.onAuthStateChanged((user) => {
+                // if store exists
+                if (doc.exists) {
 
-        //     if (user) {
+                    // get store data
+                    var product = doc.data();
+                    product["id"] = doc.id;
 
-        //         this.props.history.push('/');
+                    // update state
+                    this.setState({
 
-        //     }
+                        // update products
+                        product: product,
+                        loading: false,
 
-        //     else {
+                    });
 
-        //         // console.log("user no logged");
+                }
 
-        //         // this.props.history.push('/EditSNPostToProduct/');
-        //     }
-
-        //     this.setState({
-        //         loading: false,
-        //     });
-
-        // });
+            })
 
     }
-
-
-    // convert_to_product() {
-
-    //     this.setState({
-    //         loading: true,
-    //     });
-
-    //     // alert("convert to product");
-
-    //     // prototype
-    //     this.props.history.push('/productsToSell');
-
-    //     // console.log(this);
-    //     // auth.signInWithEmailAndPassword(email, password)
-
-    //     //     .then(res => {
-
-    //     //         console.log("user logged!");
-
-    //     //         this.setState({
-    //     //             loading: false,
-    //     //         });
-
-    //     //         this.props.history.push('/admin');
-
-    //     //     })
-
-    //     //     .catch((error) => {
-
-    //     //         this.setState({
-    //     //             loading: false,
-    //     //         });
-
-    //     //         console.log(error.code);
-
-    //     //         alert(error.message);
-
-    //     // });
-    // }
 
 
     render() {
