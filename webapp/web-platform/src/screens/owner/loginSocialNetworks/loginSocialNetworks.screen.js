@@ -116,7 +116,7 @@ class LoginSocialNetworks extends React.Component {
                     fetch(url)
                     .then(res =>res.json())
                     .then(data => {
-                        // console.log(data);
+                        console.log(data);
                         // console.log("DATA");
 
                         const posts = data.result.data;
