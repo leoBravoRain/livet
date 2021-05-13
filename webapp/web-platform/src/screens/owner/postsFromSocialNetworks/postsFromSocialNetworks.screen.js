@@ -81,6 +81,41 @@ class PostsFromSocialNetworks extends React.Component {
 
                 // get posts from IG (filter by store id)
 
+                console.log(this.props.location);
+
+                // validate if it has authorization IG API code
+                if (this.props.location.state.authCode) {
+                    
+                    alert("authorizatino code");
+
+                    // get access token
+                    const requestOptions = {
+                        method: 'POST',
+                            // crossDomain: true,
+                        mode: 'cors',
+                        headers: { 
+                            'Content-Type': 'application/json', 
+                            "Access-Control-Allow-Origin":  "*"
+                            
+                        },
+                        // body: JSON.stringify({ title: 'React POST Request Example' })
+                    };
+
+                    const url = "https://api.instagram.com/oauth/access_token \ -F client_id=477247573594243 \ -F client_secret=c58240f5ee44ea61bbda754e985dccdb \ -F grant_type=authorization_code \ -F redirect_uri=https://localhost:3000/loginSocialNetworks \ -F code=" + this.props.location.state.authCode;
+
+                    fetch(url, requestOptions)
+                        .then(response => response.json())
+                        // .then(data => this.setState({ postId: data.id }));
+                        .then(data => {
+                            console.log(data);
+                            console.log("DATA");
+                        });
+
+                }
+                else{
+                    alert("no auth code");
+                }
+
                 // update posts
                 this.setState({
                     posts: posts,
