@@ -70,7 +70,7 @@ class EditSNPostToProduct extends React.Component {
             // this can be for example "size" or "units"
             productVar1: null,
             productPrice: null,
-            productImage: "https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg",
+            // productImage: "https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg",
             productExtraInformation: null,
         }
 
@@ -93,6 +93,8 @@ class EditSNPostToProduct extends React.Component {
                 // this.props.history.push('/productsToSell');
                 this.setState({
                     post: this.props.location.state.post,
+                    // initial image
+                    productImage: this.props.location.state.post.media_url,
                     loading: false,
                 });
             }
@@ -207,7 +209,8 @@ class EditSNPostToProduct extends React.Component {
 
                                     {/* original image */}
                                     <img 
-                                        src={this.state.post.image} 
+                                        // src={this.state.post.image} 
+                                        src={this.state.post.media_url} 
                                         alt="image" 
                                         width = "300px"
                                         heigh = "300px"
@@ -215,7 +218,8 @@ class EditSNPostToProduct extends React.Component {
 
                                     {/* originla text */}
                                     <Typography align="center" variant="body2" component="p" gutterBottom>
-                                        {this.state.post.text}
+                                        {/* {this.state.post.text} */}
+                                        {this.state.post.caption}
                                     </Typography>
 
                                 </Container>

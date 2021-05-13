@@ -34,19 +34,19 @@ import { auth } from "../../../libraries/firebase/firebase";
 
 import MenuBar from "../generalComponents/menuBar.component";
 
-// prototype post
-const posts = [
+// // prototype post
+// const posts = [
 
-    {
-        "text": "hello this is my first IG post",
-        "image": "https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg",
-    },
+//     {
+//         "text": "hello this is my first IG post",
+//         "image": "https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg",
+//     },
 
-    {
-        "text": "This is another IG post",
-        "image": "https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg",
-    },
-];
+//     {
+//         "text": "This is another IG post",
+//         "image": "https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg",
+//     },
+// ];
 
 
 class PostsFromSocialNetworks extends React.Component {
@@ -81,40 +81,55 @@ class PostsFromSocialNetworks extends React.Component {
 
                 // get posts from IG (filter by store id)
 
-                console.log(this.props.location);
+                // console.log(this.props.location);
+
+                var posts = [];
+
+                // validation if it contains posts from IG API
+                // posts is stored in state variable and is it's sent from push history (url)  from previous webpage
+                if (this.props.location.state != null) {
+                    if(this.props.location.state.posts != null) {
+                        posts = this.props.location.state.posts;
+                        alert("post from API");
+                    }
+                }
+
+                else{
+                    alert("No POST from API (from previous webpage)");
+                }
 
                 // validate if it has authorization IG API code
-                if (this.props.location.state.authCode) {
+                // if (this.props.location.state.authCode) {
                     
-                    alert("authorizatino code");
+                //     alert("authorizatino code");
 
-                    // get access token
-                    const requestOptions = {
-                        method: 'POST',
-                            // crossDomain: true,
-                        mode: 'cors',
-                        headers: { 
-                            'Content-Type': 'application/json', 
-                            "Access-Control-Allow-Origin":  "*"
+                //     // get access token
+                //     const requestOptions = {
+                //         method: 'POST',
+                //             // crossDomain: true,
+                //         mode: 'cors',
+                //         headers: { 
+                //             'Content-Type': 'application/json', 
+                //             "Access-Control-Allow-Origin":  "*"
                             
-                        },
-                        // body: JSON.stringify({ title: 'React POST Request Example' })
-                    };
+                //         },
+                //         // body: JSON.stringify({ title: 'React POST Request Example' })
+                //     };
 
-                    const url = "https://api.instagram.com/oauth/access_token \ -F client_id=477247573594243 \ -F client_secret=c58240f5ee44ea61bbda754e985dccdb \ -F grant_type=authorization_code \ -F redirect_uri=https://localhost:3000/loginSocialNetworks \ -F code=" + this.props.location.state.authCode;
+                //     const url = "https://api.instagram.com/oauth/access_token \ -F client_id=477247573594243 \ -F client_secret=c58240f5ee44ea61bbda754e985dccdb \ -F grant_type=authorization_code \ -F redirect_uri=https://localhost:3000/loginSocialNetworks \ -F code=" + this.props.location.state.authCode;
 
-                    fetch(url, requestOptions)
-                        .then(response => response.json())
-                        // .then(data => this.setState({ postId: data.id }));
-                        .then(data => {
-                            console.log(data);
-                            console.log("DATA");
-                        });
+                //     fetch(url, requestOptions)
+                //         .then(response => response.json())
+                //         // .then(data => this.setState({ postId: data.id }));
+                //         .then(data => {
+                //             console.log(data);
+                //             console.log("DATA");
+                //         });
 
-                }
-                else{
-                    alert("no auth code");
-                }
+                // }
+                // else{
+                //     alert("no auth code");
+                // }
 
                 // update posts
                 this.setState({
@@ -202,7 +217,8 @@ class PostsFromSocialNetworks extends React.Component {
                                             <Card>
                                                 <CardActionArea>
                                                     <CardMedia
-                                                        image={post.image}
+                                                        // image={post.image}
+                                                        image={post.media_url}
                                                         component="img"
                                                         alt="Contemplative Reptile"
                                                         height="300"
@@ -214,7 +230,8 @@ class PostsFromSocialNetworks extends React.Component {
                                                     <CardContent>
 
                                                         <Typography variant="body2" color="textSecondary" component="p">
-                                                            {post.text}
+                                                            {/* {post.text} */}
+                                                            {post.caption}
                                                         </Typography>
 
                                                     </CardContent>

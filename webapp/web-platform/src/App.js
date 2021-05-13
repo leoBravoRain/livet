@@ -126,7 +126,7 @@ class App extends Component {
           {/* owner */}
           <Route path = "/login" exact component = {Login} />
           <Route path="/register" exact component={Register} />
-          <Route path="/loginSocialNetworks" exact component={LoginSocialNetworks} />
+          <Route path="/loginSocialNetworks/" exact component={LoginSocialNetworks} />
           <Route path="/postsFromSocialNetworks/:store_id" exact component={PostsFromSocialNetworks} />
           <Route path="/editSNPostToProduct/:store_id" exact component={EditSNPostToProduct} />
           <Route path="/productsToSell/:store_id" exact component={ProductsToSell} />

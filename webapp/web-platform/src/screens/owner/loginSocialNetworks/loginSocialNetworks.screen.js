@@ -57,16 +57,18 @@ class LoginSocialNetworks extends React.Component {
                 // this.props.history.push('/productsToSell');
 
                 // IG Login API
-                console.log(this.props.location);
+                // console.log(this.props.location);
                 // get authorization code
                 const authCode = this.props.location.search.replace("?code=","");
 
                 // console.log("AUTH CODE: " + authCode);
 
+                // console.log(authCode);
+
                 if (authCode) {
 
-                    console.log("authorization code");
-                    console.log(authCode);
+                    // console.log("authorization code");
+                    // console.log(authCode);
 
                     // so far everythin is correct
 
@@ -114,8 +116,23 @@ class LoginSocialNetworks extends React.Component {
                     fetch(url)
                     .then(res =>res.json())
                     .then(data => {
-                        console.log(data);
+                        // console.log(data);
                         // console.log("DATA");
+
+                        const posts = data.result.data;
+
+                        console.log(posts);
+                        // console.log(data.result.data);
+                        // redirect to posts
+                        // this.props.match.params.store_id
+                        // this.props.history.push("/postsFromSocialNetworks/" + this.props.match.params.store_id);
+                        alert("Change code store id");
+
+                        // console.log("/postsFromSocialNetworks/" + localStorage.getItem('store_id'));
+
+                        // this.props.history.push("/postsFromSocialNetworks/" + this.props.match.params.store_id, {posts: posts});
+                        this.props.history.push("/postsFromSocialNetworks/" + localStorage.getItem('store_id') , { posts: posts });
+
                     })
 
 

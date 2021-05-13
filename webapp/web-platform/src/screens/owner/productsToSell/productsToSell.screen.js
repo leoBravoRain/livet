@@ -149,7 +149,11 @@ class ProductsToSell extends React.Component {
                 {/* menu */}
                 <MenuBar
                     goToSocialNetworkPosts = {() => {
-                        this.props.history.push("/postsFromSocialNetworks/" + this.props.match.params.store_id);
+                        // set store id as local varibale because IG API cannot receive the store id in the url (becaus it has to be exact url and it changes with the store ids)
+                        localStorage.setItem('store_id', this.props.match.params.store_id);
+
+                        // this.props.history.push("/loginSocialNetworks/" + this.props.match.params.store_id);
+                        this.props.history.push("/loginSocialNetworks/");
                     }}
 
                     goToProductsToSell={() => {
