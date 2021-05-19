@@ -11,6 +11,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from '@material-ui/core/Grid';
+import Divider from '@material-ui/core/Divider';
 
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -133,75 +134,204 @@ class ProductsCatalog extends React.Component {
 
         return (
 
-            <Grid
-                container
-                spacing={3}
-            >
+            !this.state.loading
+
+                ?
+
+                // data to display
+
+                <Container 
+                    // style = {{
+                    //     margin: 10,
+                    // }}
+                >
 
 
-                {
-                    !this.state.loading
 
-                        ?
 
-                        <Grid 
-                            item 
-                            xs={12} 
-                            sm={12}
-                        // style={{ backgroundColor: "yellow" }}
+                    {/* store information */}
+                    <Grid
+                        container
+                        style = {{
+                            // margin: 20,
+                            marginTop: 40,
+                            // backgroundColor: "red",
+                        }}
+                    >
+
+                        {/* profile photo */}
+                        <Grid
+                            item
+                            xs = {12}
+                            md = {4}
+                            style = {{
+                                display: "flex",
+                                justifyContent: "center",
+                                // backgroundColor: "green",
+                            }}
                         >
 
-                            {/* store information */}
-                            <Container>
+                            {/* profile photo */}
+                            <img
+                                src={this.state.store.profilePhoto}
+                                width="100px"
+                                height="100px"
+                            />  
 
-                                {/* profile photo */}
-                                <img
-                                    src={this.state.store.profilePhoto}
-                                    width="100px"
-                                    height="100px"
-                                />  
+                        </Grid>
 
-                                {/* title */}
-                                <Typography align="center" variant="h4" component="h4" gutterBottom>
-                                    {this.state.store.name}
-                                </Typography>
 
-                                {/* IG link */}
-                                <Typography align="center" variant="h6" component="h6" gutterBottom>
-                                    <a href={this.state.store.instagramUrl}> Instagram </a>
-                                </Typography>
+                        {/* store description */}
+                        <Grid
+                            item
+                            xs={12}
+                            md={4}
+                            style={{
+                                // backgroundColor: "yellow",
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "center",
+                            }}
+                        >
 
-                            </Container>
+                            {/* title */}
+                            <Typography align="center" variant="h4" component="h4" gutterBottom>
+                                {this.state.store.name}
+                            </Typography>
 
-                            {/* list of products */}
-                            <Paper
-                                style={{
-                                    padding: 20,
-                                    margin: 10,
-                                    alignContent: "center",
-                                    justifyContent: "center",
-                                    display: "flex",
-                                    flexDirection: "column",
+                            {/* description */}
+                            <Typography 
+                                display="inline"
+                                // inline
+                                // style={{ display: 'inline-block' }} 
+                                align="center" 
+                                variant="body2" 
+                                component="p" 
+                                gutterBottom
+                            >
+                                {this.state.store.description}
+                            </Typography>
+
+                        </Grid>
+
+
+                        {/* buttons */}
+                        <Grid
+                            item
+                            xs={12}
+                            md={4}
+                            style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                // alignContent: "center",
+                                // backgroundColor: "red",
+                            }}
+                        >
+
+                            {/* go to home */}
+                            <Button
+                                // align="center"
+                                size="small"
+                                color="primary"
+                                // variant="contained"
+                                onClick={() => {
+                                    // alert("Go to home")
+                                    this.props.history.push('/' + this.props.match.params.store_id);
                                 }}
-
-                                elevation={3}
                             >
 
-                                
-                                {/* each post */}
-                                {
-                                    this.state.products.map((product) => {
+                                Inicio
 
-                                        return (
+                            </Button>
 
-                                            // each product structure
+                            {/* go to IG */}
+                            <Button
+                                // align="center"
+                                size="small"
+                                color="primary"
+                                // variant="contained"
+                                onClick={() => {
+                                    // alert("Go to home")
+                                    window.open(this.state.store.instagramUrl);
+                                }}
+                            >
+
+                                Ir a mi Instagram
+
+                            </Button>
+
+                        </Grid>
+
+                    </Grid>
+
+
+
+
+
+
+                    {/* catalog of products */}
+                    <Container>
+
+                            {/* divider */}
+
+                            <Divider 
+                                // light = {true}
+                                variant="middle"
+                                style = {{
+                                    margin: 50
+                                }}
+                            />
+
+                            {/* title */}
+                            <Typography 
+                                gutterBottom 
+                                variant="h5" 
+                                component="h5"
+                                style = {{
+                                    // marginTop: 20,
+                                    marginBottom: 30,
+                                }}
+                            >
+                                Mira nuestros productos
+                            </Typography>
+
+                        {/* list of products */}
+                            <Grid
+                                container
+                                spacing = {3}
+                                style={{
+                                    // padding: 20,
+                                    // margin: 5,
+                                    // alignContent: "center",
+                                    justifyContent: "center",
+                                    display: "flex",
+                                    // flexDirection: "column",
+                                    // backgroundColor: "green",
+                                }}
+
+                                // elevation={3}
+                            >
+                            {/* each post */}
+                            {
+                                this.state.products.map((product) => {
+
+                                    return (
+
+                                        // each product structure
+                                        <Grid
+                                            item
+                                            xs = {12}
+                                            md = {4}
+                                        >
+
                                             <Card>
-                                                <CardActionArea>
+                                                <CardActionArea
+                                                >
                                                     <CardMedia
                                                         image={product.image}
                                                         component="img"
                                                         alt="Contemplative Reptile"
-                                                        height="300"
+                                                        height="200"
 
                                                     // title={workshop.name}
                                                     />
@@ -209,12 +339,24 @@ class ProductsCatalog extends React.Component {
                                                     {/* contentn */}
                                                     <CardContent>
 
+                                                        {/* product name */}
                                                         <Typography gutterBottom variant="h5" component="h2">
                                                             {product.name}
                                                         </Typography>
 
+                                                        {/* description */}
                                                         <Typography variant="body2" color="textSecondary" component="p">
                                                             {product.description}
+                                                        </Typography>
+
+                                                        {/* size */}
+                                                        <Typography gutterBottom variant="h5" component="h2">
+                                                            {product.var1}
+                                                        </Typography>
+
+                                                        {/* price */}
+                                                        <Typography gutterBottom variant="h5" component="h2">
+                                                            {product.price}
                                                         </Typography>
 
                                                     </CardContent>
@@ -224,7 +366,10 @@ class ProductsCatalog extends React.Component {
 
                                                 <CardActions>
 
-                                                    <Button size="small" color="primary"
+                                                    <Button 
+                                                        align="center" 
+                                                        size="small" 
+                                                        color="primary"
                                                         variant="contained"
                                                         onClick={() => {
                                                             // window.open("https://wa.me/" + workshop.teacherMobileNumber + "?text=Hola, quiero tomar una clase en tu curso de '" + workshop.title + "' que aparece en la plataforma online")
@@ -245,21 +390,23 @@ class ProductsCatalog extends React.Component {
 
                                             </Card>
 
-                                        );
-                                    })
-                                }
+                                        </Grid>
 
-                            </Paper>
+                                    );
+                                })
+                            }
 
                         </Grid>
 
-                        :
+                    </Container>
 
-                        <CircularProgress />
+                </Container>
 
-                }
-                {/* </Paper> */}
-            </Grid>
+                :
+
+                // loading data
+                <CircularProgress />
+
         );
 
     }
