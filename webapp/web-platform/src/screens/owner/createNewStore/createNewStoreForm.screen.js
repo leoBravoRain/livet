@@ -3,14 +3,14 @@ import React from "react";
 // import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 // material ui
-import Paper from '@material-ui/core/Paper';
-// import Container from '@material-ui/core/Container';
+// import Paper from '@material-ui/core/Paper';
+import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 import { Button } from "@material-ui/core";
 import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Grid from '@material-ui/core/Grid';
+// import Grid from '@material-ui/core/Grid';
 
 // firebase
 import {
@@ -50,79 +50,79 @@ class CreateNewStoreForm extends React.Component {
         console.log("load create new store form component");
 
         this.setState({
-            loading: true,
+            loading: false,
         });
 
         // check if user is logged
-        auth.onAuthStateChanged((user) => {
+        // auth.onAuthStateChanged((user) => {
 
-            if (user) {
+        //     if (user) {
 
-                // assign logged user to user var
-                loggedUser = user;
+        //         // assign logged user to user var
+        //         loggedUser = user;
 
-                // // redirect
-                // this.props.history.push('/productsToSell');
+        //         // // redirect
+        //         // this.props.history.push('/productsToSell');
 
-                // IG Login API
-                // console.log(this.props.location);
-                // get authorization code
-                const authCode = this.props.location.search.replace("?code=", "");
+        //         // IG Login API
+        //         // console.log(this.props.location);
+        //         // get authorization code
+        //         const authCode = this.props.location.search.replace("?code=", "");
 
-                // console.log("AUTH CODE: " + authCode);
+        //         // console.log("AUTH CODE: " + authCode);
 
-                // console.log(authCode);
+        //         // console.log(authCode);
 
-                if (authCode) {
+        //         if (authCode) {
 
-                    alert("IG API auth code");
-                    const url = "http://localhost:5001/livet2/us-central1/getAPIToken?authCode=" + authCode + "&requestType=userInformation";
+        //             alert("IG API auth code");
+        //             const url = "http://localhost:5001/livet2/us-central1/getAPIToken?authCode=" + authCode + "&requestType=userInformation";
 
-                    fetch(url)
-                        .then(res => res.json())
-                        .then(data => {
-                            console.log(data);
-                            // console.log("DATA");
+        //             fetch(url)
+        //                 .then(res => res.json())
+        //                 .then(data => {
+        //                     console.log(data);
+        //                     // console.log("DATA");
 
-                            // const posts = data.result.data;
+        //                     // const posts = data.result.data;
 
-                            // console.log(posts);
-                            // // console.log(data.result.data);
-                            // // redirect to posts
-                            // // this.props.match.params.store_id
-                            // // this.props.history.push("/postsFromSocialNetworks/" + this.props.match.params.store_id);
-                            // alert("Change code store id");
+        //                     // console.log(posts);
+        //                     // // console.log(data.result.data);
+        //                     // // redirect to posts
+        //                     // // this.props.match.params.store_id
+        //                     // // this.props.history.push("/postsFromSocialNetworks/" + this.props.match.params.store_id);
+        //                     // alert("Change code store id");
 
-                            // // console.log("/postsFromSocialNetworks/" + localStorage.getItem('store_id'));
+        //                     // // console.log("/postsFromSocialNetworks/" + localStorage.getItem('store_id'));
 
-                            // // this.props.history.push("/postsFromSocialNetworks/" + this.props.match.params.store_id, {posts: posts});
-                            // this.props.history.push("/postsFromSocialNetworks/" + localStorage.getItem('store_id'), { posts: posts });
+        //                     // // this.props.history.push("/postsFromSocialNetworks/" + this.props.match.params.store_id, {posts: posts});
+        //                     // this.props.history.push("/postsFromSocialNetworks/" + localStorage.getItem('store_id'), { posts: posts });
 
-                            // update user name
-                            this.setState({
-                                name: data.result.username,
-                                loading: false,
-                            });
+        //                     // update user name
+        //                     this.setState({
+        //                         name: data.result.username,
+        //                         loading: false,
+        //                     });
 
-                        })
+        //                 })
 
 
-                };
+        //         };
 
-            }
+        //     }
 
-            else {
+        //     else {
 
-                // console.log("user no logged");
+        //         // console.log("user no logged");
 
-                this.props.history.push('/login');
-            }
+        //         this.props.history.push('/login');
+        //     }
 
-            // this.setState({
-            //     loading: false,
-            // });
+        //     // this.setState({
+        //     //     loading: false,
+        //     // });
 
-        });
+        // });
 
     }
 
@@ -180,114 +180,96 @@ class CreateNewStoreForm extends React.Component {
 
         return (
 
-            <Grid
-                container
-                spacing={3}
-            >
+            !this.state.loading
 
+                ?
 
-                {
-                    !this.state.loading
+                    <Container
+                        // item xs={12} sm={12}
+                        style={{
+                            // backgroundColor: "yellow" 
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                        }}
+                    >
 
-                        ?
+                        {/* sync with IG account */}
+                        <Typography align="center" variant="h4" component="h4" gutterBottom>
+                            Crear tienda
+                        </Typography>
 
-                        <Grid item xs={12} sm={12}
-                        // style={{ backgroundColor: "yellow" }}
+                        {/* informatino to fill */}
+                        <FormControl
+                            style={{
+                                width: "100%",
+                                alignSelf: "center",
+                            }}
                         >
-                            <Paper
-                                style={{
-                                    padding: 20,
-                                    margin: 10,
-                                    alignContent: "center",
-                                    justifyContent: "center",
-                                    display: "flex",
-                                    flexDirection: "column",
-                                }}
 
-                                elevation={3}
+                            {/* name */}
+                            <TextField
+                                // id="standard-uncontrolled"
+                                label="Nombre de la tienda"
+                                // type="Nombre"
+                                // defaultValue="Correo electrónico"
+                                margin="normal"
+                                onChange={(e) => this.setState({ name: e.target.value })}
+                                value={this.state.name}
+                            />
+
+                            {/* description */}
+                            <TextField
+                                // id="standard-uncontrolled"
+                                label="Descripción de la tienda"
+                                multiline
+                                // defaultValue="Correo electrónico"
+                                margin="normal"
+                                onChange={(e) => this.setState({ description: e.target.value })}
+                                value={this.state.description}
+                            />
+
+                            {/* instagram url */}
+                            <TextField
+                                // id="standard-uncontrolled"
+                                label="Link de tu tienda de Instagram"
+                                // type="Tamaño"
+                                // defaultValue="Correo electrónico"
+                                margin="normal"
+                                onChange={(e) => this.setState({ instagramUrl: e.target.value })}
+                                value={this.state.instagramUrl}
+                            />
+
+                            {/* profile photo */}
+                            {/* <TextField
+                                // id="standard-uncontrolled"
+                                label="Foto de perfil"
+                                // type="Precio"
+                                // defaultValue="Correo electrónico"
+                                margin="normal"
+                                onChange={(e) => this.setState({ profilePhoto: e.target.value })}
+                                value={this.state.profilePhoto}
+                            /> */}
+
+                            
+                            {/* create store */}
+                            <Button
+                                align="center"
+                                variant="contained"
+                                color="primary"
+                                onClick={this.createStore}
                             >
+                                Crear store
+                            </Button>
 
-                                {/* sync with IG account */}
-                                <Typography align="center" variant="h4" component="h4" gutterBottom>
-                                    Crear tienda
-                                </Typography>
+                        </FormControl>
 
-                                {/* informatino to fill */}
-                                <FormControl
-                                // style={{
-                                //     width: "50%",
-                                //     alignSelf: "center",
-                                // }}
-                                >
+                    </Container>
 
-                                    {/* name */}
-                                    <TextField
-                                        // id="standard-uncontrolled"
-                                        label="Nombre de la tienda"
-                                        // type="Nombre"
-                                        // defaultValue="Correo electrónico"
-                                        margin="normal"
-                                        onChange={(e) => this.setState({ name: e.target.value })}
-                                        value={this.state.name}
-                                    />
+                :
 
-                                    {/* description */}
-                                    <TextField
-                                        // id="standard-uncontrolled"
-                                        label="Descripción de la tienda"
-                                        multiline
-                                        // defaultValue="Correo electrónico"
-                                        margin="normal"
-                                        onChange={(e) => this.setState({ description: e.target.value })}
-                                        value={this.state.description}
-                                    />
+                    <CircularProgress />
 
-                                    {/* instagram url */}
-                                    <TextField
-                                        // id="standard-uncontrolled"
-                                        label="Link de tu tienda de Instagram"
-                                        // type="Tamaño"
-                                        // defaultValue="Correo electrónico"
-                                        margin="normal"
-                                        onChange={(e) => this.setState({ instagramUrl: e.target.value })}
-                                        value={this.state.instagramUrl}
-                                    />
-
-                                    {/* profile photo */}
-                                    {/* <TextField
-                                        // id="standard-uncontrolled"
-                                        label="Foto de perfil"
-                                        // type="Precio"
-                                        // defaultValue="Correo electrónico"
-                                        margin="normal"
-                                        onChange={(e) => this.setState({ profilePhoto: e.target.value })}
-                                        value={this.state.profilePhoto}
-                                    /> */}
-
-                                    
-                                    {/* create store */}
-                                    <Button
-                                        align="center"
-                                        variant="contained"
-                                        color="primary"
-                                        onClick={this.createStore}
-                                    >
-                                        Crear store
-                                    </Button>
-
-                                </FormControl>
-
-                            </Paper>
-
-                        </Grid>
-
-                        :
-
-                        <CircularProgress />
-
-                }
-                {/* </Paper> */}
-            </Grid>
         );
 
     }

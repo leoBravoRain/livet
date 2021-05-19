@@ -4,13 +4,13 @@ import React from "react";
 
 // material ui
 // import Paper from '@material-ui/core/Paper';
-// import Container from '@material-ui/core/Container';
-import TextField from '@material-ui/core/TextField';
+import Container from '@material-ui/core/Container';
+// import TextField from '@material-ui/core/TextField';
 import { Button } from "@material-ui/core";
 import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Grid from '@material-ui/core/Grid';
+// import Grid from '@material-ui/core/Grid';
 
 // import Card from '@material-ui/core/Card';
 // import CardActionArea from '@material-ui/core/CardActionArea';
@@ -148,77 +148,51 @@ class CreateNewStore extends React.Component {
 
         return (
 
-            <Grid
-                container
-                spacing={3}
-            >
+            !this.state.loading
+
+                ?
 
 
-                {
-                    (!this.state.loading)
+                    <Container 
+                    // item xs={12} sm={12}
+                        style={{ 
+                            // backgroundColor: "yellow" 
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                        }}
+                    >
 
-                        ?
-
-
+                        {/* title */}
+                        <Typography align="center" variant="h4" component="h4" gutterBottom>
+                            Crear nueva tienda
+                        </Typography>
                         
-                            <Grid item xs={12} sm={12}
-                            // style={{ backgroundColor: "yellow" }}
-                            >
 
-                                {/* title */}
-                                <Typography align="center" variant="h4" component="h4" gutterBottom>
-                                    Crear nueva tienda
-                                </Typography>
+                        {/* go to link with IG account */}
+                        <Button
+                            align="center"
+                            variant="contained"
+                            color="primary"
+                            onClick={() => {
+                                // console.log('/productsToSell/' + store.id)
+                                // this.props.history.push('/productsToSell/' + store.id)
+                                // alert("go to synchornize with IG account");
+                                // this.props.history.push('/createNewStore')
 
-                                <FormControl
-                                    style={{
-                                        width: "50%",
-                                        alignSelf: "center",
-                                    }}
-                                >
-                                    
-                                    {/* product name
-                                    <TextField
-                                        // id="standard-uncontrolled"
-                                        label="Link de tu tienda de instagram"
-                                        type="Link Instagram"
-                                        // defaultValue="Correo electrónico"
-                                        margin="normal"
-                                        onChange={(e) => this.setState({ instagramUrl: e.target.value })}
-                                        value={this.state.instagramUrl}
-                                    /> */}
+                                // go to IG authorization 
+                                window.location.replace('https://api.instagram.com/oauth/authorize?client_id=477247573594243&redirect_uri=https://localhost:3000/createNewStoreForm&scope=user_profile,user_media&response_type=code');
+                            }}
+                        >
+                            Sincronizar con cuenta de Instagram
+                        </Button>
 
-                                    {/* go to link with IG account */}
-                                    <Button
-                                        align="center"
-                                        variant="contained"
-                                        color="primary"
-                                        onClick={() => {
-                                            // console.log('/productsToSell/' + store.id)
-                                            // this.props.history.push('/productsToSell/' + store.id)
-                                            // alert("go to synchornize with IG account");
-                                            // this.props.history.push('/createNewStore')
+                    </Container>
 
-                                            // go to IG authorization 
-                                            window.location.replace('https://api.instagram.com/oauth/authorize?client_id=477247573594243&redirect_uri=https://localhost:3000/createNewStoreForm&scope=user_profile,user_media&response_type=code');
-                                        }}
-                                    >
-                                        Sincronizar con cuenta de Instagram
-                                    </Button>
+                :
 
-                                </FormControl>
+                <CircularProgress />
 
-                                {/* IG synchronization */}
-
-                            </Grid>
-
-                        :
-
-                        <CircularProgress />
-
-                }
-                {/* </Paper> */}
-            </Grid>
         );
 
     }
