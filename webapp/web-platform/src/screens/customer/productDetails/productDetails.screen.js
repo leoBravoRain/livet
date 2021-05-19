@@ -99,105 +99,123 @@ class ProductDetails extends React.Component {
 
         return (
 
-            <Grid
-                container
-                spacing={3}
-            >
+            !this.state.loading
+
+            ?
+
+                // this is to center content
+                <Container>
+
+                    {/* this is real container */}
+                    <Grid
+                        container
+                        style={{
+                            // padding: 20,
+                            // margin: 5,
+                            // alignContent: "center",
+                            justifyContent: "center",
+                            // display: "flex",
+                            // flexDirection: "column",
+                            // backgroundColor: "yellow",
+                        }}
+                    >
 
 
-                {
-                    !this.state.loading
 
-                        ?
-
-                        <Grid item xs={12} sm={12}
-                        // style={{ backgroundColor: "yellow" }}
+                        {/* pictures */}
+                        <Grid
+                            item
+                            style={{
+                                // padding: 20,
+                                margin: 10,
+                                // alignContent: "center",
+                                // justifyContent: "center",
+                                // display: "flex",
+                                // flexDirection: "column",
+                                // backgroundColor: "green",
+                            }}
                         >
 
-                            <Paper
-                                style={{
-                                    padding: 20,
-                                    margin: 10,
-                                    alignContent: "center",
-                                    justifyContent: "center",
-                                    display: "flex",
-                                    flexDirection: "column",
-                                }}
+                            {/* original image */}
+                            <img
+                                src={this.state.product.image}
+                                alt="image"
+                                width="300px"
+                                heigh="300px"
+                                />
+                        </Grid>
 
-                                elevation={3}
+
+
+
+                        {/* general information */}
+                        <Grid
+                            item
+                            style={{
+                                // padding: 20,
+                                margin: 10,
+                                // alignContent: "center",
+                                // justifyContent: "center",
+                                // display: "flex",
+                                // flexDirection: "column",
+                                // backgroundColor: "red",
+                            }}
+                        >
+                    
+                            {/* name */}
+                            <Typography align="center" variant="h2" component="h2" gutterBottom>
+                                {this.state.product.name}
+                            </Typography>
+
+                            {/* description */}
+                            <Typography align="center" variant="body2" component="p" gutterBottom>
+                                {this.state.product.description}
+                            </Typography>
+
+                            {/* extra information */}
+                            <Typography align="center" variant="body2" component="p" gutterBottom>
+                                {this.state.product.extraInformation}
+                            </Typography>
+
+                            {/* var 1 */}
+                            <Typography align="center" variant="body2" component="p" gutterBottom>
+                                {this.state.product.var1}
+                            </Typography>
+
+                            {/* price */}
+                            <Typography align="center" variant="body2" component="p" gutterBottom>
+                                $ {this.state.product.price.toLocaleString()}
+                            </Typography>
+
+                            {/* to buy button */}
+                            <Button 
+                                size="small" 
+                                color="primary"
+                                variant="contained"
+                                onClick={() => {
+                                    // window.open("https://wa.me/" + workshop.teacherMobileNumber + "?text=Hola, quiero tomar una clase en tu curso de '" + workshop.title + "' que aparece en la plataforma online")
+                                    // this.setState({
+                                    //     toBuyModal: true,
+                                    // });
+
+                                    // alert("Go to buy");
+                                    this.props.history.push('/saleConfirmation/' + this.props.match.params.store_id + "/" + this.props.match.params.product_id);
+                                }}
                             >
 
-                                {/* information */}
+                                Comprar
 
-                                {/* original information */}
-                                <Container>
-
-                                    {/* original image */}
-                                    <img
-                                        src={this.state.product.image}
-                                        alt="image"
-                                        width="300px"
-                                        heigh="300px"
-                                    />
-
-                                    {/* name */}
-                                    <Typography align="center" variant="h2" component="h2" gutterBottom>
-                                        {this.state.product.name}
-                                    </Typography>
-
-                                    {/* description */}
-                                    <Typography align="center" variant="body2" component="p" gutterBottom>
-                                        {this.state.product.description}
-                                    </Typography>
-
-                                    {/* extra information */}
-                                    <Typography align="center" variant="body2" component="p" gutterBottom>
-                                        {this.state.product.extraInformation}
-                                    </Typography>
-
-                                    {/* var 1 */}
-                                    <Typography align="center" variant="body2" component="p" gutterBottom>
-                                        {this.state.product.var1}
-                                    </Typography>
-
-                                    {/* price */}
-                                    <Typography align="center" variant="body2" component="p" gutterBottom>
-                                        $ {this.state.product.price.toLocaleString()}
-                                    </Typography>
-
-                                    {/* to buy button */}
-                                    <Button 
-                                        size="small" 
-                                        color="primary"
-                                        variant="contained"
-                                        onClick={() => {
-                                            // window.open("https://wa.me/" + workshop.teacherMobileNumber + "?text=Hola, quiero tomar una clase en tu curso de '" + workshop.title + "' que aparece en la plataforma online")
-                                            // this.setState({
-                                            //     toBuyModal: true,
-                                            // });
-
-                                            // alert("Go to buy");
-                                            this.props.history.push('/saleConfirmation/' + this.props.match.params.store_id + "/" + this.props.match.params.product_id);
-                                        }}
-                                    >
-
-                                        Comprar
-
-                                    </Button>
-
-                                </Container>
-
-                            </Paper>
+                            </Button>
 
                         </Grid>
 
-                        :
+                    </Grid>
 
-                        <CircularProgress />
+                </Container>
 
-                }
-                {/* </Paper> */}
-            </Grid>
+            :
+
+                <CircularProgress />
         );
 
     }

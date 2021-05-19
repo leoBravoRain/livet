@@ -3,11 +3,11 @@ import React from "react";
 // import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 // material ui
-import Paper from '@material-ui/core/Paper';
+// import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 // import TextField from '@material-ui/core/TextField';
 import { Button } from "@material-ui/core";
-import FormControl from '@material-ui/core/FormControl';
+// import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from '@material-ui/core/Grid';
@@ -23,6 +23,8 @@ import PlayArrow from '@material-ui/icons/PlayArrow';
 // import Schedule from '@material-ui/icons/Schedule';
 
 // import Select from '@material-ui/core/Select';
+
+import StoreInformation from "../generalComponents/storeInformation/storeInformation.component";
 
 // import Dialog from '@material-ui/core/Dialog';
 // import DialogActions from '@material-ui/core/DialogActions';
@@ -150,120 +152,19 @@ class ProductsCatalog extends React.Component {
 
 
                     {/* store information */}
-                    <Grid
-                        container
-                        style = {{
-                            // margin: 20,
-                            marginTop: 40,
-                            // backgroundColor: "red",
+                    <StoreInformation
+                        profilePhoto={this.state.store.profilePhoto}
+                        name={this.state.store.name}
+                        description={this.state.store.description}
+                        goToHome={() => {
+                            // alert("Go to home")
+                            this.props.history.push('/' + this.props.match.params.store_id);
                         }}
-                    >
-
-                        {/* profile photo */}
-                        <Grid
-                            item
-                            xs = {12}
-                            md = {4}
-                            style = {{
-                                display: "flex",
-                                justifyContent: "center",
-                                // backgroundColor: "green",
-                            }}
-                        >
-
-                            {/* profile photo */}
-                            <img
-                                src={this.state.store.profilePhoto}
-                                width="100px"
-                                height="100px"
-                            />  
-
-                        </Grid>
-
-
-                        {/* store description */}
-                        <Grid
-                            item
-                            xs={12}
-                            md={4}
-                            style={{
-                                // backgroundColor: "yellow",
-                                display: "flex",
-                                flexDirection: "column",
-                                justifyContent: "center",
-                            }}
-                        >
-
-                            {/* title */}
-                            <Typography align="center" variant="h4" component="h4" gutterBottom>
-                                {this.state.store.name}
-                            </Typography>
-
-                            {/* description */}
-                            <Typography 
-                                display="inline"
-                                // inline
-                                // style={{ display: 'inline-block' }} 
-                                align="center" 
-                                variant="body2" 
-                                component="p" 
-                                gutterBottom
-                            >
-                                {this.state.store.description}
-                            </Typography>
-
-                        </Grid>
-
-
-                        {/* buttons */}
-                        <Grid
-                            item
-                            xs={12}
-                            md={4}
-                            style={{
-                                display: "flex",
-                                justifyContent: "center",
-                                // alignContent: "center",
-                                // backgroundColor: "red",
-                            }}
-                        >
-
-                            {/* go to home */}
-                            <Button
-                                // align="center"
-                                size="small"
-                                color="primary"
-                                // variant="contained"
-                                onClick={() => {
-                                    // alert("Go to home")
-                                    this.props.history.push('/' + this.props.match.params.store_id);
-                                }}
-                            >
-
-                                Inicio
-
-                            </Button>
-
-                            {/* go to IG */}
-                            <Button
-                                // align="center"
-                                size="small"
-                                color="primary"
-                                // variant="contained"
-                                onClick={() => {
-                                    // alert("Go to home")
-                                    window.open(this.state.store.instagramUrl);
-                                }}
-                            >
-
-                                Ir a mi Instagram
-
-                            </Button>
-
-                        </Grid>
-
-                    </Grid>
-
+                        goToInstagram={() => {
+                            // alert("Go to home")
+                            window.open(this.state.store.instagramUrl);
+                        }}
+                    />
 
 
 
