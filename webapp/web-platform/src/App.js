@@ -34,6 +34,8 @@ import EditSNPostToProduct from "./screens/owner/editSNPostToProduct/editSNPostT
 import ProductsToSell from "./screens/owner/productsToSell/productsToSell.screen";
 import Register from "./screens/owner/register/register.screen";
 import ChooseStore from "./screens/owner/chooseStore/chooseStore.screen";
+import CreateNewStore from "./screens/owner/createNewStore/createNewStore.screen";
+import CreateNewStoreForm from "./screens/owner/createNewStore/createNewStoreForm.screen";
 
 // customer
 import ProductsCatalog from "./screens/customer/productsCatalog/productsCatalog.screen";
@@ -131,6 +133,8 @@ class App extends Component {
           <Route path="/editSNPostToProduct/:store_id" exact component={EditSNPostToProduct} />
           <Route path="/productsToSell/:store_id" exact component={ProductsToSell} />
           <Route path="/chooseStore" exact component={ChooseStore}/>
+          <Route path="/createNewStore" exact component={CreateNewStore} />
+          <Route path="/createNewStoreForm" exact component={CreateNewStoreForm} />
           
           {/* customer */}
           <Route path="/:store_id" exact component={ProductsCatalog} />

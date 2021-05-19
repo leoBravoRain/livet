@@ -152,6 +152,21 @@ class ChooseStore extends React.Component {
                                     Tus tiendas asociadas
                                 </Typography>
 
+                                {/* create new store */}
+                                <Button
+                                    align="center"
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={() => {
+                                        // console.log('/productsToSell/' + store.id)
+                                        // this.props.history.push('/productsToSell/' + store.id)
+                                        // alert("go to create new store");
+                                        this.props.history.push('/createNewStore')
+                                    }}
+                                >
+                                    Crear nueva tienda
+                                </Button>
+
                                 {/* each post */}
                                 {
                                     this.state.stores.map((store) => {
