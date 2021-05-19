@@ -3,12 +3,13 @@ import React from "react";
 // import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 // material ui
-import Paper from '@material-ui/core/Paper';
+// import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 import { Button } from "@material-ui/core";
 import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 // firebase
 import { auth } from "../../../libraries/firebase/firebase";
@@ -25,6 +26,7 @@ class Register extends React.Component {
         this.state = {
             email: "",
             password: "",
+            loading: false,
         }
 
         this.on_submit = this.on_submit.bind(this);
@@ -32,29 +34,15 @@ class Register extends React.Component {
     }
 
     componentDidMount() {
-
-        // // check if user is logged
-        // auth.onAuthStateChanged((user) => {
-
-        //     if (user) {
-
-        //         this.props.history.push('/productsToSell');
-
-        //     }
-
-        //     else {
-
-        //         // console.log("user no logged");
-
-        //         // this.props.history.push('/Register/');
-        //     }
-
-        // });
-
-    }
-
+        console.log("load register component");
+    };
+    
     // onsubmit form
     on_submit() {
+
+        this.setState({
+            loading: true,
+        });
 
         const email = this.state.email.trim();
         const password = this.state.password;
@@ -67,6 +55,10 @@ class Register extends React.Component {
                 // console.log("user logged!");
                 alert("Te has registrado exitosamente");
 
+                this.setState({
+                    loading: false,
+                });
+
                 // go to social network login
                 this.props.history.push('/loginSocialNetworks');
 
@@ -75,8 +67,11 @@ class Register extends React.Component {
             .catch(function (error) {
 
                 // console.log(error);
-
                 alert(error.message);
+
+                this.setState({
+                    loading: false,
+                });
 
             });
     }
@@ -85,24 +80,21 @@ class Register extends React.Component {
 
         return (
 
-            <Paper
-                style={{
-                    margin: 20,
-                    padding: 20,
-                }}
-            >
+            !this.state.loading
 
-                {/* register */}
+                ?
+
                 <Container
                     style={{
                         display: "flex",
                         flexDirection: "column",
+                        justifyContent: "center",
                     }}
                 >
 
                     {/* information */}
                     <Typography align="center" variant="h4" component="h4" gutterBottom>
-                        Registrarte en la plataforma
+                        Registro en Livet
                     </Typography>
 
                     <Typography align="center" variant="body2" component="p" gutterBottom>
@@ -144,7 +136,12 @@ class Register extends React.Component {
                     </FormControl>
 
                 </Container>
-            </Paper>
+
+            :
+
+                <CircularProgress/>
+
+                        
         );
 
     }

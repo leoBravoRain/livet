@@ -3,8 +3,10 @@ import React, { Component } from "react";
 
 // import "bootstrap/dist/css/bootstrap.min.css";
 
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
+import { 
+  BrowserRouter as Router, Route, Link 
+} from "react-router-dom";
+import { Switch } from "react-router";
 // import Home from "./screens/home.screen";
 // import Login from "./screens/login.screen";
 
@@ -94,55 +96,61 @@ class App extends Component {
 
         <Router>
 
-          <AppBar position="static">
+              <AppBar 
+                position="static"
+              >
 
-            <Toolbar>
+                <Toolbar>
 
-              {/* to home */}
-              <Link to="/" className="nav-link" style={{ "flex": 1, "color": "white", "textDecoration": "none" }}>
+                  {/* to home */}
+                  <Link to="/" className="nav-link" style={{ "flex": 1, "color": "white", "textDecoration": "none" }}>
 
-                <Typography gutterBottom variant="h4" component="h2">
+                    <Typography gutterBottom variant="h4" component="h2">
 
-                  Livet
+                      Livet
 
-                </Typography>
+                    </Typography>
 
-              </Link>
+                  </Link>
 
 
-              {/* Link without "to" because text has the functino to close session */}
-              <Link className="nav-link" style={{ textDecoration: "none" }}>
+                  {/* Link without "to" because text has the functino to close session */}
+                  <Link className="nav-link" style={{ textDecoration: "none" }}>
 
-                <Typography gutterBottom variant="h6" component="h6" onClick={this.on_logout}>
+                    <Typography gutterBottom variant="h6" component="h6" onClick={this.on_logout}>
 
-                  Cerrar sesión
+                      Cerrar sesión
 
-							</Typography>
+                  </Typography>
 
-              </Link>
+                  </Link>
 
-            </Toolbar>
+                </Toolbar>
 
-          </AppBar>
+              </AppBar>
 
-          {/* owner */}
-          <Route path = "/login" exact component = {Login} />
-          <Route path="/register" exact component={Register} />
-          <Route path="/loginSocialNetworks/" exact component={LoginSocialNetworks} />
-          <Route path="/postsFromSocialNetworks/:store_id" exact component={PostsFromSocialNetworks} />
-          <Route path="/editSNPostToProduct/:store_id" exact component={EditSNPostToProduct} />
-          <Route path="/productsToSell/:store_id" exact component={ProductsToSell} />
-          <Route path="/chooseStore" exact component={ChooseStore}/>
-          <Route path="/createNewStore" exact component={CreateNewStore} />
-          <Route path="/createNewStoreForm" exact component={CreateNewStoreForm} />
-          
-          {/* customer */}
-          <Route path="/:store_id" exact component={ProductsCatalog} />
-          <Route path="/productDetails/:store_id/:product_id" exact component={ProductDetails} />
-          <Route path="/saleConfirmation/:store_id/:product_id" exact component={SaleConfirmation} />
-          {/* <Route path="/" exact component={Home} />
+              {/* owner */}
+              <Route path = "/" exact component = {Login} />
+              <Route path="/register" exact component={Register} />
+              <Route path="/loginSocialNetworks/" exact component={LoginSocialNetworks} />
+              <Route path="/postsFromSocialNetworks/:store_id" exact component={PostsFromSocialNetworks} />
+              <Route path="/editSNPostToProduct/:store_id" exact component={EditSNPostToProduct} />
+              <Route path="/productsToSell/:store_id" exact component={ProductsToSell} />
+              <Route path="/chooseStore" exact component={ChooseStore}/>
+              <Route path="/createNewStore" exact component={CreateNewStore} />
+              <Route path="/createNewStoreForm" exact component={CreateNewStoreForm} />
+              
+              {/* customer */}
+              <Route path="/:store_id" exact component={ProductsCatalog} />
+              <Route path="/productDetails/:store_id/:product_id" exact component={ProductDetails} />
+              <Route path="/saleConfirmation/:store_id/:product_id" exact component={SaleConfirmation} />
+              {/* <Route path="/" exact component={Home} />
 
-          <Route path="/workshopDetails" exact component={WorkshopDetails} /> */}
+              <Route path="/workshopDetails" exact component={WorkshopDetails} /> */}
+
+            {/* </div>
+
+          </Switch> */}
 
         </Router>
 

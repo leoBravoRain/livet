@@ -3,14 +3,14 @@ import React from "react";
 // import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 // material ui
-import Paper from '@material-ui/core/Paper';
+// import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 import { Button } from "@material-ui/core";
 import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Grid from '@material-ui/core/Grid';
+// import Grid from '@material-ui/core/Grid';
 
 // firebase
 import { auth } from "../../../libraries/firebase/firebase";
@@ -36,6 +36,8 @@ class Login extends React.Component {
 
     componentDidMount() {
 
+        console.log("load login component");
+        
         this.setState({
             loading: true,
         });
@@ -111,115 +113,99 @@ class Login extends React.Component {
 
         return (
 
-            <Grid 
-                container 
-                spacing={3}
-            >
+            !this.state.loading
+
+                ?
+
+                    <Container
+                        style = {{
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                        }}
+                    >
+
+                        <Typography align="center" variant="h4" component="h4" gutterBottom>
+                            Entrar a Livet
+                        </Typography>
+
+                        {/* <Typography align="center" variant="body2" component="p" gutterBottom>
+                            Transforma tu Instagram en un E-commerce en solo minutos
+                        </Typography> */}
+
+                        <Typography align="center" variant="body2" component="p" gutterBottom>
+                            Ingresa tu email y contraseña
+                        </Typography>
 
 
-                {
-                    !this.state.loading
-
-                        ?
-
-                        <Grid item xs={12} sm={12}
-                        // style={{ backgroundColor: "yellow" }}
+                        <FormControl
+                            style={{
+                                width: "50%",
+                                alignSelf: "center",
+                            }}
                         >
-                            <Paper
-                                style={{
-                                    padding: 20,
-                                    margin: 10,
-                                    alignContent: "center",
-                                    justifyContent: "center",
-                                    display: "flex",
-                                    flexDirection: "column",
+
+                            <TextField
+                                // id="standard-uncontrolled"
+                                label="Email"
+                                // defaultValue="Correo electrónico"
+                                margin="normal"
+                                onChange={(e) => this.setState({ email: e.target.value })}
+                                value={this.state.email}
+                            />
+
+                            <TextField
+                                // id="standard-uncontrolled"
+                                label="Contraseña"
+                                type="password"
+                                // defaultValue="Correo electrónico"
+                                margin="normal"
+                                onChange={(e) => this.setState({ password: e.target.value })}
+                                value={this.state.password}
+                            />
+
+                            <Button align="center" variant="contained" color="primary" onClick={this.on_submit}>
+                                Entrar
+                            </Button>
+
+                        </FormControl>
+
+                        <Typography align="center" variant="body2" component="p" gutterBottom>
+                            Si no recuerdas tu contraseña, contactate con el administrador
+                        </Typography>
+
+                        {/* register area */}
+                        <Container
+                            style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "center",
+                                alignItems: "center",
+                            }}
+                        >
+
+                            {/* information */}
+                            <Typography align="center" variant="body2" component="p" gutterBottom>
+                                Si aún no estas registrado, inscribete aquí
+                            </Typography>
+
+                            {/* register button */}
+                            <Button align="center" variant="contained" color="primary"
+                                onClick={() => {
+                                    this.props.history.push('/register');
+                                    // alert("go to register");
                                 }}
-
-                                elevation={3}
                             >
+                                Registrarme
+                            </Button>
+                        </Container>
 
-                                <Typography align="center" variant="h4" component="h4" gutterBottom>
-                                    Entrar a Livet
-                                </Typography>
+                    </Container>
 
-                                <Typography align="center" variant="body2" component="p" gutterBottom>
-                                    Ingresa tu email y contraseña
-                                </Typography>
+                :
 
+                    <CircularProgress />
 
-                                <FormControl
-                                    style={{
-                                        width: "50%",
-                                        alignSelf: "center",
-                                    }}
-                                >
-
-                                    <TextField
-                                        // id="standard-uncontrolled"
-                                        label="Email"
-                                        // defaultValue="Correo electrónico"
-                                        margin="normal"
-                                        onChange={(e) => this.setState({ email: e.target.value })}
-                                        value={this.state.email}
-                                    />
-
-                                    <TextField
-                                        // id="standard-uncontrolled"
-                                        label="Contraseña"
-                                        type="password"
-                                        // defaultValue="Correo electrónico"
-                                        margin="normal"
-                                        onChange={(e) => this.setState({ password: e.target.value })}
-                                        value={this.state.password}
-                                    />
-
-                                    <Button align="center" variant="contained" color="primary" onClick={this.on_submit}>
-                                        Entrar
-                                    </Button>
-
-                                </FormControl>
-
-                                <Typography align="center" variant="body2" component="p" gutterBottom>
-                                    Si no recuerdas tu contraseña, contactate con el administrador
-                                </Typography>
-
-                                {/* register area */}
-                                <Container
-                                    style={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                    }}
-                                >
-
-                                    {/* information */}
-                                    <Typography align="center" variant="body2" component="p" gutterBottom>
-                                        Si aún no estas registrado, inscribete aquí
-                                    </Typography>
-
-                                    {/* register button */}
-                                    <Button align="center" variant="contained" color="primary"
-                                        onClick={() => {
-                                            this.props.history.push('/register');
-                                            // alert("go to register");
-                                        }}
-                                    >
-                                        Registrarme
-                                    </Button>
-                                </Container>
-
-                            </Paper>
-
-                        </Grid>
-
-                        :
-
-                        <CircularProgress />
-
-                }
-                {/* </Paper> */}
-            </Grid>
         );
 
     }

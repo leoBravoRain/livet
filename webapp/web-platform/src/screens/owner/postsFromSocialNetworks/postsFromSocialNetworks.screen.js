@@ -53,6 +53,8 @@ class PostsFromSocialNetworks extends React.Component {
 
     componentDidMount() {
 
+        console.log("load posts from sn component");
+
         this.setState({
             loading: true,
         });

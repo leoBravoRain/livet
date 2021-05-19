@@ -49,13 +49,15 @@ class ChooseStore extends React.Component {
 
         // initial states
         this.state = {
-            loading: false,
+            loading: true,
             stores: [],
         }
 
     }
 
     componentDidMount() {
+
+        console.log("load choose store component");
 
         this.setState({
             loading: true,
@@ -104,7 +106,7 @@ class ChooseStore extends React.Component {
 
                 // console.log("user no logged");
 
-                this.props.history.push('/login');
+                this.props.history.push('/');
             }
 
             // this.setState({
@@ -119,102 +121,115 @@ class ChooseStore extends React.Component {
 
         return (
 
-            <Grid
-                container
-                spacing={3}
-            >
+            !this.state.loading
 
-                {
-                    !this.state.loading
+                ?
 
-                        ?
+                    <Container
+                        style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                        }}
+                    >
 
-                        <Grid item xs={12} sm={12}
-                        // style={{ backgroundColor: "yellow" }}
+
+                        {/* title */}
+                        <Typography align="center" variant="h4" component="h4" gutterBottom>
+                            Tus tiendas asociadas
+                        </Typography>
+
+                        {/* create new store */}
+                        <Button
+                            align="center"
+                            variant="contained"
+                            color="primary"
+                            onClick={() => {
+                                // console.log('/productsToSell/' + store.id)
+                                // this.props.history.push('/productsToSell/' + store.id)
+                                // alert("go to create new store");
+                                this.props.history.push('/createNewStore')
+                            }}
                         >
+                            Crear nueva tienda
+                        </Button>
 
-                            {/* list of products */}
-                            <Paper
-                                style={{
-                                    padding: 20,
-                                    margin: 10,
-                                    alignContent: "center",
-                                    justifyContent: "center",
-                                    display: "flex",
-                                    flexDirection: "column",
-                                }}
+                        {/* each store */}
+                        {
 
-                                elevation={3}
-                            >
+                            // if user has stores
+                            this.state.stores.length > 0 
 
-                                {/* title */}
-                                <Typography align="center" variant="h4" component="h4" gutterBottom>
-                                    Tus tiendas asociadas
-                                </Typography>
+                            ?
 
-                                {/* create new store */}
-                                <Button
-                                    align="center"
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={() => {
-                                        // console.log('/productsToSell/' + store.id)
-                                        // this.props.history.push('/productsToSell/' + store.id)
-                                        // alert("go to create new store");
-                                        this.props.history.push('/createNewStore')
-                                    }}
-                                >
-                                    Crear nueva tienda
-                                </Button>
+                                // stores list
+                                <Container>
 
-                                {/* each post */}
-                                {
-                                    this.state.stores.map((store) => {
+                                    {
+                                        this.state.stores.map((store) => {
 
-                                        return (
+                                            return (
 
-                                            <Container
-                                                style = {{
-                                                    display: "flex",
-                                                    flexDirection: "row",
-                                                }}
-                                            >
-
-                                                {/* store name */}
-                                                <Typography align="center" variant="body2" component="p" gutterBottom onClick = {() => alert("oaijsd")}>
-                                                    {store.name}
-                                                </Typography>
-                                                
-                                                {/* go to */}
-                                                <Button 
-                                                    align="center" 
-                                                    variant="contained" 
-                                                    color="primary" 
-                                                    onClick={() => {
-                                                        // console.log('/productsToSell/' + store.id)
-                                                        this.props.history.push('/productsToSell/' + store.id)
-                                                        // this.props.history.push('/postsFromSocialNetworks/' + store.id)
+                                                <Container
+                                                    style = {{
+                                                        display: "flex",
+                                                        flexDirection: "row",
                                                     }}
                                                 >
-                                                    Ir a la tienda
-                                                </Button>
-                                            </Container>
 
-                                        );
-                                    })
-                                }
+                                                    {/* store name */}
+                                                    <Typography 
+                                                        align="center" 
+                                                        variant="body2" 
+                                                        component="p" 
+                                                        gutterBottom 
+                                                        // onClick = {() => alert("oaijsd")}
+                                                    >
+                                                        {store.name}
+                                                    </Typography>
+                                                    
+                                                    {/* go to */}
+                                                    <Button 
+                                                        align="center" 
+                                                        variant="contained" 
+                                                        color="primary" 
+                                                        onClick={() => {
+                                                            // console.log('/productsToSell/' + store.id)
+                                                            this.props.history.push('/productsToSell/' + store.id)
+                                                            // this.props.history.push('/postsFromSocialNetworks/' + store.id)
+                                                        }}
+                                                    >
+                                                        Ir a la tienda
+                                                    </Button>
+                                                </Container>
 
-                            </Paper>
+                                            );
+                                        })
 
-                        </Grid>
+                                    }
 
-                        :
+                                </Container>
 
-                        <CircularProgress />
+                            :
 
-                }
-                {/* </Paper> */}
-            </Grid>
+                                <Typography 
+                                    align="center" 
+                                    variant="body2" 
+                                    component="p" 
+                                    gutterBottom 
+                                    // onClick={() => alert("oaijsd")}
+                                >
+                                    No tienes tiendas asociadas, ¡Comienza creando una!
+                                </Typography>
+                        }
+
+
+                    </Container>
+
+                :
+
+                    <CircularProgress />
+
         );
 
     }

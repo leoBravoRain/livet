@@ -57,6 +57,8 @@ class CreateNewStore extends React.Component {
 
     componentDidMount() {
 
+        console.log("load create new store component");
+
         this.setState({
             loading: true,
         });

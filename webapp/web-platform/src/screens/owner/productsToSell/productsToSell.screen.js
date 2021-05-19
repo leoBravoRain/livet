@@ -79,6 +79,8 @@ class ProductsToSell extends React.Component {
 
     componentDidMount() {
 
+        console.log("load product to sell component");
+
         this.setState({
             loading: true,
         });

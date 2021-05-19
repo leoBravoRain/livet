@@ -80,6 +80,8 @@ class EditSNPostToProduct extends React.Component {
 
     componentDidMount() {
 
+        console.log("load edit post to product component");
+
         this.setState({
             loading: true,
         });

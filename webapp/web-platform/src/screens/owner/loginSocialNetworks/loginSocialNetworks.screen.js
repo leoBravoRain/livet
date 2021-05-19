@@ -41,6 +41,8 @@ class LoginSocialNetworks extends React.Component {
 
     componentDidMount() {
 
+        console.log("load login with sn component");
+
         this.setState({
             loading: true,
         });

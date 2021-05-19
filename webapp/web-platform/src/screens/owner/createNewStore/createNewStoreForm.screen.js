@@ -47,6 +47,8 @@ class CreateNewStoreForm extends React.Component {
 
     componentDidMount() {
 
+        console.log("load create new store form component");
+
         this.setState({
             loading: true,
         });
