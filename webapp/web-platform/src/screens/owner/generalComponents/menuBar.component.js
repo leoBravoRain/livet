@@ -4,13 +4,13 @@ import React from "react";
 
 // material ui
 // import Paper from '@material-ui/core/Paper';
-// import Container from '@material-ui/core/Container';
+import Container from '@material-ui/core/Container';
 // import TextField from '@material-ui/core/TextField';
 import { Button } from "@material-ui/core";
 // import FormControl from '@material-ui/core/FormControl';
 // import Typography from '@material-ui/core/Typography';
 // import CircularProgress from "@material-ui/core/CircularProgress";
-import Grid from '@material-ui/core/Grid';
+// import Grid from '@material-ui/core/Grid';
 
 // firebase
 // import { auth } from "../../../libraries/firebase/firebase";
@@ -29,9 +29,16 @@ class MenuBar extends React.Component {
 
         return (
 
-            <Grid
-                container
-                spacing={3}
+            <Container
+                // container
+                // spacing={3}
+                style = {{
+                    display: "flex",
+                    justifyContent: "center",
+                    // backgroundColor: "green",
+                    marginTop:10,
+                    marginBottom: 10,
+                }}
             >
 
                 {/* choose store */}
@@ -64,7 +71,7 @@ class MenuBar extends React.Component {
                 </Button>
 
 
-            </Grid>
+            </Container>
         );
 
     }

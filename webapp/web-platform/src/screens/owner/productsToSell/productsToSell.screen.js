@@ -143,9 +143,15 @@ class ProductsToSell extends React.Component {
 
         return (
 
-            <Grid
-                container
-                spacing={3}
+            <Container
+                // container
+                // spacing={3}
+                style = {{
+                    display: "flex",
+                    flexDirection: "column",
+                    // backgroundColor: "red",
+                    justifyContent: "center",
+                }}
             >
                 
                 {/* menu */}
@@ -172,107 +178,133 @@ class ProductsToSell extends React.Component {
                     }}
                 />
 
-                {/* list of products */}
-                {
-                    !this.state.loading
+                {/* products list */}
+                <Container>
 
-                        ?
+                    {/* title */}
+                    <Typography align="center" variant="h4" component="h4" gutterBottom>
+                        Productos a la venta en tu página
+                    </Typography>
 
-                        <Grid item xs={12} sm={12}
-                        // style={{ backgroundColor: "yellow" }}
-                        >
+                    {/* list of products */}
+                    {
+                        !this.state.loading
 
-                            {/* list of products */}
-                            <Paper
-                                style={{
-                                    padding: 20,
-                                    margin: 10,
-                                    alignContent: "center",
-                                    justifyContent: "center",
-                                    display: "flex",
-                                    flexDirection: "column",
-                                }}
+                            ?
 
-                                elevation={3}
-                            >
+                                <Grid
+                                    container
+                                    spacing={3}
+                                    style={{
+                                        // padding: 20,
+                                        // margin: 5,
+                                        // alignContent: "center",
+                                        justifyContent: "center",
+                                        display: "flex",
+                                        // flexDirection: "column",
+                                        // backgroundColor: "green",
+                                    }}
 
-                                {/* title */}
-                                <Typography align="center" variant="h4" component="h4" gutterBottom>
-                                    Productos a la venta en tu página
-                                </Typography>
+                                // elevation={3}
+                                >
 
-                                {/* each post */}
-                                {
-                                    this.state.products.map((product) => {
+                                    {/* each post */}
+                                    {
+                                        this.state.products.map((product) => {
 
-                                        return (
+                                            return (
 
-                                            // each product structure
-                                            <Card>
-                                                <CardActionArea>
-                                                    <CardMedia
-                                                        image={product.image}
-                                                        component="img"
-                                                        alt="Contemplative Reptile"
-                                                        height="300"
+                                                
+                                                // each product structure
+                                                <Grid
+                                                    item
+                                                    xs={12}
+                                                    md={4}
+                                                >
 
-                                                    // title={workshop.name}
-                                                    />
+                                                    <Card>
+                                                        <CardActionArea
+                                                        >
+                                                            <CardMedia
+                                                                image={product.image}
+                                                                component="img"
+                                                                alt="Contemplative Reptile"
+                                                                height="200"
 
-                                                    {/* contentn */}
-                                                    <CardContent>
+                                                            // title={workshop.name}
+                                                            />
 
-                                                        <Typography gutterBottom variant="h5" component="h2">
-                                                            {product.name}
-                                                        </Typography>
+                                                            {/* contentn */}
+                                                            <CardContent>
 
-                                                        <Typography variant="body2" color="textSecondary" component="p">
-                                                            {product.description}
-                                                        </Typography>
+                                                                {/* product name */}
+                                                                <Typography gutterBottom variant="h5" component="h2">
+                                                                    {product.name}
+                                                                </Typography>
 
-                                                    </CardContent>
+                                                                {/* description */}
+                                                                <Typography variant="body2" color="textSecondary" component="p">
+                                                                    {product.description}
+                                                                </Typography>
 
-                                                </CardActionArea>
+                                                                {/* size */}
+                                                                <Typography gutterBottom variant="h5" component="h2">
+                                                                    {product.var1}
+                                                                </Typography>
+
+                                                                {/* price */}
+                                                                <Typography gutterBottom variant="h5" component="h2">
+                                                                    {product.price}
+                                                                </Typography>
+
+                                                            </CardContent>
+
+                                                        </CardActionArea>
+
+                                                        {/* <CardActions>
+
+                                                            <Button
+                                                                align="center"
+                                                                size="small"
+                                                                color="primary"
+                                                                variant="contained"
+                                                                onClick={() => {
+                                                                    // window.open("https://wa.me/" + workshop.teacherMobileNumber + "?text=Hola, quiero tomar una clase en tu curso de '" + workshop.title + "' que aparece en la plataforma online")
+                                                                    // this.setState({
+                                                                    //     toBuyModal: true,
+                                                                    // });
+
+                                                                    // alert("See details")
+                                                                    this.props.history.push('/productDetails/' + this.state.store.id + "/" + product.id);
+                                                                }}
+                                                            >
+
+                                                                <PlayArrow /> Ver detalles
+        
+                                                            </Button>
+
+                                                        </CardActions> */}
+
+                                                    </Card>
+
+                                                </Grid>
+
+                                            );
+                                        })
+                                    }
+
+                                </Grid>
 
 
-                                                {/* <CardActions>
+                            :
 
-                                                    <Button size="small" color="primary"
-                                                        variant="contained"
-                                                        onClick={() => {
-                                                            // window.open("https://wa.me/" + workshop.teacherMobileNumber + "?text=Hola, quiero tomar una clase en tu curso de '" + workshop.title + "' que aparece en la plataforma online")
-                                                            // this.setState({
-                                                            //     toBuyModal: true,
-                                                            // });
+                            <CircularProgress />
 
-                                                            // alert("See details")
-                                                            this.props.history.push('/editSNPostToProduct');
-                                                        }}
-                                                    >
-
-                                                        <PlayArrow /> Ver
-
-                                                    </Button>
-
-                                                </CardActions> */}
-
-                                            </Card>
-
-                                        );
-                                    })
-                                }
-
-                            </Paper>
-
-                        </Grid>
-
-                        :
-
-                        <CircularProgress />
-
-                }
-                {/* </Paper> */}
-            </Grid>
+                    }
+                
+                </Container>
+                
+            </Container>
         );
 
     }
