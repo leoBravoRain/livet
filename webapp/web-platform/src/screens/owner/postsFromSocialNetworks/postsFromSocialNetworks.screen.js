@@ -78,13 +78,13 @@ class PostsFromSocialNetworks extends React.Component {
                 if (this.props.location.state != null) {
                     if(this.props.location.state.posts != null) {
                         posts = this.props.location.state.posts;
-                        alert("post from API");
+                        // alert("post from API");
                     }
                 }
 
-                else{
-                    alert("No POST from API (from previous webpage)");
-                }
+                // else{
+                //     alert("No POST from API (from previous webpage)");
+                // }
 
                 // validate if it has authorization IG API code
                 // if (this.props.location.state.authCode) {
@@ -147,15 +147,25 @@ class PostsFromSocialNetworks extends React.Component {
 
         return (
 
-            <Grid
-                container
-                spacing={3}
+            <Container
+                // container
+                // spacing={3}
+                style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    // backgroundColor: "red",
+                    justifyContent: "center",
+                }}
             >
 
                 {/* menu */}
                 <MenuBar
                     goToSocialNetworkPosts={() => {
-                        this.props.history.push("/postsFromSocialNetworks/" + this.props.match.params.store_id);
+                        // set store id as local varibale because IG API cannot receive the store id in the url (becaus it has to be exact url and it changes with the store ids)
+                        localStorage.setItem('store_id', this.props.match.params.store_id);
+
+                        // this.props.history.push("/loginSocialNetworks/" + this.props.match.params.store_id);
+                        this.props.history.push("/loginSocialNetworks/");
                     }}
 
                     goToProductsToSell={() => {
@@ -172,104 +182,118 @@ class PostsFromSocialNetworks extends React.Component {
                     }}
                 />
 
-                {
-                    !this.state.loading
+                {/* products list */}
+                <Container>
 
-                        ?
+                    {/* title */}
+                    <Typography align="center" variant="h4" component="h4" gutterBottom>
+                        Posteos desde tu cuenta de Instagram
+                    </Typography>
 
-                        <Grid item xs={12} sm={12}
-                        // style={{ backgroundColor: "yellow" }}
-                        >
+                    {/* list of products */}
+                    {
+                        !this.state.loading
 
-                            {/* list of posts */}
-                            <Paper
+                            ?
+
+                            <Grid
+                                container
+                                spacing={3}
                                 style={{
-                                    padding: 20,
-                                    margin: 10,
-                                    alignContent: "center",
+                                    // padding: 20,
+                                    // margin: 5,
+                                    // alignContent: "center",
                                     justifyContent: "center",
                                     display: "flex",
-                                    flexDirection: "column",
+                                    // flexDirection: "column",
+                                    // backgroundColor: "green",
                                 }}
 
-                                elevation={3}
+                            // elevation={3}
                             >
-
-                                {/* title */}
-                                <Typography align="center" variant="h4" component="h4" gutterBottom>
-                                    Posteos desde tu cuenta de Instagram
-                                </Typography>
 
                                 {/* each post */}
                                 {
                                     this.state.posts.map((post) => {
 
-                                        return(
-
-                                            // each post structure
-                                            <Card>
-                                                <CardActionArea>
-                                                    <CardMedia
-                                                        // image={post.image}
-                                                        image={post.media_url}
-                                                        component="img"
-                                                        alt="Contemplative Reptile"
-                                                        height="300"
-
-                                                    // title={workshop.name}
-                                                    />
-
-                                                    {/* contentn */}
-                                                    <CardContent>
-
-                                                        <Typography variant="body2" color="textSecondary" component="p">
-                                                            {/* {post.text} */}
-                                                            {post.caption}
-                                                        </Typography>
-
-                                                    </CardContent>
-
-                                                </CardActionArea>
+                                        return (
 
 
-                                                <CardActions>
+                                            // each product structure
+                                            <Grid
+                                                item
+                                                xs={12}
+                                                md={4}
+                                            >
 
-                                                    <Button size="small" color="primary"
-                                                        variant="contained"
-                                                        onClick={() => {
-                                                            // window.open("https://wa.me/" + workshop.teacherMobileNumber + "?text=Hola, quiero tomar una clase en tu curso de '" + workshop.title + "' que aparece en la plataforma online")
-                                                            // this.setState({
-                                                            //     toBuyModal: true,
-                                                            // });
-
-                                                            // alert("See details")
-                                                            this.props.history.push('/editSNPostToProduct/' + this.props.match.params.store_id, {"post": post});
-                                                        }}
+                                                <Card>
+                                                    <CardActionArea
                                                     >
+                                                        <CardMedia
+                                                            image={post.media_url}
+                                                            component="img"
+                                                            alt="Quizás esto es un video o un albúm de fotos. Por ahora solo podemos cargar imágenes únicas :("
+                                                            height="200"
 
-                                                        <PlayArrow /> Ver
+                                                        // title={workshop.name}
+                                                        />
 
-                                                    </Button>
+                                                        {/* contentn */}
+                                                        <CardContent>
 
-                                                </CardActions>
+                                                            {/* product name */}
+                                                            <Typography gutterBottom variant="h5" component="h2">
+                                                                {post.caption.substring(0, 80)} ...
+                                                            </Typography>
 
-                                            </Card>
-                                            
+                                                        </CardContent>
+
+                                                    </CardActionArea>
+
+                                                    <CardActions>
+
+                                                        <Button
+                                                            align="center"
+                                                            size="small"
+                                                            color="primary"
+                                                            variant="contained"
+                                                            onClick={() => {
+                                                                // window.open("https://wa.me/" + workshop.teacherMobileNumber + "?text=Hola, quiero tomar una clase en tu curso de '" + workshop.title + "' que aparece en la plataforma online")
+                                                                // this.setState({
+                                                                //     toBuyModal: true,
+                                                                // });
+
+                                                                // alert("See details")
+                                                                this.props.history.push('/editSNPostToProduct/' + this.props.match.params.store_id, { "post": post });
+                                                            }}
+                                                        >
+
+                                                            <PlayArrow /> Ver
+    
+                                                        </Button>
+
+                                                    </CardActions>
+
+                                                </Card>
+
+                                            </Grid>
+
                                         );
                                     })
                                 }
 
-                            </Paper>
+                            </Grid>
 
-                        </Grid>
 
-                        :
+                            :
 
-                        <CircularProgress />
+                            <CircularProgress />
 
-                }
-                {/* </Paper> */}
-            </Grid>
+                    }
+
+                </Container>
+
+            </Container>
         );
 
     }

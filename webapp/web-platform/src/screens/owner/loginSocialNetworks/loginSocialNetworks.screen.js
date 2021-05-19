@@ -32,7 +32,7 @@ class LoginSocialNetworks extends React.Component {
 
         // initial states
         this.state = {
-            loading: false,
+            loading: true,
         }
 
         this.on_submit = this.on_submit.bind(this);
@@ -74,17 +74,21 @@ class LoginSocialNetworks extends React.Component {
                     fetch(url)
                     .then(res =>res.json())
                     .then(data => {
-                        console.log(data);
+                        // console.log(data);
                         // console.log("DATA");
 
                         const posts = data.result.data;
 
-                        console.log(posts);
+                        // console.log(posts);
                         // console.log(data.result.data);
                         // redirect to posts
                         // this.props.match.params.store_id
                         // this.props.history.push("/postsFromSocialNetworks/" + this.props.match.params.store_id);
-                        alert("Change code store id");
+                        // alert("Change code store id");
+
+                        // this.setState({
+                        //     loading: false,
+                        // });
 
                         // console.log("/postsFromSocialNetworks/" + localStorage.getItem('store_id'));
 
@@ -94,7 +98,14 @@ class LoginSocialNetworks extends React.Component {
                     })
 
 
-                };
+                }
+
+                // no auth code
+                else {
+                    this.setState({
+                        loading: false,
+                    });
+                }
 
             }
 
@@ -105,9 +116,9 @@ class LoginSocialNetworks extends React.Component {
                 this.props.history.push('/login');
             }
 
-            this.setState({
-                loading: false,
-            });
+            // this.setState({
+            //     loading: false,
+            // });
 
         });
 
