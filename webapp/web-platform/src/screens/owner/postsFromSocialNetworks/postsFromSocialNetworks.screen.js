@@ -34,20 +34,6 @@ import { auth } from "../../../libraries/firebase/firebase";
 
 import MenuBar from "../generalComponents/menuBar.component";
 
-// // prototype post
-// const posts = [
-
-//     {
-//         "text": "hello this is my first IG post",
-//         "image": "https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg",
-//     },
-
-//     {
-//         "text": "This is another IG post",
-//         "image": "https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg",
-//     },
-// ];
-
 
 class PostsFromSocialNetworks extends React.Component {
 

@@ -111,49 +111,6 @@ class LoginSocialNetworks extends React.Component {
 
     }
 
-    // create store on DB
-    createStore() {
-
-        // define store
-        const newStore = {
-            "name": "Cami cooks",
-            "instagramUrl": "https://www.instagram.com/camicooks_/",
-            "profilePhoto": "https://instagram.fpuq3-1.fna.fbcdn.net/v/t51.2885-19/s320x320/97950066_1170349686638961_3025539464844804096_n.jpg?tp=1&_nc_ht=instagram.fpuq3-1.fna.fbcdn.net&_nc_ohc=gWikcq9ctcIAX8OQDqp&edm=ABfd0MgBAAAA&ccb=7-4&oh=b94a4bc8d14313227db5ff3db3795d06&oe=60BDCE66&_nc_sid=7bff83",
-            // owner store (user from DB)
-            "ownerId": loggedUser.uid,
-        };
-
-        // create store in DB 
-        fs.collection('stores')
-            .add(
-                newStore
-            )
-            .then(ref_ => {
-
-                alert("Tu tienda ha sido creada exitosamente");
-
-                this.setState({
-                    loading: false
-                });
-
-                // navigate to post from social networks
-                // + store id
-                this.props.history.push("/postsFromSocialNetworks/" + ref_.id);
-
-            })
-
-            .catch(e => {
-
-                this.setState({
-                    loading: false
-                });
-
-
-                alert("Tuvimos un error, inténtalo nuevamente porfavor");
-
-            });
-            
-    }
     // onsubmit form
     on_submit() {
 
@@ -166,45 +123,6 @@ class LoginSocialNetworks extends React.Component {
 
         // redirect to IG authorization
         window.location.replace('https://api.instagram.com/oauth/authorize?client_id=477247573594243&redirect_uri=https://localhost:3000/loginSocialNetworks&scope=user_profile,user_media&response_type=code');
-
-        // // define store
-        // const newStore = {
-        //     "name": "Cami cooks",
-        //     "instagramUrl": "https://www.instagram.com/camicooks_/",
-        //     "profilePhoto": "https://instagram.fpuq3-1.fna.fbcdn.net/v/t51.2885-19/s320x320/97950066_1170349686638961_3025539464844804096_n.jpg?tp=1&_nc_ht=instagram.fpuq3-1.fna.fbcdn.net&_nc_ohc=gWikcq9ctcIAX8OQDqp&edm=ABfd0MgBAAAA&ccb=7-4&oh=b94a4bc8d14313227db5ff3db3795d06&oe=60BDCE66&_nc_sid=7bff83",
-        //     // owner store (user from DB)
-        //     "ownerId": loggedUser.uid,
-        // };
-
-        // // create store in DB 
-        // fs.collection('stores')
-        // .add(
-        //     newStore
-        // )
-        // .then(ref_ => {
-
-        //     alert("Tu tienda ha sido creada exitosamente");
-
-        //     this.setState({ 
-        //         loading: false 
-        //     });
-
-        //     // navigate to post from social networks
-        //     // + store id
-        //     this.props.history.push("/postsFromSocialNetworks/" + ref_.id);
-
-        // })
-    
-        // .catch (e => {
-
-        //     this.setState({ 
-        //         loading: false 
-        //     });
-
-
-        //     alert("Tuvimos un error, inténtalo nuevamente porfavor");
-
-        // });
 
     };
 
