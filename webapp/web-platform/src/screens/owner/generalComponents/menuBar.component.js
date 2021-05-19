@@ -56,6 +56,13 @@ class MenuBar extends React.Component {
                     Productos en la tienda
                 </Button>
 
+                {/* go to store */}
+                <Button align="center" variant="contained" color="primary"
+                    onClick={this.props.goToStore}
+                >
+                    Ir a la tienda
+                </Button>
+
 
             </Grid>
         );

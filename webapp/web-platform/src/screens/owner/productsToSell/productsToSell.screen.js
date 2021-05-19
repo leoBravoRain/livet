@@ -163,6 +163,11 @@ class ProductsToSell extends React.Component {
                     goToChooseStore = {() => {
                         this.props.history.push("/chooseStore");
                     }}
+
+                    goToStore = {() => {
+                        // open store
+                        window.open(window.location.origin + "/" + this.props.match.params.store_id);
+                    }}
                 />
 
                 {/* list of products */}
