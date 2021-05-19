@@ -3,19 +3,19 @@ import React from "react";
 // import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 // material ui
-import Paper from '@material-ui/core/Paper';
-// import Container from '@material-ui/core/Container';
+// import Paper from '@material-ui/core/Paper';
+import Container from '@material-ui/core/Container';
 // import TextField from '@material-ui/core/TextField';
 import { Button } from "@material-ui/core";
 // import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Grid from '@material-ui/core/Grid';
+// import Grid from '@material-ui/core/Grid';
 
 // firebase
 import { 
     auth,
-    fs,
+    // fs,
 } from "../../../libraries/firebase/firebase";
 
 
@@ -132,67 +132,50 @@ class LoginSocialNetworks extends React.Component {
 
         return (
 
-            <Grid
-                container
-                spacing={3}
-            >
+            !this.state.loading
+
+                ?
 
 
-                {
-                    !this.state.loading
+                    <Container
+                        // item xs={12} sm={12}
+                        style={{
+                            // backgroundColor: "yellow" 
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                        }}
+                    >
 
-                        ?
+                        {/* sync with IG account */}
+                        <Typography align="center" variant="h4" component="h4" gutterBottom>
+                            Sincronizar con tu tienda de Instagram
+                        </Typography>
 
-                        <Grid item xs={12} sm={12}
-                        // style={{ backgroundColor: "yellow" }}
+                        <Typography align="center" variant="body2" component="p" gutterBottom>
+                            Para poder sincronizar tu cuenta de IG con tu propia página web, debes registrarte con la cuenta de IG de tu tienda
+                        </Typography>
+
+                        <Button align="center" variant="contained" color="primary"
+                            onClick={() => {
+
+                                this.on_submit();
+
+                                // this.props.history.push('/postsFromSocialNetworks');
+                                // alert("go to IG posts page");
+                            }}
                         >
-                            <Paper
-                                style={{
-                                    padding: 20,
-                                    margin: 10,
-                                    alignContent: "center",
-                                    justifyContent: "center",
-                                    display: "flex",
-                                    flexDirection: "column",
-                                }}
 
-                                elevation={3}
-                            >
+                            Sincronizar con tienda IG
 
-                                {/* sync with IG account */}
-                                <Typography align="center" variant="h4" component="h4" gutterBottom>
-                                    Sincronizar con tu tienda de Instagram
-                                </Typography>
+                        </Button>
 
-                                <Typography align="center" variant="body2" component="p" gutterBottom>
-                                    Para poder sincronizar tu cuenta de IG con tu propia página web, debes registrarte con la cuenta de IG de tu tienda
-                                </Typography>
+                    </Container>
 
-                                <Button align="center" variant="contained" color="primary"
-                                    onClick={() => {
+                :
 
-                                        this.on_submit();
+                    <CircularProgress />
 
-                                        // this.props.history.push('/postsFromSocialNetworks');
-                                        // alert("go to IG posts page");
-                                    }}
-                                >
-
-                                    Sincronizar con tienda IG
-
-                                </Button>
-
-                            </Paper>
-
-                        </Grid>
-
-                        :
-
-                        <CircularProgress />
-
-                }
-                {/* </Paper> */}
-            </Grid>
         );
 
     }
