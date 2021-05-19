@@ -32,6 +32,7 @@ import Grid from '@material-ui/core/Grid';
 // firebase
 import { fs } from "../../../libraries/firebase/firebase";
 
+import StoreInformation from "../generalComponents/storeInformation/storeInformation.component";
 
 // // prototype post
 // const product = {
@@ -56,6 +57,7 @@ class ProductDetails extends React.Component {
         this.state = {
             loading: true,
             product: null,
+            store: null,
         }
 
         // this.convert_to_product = this.convert_to_product.bind(this);
@@ -69,28 +71,42 @@ class ProductDetails extends React.Component {
         });
 
         // get store data
-        fs.collection("stores").doc(this.props.match.params.store_id).collection("products").doc(this.props.match.params.product_id).get()
-            .then(doc => {
+        fs.collection("stores").doc(this.props.match.params.store_id).get()
+        .then(doc => {
+            // if store exists
+            if (doc.exists) {
 
-                // if store exists
-                if (doc.exists) {
+                // get store data
+                var store = doc.data();
+                // store["id"] = doc.id;
 
-                    // get store data
-                    var product = doc.data();
-                    product["id"] = doc.id;
+                // get product information
+                fs.collection("stores").doc(this.props.match.params.store_id).collection("products").doc(this.props.match.params.product_id).get()
+                    .then(doc => {
+        
+                        // if store exists
+                        if (doc.exists) {
+        
+                            // get store data
+                            var product = doc.data();
+                            product["id"] = doc.id;
+        
+                            // update state
+                            this.setState({
+        
+                                // update products
+                                product: product,
+                                store: store,
+                                loading: false,
+        
+                            });
+        
+                        }
+        
+                    })
 
-                    // update state
-                    this.setState({
-
-                        // update products
-                        product: product,
-                        loading: false,
-
-                    });
-
-                }
-
-            })
+            }
+        })
 
     }
 
@@ -105,6 +121,21 @@ class ProductDetails extends React.Component {
 
                 // this is to center content
                 <Container>
+
+                    {/* store information */}
+                    <StoreInformation
+                        profilePhoto={this.state.store.profilePhoto}
+                        name={this.state.store.name}
+                        description={this.state.store.description}
+                        goToHome={() => {
+                            // alert("Go to home")
+                            this.props.history.push('/' + this.props.match.params.store_id);
+                        }}
+                        goToInstagram={() => {
+                            // alert("Go to home")
+                            window.open(this.state.store.instagramUrl);
+                        }}
+                    />
 
                     {/* this is real container */}
                     <Grid

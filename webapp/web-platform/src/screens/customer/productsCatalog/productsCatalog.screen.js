@@ -11,7 +11,7 @@ import { Button } from "@material-ui/core";
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from '@material-ui/core/Grid';
-import Divider from '@material-ui/core/Divider';
+// import Divider from '@material-ui/core/Divider';
 
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -172,16 +172,6 @@ class ProductsCatalog extends React.Component {
 
                     {/* catalog of products */}
                     <Container>
-
-                            {/* divider */}
-
-                            <Divider 
-                                // light = {true}
-                                variant="middle"
-                                style = {{
-                                    margin: 50
-                                }}
-                            />
 
                             {/* title */}
                             <Typography 

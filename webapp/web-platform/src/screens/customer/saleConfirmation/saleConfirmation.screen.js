@@ -12,6 +12,8 @@ import Typography from '@material-ui/core/Typography';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from '@material-ui/core/Grid';
 
+import StoreInformation from "../generalComponents/storeInformation/storeInformation.component";
+
 // import Card from '@material-ui/core/Card';
 // import CardActionArea from '@material-ui/core/CardActionArea';
 // import CardActions from '@material-ui/core/CardActions';
@@ -57,11 +59,14 @@ class SaleConfirmation extends React.Component {
         // initial states
         this.state = {
 
-            loading: false,
+            loading: true,
 
             customerName: null,
             customerEmail: null,
             customerAddress: null,
+
+            // store
+            store: null,
 
         };
 
@@ -69,12 +74,36 @@ class SaleConfirmation extends React.Component {
 
     }
 
-    // componentDidMount() {
+    componentDidMount() {
 
-        
+        this.setState({
+            loading: true,
+        });
 
-    // }
+        // get store data
+        fs.collection("stores").doc(this.props.match.params.store_id).get()
+            .then(doc => {
 
+                // if store exists
+                if (doc.exists) {
+
+                    // get store data
+                    var store = doc.data();
+                    store["id"] = doc.id;
+                    // console.log(store);
+
+                    // update state
+                    this.setState({
+
+                        // update products
+                        store: store,
+                        loading: false,
+
+                    });
+                }
+            })
+
+    }
 
     confirm_sale() {
 
@@ -82,53 +111,59 @@ class SaleConfirmation extends React.Component {
             loading: true,
         });
 
-        // validate if cusomter data is filled
-        if (this.state.customerName != null & this.state.customerEmail != null & this.state.customerAddress != null) {
 
-            // get product data
-            fs.collection("stores").doc(this.props.match.params.store_id).collection("products").doc(this.props.match.params.product_id)
-            .get()
-            .then(doc => {
+        // THIS CODE IS TO DEMO
+        // redirect to payment
+        window.location.href = "https://app.payku.cl/botonpago/index?idboton=14257&verif=0f7014ea";
+
+        // THIS IS THE REAL CODE
+        // // validate if cusomter data is filled
+        // if (this.state.customerName != null & this.state.customerEmail != null & this.state.customerAddress != null) {
+
+        //     // get product data
+        //     fs.collection("stores").doc(this.props.match.params.store_id).collection("products").doc(this.props.match.params.product_id)
+        //     .get()
+        //     .then(doc => {
 
 
-                // if product exists
-                // sale data needs the product data
-                if(doc.exists) {
+        //         // if product exists
+        //         // sale data needs the product data
+        //         if(doc.exists) {
 
-                    // sale object
-                    const newSale = {
+        //             // sale object
+        //             const newSale = {
                         
-                        productId: doc.id,
-                        customerName: this.state.customerName,
-                        customerEmail: this.state.customerEmail,
-                        customerAddress: this.state.customerAddress,
+        //                 productId: doc.id,
+        //                 customerName: this.state.customerName,
+        //                 customerEmail: this.state.customerEmail,
+        //                 customerAddress: this.state.customerAddress,
                         
-                    };
+        //             };
             
-                    fs.collection('stores').doc(this.props.match.params.store_id).collection("sales")
-                        .add(
-                            newSale
-                        )
-                        .then(ref_ => {
+        //             fs.collection('stores').doc(this.props.match.params.store_id).collection("sales")
+        //                 .add(
+        //                     newSale
+        //                 )
+        //                 .then(ref_ => {
             
-                            // redirect to payment
-                            window.location.href = doc.data().paymentUrl;
+        //                     // redirect to payment
+        //                     window.location.href = doc.data().paymentUrl;
             
-                        });
+        //                 });
                     
-                }
-            })
+        //         }
+        //     })
 
-        }
+        // }
 
-        // if user data is not complete
-        else {
-            alert("Debes rellenar toda la información antes de seguir");
+        // // if user data is not complete
+        // else {
+        //     alert("Debes rellenar toda la información antes de seguir");
 
-            this.setState({
-                loading: false,
-            });
-        };
+        //     this.setState({
+        //         loading: false,
+        //     });
+        // };
         
     }
 
@@ -137,127 +172,116 @@ class SaleConfirmation extends React.Component {
 
         return (
 
-            <Grid
-                container
-                spacing={3}
-            >
+            !this.state.loading
+
+                ?
+
+                <Container
+                // style={{ backgroundColor: "yellow" }}
+                >
+                    
+                    {/* store information */}
+                    <StoreInformation
+                        profilePhoto={this.state.store.profilePhoto}
+                        name={this.state.store.name}
+                        description={this.state.store.description}
+                        goToHome={() => {
+                            // alert("Go to home")
+                            this.props.history.push('/' + this.props.match.params.store_id);
+                        }}
+                        goToInstagram={() => {
+                            // alert("Go to home")
+                            window.open(this.state.store.instagramUrl);
+                        }}
+                    />
+
+                    {/* section title */}
+                    <Typography align="center" variant="h4" component="h4" gutterBottom>
+                        Confirmar la compra
+                    </Typography>
+
+                    {/* informatino to fill */}
+                    <FormControl
+                    // style={{
+                    //     width: "50%",
+                    //     alignSelf: "center",
+                    // }}
+                    >
+
+                        {/* customer name */}
+                        <TextField
+                            required
+                            // id="standard-uncontrolled"
+                            label="Nombre"
+                            // type="Nombre"
+                            // defaultValue="Correo electrónico"
+                            margin="normal"
+                            onChange={(e) => this.setState({ customerName: e.target.value })}
+                            value={this.state.customerName}
+                        />
+
+                        {/* customer address */}
+                        <TextField
+                            required
+                            // id="standard-uncontrolled"
+                            label="Dirección para enviarte el producto"
+                            // type="Dirección"
+                            // defaultValue="Correo electrónico"
+                            margin="normal"
+                            onChange={(e) => this.setState({ customerAddress: e.target.value })}
+                            value={this.state.customerAddress}
+                        />
+
+                        {/* customer email */}
+                        <TextField
+                            required
+                            // id="standard-uncontrolled"
+                            label="Correo Electrónico"
+                            // type="Correo Electrónico"
+                            // defaultValue="Correo electrónico"
+                            margin="normal"
+                            onChange={(e) => this.setState({ customerEmail: e.target.value })}
+                            value={this.state.customerEmail}
+                        />
+
+                        <Typography align="center" variant="body2" component="p" gutterBottom>
+                        
+                            ***
+
+                            Este proceso de compra es solo una demostración por lo que no corresponde a una venta real.
+
+                            ​
+
+                            Si seleccionas "Confirmar Compra" te redirigiremos hacia un botón de pago simulado, el cual solo sirve para que veas como sería el proceso de pago para tus clientes.
 
 
-                {
-                    !this.state.loading
+                            Este mensaje no aparecerá en tu página real. 
 
-                        ?
+                            El método de pago se implementará de forma real cuando tengas tu propia página de e-commerce. 
 
-                        <Grid item xs={12} sm={12}
-                        // style={{ backgroundColor: "yellow" }}
+                            ***
+
+                        </Typography>
+
+
+                        {/* convert to post button */}
+                        <Button
+                            align="center"
+                            variant="contained"
+                            color="primary"
+                            onClick={this.confirm_sale}
                         >
+                            Ir a pagar
+                        </Button>
 
-                            {/* list of posts */}
-                            <Paper
-                                style={{
-                                    padding: 20,
-                                    margin: 10,
-                                    alignContent: "center",
-                                    justifyContent: "center",
-                                    display: "flex",
-                                    flexDirection: "column",
-                                }}
+                    </FormControl>
 
-                                elevation={3}
-                            >
+                </Container>
 
-                                {/* section title */}
-                                <Typography align="center" variant="h4" component="h4" gutterBottom>
-                                    Confirmar la compra
-                                </Typography>
+                :
 
-                                {/* informatino to fill */}
-                                <FormControl
-                                // style={{
-                                //     width: "50%",
-                                //     alignSelf: "center",
-                                // }}
-                                >
+                <CircularProgress />
 
-                                    {/* customer name */}
-                                    <TextField
-                                        required
-                                        // id="standard-uncontrolled"
-                                        label="Nombre"
-                                        type="Nombre"
-                                        // defaultValue="Correo electrónico"
-                                        margin="normal"
-                                        onChange={(e) => this.setState({ customerName: e.target.value })}
-                                        value={this.state.customerName}
-                                    />
-
-                                    {/* customer address */}
-                                    <TextField
-                                        required
-                                        // id="standard-uncontrolled"
-                                        label="Dirección para enviarte el producto"
-                                        type="Dirección"
-                                        // defaultValue="Correo electrónico"
-                                        margin="normal"
-                                        onChange={(e) => this.setState({ customerAddress: e.target.value })}
-                                        value={this.state.customerAddress}
-                                    />
-
-                                    {/* customer email */}
-                                    <TextField
-                                        required
-                                        // id="standard-uncontrolled"
-                                        label="Correo Electrónico"
-                                        type="Correo Electrónico"
-                                        // defaultValue="Correo electrónico"
-                                        margin="normal"
-                                        onChange={(e) => this.setState({ customerEmail: e.target.value })}
-                                        value={this.state.customerEmail}
-                                    />
-
-                                    <Typography align="center" variant="body2" component="p" gutterBottom>
-                                   
-                                        ***
-
-                                        Este proceso de compra es solo una demostración por lo que no corresponde a una venta real.
-
-                                        ​
-
-                                        Si seleccionas "Confirmar Compra" te redirigiremos hacia un botón de pago simulado, el cual solo sirve para que veas como sería el proceso de pago para tus clientes.
-
-
-                                        Este mensaje no aparecerá en tu página real. 
-
-                                        El método de pago se implementará de forma real cuando tengas tu propia página de e-commerce. 
-
-                                        ***
-
-                                    </Typography>
-
-
-                                    {/* convert to post button */}
-                                    <Button
-                                        align="center"
-                                        variant="contained"
-                                        color="primary"
-                                        onClick={this.confirm_sale}
-                                    >
-                                        Ir a pagar
-                                    </Button>
-
-                                </FormControl>
-
-                            </Paper>
-
-                        </Grid>
-
-                        :
-
-                        <CircularProgress />
-
-                }
-                {/* </Paper> */}
-            </Grid>
         );
 
     }
