@@ -64,7 +64,7 @@ class Register extends React.Component {
 
             })
 
-            .catch(function (error) {
+            .catch((error) => {
 
                 // console.log(error);
                 alert(error.message);

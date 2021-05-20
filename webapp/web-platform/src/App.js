@@ -108,38 +108,7 @@ class App extends Component {
 
             <div> */}
 
-              <AppBar 
-                position="static"
-              >
-
-                <Toolbar>
-
-                  {/* to home */}
-                  <Link to="/" className="nav-link" style={{ "flex": 1, "color": "white", "textDecoration": "none" }}>
-
-                    <Typography gutterBottom variant="h4" component="h2">
-
-                      Livet
-
-                    </Typography>
-
-                  </Link>
-
-
-                  {/* Link without "to" because text has the functino to close session */}
-                  <Link className="nav-link" style={{ textDecoration: "none" }}>
-
-                    <Typography gutterBottom variant="h6" component="h6" onClick={this.on_logout}>
-
-                      Cerrar sesión
-
-                  </Typography>
-
-                  </Link>
-
-                </Toolbar>
-
-              </AppBar>
+              
 
               {/* owner */}
               <Route path = "/" exact component = {Login} />

@@ -105,7 +105,7 @@ class EditSNPostToProduct extends React.Component {
 
                 // console.log("user no logged");
 
-                this.props.history.push('/login');
+                this.props.history.push('/');
             }
 
             this.setState({
@@ -188,6 +188,22 @@ class EditSNPostToProduct extends React.Component {
                         <Typography align="center" variant="h4" component="h4" gutterBottom>
                             Editar post para convertir en producto
                         </Typography>
+
+                        <Chip
+                            label="Acá debes agregar la información sobre el producto que venderás en tu tienda. La imagen será la misma que la del posteo."
+                            // color="primary"
+                            // margin = "100"
+                            style={{
+                                margin: 50,
+                                backgroundColor: "rgba(173, 216, 230, 0.5)",
+                            }}
+
+                        />
+
+                        {/* <Typography align="center" variant="body2" component="p" gutterBottom style={{ margin: 50, }}>
+                            Acá debes agregar la información sobre el producto que venderás en tu tienda. La imagen será la misma que la del posteo.
+                        </Typography> */}
+
 
                         {/* information */}
 

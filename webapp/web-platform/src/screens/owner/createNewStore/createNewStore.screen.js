@@ -82,7 +82,7 @@ class CreateNewStore extends React.Component {
 
                 // console.log("user no logged");
 
-                this.props.history.push('/login');
+                this.props.history.push('/');
                 
                 this.setState({
                     loading: false,
@@ -167,6 +167,14 @@ class CreateNewStore extends React.Component {
                         <Typography align="center" variant="h4" component="h4" gutterBottom>
                             Crear nueva tienda
                         </Typography>
+
+                        {/* information */}
+                        <Typography align="center" variant="body2" component="p" gutterBottom>
+                            Esta plataforma obtiene tus posteos de Instagram y con estos tú puedes elegir cuales de ellos corresponderán a productos a vender en tu tienda.
+                        </Typography>
+                        <Typography align="center" variant="body2" component="p" gutterBottom>
+                            El primer paso es sincronizar tu cuenta de tienda de Instagram, para poder obtener los posteos
+                        </Typography>
                         
 
                         {/* go to link with IG account */}
@@ -184,7 +192,7 @@ class CreateNewStore extends React.Component {
                                 window.location.replace('https://api.instagram.com/oauth/authorize?client_id=477247573594243&redirect_uri=https://localhost:3000/createNewStoreForm&scope=user_profile,user_media&response_type=code');
                             }}
                         >
-                            Sincronizar con cuenta de Instagram
+                            Sincronizar mi cuenta de Instagram
                         </Button>
 
                     </Container>

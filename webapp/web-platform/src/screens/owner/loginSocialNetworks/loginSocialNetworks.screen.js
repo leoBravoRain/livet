@@ -113,7 +113,7 @@ class LoginSocialNetworks extends React.Component {
 
                 // console.log("user no logged");
 
-                this.props.history.push('/login');
+                this.props.history.push('/');
             }
 
             // this.setState({
@@ -164,7 +164,7 @@ class LoginSocialNetworks extends React.Component {
                         </Typography>
 
                         <Typography align="center" variant="body2" component="p" gutterBottom>
-                            Para poder sincronizar tu cuenta de IG con tu propia página web, debes registrarte con la cuenta de IG de tu tienda
+                            Para poder obtener los posteos de tu cuenta de Instagram, debes autorizar el uso de datos directamente en Instagram
                         </Typography>
 
                         <Button align="center" variant="contained" color="primary"
@@ -177,7 +177,7 @@ class LoginSocialNetworks extends React.Component {
                             }}
                         >
 
-                            Sincronizar con tienda IG
+                            Autorizar y obtener posteos desde mi tienda IG
 
                         </Button>
 

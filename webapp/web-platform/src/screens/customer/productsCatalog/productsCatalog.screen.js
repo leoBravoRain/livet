@@ -256,6 +256,8 @@ class ProductsCatalog extends React.Component {
                                                                 flexDirection: "row",
                                                                 justifyContent: "center",
                                                                 // alignContent: "center"
+                                                                marginTop: 40,
+                                                                marginBottom: 30,
                                                             }}
                                                         >
 

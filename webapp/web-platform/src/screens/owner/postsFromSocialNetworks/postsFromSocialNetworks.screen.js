@@ -19,6 +19,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 // import Modal from '@material-ui/core/Modal';
 import PlayArrow from '@material-ui/icons/PlayArrow';
+import Chip from '@material-ui/core/Chip';
 // import Schedule from '@material-ui/icons/Schedule';
 
 // import Select from '@material-ui/core/Select';
@@ -132,7 +133,7 @@ class PostsFromSocialNetworks extends React.Component {
 
                 // console.log("user no logged");
 
-                this.props.history.push('/login');
+                this.props.history.push('/');
             }
 
             this.setState({
@@ -180,6 +181,21 @@ class PostsFromSocialNetworks extends React.Component {
                         // open store
                         window.open(window.location.origin + "/" + this.props.match.params.store_id);
                     }}
+
+                    logout={() => {
+
+                        // logout
+                        auth.signOut().then(res => {
+
+                            alert("Has cerrado tu sesión");
+
+                        }).catch(error => {
+
+                            console.log(error);
+
+                        });
+
+                    }}
                 />
 
                 {/* products list */}
@@ -189,6 +205,21 @@ class PostsFromSocialNetworks extends React.Component {
                     <Typography align="center" variant="h4" component="h4" gutterBottom>
                         Posteos desde tu cuenta de Instagram
                     </Typography>
+
+                    {/* Information */}
+                    <Chip
+                        label="Estos son los posteos que obtuvimos directamente desde tu cuenta de Instagram. Si alguno de ellos corresponde a un producto que deseas agregar a tu tienda, ¡seleccionalo!"
+                        // color="primary"
+                        // margin = "100"
+                        style={{
+                            margin: 50,
+                            backgroundColor: "rgba(173, 216, 230, 0.5)",
+                        }}
+
+                    />
+                    {/* <Typography align="center" variant="body2" component="p" gutterBottom style = {{margin: 50,}}>
+                        Estos son los posteos que obtuvimos directamente desde tu cuenta de Instagram. Si alguno de ellos corresponde a un producto que deseas agregar a tu tienda, ¡seleccionalo!
+                    </Typography> */}
 
                     {/* list of products */}
                     {

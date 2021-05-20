@@ -70,6 +70,13 @@ class MenuBar extends React.Component {
                     Ir a la tienda
                 </Button>
 
+                {/* logout */}
+                <Button align="center" variant="contained" color="primary"
+                    onClick={this.props.logout}
+                >
+                    Cerrar sesión
+                </Button>
+
 
             </Container>
         );

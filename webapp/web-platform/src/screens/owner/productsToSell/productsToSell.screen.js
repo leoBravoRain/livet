@@ -3,11 +3,11 @@ import React from "react";
 // import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 // material ui
-import Paper from '@material-ui/core/Paper';
+// import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 // import TextField from '@material-ui/core/TextField';
 import { Button } from "@material-ui/core";
-import FormControl from '@material-ui/core/FormControl';
+// import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from '@material-ui/core/Grid';
@@ -27,7 +27,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 // import DialogActions from '@material-ui/core/DialogActions';
 // import DialogContent from '@material-ui/core/DialogContent';
 // import DialogTitle from '@material-ui/core/DialogTitle';
-// import Chip from '@material-ui/core/Chip';
+import Chip from '@material-ui/core/Chip';
 
 import MenuBar from "../generalComponents/menuBar.component";
 
@@ -128,7 +128,7 @@ class ProductsToSell extends React.Component {
 
                 // console.log("user no logged");
 
-                this.props.history.push('/login');
+                this.props.history.push('/');
             }
 
             // this.setState({
@@ -176,15 +176,47 @@ class ProductsToSell extends React.Component {
                         // open store
                         window.open(window.location.origin + "/" + this.props.match.params.store_id);
                     }}
+
+                    logout={() => {
+
+                        // logout
+                        auth.signOut().then(res => {
+
+                            alert("Has cerrado tu sesión");
+
+                        }).catch(error => {
+
+                            console.log(error);
+
+                        });
+
+                    }}
                 />
 
                 {/* products list */}
-                <Container>
+                <Container
+                    style = {{
+                        justifyContent: "center",
+                        display:"flex",
+                        flexDirection: "column",
+                    }}
+                >
 
                     {/* title */}
                     <Typography align="center" variant="h4" component="h4" gutterBottom>
                         Productos a la venta en tu página
                     </Typography>
+
+                    <Chip
+                        label="Estos son todos los productos que estan disponibles en tu página y que un cliente puede comprar"
+                        // color="primary"
+                        // margin = "100"
+                        style={{
+                            margin: 50,
+                            backgroundColor: "rgba(173, 216, 230, 0.5)",
+                        }}
+
+                    />
 
                     {/* list of products */}
                     {
@@ -210,87 +242,124 @@ class ProductsToSell extends React.Component {
 
                                     {/* each post */}
                                     {
-                                        this.state.products.map((product) => {
 
-                                            return (
+                                        // check if there are posts
+                                        this.state.products.length > 0 
 
-                                                
-                                                // each product structure
-                                                <Grid
-                                                    item
-                                                    xs={12}
-                                                    md={4}
-                                                >
+                                        ?
 
-                                                    <Card>
-                                                        <CardActionArea
-                                                        >
-                                                            <CardMedia
-                                                                image={product.image}
-                                                                component="img"
-                                                                alt="Contemplative Reptile"
-                                                                height="200"
+                                            this.state.products.map((product) => {
 
-                                                            // title={workshop.name}
-                                                            />
+                                                return (
 
-                                                            {/* contentn */}
-                                                            <CardContent>
+                                                    
+                                                    // each product structure
+                                                    <Grid
+                                                        item
+                                                        xs={12}
+                                                        md={4}
+                                                    >
 
-                                                                {/* product name */}
-                                                                <Typography gutterBottom variant="h5" component="h2">
-                                                                    {product.name}
-                                                                </Typography>
-
-                                                                {/* description */}
-                                                                <Typography variant="body2" color="textSecondary" component="p">
-                                                                    {product.description}
-                                                                </Typography>
-
-                                                                {/* size */}
-                                                                <Typography gutterBottom variant="h5" component="h2">
-                                                                    {product.var1}
-                                                                </Typography>
-
-                                                                {/* price */}
-                                                                <Typography gutterBottom variant="h5" component="h2">
-                                                                    {product.price}
-                                                                </Typography>
-
-                                                            </CardContent>
-
-                                                        </CardActionArea>
-
-                                                        {/* <CardActions>
-
-                                                            <Button
-                                                                align="center"
-                                                                size="small"
-                                                                color="primary"
-                                                                variant="contained"
-                                                                onClick={() => {
-                                                                    // window.open("https://wa.me/" + workshop.teacherMobileNumber + "?text=Hola, quiero tomar una clase en tu curso de '" + workshop.title + "' que aparece en la plataforma online")
-                                                                    // this.setState({
-                                                                    //     toBuyModal: true,
-                                                                    // });
-
-                                                                    // alert("See details")
-                                                                    this.props.history.push('/productDetails/' + this.state.store.id + "/" + product.id);
-                                                                }}
+                                                        <Card>
+                                                            <CardActionArea
                                                             >
+                                                                <CardMedia
+                                                                    image={product.image}
+                                                                    component="img"
+                                                                    alt="Contemplative Reptile"
+                                                                    height="200"
 
-                                                                <PlayArrow /> Ver detalles
-        
-                                                            </Button>
+                                                                // title={workshop.name}
+                                                                />
 
-                                                        </CardActions> */}
+                                                                {/* contentn */}
+                                                                <CardContent>
 
-                                                    </Card>
+                                                                    {/* product name */}
+                                                                    <Typography gutterBottom variant="h5" component="h2">
+                                                                        {product.name}
+                                                                    </Typography>
 
-                                                </Grid>
+                                                                    {/* description */}
+                                                                    <Typography variant="body2" color="textSecondary" component="p">
+                                                                        {product.description}
+                                                                    </Typography>
 
-                                            );
-                                        })
+                                                                    {/* size */}
+                                                                    <Typography gutterBottom variant="h5" component="h2">
+                                                                        {product.var1}
+                                                                    </Typography>
+
+                                                                    {/* price */}
+                                                                    <Typography gutterBottom variant="h5" component="h2">
+                                                                        {product.price}
+                                                                    </Typography>
+
+                                                                </CardContent>
+
+                                                            </CardActionArea>
+
+                                                            {/* <CardActions>
+
+                                                                <Button
+                                                                    align="center"
+                                                                    size="small"
+                                                                    color="primary"
+                                                                    variant="contained"
+                                                                    onClick={() => {
+                                                                        // window.open("https://wa.me/" + workshop.teacherMobileNumber + "?text=Hola, quiero tomar una clase en tu curso de '" + workshop.title + "' que aparece en la plataforma online")
+                                                                        // this.setState({
+                                                                        //     toBuyModal: true,
+                                                                        // });
+
+                                                                        // alert("See details")
+                                                                        this.props.history.push('/productDetails/' + this.state.store.id + "/" + product.id);
+                                                                    }}
+                                                                >
+
+                                                                    <PlayArrow /> Ver detalles
+            
+                                                                </Button>
+
+                                                            </CardActions> */}
+
+                                                        </Card>
+
+                                                    </Grid>
+
+                                                );
+                                            })
+
+                                        :
+
+                                            <Container
+                                                style = {{
+                                                    display: "flex",
+                                                    flexDirection: "column",
+                                                    justifyContent: "center",
+                                                    margin: 50,
+                                                }}
+                                            >
+
+                                                <Typography 
+                                                    align = "center"
+                                                    gutterBottom variant="body2" component="p">
+                                                    Aún no has agregado productos a tu tienda ¡Comienza a agregar productos directamente desde tu tienda de Instagram!
+                                                </Typography>
+                                            
+                                                {/* go to post from SN */}
+                                                <Button
+                                                    onClick={() => {
+                                                        // set store id as local varibale because IG API cannot receive the store id in the url (becaus it has to be exact url and it changes with the store ids)
+                                                        localStorage.setItem('store_id', this.props.match.params.store_id);
+
+                                                        // this.props.history.push("/loginSocialNetworks/" + this.props.match.params.store_id);
+                                                        this.props.history.push("/loginSocialNetworks/");
+                                                    }}
+                                                >
+                                                    Agregar productos desde mi cuenta de Instagram
+                                                </Button>
+                                            </Container>
                                     }
 
                                 </Grid>

@@ -190,7 +190,10 @@ class Login extends React.Component {
                             </Typography>
 
                             {/* register button */}
-                            <Button align="center" variant="contained" color="primary"
+                            <Button 
+                                align="center" 
+                                variant="contained" 
+                                color="secondary"
                                 onClick={() => {
                                     this.props.history.push('/register');
                                     // alert("go to register");
