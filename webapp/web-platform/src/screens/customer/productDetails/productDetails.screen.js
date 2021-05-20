@@ -185,8 +185,8 @@ class ProductDetails extends React.Component {
                             style={{
                                 // padding: 20,
                                 margin: 10,
-                                // alignContent: "center",
-                                // justifyContent: "center",
+                                alignContent: "left",
+                                justifyContent: "left",
                                 // display: "flex",
                                 // flexDirection: "column",
                                 // backgroundColor: "red",
@@ -194,32 +194,54 @@ class ProductDetails extends React.Component {
                         >
                     
                             {/* name */}
-                            <Typography align="center" variant="h2" component="h2" gutterBottom>
+                            <Typography 
+                                // align="center" 
+                                variant="h3" 
+                                component="h3" 
+                                gutterBottom
+                            >
                                 {this.state.product.name}
                             </Typography>
 
                             {/* description */}
-                            <Typography align="center" variant="body2" component="p" gutterBottom>
+                            <Typography 
+                                // align="center" 
+                                variant="body2" 
+                                component="p" 
+                                gutterBottom>
                                 {this.state.product.description}
                             </Typography>
 
                             {/* extra information */}
-                            <Typography align="center" variant="body2" component="p" gutterBottom>
+                            <Typography 
+                            // align="center" 
+                            variant="body2" component="p" gutterBottom>
                                 {this.state.product.extraInformation}
                             </Typography>
 
                             {/* var 1 */}
-                            <Typography align="center" variant="body2" component="p" gutterBottom>
+                            <Typography 
+                                // align="center" 
+                                variant="body2" component="p" gutterBottom>
                                 {this.state.product.var1}
                             </Typography>
 
                             {/* price */}
-                            <Typography align="center" variant="body2" component="p" gutterBottom>
-                                $ {this.state.product.price.toLocaleString()}
+                            <Typography 
+                            // align="center" 
+                                variant="subtitle2" 
+                                component="p" 
+                                gutterBottom
+                                style = {{
+                                    margin: 20,
+                                }}
+                            >
+                                Precio: $ {this.state.product.price.toLocaleString()}
                             </Typography>
 
                             {/* to buy button */}
                             <Button 
+                                align = "right"
                                 size="small" 
                                 color="primary"
                                 variant="contained"
