@@ -10,10 +10,10 @@ import { Button } from "@material-ui/core";
 import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Grid from '@material-ui/core/Grid';
+// import Grid from '@material-ui/core/Grid';
 
 import StoreInformation from "../generalComponents/storeInformation/storeInformation.component";
-
+import FooterStore from "../generalComponents/footerStore/footerStore.component";
 // import Card from '@material-ui/core/Card';
 // import CardActionArea from '@material-ui/core/CardActionArea';
 // import CardActions from '@material-ui/core/CardActions';
@@ -276,6 +276,14 @@ class SaleConfirmation extends React.Component {
 
                     </FormControl>
 
+                    {/* footer */}
+                    <FooterStore
+                        goToInstagram={() => {
+                            // alert("Go to home")
+                            window.open(this.state.store.instagramUrl);
+                        }}
+                    />
+                    
                 </Container>
 
                 :

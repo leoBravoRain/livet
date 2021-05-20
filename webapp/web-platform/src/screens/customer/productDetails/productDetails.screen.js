@@ -33,7 +33,7 @@ import Grid from '@material-ui/core/Grid';
 import { fs } from "../../../libraries/firebase/firebase";
 
 import StoreInformation from "../generalComponents/storeInformation/storeInformation.component";
-
+import FooterStore from "../generalComponents/footerStore/footerStore.component";
 // // prototype post
 // const product = {
 //     "name": "Panqueques de queso crema",
@@ -263,6 +263,14 @@ class ProductDetails extends React.Component {
                         </Grid>
 
                     </Grid>
+
+                    {/* footer */}
+                    <FooterStore
+                        goToInstagram={() => {
+                            // alert("Go to home")
+                            window.open(this.state.store.instagramUrl);
+                        }}
+                    />
 
                 </Container>
 

@@ -25,6 +25,7 @@ import Search from '@material-ui/icons/Search';
 // import Select from '@material-ui/core/Select';
 
 import StoreInformation from "../generalComponents/storeInformation/storeInformation.component";
+import FooterStore from "../generalComponents/footerStore/footerStore.component";
 
 // import Dialog from '@material-ui/core/Dialog';
 // import DialogActions from '@material-ui/core/DialogActions';
@@ -358,6 +359,14 @@ class ProductsCatalog extends React.Component {
                         </Grid>
 
                     </Container>
+
+                    {/* footer */}
+                    <FooterStore 
+                        goToInstagram={() => {
+                            // alert("Go to home")
+                            window.open(this.state.store.instagramUrl);
+                        }}
+                    />
 
                 </Container>
 
