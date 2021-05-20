@@ -27,7 +27,7 @@ import Grid from '@material-ui/core/Grid';
 // import DialogActions from '@material-ui/core/DialogActions';
 // import DialogContent from '@material-ui/core/DialogContent';
 // import DialogTitle from '@material-ui/core/DialogTitle';
-// import Chip from '@material-ui/core/Chip';
+import Chip from '@material-ui/core/Chip';
 
 // firebase
 import { 
@@ -170,149 +170,186 @@ class EditSNPostToProduct extends React.Component {
 
         return (
 
-            <Grid
-                container
-                spacing={3}
-            >
+            !this.state.loading
 
+                ?
 
-                {
-                    (!this.state.loading)
+                    <Container
+                        // item xs={12} sm={12}
+                        style={{
+                            // backgroundColor: "yellow" 
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                        }}
+                    >
 
-                        ?
+                        {/* section title */}
+                        <Typography align="center" variant="h4" component="h4" gutterBottom>
+                            Editar post para convertir en producto
+                        </Typography>
 
-                        <Grid item xs={12} sm={12}
-                        // style={{ backgroundColor: "yellow" }}
+                        {/* information */}
+
+                        {/* original information */}
+                        <Grid
+                            container
+                            style = {{
+                                // display: "flex",
+                                justifyContent: "center",
+                                // alignContent: "center",
+                                // backgroundColor: "green",
+
+                            }}
                         >
 
-                            {/* list of posts */}
-                            <Paper
+                            {/* original image */}
+                            <Grid
+                                item
+                                xs = {12}
+                                md = {6}
                                 style={{
-                                    padding: 20,
-                                    margin: 10,
-                                    alignContent: "center",
-                                    justifyContent: "center",
                                     display: "flex",
-                                    flexDirection: "column",
-                                }}
+                                    justifyContent: "center",
+                                    // alignContent: "center",
+                                    // backgroundColor: "red",
 
-                                elevation={3}
+                                }}
                             >
 
-                                {/* section title */}
-                                <Typography align="center" variant="h4" component="h4" gutterBottom>
-                                    Editar post para convertir en producto
+                                <img 
+                                    // src={this.state.post.image} 
+                                    src={this.state.post.media_url} 
+                                    alt="image" 
+                                    width = "300px"
+                                    heigh = "300px"
+                                />
+
+                            </Grid>
+
+                            <Grid 
+                                item
+                                xs={12}
+                                md={6}
+                                style={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    // alignContent: "center",
+                                    flexDirection:"column",
+                                    // backgroundColor: "yellow",
+
+                                }}
+                            >
+
+                                <Chip 
+                                    label="Si quieres puedes copiar parte de este texto y pegarlo en alguno de los campos de tu producto" 
+                                    // color="primary"
+                                    // margin = "100"
+                                    style = {{
+                                        margin: 20,
+                                    }}
+
+                                />
+
+                                {/* originla text */}
+                                <Typography align="center" variant="body2" component="p" gutterBottom>
+                                    {/* {this.state.post.text} */}
+                                    {this.state.post.caption}
                                 </Typography>
 
-                                {/* information */}
-
-                                {/* original information */}
-                                <Container>
-
-                                    {/* original image */}
-                                    <img 
-                                        // src={this.state.post.image} 
-                                        src={this.state.post.media_url} 
-                                        alt="image" 
-                                        width = "300px"
-                                        heigh = "300px"
-                                    />
-
-                                    {/* originla text */}
-                                    <Typography align="center" variant="body2" component="p" gutterBottom>
-                                        {/* {this.state.post.text} */}
-                                        {this.state.post.caption}
-                                    </Typography>
-
-                                </Container>
-
-                                {/* informatino to fill */}
-                                <FormControl
-                                    // style={{
-                                    //     width: "50%",
-                                    //     alignSelf: "center",
-                                    // }}
-                                >
-
-                                    {/* product name */}
-                                    <TextField
-                                        // id="standard-uncontrolled"
-                                        label="Nombre producto"
-                                        type="Nombre producto"
-                                        // defaultValue="Correo electrónico"
-                                        margin="normal"
-                                        onChange={(e) => this.setState({ productName: e.target.value })}
-                                        value={this.state.productName}
-                                    />
-
-                                    {/* product description */}
-                                    <TextField
-                                        // id="standard-uncontrolled"
-                                        label="Descripción del producto"
-                                        type="Descripción"
-                                        // defaultValue="Correo electrónico"
-                                        margin="normal"
-                                        onChange={(e) => this.setState({ productDescription: e.target.value })}
-                                        value={this.state.productDescription}
-                                    />
-
-                                    {/* product var 1 */}
-                                    {/* This can be different for each store (maybe the best is to create a "choose a variable first") */}
-                                    <TextField
-                                        // id="standard-uncontrolled"
-                                        label="Tamaño del producto"
-                                        type="Tamaño"
-                                        // defaultValue="Correo electrónico"
-                                        margin="normal"
-                                        onChange={(e) => this.setState({ productVar1: e.target.value })}
-                                        value={this.state.productVar1}
-                                    />
-
-                                    {/* product price */}
-                                    <TextField
-                                        // id="standard-uncontrolled"
-                                        label="Precio del producto"
-                                        type="Precio"
-                                        // defaultValue="Correo electrónico"
-                                        margin="normal"
-                                        onChange={(e) => this.setState({ productPrice: e.target.value })}
-                                        value={this.state.productPrice}
-                                    />
-
-                                    {/* product extra information */}
-                                    <TextField
-                                        // id="standard-uncontrolled"
-                                        label="Información extra del producto (como por ejemplo, condiciones del envío)"
-                                        type="Información Extra"
-                                        // defaultValue="Correo electrónico"
-                                        margin="normal"
-                                        onChange={(e) => this.setState({ productExtraInformation: e.target.value })}
-                                        value={this.state.productExtraInformation}
-                                    />
-
-                                    {/* convert to post button */}
-                                    <Button 
-                                        align="center" 
-                                        variant="contained" 
-                                        color="primary" 
-                                        onClick={this.convert_to_product}
-                                    >
-                                        Convertir a producto
-                                    </Button>
-
-                                </FormControl>
-
-                            </Paper>
+                            </Grid>
 
                         </Grid>
 
-                        :
+                        {/* informatino to fill */}
+                        <FormControl
+                            // style={{
+                            //     width: "50%",
+                            //     alignSelf: "center",
+                            // }}
+                        >
 
-                        <CircularProgress />
+                            {/* title */}
+                            <Typography align="center" variant="h4" component="h4" gutterBottom>
+                                Agregar información
+                            </Typography>
 
-                }
-                {/* </Paper> */}
-            </Grid>
+                            {/* product name */}
+                            <TextField
+                                // id="standard-uncontrolled"
+                                label="Nombre producto"
+                                // type="Nombre producto"
+                                // defaultValue="Correo electrónico"
+                                margin="normal"
+                                onChange={(e) => this.setState({ productName: e.target.value })}
+                                value={this.state.productName}
+                            />
+
+                            {/* product description */}
+                            <TextField
+                                // id="standard-uncontrolled"
+                                label="Descripción del producto"
+                                // type="Descripción"
+                                multiline
+                                // defaultValue="Correo electrónico"
+                                margin="normal"
+                                onChange={(e) => this.setState({ productDescription: e.target.value })}
+                                value={this.state.productDescription}
+                            />
+
+                            {/* product var 1 */}
+                            {/* This can be different for each store (maybe the best is to create a "choose a variable first") */}
+                            <TextField
+                                // id="standard-uncontrolled"
+                                label="Tamaño del producto"
+                                // type="Tamaño"
+                                // defaultValue="Correo electrónico"
+                                margin="normal"
+                                onChange={(e) => this.setState({ productVar1: e.target.value })}
+                                value={this.state.productVar1}
+                            />
+
+                            {/* product price */}
+                            <TextField
+                                // id="standard-uncontrolled"
+                                label="Precio del producto"
+                                // type="Precio"
+                                // defaultValue="Correo electrónico"
+                                margin="normal"
+                                onChange={(e) => this.setState({ productPrice: e.target.value })}
+                                value={this.state.productPrice}
+                            />
+
+                            {/* product extra information */}
+                            <TextField
+                                // id="standard-uncontrolled"
+                                label="Información extra del producto (como por ejemplo, condiciones del envío)"
+                                multiline
+                                // type="Información Extra"
+                                // defaultValue="Correo electrónico"
+                                margin="normal"
+                                onChange={(e) => this.setState({ productExtraInformation: e.target.value })}
+                                value={this.state.productExtraInformation}
+                            />
+
+                            {/* convert to post button */}
+                            <Button 
+                                align="center" 
+                                variant="contained" 
+                                color="primary" 
+                                onClick={this.convert_to_product}
+                            >
+                                Convertir a producto
+                            </Button>
+
+                        </FormControl>
+
+                    </Container>
+
+                :
+
+                    <CircularProgress />
+
         );
 
     }
