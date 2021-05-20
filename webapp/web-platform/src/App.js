@@ -4,9 +4,13 @@ import React, { Component } from "react";
 // import "bootstrap/dist/css/bootstrap.min.css";
 
 import { 
-  BrowserRouter as Router, Route, Link 
+  BrowserRouter as Router, Route, Link,
+  Switch,
+  // Router,
+  // Route,
+  // Link
 } from "react-router-dom";
-import { Switch } from "react-router";
+// import { Switch } from "react-router";
 // import Home from "./screens/home.screen";
 // import Login from "./screens/login.screen";
 
@@ -95,6 +99,14 @@ class App extends Component {
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
 
         <Router>
+
+          {/* <Switch> */}
+
+            {/* <Route path="/:store_id" exact component={ProductsCatalog} />
+            <Route path="/productDetails/:store_id/:product_id" exact component={ProductDetails} />
+            <Route path="/saleConfirmation/:store_id/:product_id" exact component={SaleConfirmation} />
+
+            <div> */}
 
               <AppBar 
                 position="static"

@@ -74,12 +74,17 @@ class StoreInformation extends React.Component {
                             // backgroundColor: "yellow",
                             display: "flex",
                             flexDirection: "column",
-                            justifyContent: "center",
+                            justifyContent: "left",
                         }}
                         >
 
                         {/* title */}
-                        <Typography align="center" variant="h4" component="h4" gutterBottom>
+                        <Typography 
+                            // align="center" 
+                            variant="h4" 
+                            component="h4" 
+                            gutterBottom
+                        >
                             {this.props.name}
                         </Typography>
 
@@ -88,7 +93,7 @@ class StoreInformation extends React.Component {
                             display="inline"
                             // inline
                             // style={{ display: 'inline-block' }} 
-                            align="center"
+                            // align="center"
                             variant="body2"
                             component="p"
                             gutterBottom

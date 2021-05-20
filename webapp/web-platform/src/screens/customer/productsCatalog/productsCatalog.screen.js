@@ -20,8 +20,8 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 // import Modal from '@material-ui/core/Modal';
 import PlayArrow from '@material-ui/icons/PlayArrow';
-// import Schedule from '@material-ui/icons/Schedule';
-
+import AttachMoney from '@material-ui/icons/AttachMoney';
+import Search from '@material-ui/icons/Search';
 // import Select from '@material-ui/core/Select';
 
 import StoreInformation from "../generalComponents/storeInformation/storeInformation.component";
@@ -176,10 +176,11 @@ class ProductsCatalog extends React.Component {
                             {/* title */}
                             <Typography 
                                 gutterBottom 
-                                variant="h5" 
-                                component="h5"
+                                variant="h2" 
+                                component="h2"
                                 style = {{
                                     // marginTop: 20,
+                                    fontSize: 30,
                                     marginBottom: 30,
                                 }}
                             >
@@ -213,9 +214,17 @@ class ProductsCatalog extends React.Component {
                                             item
                                             xs = {12}
                                             md = {4}
+                                            // style = {{
+                                            //     elevation: 0,
+                                            // }}
                                         >
 
-                                            <Card>
+                                            <Card
+                                                // style={{
+                                                //     backgroundColor: "red",
+                                                //     // borderRadius: 10,
+                                                // }}
+                                            >
                                                 <CardActionArea
                                                 >
                                                     <CardMedia
@@ -231,7 +240,7 @@ class ProductsCatalog extends React.Component {
                                                     <CardContent>
 
                                                         {/* product name */}
-                                                        <Typography gutterBottom variant="h5" component="h2">
+                                                        <Typography gutterBottom variant="h6" component="h6">
                                                             {product.name}
                                                         </Typography>
 
@@ -240,22 +249,81 @@ class ProductsCatalog extends React.Component {
                                                             {product.description}
                                                         </Typography>
 
-                                                        {/* size */}
-                                                        <Typography gutterBottom variant="h5" component="h2">
-                                                            {product.var1}
-                                                        </Typography>
+                                                        <Container
+                                                            style = {{
+                                                                display: "flex",
+                                                                flexDirection: "row",
+                                                                justifyContent: "center",
+                                                                // alignContent: "center"
+                                                            }}
+                                                        >
 
-                                                        {/* price */}
-                                                        <Typography gutterBottom variant="h5" component="h2">
-                                                            {product.price}
-                                                        </Typography>
+                                                            {/* size */}
+                                                            <Container
+                                                                style={{
+                                                                    display: "flex",
+                                                                    flex: 1,
+                                                                    flexDirection: "row",
+                                                                    // backgroundColor: "red",
+                                                                    textAlign: "center",
+                                                                    justifyContent: "center",
+                                                                    alignContent: "center",
+                                                                }}
+                                                            >
+
+                                                                <Search fontSize="small" />
+
+                                                                <Typography 
+                                                                    // style = {{flex:1}}
+                                                                    gutterBottom 
+                                                                    variant="subtitle2" 
+                                                                    component="p"
+                                                                    align="center" 
+                                                                >
+                                                                    {product.var1}
+                                                                </Typography>
+
+                                                            </Container>
+
+                                                            {/* price */}
+                                                            <Container
+                                                                style={{
+                                                                    display: "flex",
+                                                                    flex: 1,
+                                                                    flexDirection: "row",
+                                                                    // backgroundColor: "red",
+                                                                    textAlign: "center",
+                                                                    justifyContent: "center",
+                                                                    alignContent: "center",
+                                                                }}
+                                                            >
+
+                                                                <AttachMoney fontSize="small" />
+
+                                                                <Typography
+                                                                    align="center" 
+                                                                    gutterBottom
+                                                                    variant="subtitle2"
+                                                                    component="p"
+                                                                >
+                                                                    {product.price}
+                                                                </Typography>
+                                                            </Container>
+
+                                                        </Container>
 
                                                     </CardContent>
 
                                                 </CardActionArea>
 
 
-                                                <CardActions>
+                                                <CardActions
+                                                    style = {{
+                                                        // display: "flex",
+                                                        justifyContent: "center",
+                                                        // backgroundColor: "red",
+                                                    }}
+                                                >
 
                                                     <Button 
                                                         align="center" 
@@ -273,7 +341,7 @@ class ProductsCatalog extends React.Component {
                                                         }}
                                                     >
 
-                                                        <PlayArrow /> Ver detalles
+                                                        Ver detalles
 
                                                     </Button>
 
