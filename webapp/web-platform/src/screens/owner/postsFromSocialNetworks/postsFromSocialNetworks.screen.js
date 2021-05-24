@@ -228,9 +228,11 @@ class PostsFromSocialNetworks extends React.Component {
                             backgroundColor: "rgba(173, 216, 230, 0.5)",
                             borderRadius: 50,
                             textAlign: "center",
-                            // justifyContent: "center",
+                            justifyContent: "center",
+                            // alignSelf: "center",
                             padding: 10,
                         }}
+                        // align = "center"
                     >
                         Estos son los posteos que obtuvimos directamente desde tu cuenta de Instagram. Si alguno de ellos corresponde a un producto que deseas agregar a tu tienda, ¡seleccionalo!
                     </Typography>

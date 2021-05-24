@@ -240,7 +240,7 @@ class ProductsToSell extends React.Component {
                             backgroundColor: "rgba(173, 216, 230, 0.5)",
                             borderRadius: 50,
                             textAlign: "center",
-                            // justifyContent: "center",
+                            justifyContent: "center",
                             padding: 10,
                         }}
                     >

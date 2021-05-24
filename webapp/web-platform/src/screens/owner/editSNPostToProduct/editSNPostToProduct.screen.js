@@ -306,6 +306,18 @@ class EditSNPostToProduct extends React.Component {
                                     {this.state.post.caption}
                                 </Typography>
 
+                                {/* button to copy text */}
+                                {/* <Button
+                                    align="center"
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={() => {
+                                        console.log(2ojsad);
+                                    }}
+                                >
+                                    Copiar texto
+                                </Button> */}
+
                             </Grid>
 
                         </Grid>
