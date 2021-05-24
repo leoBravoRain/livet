@@ -60,7 +60,7 @@ class StoreInformation extends React.Component {
                             src={this.props.profilePhoto}
                             width="100px"
                             height="100px"
-                            />
+                        />
 
                     </Grid>
 

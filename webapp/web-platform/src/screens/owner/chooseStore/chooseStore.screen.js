@@ -20,6 +20,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 // import Modal from '@material-ui/core/Modal';
 import Close from '@material-ui/icons/Close';
 import Add from "@material-ui/icons/Add";
+import Send from "@material-ui/icons/Send";
 
 // import Schedule from '@material-ui/icons/Schedule';
 
@@ -184,7 +185,11 @@ class ChooseStore extends React.Component {
                             ?
 
                                 // stores list
-                                <Container>
+                                <Container
+                                    style = {{
+                                        marginTop: 20,
+                                    }}
+                                >
 
                                     {
                                         this.state.stores.map((store) => {
@@ -195,6 +200,7 @@ class ChooseStore extends React.Component {
                                                     style = {{
                                                         display: "flex",
                                                         flexDirection: "row",
+                                                        justifyContent: "center",
                                                     }}
                                                 >
 
@@ -220,7 +226,8 @@ class ChooseStore extends React.Component {
                                                             // this.props.history.push('/postsFromSocialNetworks/' + store.id)
                                                         }}
                                                     >
-                                                        Ir a la tienda
+                                                        <Send />
+                                                        Ver tienda
                                                     </Button>
                                                 </Container>
 
