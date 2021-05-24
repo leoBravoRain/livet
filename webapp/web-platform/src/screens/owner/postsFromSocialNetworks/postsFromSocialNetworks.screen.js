@@ -19,7 +19,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 // import Modal from '@material-ui/core/Modal';
 import PlayArrow from '@material-ui/icons/PlayArrow';
-import Chip from '@material-ui/core/Chip';
+// import Chip from '@material-ui/core/Chip';
 // import Schedule from '@material-ui/icons/Schedule';
 
 // import Select from '@material-ui/core/Select';
@@ -207,7 +207,7 @@ class PostsFromSocialNetworks extends React.Component {
                     </Typography>
 
                     {/* Information */}
-                    <Chip
+                    {/* <Chip
                         label="Estos son los posteos que obtuvimos directamente desde tu cuenta de Instagram. Si alguno de ellos corresponde a un producto que deseas agregar a tu tienda, ¡seleccionalo!"
                         // color="primary"
                         // margin = "100"
@@ -216,10 +216,24 @@ class PostsFromSocialNetworks extends React.Component {
                             backgroundColor: "rgba(173, 216, 230, 0.5)",
                         }}
 
-                    />
-                    {/* <Typography align="center" variant="body2" component="p" gutterBottom style = {{margin: 50,}}>
+                    /> */}
+                    <Typography
+                        gutterBottom
+                        variant="body2"
+                        component="p"
+                        style={{
+                            // margin: 50,
+                            display: "flex",
+                            flexWrap: "wrap",
+                            backgroundColor: "rgba(173, 216, 230, 0.5)",
+                            borderRadius: 50,
+                            textAlign: "center",
+                            // justifyContent: "center",
+                            padding: 10,
+                        }}
+                    >
                         Estos son los posteos que obtuvimos directamente desde tu cuenta de Instagram. Si alguno de ellos corresponde a un producto que deseas agregar a tu tienda, ¡seleccionalo!
-                    </Typography> */}
+                    </Typography>
 
                     {/* list of products */}
                     {

@@ -27,7 +27,7 @@ import Grid from '@material-ui/core/Grid';
 // import DialogActions from '@material-ui/core/DialogActions';
 // import DialogContent from '@material-ui/core/DialogContent';
 // import DialogTitle from '@material-ui/core/DialogTitle';
-import Chip from '@material-ui/core/Chip';
+// import Chip from '@material-ui/core/Chip';
 
 // firebase
 import { 
@@ -189,7 +189,7 @@ class EditSNPostToProduct extends React.Component {
                             Editar post para convertir en producto
                         </Typography>
 
-                        <Chip
+                        {/* <Chip
                             label="Acá debes agregar la información sobre el producto que venderás en tu tienda. La imagen será la misma que la del posteo."
                             // color="primary"
                             // margin = "100"
@@ -198,11 +198,25 @@ class EditSNPostToProduct extends React.Component {
                                 backgroundColor: "rgba(173, 216, 230, 0.5)",
                             }}
 
-                        />
+                        /> */}
 
-                        {/* <Typography align="center" variant="body2" component="p" gutterBottom style={{ margin: 50, }}>
+                        <Typography
+                            gutterBottom
+                            variant="body2"
+                            component="p"
+                            style={{
+                                // margin: 50,
+                                display: "flex",
+                                flexWrap: "wrap",
+                                backgroundColor: "rgba(173, 216, 230, 0.5)",
+                                borderRadius: 50,
+                                textAlign: "center",
+                                // justifyContent: "center",
+                                padding: 10,
+                            }}
+                        >
                             Acá debes agregar la información sobre el producto que venderás en tu tienda. La imagen será la misma que la del posteo.
-                        </Typography> */}
+                        </Typography>
 
 
                         {/* information */}
@@ -257,7 +271,7 @@ class EditSNPostToProduct extends React.Component {
                                 }}
                             >
 
-                                <Chip 
+                                {/* <Chip 
                                     label="Si quieres puedes copiar parte de este texto y pegarlo en alguno de los campos de tu producto" 
                                     // color="primary"
                                     // margin = "100"
@@ -265,7 +279,26 @@ class EditSNPostToProduct extends React.Component {
                                         margin: 20,
                                     }}
 
-                                />
+                                /> */}
+
+                                <Typography
+                                    gutterBottom
+                                    variant="body2"
+                                    component="p"
+                                    style={{
+                                        // margin: 50,
+                                        display: "flex",
+                                        flexWrap: "wrap",
+                                        backgroundColor: "rgba(173, 216, 230, 0.5)",
+                                        borderRadius: 50,
+                                        textAlign: "center",
+                                        // justifyContent: "center",
+                                        padding: 10,
+                                    }}
+                                >
+                                    Si quieres puedes copiar parte de este texto y pegarlo en alguno de los campos de tu producto
+
+                                </Typography>
 
                                 {/* originla text */}
                                 <Typography align="center" variant="body2" component="p" gutterBottom>

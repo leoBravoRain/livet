@@ -27,7 +27,7 @@ import Add from '@material-ui/icons/Add';
 // import DialogActions from '@material-ui/core/DialogActions';
 // import DialogContent from '@material-ui/core/DialogContent';
 // import DialogTitle from '@material-ui/core/DialogTitle';
-import Chip from '@material-ui/core/Chip';
+// import Chip from '@material-ui/core/Chip';
 
 import MenuBar from "../generalComponents/menuBar.component";
 
@@ -207,16 +207,42 @@ class ProductsToSell extends React.Component {
                         Productos a la venta en tu página
                     </Typography>
 
-                    <Chip
-                        label="Estos son todos los productos que estan disponibles en tu página y que un cliente puede comprar"
+                    {/* Information */}
+                    {/* <Container
+                        // label="Estos son todos los productos que estan disponibles en tu página y que un cliente puede comprar"
                         // color="primary"
                         // margin = "100"
                         style={{
-                            margin: 50,
+                            // margin: 50,
+                            display: "flex",
+                            flexWrap: "wrap",
                             backgroundColor: "rgba(173, 216, 230, 0.5)",
+                            borderRadius: 50,
+                            textAlign: "center",
+                            justifyContent: "center",
+                            padding: 10,
                         }}
 
-                    />
+                    > */}
+                    <Typography 
+                        gutterBottom 
+                        variant="body2" 
+                        component="p"
+                        style={{
+                            // margin: 50,
+                            display: "flex",
+                            flexWrap: "wrap",
+                            backgroundColor: "rgba(173, 216, 230, 0.5)",
+                            borderRadius: 50,
+                            textAlign: "center",
+                            // justifyContent: "center",
+                            padding: 10,
+                        }}
+                    >
+                        Estos son todos los productos que estan disponibles en tu página y que un cliente puede comprar
+                    </Typography>
+
+                    {/* </Container> */}
 
                     {/* list of products */}
                     {
