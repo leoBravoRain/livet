@@ -61,53 +61,63 @@ class CreateNewStoreForm extends React.Component {
                 // assign logged user to user var
                 loggedUser = user;
 
+                // loading false
+                this.setState({
+                    // name: data.result.username,
+                    loading: false,
+                });
+
                 // // redirect
                 // this.props.history.push('/productsToSell');
 
                 // IG Login API
+                // this is to get the user profile information
+                // but I'm not using it because it only can gets the user name (not profile neither profile photo) 
                 // console.log(this.props.location);
                 // get authorization code
-                const authCode = this.props.location.search.replace("?code=", "");
+                // const authCode = this.props.location.search.replace("?code=", "");
 
-                // console.log("AUTH CODE: " + authCode);
+                // // console.log("AUTH CODE: " + authCode);
 
-                // console.log(authCode);
+                // // console.log(authCode);
 
-                if (authCode) {
+                // if (authCode) {
 
-                    // alert("IG API auth code");
-                    const url = "http://localhost:5001/livet2/us-central1/getAPIToken?authCode=" + authCode + "&requestType=userInformation";
+                //     // alert("IG API auth code");
+                //     const apiUrl = "https://us-central1-livet2.cloudfunctions.net/getAPIToken";
+                //     // const apiUrl = "http://localhost:5001/livet2/us-central1/getAPIToken";
+                //     const url = apiUrl + "?authCode=" + authCode + "&requestType=userInformation";
 
-                    fetch(url)
-                        .then(res => res.json())
-                        .then(data => {
-                            // console.log(data);
-                            // console.log("DATA");
+                //     fetch(url)
+                //         .then(res => res.json())
+                //         .then(data => {
+                //             // console.log(data);
+                //             // console.log("DATA");
 
-                            // const posts = data.result.data;
+                //             // const posts = data.result.data;
 
-                            // console.log(posts);
-                            // // console.log(data.result.data);
-                            // // redirect to posts
-                            // // this.props.match.params.store_id
-                            // // this.props.history.push("/postsFromSocialNetworks/" + this.props.match.params.store_id);
-                            // alert("Change code store id");
+                //             // console.log(posts);
+                //             // // console.log(data.result.data);
+                //             // // redirect to posts
+                //             // // this.props.match.params.store_id
+                //             // // this.props.history.push("/postsFromSocialNetworks/" + this.props.match.params.store_id);
+                //             // alert("Change code store id");
 
-                            // // console.log("/postsFromSocialNetworks/" + localStorage.getItem('store_id'));
+                //             // // console.log("/postsFromSocialNetworks/" + localStorage.getItem('store_id'));
 
-                            // // this.props.history.push("/postsFromSocialNetworks/" + this.props.match.params.store_id, {posts: posts});
-                            // this.props.history.push("/postsFromSocialNetworks/" + localStorage.getItem('store_id'), { posts: posts });
+                //             // // this.props.history.push("/postsFromSocialNetworks/" + this.props.match.params.store_id, {posts: posts});
+                //             // this.props.history.push("/postsFromSocialNetworks/" + localStorage.getItem('store_id'), { posts: posts });
 
-                            // update user name
-                            this.setState({
-                                name: data.result.username,
-                                loading: false,
-                            });
+                //             // update user name
+                //             this.setState({
+                //                 name: data.result.username,
+                //                 loading: false,
+                //             });
 
-                        })
+                //         })
 
 
-                };
+                // };
 
             }
 
@@ -215,9 +225,9 @@ class CreateNewStoreForm extends React.Component {
                         </Typography>
 
                         {/* information */}
-                        <Typography align="center" variant="body2" component="p" gutterBottom>
+                        {/* <Typography align="center" variant="body2" component="p" gutterBottom>
                             ¡Ahora tu cuenta ya está sincronizada!
-                        </Typography>
+                        </Typography> */}
 
                         <Typography align="center" variant="body2" component="p" gutterBottom>
                             Para poder crear la página, agrega la siguiente información general sobre tu tienda, la cual podrá ser vista por cualquier cliente que llegue a tu página
@@ -285,7 +295,7 @@ class CreateNewStoreForm extends React.Component {
                                 color="primary"
                                 onClick={this.createStore}
                             >
-                                Crear store
+                                Crear tienda
                             </Button>
 
                         </FormControl>

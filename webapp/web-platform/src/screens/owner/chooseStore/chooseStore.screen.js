@@ -10,7 +10,7 @@ import { Button } from "@material-ui/core";
 // import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Grid from '@material-ui/core/Grid';
+// import Grid from '@material-ui/core/Grid';
 
 // import Card from '@material-ui/core/Card';
 // import CardActionArea from '@material-ui/core/CardActionArea';
@@ -18,7 +18,9 @@ import Grid from '@material-ui/core/Grid';
 // import CardContent from '@material-ui/core/CardContent';
 // import CardMedia from '@material-ui/core/CardMedia';
 // import Modal from '@material-ui/core/Modal';
-// import PlayArrow from '@material-ui/icons/PlayArrow';
+import Close from '@material-ui/icons/Close';
+import Add from "@material-ui/icons/Add";
+
 // import Schedule from '@material-ui/icons/Schedule';
 
 // import Select from '@material-ui/core/Select';
@@ -29,7 +31,7 @@ import Grid from '@material-ui/core/Grid';
 // import DialogTitle from '@material-ui/core/DialogTitle';
 // import Chip from '@material-ui/core/Chip';
 
-import MenuBar from "../generalComponents/menuBar.component";
+// import MenuBar from "../generalComponents/menuBar.component";
 
 // firebase
 import {
@@ -133,6 +135,24 @@ class ChooseStore extends React.Component {
                         }}
                     >
 
+                        {/* logout */}
+                        <Button align="center" variant="contained" color="primary"
+                            onClick={() => {
+                                // logout
+                                auth.signOut().then(res => {
+
+                                    alert("Has cerrado tu sesión");
+
+                                }).catch(error => {
+
+                                    console.log(error);
+
+                                });
+                            }}
+                        >
+                            <Close />
+                            Cerrar sesión
+                        </Button>
 
                         {/* title */}
                         <Typography align="center" variant="h4" component="h4" gutterBottom>
@@ -148,9 +168,10 @@ class ChooseStore extends React.Component {
                                 // console.log('/productsToSell/' + store.id)
                                 // this.props.history.push('/productsToSell/' + store.id)
                                 // alert("go to create new store");
-                                this.props.history.push('/createNewStore')
+                                this.props.history.push('/createNewStoreForm')
                             }}
                         >
+                            <Add/>
                             Crear nueva tienda
                         </Button>
 

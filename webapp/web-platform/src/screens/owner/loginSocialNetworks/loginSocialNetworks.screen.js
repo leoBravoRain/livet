@@ -68,8 +68,7 @@ class LoginSocialNetworks extends React.Component {
                 // console.log(authCode);
 
                 if (authCode) {
-
-                    const url = "http://localhost:5001/livet2/us-central1/getAPIToken?authCode=" + authCode + "&requestType=posts";
+                    const url = "https://us-central1-livet2.cloudfunctions.net/getAPIToken?authCode=" + authCode + "&requestType=posts";
                     
                     fetch(url)
                     .then(res =>res.json())
@@ -135,7 +134,7 @@ class LoginSocialNetworks extends React.Component {
         // IG login
 
         // redirect to IG authorization
-        window.location.replace('https://api.instagram.com/oauth/authorize?client_id=477247573594243&redirect_uri=https://localhost:3000/loginSocialNetworks&scope=user_profile,user_media&response_type=code');
+        window.location.replace('https://api.instagram.com/oauth/authorize?client_id=477247573594243&redirect_uri=https://livet2.web.app/loginSocialNetworks&scope=user_profile,user_media&response_type=code');
 
     };
 

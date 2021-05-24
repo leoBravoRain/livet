@@ -189,7 +189,9 @@ class CreateNewStore extends React.Component {
                                 // this.props.history.push('/createNewStore')
 
                                 // go to IG authorization 
-                                window.location.replace('https://api.instagram.com/oauth/authorize?client_id=477247573594243&redirect_uri=https://localhost:3000/createNewStoreForm&scope=user_profile,user_media&response_type=code');
+                                const redirect_to = "https://livet2.web.app/createNewStoreForm";
+                                // const redirect_to = "https://localhost:3000/createNewStoreForm";
+                                window.location.replace('https://api.instagram.com/oauth/authorize?client_id=477247573594243&redirect_uri=' + redirect_to + '&scope=user_profile,user_media&response_type=code');
                             }}
                         >
                             Sincronizar mi cuenta de Instagram

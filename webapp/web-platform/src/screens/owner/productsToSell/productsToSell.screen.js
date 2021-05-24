@@ -19,7 +19,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 // import Modal from '@material-ui/core/Modal';
 // import PlayArrow from '@material-ui/icons/PlayArrow';
-// import Schedule from '@material-ui/icons/Schedule';
+import Add from '@material-ui/icons/Add';
 
 // import Select from '@material-ui/core/Select';
 
@@ -357,6 +357,7 @@ class ProductsToSell extends React.Component {
                                                         this.props.history.push("/loginSocialNetworks/");
                                                     }}
                                                 >
+                                                    <Add/>
                                                     Agregar productos desde mi cuenta de Instagram
                                                 </Button>
                                             </Container>
