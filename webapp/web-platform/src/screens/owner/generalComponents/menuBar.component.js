@@ -17,6 +17,7 @@ import Close from "@material-ui/icons/Close";
 import Storefront from "@material-ui/icons/Storefront";
 import Search from "@material-ui/icons/Search";
 import Loyalty from "@material-ui/icons/Loyalty";
+import MonetizationOn from "@material-ui/icons/MonetizationOn";
 
 // firebase
 // import { auth } from "../../../libraries/firebase/firebase";
@@ -86,6 +87,14 @@ class MenuBar extends React.Component {
                     >
                         <Loyalty/>
                         Productos
+                    </Button>
+
+                    {/* sales */}
+                    <Button align="center" variant="contained" color="primary"
+                        onClick={this.props.goToSales}
+                    >
+                        <MonetizationOn />
+                        Ventas
                     </Button>
 
                     {/* go to store */}

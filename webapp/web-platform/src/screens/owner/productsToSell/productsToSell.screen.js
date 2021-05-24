@@ -191,6 +191,11 @@ class ProductsToSell extends React.Component {
                         });
 
                     }}
+
+                    goToSales = {() => {
+                        this.props.history.push("/sales/" + this.props.match.params.store_id);
+                    }}
+                    
                 />
 
                 {/* products list */}

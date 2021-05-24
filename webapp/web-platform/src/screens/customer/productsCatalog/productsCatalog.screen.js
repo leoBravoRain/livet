@@ -24,6 +24,8 @@ import AttachMoney from '@material-ui/icons/AttachMoney';
 import Search from '@material-ui/icons/Search';
 // import Select from '@material-ui/core/Select';
 
+import InputBase from '@material-ui/core/InputBase';
+
 import StoreInformation from "../generalComponents/storeInformation/storeInformation.component";
 import FooterStore from "../generalComponents/footerStore/footerStore.component";
 
@@ -168,7 +170,12 @@ class ProductsCatalog extends React.Component {
                     />
 
 
+                    {/* search bar */}
+                    {/* <Container>
+                        
+                        <TextField id="standard-basic" label="Standard" />
 
+                    </Container> */}
 
 
                     {/* catalog of products */}
