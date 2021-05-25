@@ -171,10 +171,15 @@ class CreateNewStoreForm extends React.Component {
                         loading: false
                     });
 
+                    // set store id as local varibale because IG API cannot receive the store id in the url (becaus it has to be exact url and it changes with the store ids)
+                    localStorage.setItem('store_id', ref_.id);
+
                     // navigate to post from social networks
                     // + store id
                     // this.props.history.push("/postsFromSocialNetworks/" + ref_.id);
-                    this.props.history.push("/productsToSell/" + ref_.id);
+                    // this.props.history.push("/productsToSell/" + ref_.id);
+                    this.props.history.push("/loginSocialNetworks/");
+                    
 
                 })
 
