@@ -95,6 +95,8 @@ class EditSNPostToProduct extends React.Component {
                 // this.props.history.push('/productsToSell');
                 this.setState({
                     post: this.props.location.state.post,
+
+                    productDescription: this.props.location.state.post.caption,
                     // initial image
                     productImage: this.props.location.state.post.media_url,
                     loading: false,
@@ -360,7 +362,7 @@ class EditSNPostToProduct extends React.Component {
 
                             {/* product var 1 */}
                             {/* This can be different for each store (maybe the best is to create a "choose a variable first") */}
-                            <TextField
+                            {/* <TextField
                                 // id="standard-uncontrolled"
                                 label="Tamaño del producto"
                                 // type="Tamaño"
@@ -368,7 +370,7 @@ class EditSNPostToProduct extends React.Component {
                                 margin="normal"
                                 onChange={(e) => this.setState({ productVar1: e.target.value })}
                                 value={this.state.productVar1}
-                            />
+                            /> */}
 
                             {/* product price */}
                             <TextField
@@ -382,7 +384,7 @@ class EditSNPostToProduct extends React.Component {
                             />
 
                             {/* product extra information */}
-                            <TextField
+                            {/* <TextField
                                 // id="standard-uncontrolled"
                                 label="Información extra del producto (como por ejemplo, condiciones del envío)"
                                 multiline
@@ -391,7 +393,7 @@ class EditSNPostToProduct extends React.Component {
                                 margin="normal"
                                 onChange={(e) => this.setState({ productExtraInformation: e.target.value })}
                                 value={this.state.productExtraInformation}
-                            />
+                            /> */}
 
                             {/* convert to post button */}
                             <Button 

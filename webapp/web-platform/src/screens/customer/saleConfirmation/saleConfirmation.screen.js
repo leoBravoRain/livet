@@ -63,8 +63,12 @@ class SaleConfirmation extends React.Component {
 
             customerName: null,
             customerEmail: null,
-            customerAddress: null,
-
+            // customerAddress: null,
+            customerRegion: null,
+            customerCity: null,
+            customerStreet: null,
+            customerStreetNumber: null,
+            customerPhone: null,
             // store
             store: null,
 
@@ -208,6 +212,11 @@ class SaleConfirmation extends React.Component {
                     // }}
                     >
 
+                        {/* customer address */}
+                        <Typography align="center" variant="h6" component="h6" gutterBottom>
+                            Información personal
+                        </Typography>
+
                         {/* customer name */}
                         <TextField
                             required
@@ -218,18 +227,6 @@ class SaleConfirmation extends React.Component {
                             margin="normal"
                             onChange={(e) => this.setState({ customerName: e.target.value })}
                             value={this.state.customerName}
-                        />
-
-                        {/* customer address */}
-                        <TextField
-                            required
-                            // id="standard-uncontrolled"
-                            label="Dirección para enviarte el producto"
-                            // type="Dirección"
-                            // defaultValue="Correo electrónico"
-                            margin="normal"
-                            onChange={(e) => this.setState({ customerAddress: e.target.value })}
-                            value={this.state.customerAddress}
                         />
 
                         {/* customer email */}
@@ -243,6 +240,75 @@ class SaleConfirmation extends React.Component {
                             onChange={(e) => this.setState({ customerEmail: e.target.value })}
                             value={this.state.customerEmail}
                         />
+
+                        {/* customer phone mobiel */}
+                        <TextField
+                            required
+                            // id="standard-uncontrolled"
+                            label="Celular"
+                            // type="Nombre"
+                            // defaultValue="Correo electrónico"
+                            margin="normal"
+                            onChange={(e) => this.setState({ customerPhone: e.target.value })}
+                            value={this.state.customerPhone}
+                        />
+
+                        {/* customer address */}
+                        <Typography align="center" variant="h6" component="h6" gutterBottom>
+                            Dirección de envío
+                        </Typography>
+                        
+                        {/* region */}
+                        <TextField
+                            required
+                            // id="standard-uncontrolled"
+                            label="Región"
+                            // type="Dirección"
+                            // defaultValue="Correo electrónico"
+                            margin="normal"
+                            onChange={(e) => this.setState({ customerRegion: e.target.value })}
+                            value={this.state.customerRegion}
+                        />
+
+                        {/* city */}
+                        <TextField
+                            required
+                            // id="standard-uncontrolled"
+                            label="Ciudad"
+                            // type="Dirección"
+                            // defaultValue="Correo electrónico"
+                            margin="normal"
+                            onChange={(e) => this.setState({ customerCity: e.target.value })}
+                            value={this.state.customerCity}
+                        />
+
+                        {/* street */}
+                        <TextField
+                            required
+                            // id="standard-uncontrolled"
+                            label="Calle"
+                            // type="Dirección"
+                            // defaultValue="Correo electrónico"
+                            margin="normal"
+                            onChange={(e) => this.setState({ customerStreet: e.target.value })}
+                            value={this.state.customerStreet}
+                        />
+
+                        {/* number */}
+                        <TextField
+                            required
+                            // id="standard-uncontrolled"
+                            label="Número"
+                            // type="Dirección"
+                            // defaultValue="Correo electrónico"
+                            margin="normal"
+                            onChange={(e) => this.setState({ customerHouseNumber: e.target.value })}
+                            value={this.state.customerHouseNumber}
+                        />
+
+
+
+
 
                         <Typography align="center" variant="body2" component="p" gutterBottom>
                         
@@ -279,6 +345,7 @@ class SaleConfirmation extends React.Component {
                     {/* footer */}
                     <FooterStore
                         goToInstagram={() => {
+                         
                             // alert("Go to home")
                             window.open(this.state.store.instagramUrl);
                         }}
