@@ -70,7 +70,7 @@ class MenuBar extends React.Component {
                         onClick={this.props.goToSocialNetworkPosts}
                         >
                         <Add /> 
-                        Posteos IG
+                        Agregar producto
                     </Button>
 
                 {/* </Grid> */}

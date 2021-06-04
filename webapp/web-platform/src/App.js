@@ -36,13 +36,14 @@ import theme from "./libraries/material-ui/theme"
 import Login from "./screens/owner/login/login.screen";
 import LoginSocialNetworks from "./screens/owner/loginSocialNetworks/loginSocialNetworks.screen";
 import PostsFromSocialNetworks from "./screens/owner/postsFromSocialNetworks/postsFromSocialNetworks.screen";
-import EditSNPostToProduct from "./screens/owner/editSNPostToProduct/editSNPostToProduct.screen";
+import CreateNewProduct from "./screens/owner/createNewProduct/createNewProduct.screen";
 import ProductsToSell from "./screens/owner/productsToSell/productsToSell.screen";
 import Register from "./screens/owner/register/register.screen";
 import ChooseStore from "./screens/owner/chooseStore/chooseStore.screen";
 import CreateNewStore from "./screens/owner/createNewStore/createNewStore.screen";
 import CreateNewStoreForm from "./screens/owner/createNewStore/createNewStoreForm.screen";
 import Sales from "./screens/owner/sales/sales.screen";
+import AddNewProductHome from "./screens/owner/createNewProduct/addNewProductHome.screen";
 
 // customer
 import ProductsCatalog from "./screens/customer/productsCatalog/productsCatalog.screen";
@@ -116,13 +117,14 @@ class App extends Component {
               <Route path="/register" exact component={Register} />
               <Route path="/loginSocialNetworks/" exact component={LoginSocialNetworks} />
               <Route path="/postsFromSocialNetworks/:store_id" exact component={PostsFromSocialNetworks} />
-              <Route path="/editSNPostToProduct/:store_id" exact component={EditSNPostToProduct} />
+              <Route path="/createNewProduct/:store_id" exact component={CreateNewProduct} />
               <Route path="/productsToSell/:store_id" exact component={ProductsToSell} />
               <Route path="/chooseStore" exact component={ChooseStore}/>
               <Route path="/createNewStore" exact component={CreateNewStore} />
               <Route path="/createNewStoreForm" exact component={CreateNewStoreForm} />
               <Route path="/sales/:store_id" exact component={Sales} />
-              
+              <Route path="/addNewProductHome/:store_id" exact component={AddNewProductHome} />
+
               {/* customer */}
               <Route path="/:store_id" exact component={ProductsCatalog} />
               <Route path="/productDetails/:store_id/:product_id" exact component={ProductDetails} />

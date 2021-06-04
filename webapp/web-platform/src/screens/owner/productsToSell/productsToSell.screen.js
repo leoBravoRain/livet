@@ -161,7 +161,9 @@ class ProductsToSell extends React.Component {
                         localStorage.setItem('store_id', this.props.match.params.store_id);
 
                         // this.props.history.push("/loginSocialNetworks/" + this.props.match.params.store_id);
-                        this.props.history.push("/loginSocialNetworks/");
+                        // this.props.history.push("/loginSocialNetworks/");
+                        this.props.history.push("/addNewProductHome/" + this.props.match.params.store_id);
+
                     }}
 
                     goToProductsToSell={() => {

@@ -311,7 +311,7 @@ class PostsFromSocialNetworks extends React.Component {
                                                                 // });
 
                                                                 // alert("See details")
-                                                                this.props.history.push('/editSNPostToProduct/' + this.props.match.params.store_id, { "post": post });
+                                                                this.props.history.push('/createNewProduct/' + this.props.match.params.store_id, { "post": post });
                                                             }}
                                                         >
 
