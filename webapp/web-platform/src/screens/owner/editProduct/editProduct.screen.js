@@ -33,7 +33,7 @@ import ProductInformationForm from "../generalComponents/productInformationForm.
 // import Chip from '@material-ui/core/Chip';
 
 // firebase
-import { 
+import {
     auth,
     fs,
 } from "../../../libraries/firebase/firebase";
@@ -54,7 +54,7 @@ import {
 // ];
 
 
-class CreateNewProduct extends React.Component {
+class EditProduct extends React.Component {
 
     // constructor
     constructor(props) {
@@ -71,19 +71,19 @@ class CreateNewProduct extends React.Component {
             productName: null,
             productDescription: null,
             // this can be for example "size" or "units"
-            productVar1: null,
+            // productVar1: null,
             productPrice: null,
             // productImage: "https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg",
-            productExtraInformation: null,
+            // productExtraInformation: null,
         }
 
-        this.convert_to_product = this.convert_to_product.bind(this);
+        this.editProduct = this.editProduct.bind(this);
 
     };
 
     componentDidMount() {
 
-        console.log("load edit post to product component");
+        console.log("load edit product");
 
         this.setState({
             loading: true,
@@ -97,14 +97,15 @@ class CreateNewProduct extends React.Component {
                 // // redirect
                 // this.props.history.push('/productsToSell');
 
+                console.log(this.props.location.state.product);
                 this.setState({
 
-                    // it's because it can come from IG data or from user manual data
-                    post: this.props.location.state != null ? this.props.location.state.post : null,
+                    // previous page send this data
+                    productName: this.props.location.state.product.name,
+                    productDescription: this.props.location.state.product.description,
+                    productPrice: this.props.location.state.product.price,
+                    productImage: this.props.location.state.product.image,
 
-                    productDescription: this.props.location.state != null ? this.props.location.state.post.caption : null,
-                    // initial image
-                    productImage: this.props.location.state != null ? this.props.location.state.post.media_url : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAMFBMVEXp7vG6vsG3u77s8fTCxsnn7O/f5OfFyczP09bM0dO8wMPk6ezY3eDd4uXR1tnJzdBvAX/cAAACVElEQVR4nO3b23KDIBRA0ShGU0n0//+2KmO94gWZ8Zxmr7fmwWEHJsJUHw8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwO1MHHdn+L3rIoK6eshsNJ8kTaJI07fERPOO1Nc1vgQm2oiBTWJ+d8+CqV1heplLzMRNonED+4mg7L6p591FC+133/xCRNCtd3nL9BlxWP++MOaXFdEXFjZ7r8D9l45C8y6aG0cWtP/SUGhs2d8dA/ZfGgrzYX+TVqcTNRRO9l+fS5eSYzQs85psUcuzk6igcLoHPz2J8gvzWaH/JLS+95RfOD8o1p5CU5R7l5LkfKEp0mQ1UX7hsVXqDpRrifILD/3S9CfmlUQFhQfuFu0STTyJ8gsP3PH7GVxN1FC4t2sbBy4TNRTu7LyHJbqaqKFw+/Q0ncFloo7CjRPwMnCWqKXQZ75El4nKC9dmcJaou9AXOE5UXbi+RGeJygrz8Uf+GewSn9uXuplnWDZJ7d8f24F/s6iq0LYf9olbS3Q8i5oKrRu4S9ybwaQ/aCkqtP3I28QDgeoK7TBya/aXqL5COx67PTCD2grtdOwH+pQV2r0a7YVBgZoKwwIVFQYG6ikMDVRTGByopjD8ATcKb0UhhRTe77sKs2DV7FKSjId18TUEBYVyLhUThWfILHTDqmI85/2RWWjcE/bhP6OD7maT3h20MHsA47JC3PsW0wcwLhv9t0OOPOIkCn21y2bXXwlyylxiYMPk1SuCSmpfK8bNQvIrpAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwNX4BCbAju9/X67UAAAAASUVORK5CYII=",
 
                     loading: false,
                 });
@@ -126,7 +127,7 @@ class CreateNewProduct extends React.Component {
     }
 
 
-    convert_to_product() {
+    editProduct() {
 
         this.setState({
             loading: true,
@@ -136,21 +137,22 @@ class CreateNewProduct extends React.Component {
         const newProduct = {
             "name": this.state.productName,
             "description": this.state.productDescription,
-            "var1": this.state.productVar1,
+            // "var1": this.state.productVar1,
             "price": this.state.productPrice,
             "image": this.state.productImage,
-            "extraInformation": this.state.productExtraInformation,
-            "paymentUrl": "https://app.payku.cl/botonpago/index?idboton=14257&verif=0f7014ea",
+            // "extraInformation": this.state.productExtraInformation,
+            // "paymentUrl": "https://app.payku.cl/botonpago/index?idboton=14257&verif=0f7014ea",
         };
 
         // create store in DB 
         fs.collection('stores').doc(this.props.match.params.store_id).collection("products")
-            .add(
+            .doc(this.props.location.state.product.id)
+            .update(
                 newProduct
             )
             .then(ref_ => {
 
-                alert("El producto ha sido agregado exitosamente");
+                alert("El producto ha sido editado exitosamente");
 
                 this.setState({
                     loading: false,
@@ -183,22 +185,22 @@ class CreateNewProduct extends React.Component {
 
                 ?
 
-                    <Container
-                        // item xs={12} sm={12}
-                        style={{
-                            // backgroundColor: "yellow" 
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "center",
-                        }}
-                    >
+                <Container
+                    // item xs={12} sm={12}
+                    style={{
+                        // backgroundColor: "yellow" 
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                    }}
+                >
 
-                        {/* section title */}
-                        <Typography align="center" variant="h4" component="h4" gutterBottom>
-                            Crear nuevo producto
-                        </Typography>
+                    {/* section title */}
+                    <Typography align="center" variant="h4" component="h4" gutterBottom>
+                        Editar producto
+                    </Typography>
 
-                        {/* <Chip
+                    {/* <Chip
                             label="Acá debes agregar la información sobre el producto que venderás en tu tienda. La imagen será la misma que la del posteo."
                             // color="primary"
                             // margin = "100"
@@ -209,46 +211,46 @@ class CreateNewProduct extends React.Component {
 
                         /> */}
 
-                        <Typography
-                            gutterBottom
-                            variant="body2"
-                            component="p"
-                            style={{
-                                // margin: 50,
-                                display: "flex",
-                                flexWrap: "wrap",
-                                backgroundColor: "rgba(173, 216, 230, 0.5)",
-                                borderRadius: 50,
-                                textAlign: "center",
-                                justifyContent: "center",
-                                padding: 10,
-                            }}
-                        >
-                            Acá debes agregar la información sobre el producto que venderás en tu tienda. La imagen será la misma que la del posteo.
-                        </Typography>
+                    {/* <Typography
+                        gutterBottom
+                        variant="body2"
+                        component="p"
+                        style={{
+                            // margin: 50,
+                            display: "flex",
+                            flexWrap: "wrap",
+                            backgroundColor: "rgba(173, 216, 230, 0.5)",
+                            borderRadius: 50,
+                            textAlign: "center",
+                            justifyContent: "center",
+                            padding: 10,
+                        }}
+                    >
+                        Acá debes agregar la información sobre el producto que venderás en tu tienda. La imagen será la misma que la del posteo.
+                        </Typography> */}
 
 
-                        {/* information */}
-                        <ProductInformationForm 
-                            productImage={this.state.post != null ? this.state.post.media_url : this.state.productImage}
-                            defaultIGCaption = {this.state.post != null ? this.state.post.caption : ""}
-                            changeProductName={(e) => this.setState({ productName: e.target.value })}
-                            productName={this.state.productName}
-                            changeProductDescription={(e) => this.setState({ productDescription: e.target.value })}
-                            productDescription={this.state.productDescription}
-                            changeProductPrice={(e) => this.setState({ productPrice: e.target.value })}
-                            productPrice={this.state.productPrice}
-                            convert_to_product={this.convert_to_product}
-                        />
+                    {/* information */}
+                    <ProductInformationForm
+                        productImage={this.state.post != null ? this.state.post.media_url : this.state.productImage}
+                        defaultIGCaption={this.state.post != null ? this.state.post.caption : ""}
+                        changeProductName={(e) => this.setState({ productName: e.target.value })}
+                        productName={this.state.productName}
+                        changeProductDescription={(e) => this.setState({ productDescription: e.target.value })}
+                        productDescription={this.state.productDescription}
+                        changeProductPrice={(e) => this.setState({ productPrice: e.target.value })}
+                        productPrice={this.state.productPrice}
+                        convert_to_product={this.editProduct}
+                    />
 
 
-                        {/* Here it was the origanl form component */}
+                    {/* Here it was the origanl form component */}
 
-                    </Container>
+                </Container>
 
                 :
 
-                    <CircularProgress />
+                <CircularProgress />
 
         );
 
@@ -256,4 +258,4 @@ class CreateNewProduct extends React.Component {
 
 }
 
-export default CreateNewProduct;
+export default EditProduct;

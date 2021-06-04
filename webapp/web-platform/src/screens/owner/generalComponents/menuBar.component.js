@@ -68,7 +68,7 @@ class MenuBar extends React.Component {
                     {/* social network posts */}
                     <Button align="center" variant="contained" color="primary"
                         onClick={this.props.goToSocialNetworkPosts}
-                        >
+                    >
                         <Add /> 
                         Agregar producto
                     </Button>

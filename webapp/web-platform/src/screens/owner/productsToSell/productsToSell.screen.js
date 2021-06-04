@@ -332,7 +332,7 @@ class ProductsToSell extends React.Component {
 
                                                             </CardActionArea>
 
-                                                            {/* <CardActions>
+                                                            <CardActions>
 
                                                                 <Button
                                                                     align="center"
@@ -345,16 +345,18 @@ class ProductsToSell extends React.Component {
                                                                         //     toBuyModal: true,
                                                                         // });
 
-                                                                        // alert("See details")
-                                                                        this.props.history.push('/productDetails/' + this.state.store.id + "/" + product.id);
+                                                                        // alert("Go to edit")
+                                                                        this.props.history.push('/editProduct/' + this.props.match.params.store_id + "/" + product.id, { product: product});
                                                                     }}
                                                                 >
 
-                                                                    <PlayArrow /> Ver detalles
+                                                                    {/* <PlayArrow />  */}
+                                                                    {/* Ver detalles */}
+                                                                    Editar
             
                                                                 </Button>
 
-                                                            </CardActions> */}
+                                                            </CardActions>
 
                                                         </Card>
 
