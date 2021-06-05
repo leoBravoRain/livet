@@ -76,6 +76,8 @@ class CreateNewProduct extends React.Component {
             // this can be for example "size" or "units"
             // productVar1: null,
             productPrice: null,
+            // if product is visible in final eccommerce
+            productVisible: true,
             // productImage: "https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg",
             // productExtraInformation: null,
         }
@@ -185,6 +187,7 @@ class CreateNewProduct extends React.Component {
                         "price": this.state.productPrice,
                         // "image": this.state.productImage,
                         "image": downloadURL,
+                        "visible": this.state.productVisible,
                         // "extraInformation": this.state.productExtraInformation,
                         "paymentUrl": "https://app.payku.cl/botonpago/index?idboton=14257&verif=0f7014ea",
                     };
@@ -310,6 +313,9 @@ class CreateNewProduct extends React.Component {
                             productPrice={this.state.productPrice}
                             convert_to_product={this.convert_to_product}
                             buttonText = "Crear producto"
+                            visible = {this.state.productVisible}
+                            changeVisible={(e) => this.setState({ productVisible: !this.state.productVisible })}
+                            // changeVisible = {() => alert("asjd")}
                         />
 
 

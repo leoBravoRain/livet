@@ -104,7 +104,11 @@ class ProductsCatalog extends React.Component {
                 // console.log(store);
 
                 // get store products
-                fs.collection("stores").doc(this.props.match.params.store_id).collection("products").get()
+                fs.collection("stores").doc(this.props.match.params.store_id).collection("products")
+                
+                    // filter by visible products
+                    .where("visible", "==", true)
+                    .get()
                     .then(snapshotquery => {
 
                         // // get data from API

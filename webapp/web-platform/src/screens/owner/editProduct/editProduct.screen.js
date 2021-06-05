@@ -12,7 +12,6 @@ import Typography from '@material-ui/core/Typography';
 import CircularProgress from "@material-ui/core/CircularProgress";
 // import Grid from '@material-ui/core/Grid';
 
-
 import ProductInformationForm from "../generalComponents/productInformationForm.screen";
 
 // import Card from '@material-ui/core/Card';
@@ -76,6 +75,7 @@ class EditProduct extends React.Component {
             // this can be for example "size" or "units"
             // productVar1: null,
             productPrice: null,
+            productVisible: false,
             // productImage: "https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg",
             // productExtraInformation: null,
         }
@@ -103,7 +103,6 @@ class EditProduct extends React.Component {
                 // // redirect
                 // this.props.history.push('/productsToSell');
 
-                console.log(this.props.location.state.product);
                 this.setState({
 
                     // previous page send this data
@@ -111,7 +110,7 @@ class EditProduct extends React.Component {
                     productDescription: this.props.location.state.product.description,
                     productPrice: this.props.location.state.product.price,
                     productImage: this.props.location.state.product.image,
-
+                    productVisible: this.props.location.state.product.visible,
 
                     loading: false,
                 });
@@ -135,7 +134,6 @@ class EditProduct extends React.Component {
 
     editProduct() {
 
-        // NEWWWWWWWWWW
         this.setState({
             loading: true,
         });
@@ -186,6 +184,7 @@ class EditProduct extends React.Component {
                         "price": this.state.productPrice,
                         // "image": this.state.productImage,
                         "image": downloadURL,
+                        "visible": this.state.productVisible,
                         // "extraInformation": this.state.productExtraInformation,
                         "paymentUrl": "https://app.payku.cl/botonpago/index?idboton=14257&verif=0f7014ea",
                     };
@@ -313,6 +312,8 @@ class EditProduct extends React.Component {
                         productPrice={this.state.productPrice}
                         convert_to_product={this.editProduct}
                         buttonText="Editar producto"
+                        visible={this.state.productVisible}
+                        changeVisible={(e) => this.setState({ productVisible: !this.state.productVisible })}
                     />
 
 

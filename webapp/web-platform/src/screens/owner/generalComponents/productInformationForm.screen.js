@@ -11,7 +11,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
 // import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from '@material-ui/core/Grid';
-
+import Switch from '@material-ui/core/Switch';
 // import Add from "@material-ui/icons/Add";
 // import Close from "@material-ui/icons/Close";
 // import Storefront from "@material-ui/icons/Storefront";
@@ -264,6 +264,44 @@ class ProductInformationForm extends React.Component {
                                 onChange={(e) => this.setState({ productExtraInformation: e.target.value })}
                                 value={this.state.productExtraInformation}
                             /> */}
+
+                    {/* activate / deactivate product */}
+                    <Container
+                        style = {{
+                            display: "flex",
+                            flexDirection: "row",
+                            margin: 10,
+                        }}
+                    >
+                        
+                        <Typography
+                            gutterBottom
+                            variant="body2"
+                            component="p"
+                            // style={{
+                            //     // margin: 50,
+                            //     display: "flex",
+                            //     flexWrap: "wrap",
+                            //     backgroundColor: "rgba(173, 216, 230, 0.5)",
+                            //     borderRadius: 50,
+                            //     textAlign: "center",
+                            //     justifyContent: "center",
+                            //     padding: 10,
+                            // }}
+                        >
+                            Visible en tienda
+                        </Typography>
+
+                        <Switch
+                            checked={this.props.visible}
+                            onChange={this.props.changeVisible}
+                            // name="checkedA"
+                            // inputProps={{ 'aria-label': 'secondary checkbox' }}
+                            // label = "oaisjd"
+                            // name="checkedB"
+                            color="primary"
+                        />
+                    </Container>
 
                     {/* convert to post button */}
                     <Button
