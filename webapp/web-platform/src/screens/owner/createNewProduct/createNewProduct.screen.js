@@ -36,6 +36,7 @@ import ProductInformationForm from "../generalComponents/productInformationForm.
 import { 
     auth,
     fs,
+    st,
 } from "../../../libraries/firebase/firebase";
 
 
@@ -53,6 +54,8 @@ import {
 //     },
 // ];
 
+// logged user
+var loggedUser = null;
 
 class CreateNewProduct extends React.Component {
 
@@ -71,10 +74,10 @@ class CreateNewProduct extends React.Component {
             productName: null,
             productDescription: null,
             // this can be for example "size" or "units"
-            productVar1: null,
+            // productVar1: null,
             productPrice: null,
             // productImage: "https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg",
-            productExtraInformation: null,
+            // productExtraInformation: null,
         }
 
         this.convert_to_product = this.convert_to_product.bind(this);
@@ -94,6 +97,9 @@ class CreateNewProduct extends React.Component {
 
             if (user) {
 
+                // assign logged user to user var
+                loggedUser = user;
+
                 // // redirect
                 // this.props.history.push('/productsToSell');
 
@@ -107,6 +113,7 @@ class CreateNewProduct extends React.Component {
                     productImage: this.props.location.state != null ? this.props.location.state.post.media_url : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAMFBMVEXp7vG6vsG3u77s8fTCxsnn7O/f5OfFyczP09bM0dO8wMPk6ezY3eDd4uXR1tnJzdBvAX/cAAACVElEQVR4nO3b23KDIBRA0ShGU0n0//+2KmO94gWZ8Zxmr7fmwWEHJsJUHw8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwO1MHHdn+L3rIoK6eshsNJ8kTaJI07fERPOO1Nc1vgQm2oiBTWJ+d8+CqV1heplLzMRNonED+4mg7L6p591FC+133/xCRNCtd3nL9BlxWP++MOaXFdEXFjZ7r8D9l45C8y6aG0cWtP/SUGhs2d8dA/ZfGgrzYX+TVqcTNRRO9l+fS5eSYzQs85psUcuzk6igcLoHPz2J8gvzWaH/JLS+95RfOD8o1p5CU5R7l5LkfKEp0mQ1UX7hsVXqDpRrifILD/3S9CfmlUQFhQfuFu0STTyJ8gsP3PH7GVxN1FC4t2sbBy4TNRTu7LyHJbqaqKFw+/Q0ncFloo7CjRPwMnCWqKXQZ75El4nKC9dmcJaou9AXOE5UXbi+RGeJygrz8Uf+GewSn9uXuplnWDZJ7d8f24F/s6iq0LYf9olbS3Q8i5oKrRu4S9ybwaQ/aCkqtP3I28QDgeoK7TBya/aXqL5COx67PTCD2grtdOwH+pQV2r0a7YVBgZoKwwIVFQYG6ikMDVRTGByopjD8ATcKb0UhhRTe77sKs2DV7FKSjId18TUEBYVyLhUThWfILHTDqmI85/2RWWjcE/bhP6OD7maT3h20MHsA47JC3PsW0wcwLhv9t0OOPOIkCn21y2bXXwlyylxiYMPk1SuCSmpfK8bNQvIrpAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwNX4BCbAju9/X67UAAAAASUVORK5CYII=",
 
                     loading: false,
+
                 });
             }
 
@@ -132,46 +139,109 @@ class CreateNewProduct extends React.Component {
             loading: true,
         });
 
-        // define store
-        const newProduct = {
-            "name": this.state.productName,
-            "description": this.state.productDescription,
-            "var1": this.state.productVar1,
-            "price": this.state.productPrice,
-            "image": this.state.productImage,
-            "extraInformation": this.state.productExtraInformation,
-            "paymentUrl": "https://app.payku.cl/botonpago/index?idboton=14257&verif=0f7014ea",
-        };
+        // check information isn't null
+        if (this.state.productName != null & this.state.productDescription != null & this.state.productPrice != null) {
 
-        // create store in DB 
-        fs.collection('stores').doc(this.props.match.params.store_id).collection("products")
-            .add(
-                newProduct
-            )
-            .then(ref_ => {
+            // take image
+            const selectedFile = document.getElementById('file_input').files[0];
 
-                alert("El producto ha sido agregado exitosamente");
+            // depending on value of image it return the default iamge url or the user uploaded image
+            new Promise((resolve) => {
 
-                this.setState({
-                    loading: false,
-                });
+                // if there is user image
+                if (selectedFile != null) {
+                    // alert("image");
+                    // resolve(
+                    // Create a root reference
+                    var storageRef = st.ref('stores/' + loggedUser.uid + "/" + this.props.match.params.store_id + "/products/" + selectedFile.name);
 
-                // navigate to products to sell
-                // + store id
-                this.props.history.push("/productsToSell/" + this.props.match.params.store_id);
+                    // store file in firebase store
+                    storageRef.put(selectedFile).then(snapshot => {
+
+                        // get url of fiile
+                        // return snapshot.ref.getDownloadURL();
+                        resolve(snapshot.ref.getDownloadURL());
+
+                    })
+                    // )
+                }
+
+                else {
+                    // alert("no image");
+                    resolve(this.state.productImage);
+                }
 
             })
 
-            .catch(e => {
+                // if it's ok
+                .then(downloadURL => {
 
-                this.setState({
-                    loading: false
+
+                    // define store
+                    const newProduct = {
+                        "name": this.state.productName,
+                        "description": this.state.productDescription,
+                        // "var1": this.state.productVar1,
+                        "price": this.state.productPrice,
+                        // "image": this.state.productImage,
+                        "image": downloadURL,
+                        // "extraInformation": this.state.productExtraInformation,
+                        "paymentUrl": "https://app.payku.cl/botonpago/index?idboton=14257&verif=0f7014ea",
+                    };
+        
+                    // create store in DB 
+                    fs.collection('stores').doc(this.props.match.params.store_id).collection("products")
+                        .add(
+                            newProduct
+                        )
+                        .then(ref_ => {
+        
+                            alert("El producto ha sido agregado exitosamente");
+        
+                            this.setState({
+                                loading: false,
+                            });
+        
+                            // navigate to products to sell
+                            // + store id
+                            this.props.history.push("/productsToSell/" + this.props.match.params.store_id);
+        
+                        })
+        
+                        .catch(e => {
+        
+                            this.setState({
+                                loading: false
+                            });
+        
+        
+                            alert("Tuvimos un error, inténtalo nuevamente porfavor");
+        
+                        });
+                })
+
+                // error trying to upload photo
+                .catch(e => {
+
+                    this.setState({
+                        loading: false
+                    });
+
+
+                    alert("Tuvimos un error, inténtalo nuevamente porfavor");
+
                 });
+                
 
+        }
 
-                alert("Tuvimos un error, inténtalo nuevamente porfavor");
-
+        // user must to fill data first
+        else {
+            alert("Debes agregar toda la información antes de continuar");
+            this.setState({
+                loading: false,
             });
+        }
     }
 
 
@@ -209,7 +279,7 @@ class CreateNewProduct extends React.Component {
 
                         /> */}
 
-                        <Typography
+                        {/* <Typography
                             gutterBottom
                             variant="body2"
                             component="p"
@@ -225,7 +295,7 @@ class CreateNewProduct extends React.Component {
                             }}
                         >
                             Acá debes agregar la información sobre el producto que venderás en tu tienda. La imagen será la misma que la del posteo.
-                        </Typography>
+                        </Typography> */}
 
 
                         {/* information */}
@@ -239,6 +309,7 @@ class CreateNewProduct extends React.Component {
                             changeProductPrice={(e) => this.setState({ productPrice: e.target.value })}
                             productPrice={this.state.productPrice}
                             convert_to_product={this.convert_to_product}
+                            buttonText = "Crear producto"
                         />
 
 

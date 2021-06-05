@@ -86,6 +86,37 @@ class ProductInformationForm extends React.Component {
                             heigh="300px"
                         />
 
+                        {/* upload photo */}
+                        <input
+                            style={{ margin: 10 }}
+                            id="file_input"
+                            type="file"
+                            name="agregar foto"
+                            // className="form-control p-1"
+                            accept="image/png, image/jpeg"
+                        />
+
+
+                        <Typography
+                            gutterBottom
+                            variant="body2"
+                            component="p"
+                            style={{
+                                // margin: 50,
+                                display: "flex",
+                                flexWrap: "wrap",
+                                backgroundColor: "rgba(173, 216, 230, 0.5)",
+                                borderRadius: 50,
+                                textAlign: "center",
+                                justifyContent: "center",
+                                padding: 10,
+                            }}
+                        >
+                            {/* Si contratas Livet, puedes agregar tu propia foto de perfil. Si es que no, te aparecerá esta foto por defecto */}
+                            Esta imagen se actualizará una vez que crees o actualices el producto
+                        </Typography>
+
+
                     </Grid>
 
                     <Grid
@@ -112,7 +143,7 @@ class ProductInformationForm extends React.Component {
 
                                 /> */}
 
-                        <Typography
+                        {/* <Typography
                             gutterBottom
                             variant="body2"
                             component="p"
@@ -129,14 +160,14 @@ class ProductInformationForm extends React.Component {
                         >
                             Si quieres puedes copiar parte de este texto y pegarlo en alguno de los campos de tu producto
 
-                                </Typography>
+                                </Typography> */}
 
                         {/* originla text */}
-                        <Typography align="center" variant="body2" component="p" gutterBottom>
+                        {/* <Typography align="center" variant="body2" component="p" gutterBottom> */}
                             {/* {this.state.post.text} */}
                             {/* {this.state.post != null ? this.state.post.caption : ""} */}
-                            {this.props.defaultIGCaption}
-                        </Typography>
+                            {/* {this.props.defaultIGCaption} */}
+                        {/* </Typography> */}
 
                         {/* button to copy text */}
                         {/* <Button
@@ -163,9 +194,9 @@ class ProductInformationForm extends React.Component {
                 >
 
                     {/* title */}
-                    <Typography align="center" variant="h4" component="h4" gutterBottom>
+                    {/* <Typography align="center" variant="h4" component="h4" gutterBottom>
                         Agregar información
-                            </Typography>
+                            </Typography> */}
 
                     {/* product name */}
                     <TextField
@@ -242,7 +273,8 @@ class ProductInformationForm extends React.Component {
                         onClick={this.props.convert_to_product}
 
                     >
-                        Convertir a producto
+                        {/* Crear producto */}
+                        {this.props.buttonText}
                     </Button>
 
                 </FormControl>

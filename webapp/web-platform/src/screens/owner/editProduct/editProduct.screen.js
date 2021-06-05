@@ -36,8 +36,11 @@ import ProductInformationForm from "../generalComponents/productInformationForm.
 import {
     auth,
     fs,
+    st,
 } from "../../../libraries/firebase/firebase";
 
+// logged user
+var loggedUser = null;
 
 // // prototype post
 // const posts = [
@@ -94,6 +97,9 @@ class EditProduct extends React.Component {
 
             if (user) {
 
+                // assign logged user to user var
+                loggedUser = user;
+                
                 // // redirect
                 // this.props.history.push('/productsToSell');
 
@@ -129,51 +135,116 @@ class EditProduct extends React.Component {
 
     editProduct() {
 
+        // NEWWWWWWWWWW
         this.setState({
             loading: true,
         });
 
-        // define store
-        const newProduct = {
-            "name": this.state.productName,
-            "description": this.state.productDescription,
-            // "var1": this.state.productVar1,
-            "price": this.state.productPrice,
-            "image": this.state.productImage,
-            // "extraInformation": this.state.productExtraInformation,
-            // "paymentUrl": "https://app.payku.cl/botonpago/index?idboton=14257&verif=0f7014ea",
-        };
+        // check information isn't null
+        if (this.state.productName != null & this.state.productDescription != null & this.state.productPrice != null) {
 
-        // create store in DB 
-        fs.collection('stores').doc(this.props.match.params.store_id).collection("products")
-            .doc(this.props.location.state.product.id)
-            .update(
-                newProduct
-            )
-            .then(ref_ => {
+            // take image
+            const selectedFile = document.getElementById('file_input').files[0];
 
-                alert("El producto ha sido editado exitosamente");
+            // depending on value of image it return the default iamge url or the user uploaded image
+            new Promise((resolve) => {
 
-                this.setState({
-                    loading: false,
-                });
+                // if there is user image
+                if (selectedFile != null) {
+                    // alert("image");
+                    // resolve(
+                    // Create a root reference
+                    var storageRef = st.ref('stores/' + loggedUser.uid + "/" + this.props.match.params.store_id + "/products/" + selectedFile.name);
 
-                // navigate to products to sell
-                // + store id
-                this.props.history.push("/productsToSell/" + this.props.match.params.store_id);
+                    // store file in firebase store
+                    storageRef.put(selectedFile).then(snapshot => {
+
+                        // get url of fiile
+                        // return snapshot.ref.getDownloadURL();
+                        resolve(snapshot.ref.getDownloadURL());
+
+                    })
+                    // )
+                }
+
+                else {
+                    // alert("no image");
+                    resolve(this.state.productImage);
+                }
 
             })
 
-            .catch(e => {
+                // if it's ok
+                .then(downloadURL => {
 
-                this.setState({
-                    loading: false
+
+                    // define store
+                    const newProduct = {
+                        "name": this.state.productName,
+                        "description": this.state.productDescription,
+                        // "var1": this.state.productVar1,
+                        "price": this.state.productPrice,
+                        // "image": this.state.productImage,
+                        "image": downloadURL,
+                        // "extraInformation": this.state.productExtraInformation,
+                        "paymentUrl": "https://app.payku.cl/botonpago/index?idboton=14257&verif=0f7014ea",
+                    };
+
+                    // create store in DB 
+                    fs.collection('stores').doc(this.props.match.params.store_id).collection("products")
+                        .doc(this.props.location.state.product.id)
+                        .update(
+                            newProduct
+                        )
+                        .then(ref_ => {
+
+                            alert("El producto ha sido editado exitosamente");
+
+
+                            this.setState({
+                                loading: false,
+                            });
+
+                            // navigate to products to sell
+                            // + store id
+                            this.props.history.push("/productsToSell/" + this.props.match.params.store_id);
+
+                        })
+
+                        .catch(e => {
+
+                            this.setState({
+                                loading: false
+                            });
+
+
+                            alert("Tuvimos un error, inténtalo nuevamente porfavor");
+
+                        });
+                })
+
+                // error trying to upload photo
+                .catch(e => {
+
+                    this.setState({
+                        loading: false
+                    });
+
+
+                    alert("Tuvimos un error, inténtalo nuevamente porfavor");
+
                 });
 
 
-                alert("Tuvimos un error, inténtalo nuevamente porfavor");
+        }
 
+        // user must to fill data first
+        else {
+            alert("Debes agregar toda la información antes de continuar");
+            this.setState({
+                loading: false,
             });
+        }
     }
 
 
@@ -241,6 +312,7 @@ class EditProduct extends React.Component {
                         changeProductPrice={(e) => this.setState({ productPrice: e.target.value })}
                         productPrice={this.state.productPrice}
                         convert_to_product={this.editProduct}
+                        buttonText="Editar producto"
                     />
 
 
