@@ -229,6 +229,23 @@ class ChooseStore extends React.Component {
                                                         <Send />
                                                         Ver tienda
                                                     </Button>
+
+                                                    {/* go to */}
+                                                    <Button
+                                                        align="center"
+                                                        variant="contained"
+                                                        color="primary"
+                                                        onClick={() => {
+                                                            // console.log('/productsToSell/' + store.id)
+                                                            // alert("go to store");
+                                                            this.props.history.push('/editStore/' + store.id, {store: store})
+                                                            // this.props.history.push('/postsFromSocialNetworks/' + store.id)
+                                                        }}
+                                                    >
+                                                        <Send />
+                                                        Editar tienda
+                                                    </Button>
+
                                                 </Container>
 
                                             );

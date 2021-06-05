@@ -45,6 +45,8 @@ import CreateNewStoreForm from "./screens/owner/createNewStore/createNewStoreFor
 import Sales from "./screens/owner/sales/sales.screen";
 import AddNewProductHome from "./screens/owner/createNewProduct/addNewProductHome.screen";
 import EditProduct from "./screens/owner/editProduct/editProduct.screen";
+import EditStore from "./screens/owner/editStore/editStore.screen";
+
 
 // customer
 import ProductsCatalog from "./screens/customer/productsCatalog/productsCatalog.screen";
@@ -126,6 +128,7 @@ class App extends Component {
               <Route path="/sales/:store_id" exact component={Sales} />
               <Route path="/addNewProductHome/:store_id" exact component={AddNewProductHome} />
               <Route path="/editProduct/:store_id/:product_id" exact component={EditProduct} />
+              <Route path="/editStore/:store_id" exact component={EditStore} />
 
               {/* customer */}
               <Route path="/:store_id" exact component={ProductsCatalog} />
