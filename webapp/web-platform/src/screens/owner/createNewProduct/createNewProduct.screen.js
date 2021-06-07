@@ -78,6 +78,7 @@ class CreateNewProduct extends React.Component {
             productPrice: null,
             // if product is visible in final eccommerce
             productVisible: true,
+            productStock: null,
             // productImage: "https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg",
             // productExtraInformation: null,
         }
@@ -142,11 +143,12 @@ class CreateNewProduct extends React.Component {
         });
 
         // check information isn't null
-        if (this.state.productName != null & this.state.productDescription != null & this.state.productPrice != null) {
+        if (this.state.productName != null & this.state.productDescription != null & this.state.productPrice != null & this.state.productStock != null) {
 
             // take image
             const selectedFile = document.getElementById('file_input').files[0];
 
+            // console.log("go to save product")
             // depending on value of image it return the default iamge url or the user uploaded image
             new Promise((resolve) => {
 
@@ -188,10 +190,13 @@ class CreateNewProduct extends React.Component {
                         // "image": this.state.productImage,
                         "image": downloadURL,
                         "visible": this.state.productVisible,
+                        "stock": this.state.productStock,
                         // "extraInformation": this.state.productExtraInformation,
                         "paymentUrl": "https://app.payku.cl/botonpago/index?idboton=14257&verif=0f7014ea",
                     };
-        
+                    
+                    // console.log(newProduct);
+
                     // create store in DB 
                     fs.collection('stores').doc(this.props.match.params.store_id).collection("products")
                         .add(
@@ -221,6 +226,7 @@ class CreateNewProduct extends React.Component {
                             alert("Tuvimos un error, inténtalo nuevamente porfavor");
         
                         });
+
                 })
 
                 // error trying to upload photo
@@ -315,7 +321,8 @@ class CreateNewProduct extends React.Component {
                             buttonText = "Crear producto"
                             visible = {this.state.productVisible}
                             changeVisible={(e) => this.setState({ productVisible: !this.state.productVisible })}
-                            // changeVisible = {() => alert("asjd")}
+                            changeProductStock={(e) => this.setState({ productStock: e.target.value })}
+                            productStock={this.state.productStock}
                         />
 
 

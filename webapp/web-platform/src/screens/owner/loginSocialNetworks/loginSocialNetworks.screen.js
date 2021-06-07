@@ -77,7 +77,7 @@ class LoginSocialNetworks extends React.Component {
                     .then(res =>res.json())
                     .then(data => {
                         // console.log(data);
-                        console.log("DATA");
+                        // console.log("DATA");
 
                         const posts = data.result.data;
 

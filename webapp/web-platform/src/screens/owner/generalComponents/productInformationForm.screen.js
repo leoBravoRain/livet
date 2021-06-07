@@ -241,7 +241,7 @@ class ProductInformationForm extends React.Component {
                     <TextField
                         // id="standard-uncontrolled"
                         label="Precio del producto"
-                        // type="Precio"
+                        type="number"
                         // defaultValue="Correo electrónico"
                         margin="normal"
                         // onChange={(e) => this.setState({ productPrice: e.target.value })}
@@ -253,17 +253,17 @@ class ProductInformationForm extends React.Component {
 
                     />
 
-                    {/* product extra information */}
-                    {/* <TextField
-                                // id="standard-uncontrolled"
-                                label="Información extra del producto (como por ejemplo, condiciones del envío)"
-                                multiline
-                                // type="Información Extra"
-                                // defaultValue="Correo electrónico"
-                                margin="normal"
-                                onChange={(e) => this.setState({ productExtraInformation: e.target.value })}
-                                value={this.state.productExtraInformation}
-                            /> */}
+                    {/* stock */}
+                    <TextField
+                        // id="standard-uncontrolled"
+                        label="Unidades en stock"
+                        // multiline
+                        type="number"
+                        // defaultValue="Correo electrónico"
+                        margin="normal"
+                        onChange={this.props.changeProductStock}
+                        value={this.props.productStock}
+                    />
 
                     {/* activate / deactivate product */}
                     <Container
