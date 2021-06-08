@@ -46,12 +46,14 @@ import Sales from "./screens/owner/sales/sales.screen";
 import AddNewProductHome from "./screens/owner/createNewProduct/addNewProductHome.screen";
 import EditProduct from "./screens/owner/editProduct/editProduct.screen";
 import EditStore from "./screens/owner/editStore/editStore.screen";
-import SaleForm from "./screens/owner/sales/addNewSale.screen";
+// import SaleForm from "./screens/owner/sales/addNewSale.screen";
 
 // customer
 import ProductsCatalog from "./screens/customer/productsCatalog/productsCatalog.screen";
 import ProductDetails from "./screens/customer/productDetails/productDetails.screen";
 import SaleConfirmation from "./screens/customer/saleConfirmation/saleConfirmation.screen";
+import ShoppingCart from "./screens/customer/shoppingCart/shoppingCart.screen";
+
 // import WorkshopDetails from "./screens/workshopDetails/workshopDetails.screen";
 
 // import Login from "./screens/login/login.screen";
@@ -136,6 +138,7 @@ class App extends Component {
               <Route path="/:store_id" exact component={ProductsCatalog} />
               <Route path="/productDetails/:store_id/:product_id" exact component={ProductDetails} />
               <Route path="/saleConfirmation/:store_id/:product_id" exact component={SaleConfirmation} />
+              <Route path="/shoppingCart/:store_id" exact component={ShoppingCart}/>
               {/* <Route path="/" exact component={Home} />
 
               <Route path="/workshopDetails" exact component={WorkshopDetails} /> */}

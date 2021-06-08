@@ -143,6 +143,19 @@ class StoreInformation extends React.Component {
 
                         </Button>
 
+                        {/* go to IG */}
+                        <Button
+                            // align="center"
+                            size="small"
+                            color="primary"
+                            // variant="contained"
+                            onClick={this.props.goToShoppingCart}
+                        >
+
+                            Ir a carrito
+
+                        </Button>
+
                     </Grid>
 
                 </Grid>

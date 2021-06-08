@@ -265,6 +265,10 @@ class ProductsCatalog extends React.Component {
                             // alert("Go to home")
                             window.open(this.state.store.instagramUrl);
                         }}
+                        goToShoppingCart = {() => {
+                            // alert("go to cart");
+                            this.props.history.push('/shoppingCart/' + this.props.match.params.store_id);
+                        }}
                     />
 
 
@@ -475,22 +479,22 @@ class ProductsCatalog extends React.Component {
 
                                                         {/* description */}
                                                         <Typography variant="body2" color="textSecondary" component="p">
-                                                            {product.description}
+                                                            {product.description.substring(0, 80)} ...
                                                         </Typography>
 
                                                         <Container
                                                             style = {{
                                                                 display: "flex",
                                                                 flexDirection: "row",
-                                                                justifyContent: "center",
-                                                                // alignContent: "center"
+                                                                // justifyContent: "right",
+                                                                // alignContent: "right",
                                                                 marginTop: 40,
                                                                 marginBottom: 30,
                                                             }}
                                                         >
 
                                                             {/* size */}
-                                                            <Container
+                                                            {/* <Container
                                                                 style={{
                                                                     display: "flex",
                                                                     flex: 1,
@@ -514,7 +518,7 @@ class ProductsCatalog extends React.Component {
                                                                     {product.var1}
                                                                 </Typography>
 
-                                                            </Container>
+                                                            </Container> */}
 
                                                             {/* price */}
                                                             <Container

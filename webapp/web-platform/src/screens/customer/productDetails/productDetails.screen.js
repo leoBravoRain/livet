@@ -58,6 +58,7 @@ class ProductDetails extends React.Component {
             loading: true,
             product: null,
             store: null,
+            units: 1,
         }
 
         // this.convert_to_product = this.convert_to_product.bind(this);
@@ -110,6 +111,35 @@ class ProductDetails extends React.Component {
 
     }
 
+    // add product to cart
+    addToShoppingCart() {
+
+        // get shpping cart
+        var productsArrayCart = JSON.parse(localStorage.getItem('productsArrayCart'));
+
+        // console.log(productsArrayCart);
+        if (productsArrayCart == null) {
+            productsArrayCart = [];
+        };
+
+        // add new product
+        productsArrayCart.push({
+            "product": this.state.product,
+            "units": this.state.units,
+        });
+
+        // save new array
+        localStorage.setItem('productsArrayCart', JSON.stringify(productsArrayCart));
+
+        // console.log(productsArrayCart);
+
+        // console.log(localStorage);
+        alert("Producto agregado al carrito de compra");
+
+        // redirect
+        this.props.history.push('/' + this.props.match.params.store_id);
+
+    }
 
     render() {
 
@@ -245,11 +275,11 @@ class ProductDetails extends React.Component {
                                 // id="standard-uncontrolled"
                                 label="Unidades"
                                 type="number"
-                                defaultValue={1}
+                                // defaultValue={1}
                                 margin="normal"
-                                // onChange={(e) => this.setState({ productName: e.target.value })}
+                                onChange={(e) => this.setState({ units: e.target.value })}
                                 // onChange={this.props.changeNewProductCategory}
-                                // value={this.state.productName}
+                                value={this.state.units}
                                 // value={this.props.newProductCategory}
                             />
 
@@ -266,11 +296,14 @@ class ProductDetails extends React.Component {
                                     // });
 
                                     // alert("Go to buy");
-                                    this.props.history.push('/saleConfirmation/' + this.props.match.params.store_id + "/" + this.props.match.params.product_id);
+                                    // this.props.history.push('/saleConfirmation/' + this.props.match.params.store_id + "/" + this.props.match.params.product_id);
+                                    this.addToShoppingCart();
+                                    
                                 }}
                             >
 
-                                Comprar
+                                {/* Comprar */}
+                                Agregar a carrito
 
                             </Button>
 

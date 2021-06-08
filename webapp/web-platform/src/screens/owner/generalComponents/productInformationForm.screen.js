@@ -53,7 +53,7 @@ class ProductInformationForm extends React.Component {
             >
 
                 {/* original information */}
-                <Grid
+                {/* <Grid
                     container
                     style={{
                         // display: "flex",
@@ -62,10 +62,10 @@ class ProductInformationForm extends React.Component {
                         // backgroundColor: "green",
 
                     }}
-                >
+                > */}
 
                     {/* original image */}
-                    <Grid
+                    {/* <Grid
                         item
                         xs={12}
                         md={6}
@@ -85,20 +85,20 @@ class ProductInformationForm extends React.Component {
                             alt="image"
                             width="300px"
                             heigh="300px"
-                        />
+                        /> */}
 
                         {/* upload photo */}
-                        <input
+                        {/* <input
                             style={{ margin: 10 }}
                             id="file_input"
                             type="file"
                             name="agregar foto"
                             // className="form-control p-1"
                             accept="image/png, image/jpeg"
-                        />
+                        /> */}
 
 
-                        <Typography
+                        {/* <Typography
                             gutterBottom
                             variant="body2"
                             component="p"
@@ -113,14 +113,13 @@ class ProductInformationForm extends React.Component {
                                 padding: 10,
                             }}
                         >
-                            {/* Si contratas Livet, puedes agregar tu propia foto de perfil. Si es que no, te aparecerá esta foto por defecto */}
                             Esta imagen se actualizará una vez que crees o actualices el producto
-                        </Typography>
+                        </Typography> */}
 
 
-                    </Grid>
+                    {/* </Grid> */}
 
-                    <Grid
+                    {/* <Grid
                         item
                         xs={12}
                         md={6}
@@ -132,7 +131,7 @@ class ProductInformationForm extends React.Component {
                             // backgroundColor: "yellow",
 
                         }}
-                    >
+                    > */}
 
                         {/* <Chip 
                                     label="Si quieres puedes copiar parte de este texto y pegarlo en alguno de los campos de tu producto" 
@@ -182,9 +181,9 @@ class ProductInformationForm extends React.Component {
                                     Copiar texto
                                 </Button> */}
 
-                    </Grid>
+                    {/* </Grid> */}
 
-                </Grid>
+                {/* </Grid> */}
 
                 {/* informatino to fill */}
                 <FormControl
@@ -361,6 +360,139 @@ class ProductInformationForm extends React.Component {
                             />
                     }
                     
+                    {/* original information */}
+                    <Grid
+                        container
+                        style={{
+                            // display: "flex",
+                            justifyContent: "center",
+                            // alignContent: "center",
+                            // backgroundColor: "green",
+
+                        }}
+                    >
+
+                        {/* original image */}
+                        <Grid
+                            item
+                            xs={12}
+                            md={6}
+                            style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                // alignContent: "center",
+                                // backgroundColor: "red",
+
+                            }}
+                        >
+
+                            <img
+                                // src={this.state.post.image} 
+                                // src={this.state.post != null ? this.state.post.media_url : this.state.productImage}
+                                src={this.props.productImage}
+                                alt="image"
+                                width="300px"
+                                heigh="300px"
+                            />
+
+                            {/* upload photo */}
+                            <input
+                                style={{ margin: 10 }}
+                                id="file_input"
+                                type="file"
+                                name="agregar foto"
+                                // className="form-control p-1"
+                                accept="image/png, image/jpeg"
+                            />
+
+
+                            <Typography
+                                gutterBottom
+                                variant="body2"
+                                component="p"
+                                style={{
+                                    // margin: 50,
+                                    display: "flex",
+                                    flexWrap: "wrap",
+                                    backgroundColor: "rgba(173, 216, 230, 0.5)",
+                                    borderRadius: 50,
+                                    textAlign: "center",
+                                    justifyContent: "center",
+                                    padding: 10,
+                                }}
+                            >
+                                {/* Si contratas Livet, puedes agregar tu propia foto de perfil. Si es que no, te aparecerá esta foto por defecto */}
+                                Esta imagen se actualizará una vez que crees o actualices el producto
+                        </Typography>
+
+
+                        </Grid>
+
+                        {/* <Grid
+                        item
+                        xs={12}
+                        md={6}
+                        style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            // alignContent: "center",
+                            flexDirection: "column",
+                            // backgroundColor: "yellow",
+
+                        }}
+                    > */}
+
+                        {/* <Chip 
+                                    label="Si quieres puedes copiar parte de este texto y pegarlo en alguno de los campos de tu producto" 
+                                    // color="primary"
+                                    // margin = "100"
+                                    style = {{
+                                        margin: 20,
+                                    }}
+
+                                /> */}
+
+                        {/* <Typography
+                            gutterBottom
+                            variant="body2"
+                            component="p"
+                            style={{
+                                // margin: 50,
+                                display: "flex",
+                                flexWrap: "wrap",
+                                backgroundColor: "rgba(173, 216, 230, 0.5)",
+                                borderRadius: 50,
+                                textAlign: "center",
+                                // justifyContent: "center",
+                                padding: 10,
+                            }}
+                        >
+                            Si quieres puedes copiar parte de este texto y pegarlo en alguno de los campos de tu producto
+
+                                </Typography> */}
+
+                        {/* originla text */}
+                        {/* <Typography align="center" variant="body2" component="p" gutterBottom> */}
+                        {/* {this.state.post.text} */}
+                        {/* {this.state.post != null ? this.state.post.caption : ""} */}
+                        {/* {this.props.defaultIGCaption} */}
+                        {/* </Typography> */}
+
+                        {/* button to copy text */}
+                        {/* <Button
+                                    align="center"
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={() => {
+                                        console.log(2ojsad);
+                                    }}
+                                >
+                                    Copiar texto
+                                </Button> */}
+
+                        {/* </Grid> */}
+
+                    </Grid>
 
 
                     {/* convert to post button */}
