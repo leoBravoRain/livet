@@ -22,7 +22,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import PlayArrow from '@material-ui/icons/PlayArrow';
 import AttachMoney from '@material-ui/icons/AttachMoney';
 import Search from '@material-ui/icons/Search';
-// import Select from '@material-ui/core/Select';
+import Select from '@material-ui/core/Select';
 
 import SearchBar from "material-ui-search-bar";
 
@@ -90,9 +90,14 @@ class ProductsCatalog extends React.Component {
 
             // value to search in search bar
             searchBarValue: null,
-        }
+
+            // to filter by category
+            categories: null,
+            filterCategoryIndex: 0,
+        };
 
         this.filterProduct = this.filterProduct.bind(this);
+        this.filterProductByCategory = this.filterProductByCategory.bind(this);
 
     }
 
@@ -125,6 +130,9 @@ class ProductsCatalog extends React.Component {
                         // // get data from API
                         var products = [];
 
+                        // categories to filter
+                        var categories = ["Todos"];
+
                         // iterate over each item
                         snapshotquery.forEach(doc => {
 
@@ -133,7 +141,14 @@ class ProductsCatalog extends React.Component {
                             product["id"] = doc.id;
                             products.push(product);
 
+                            // add category
+                            if (!categories.includes(product.category)){
+                                categories.push(product.category);
+                            }
+
                         });
+
+                        // console.log(categories);
 
                         // update state
                         this.setState({
@@ -143,6 +158,7 @@ class ProductsCatalog extends React.Component {
                             initialProducts: products,
                             store: store,
                             loading: false,
+                            categories: categories,
 
                         });
                     });
@@ -157,26 +173,67 @@ class ProductsCatalog extends React.Component {
 
         this.setState({loading: true});
 
-        var filteredProducts = [];
+        var newFilteredProducts = [];
         const searchValue = this.state.searchBarValue.toLowerCase();
 
         // basic implementation (search for a product with same name or description). I guess it is fast with few products
         this.state.initialProducts.forEach(product => {
+        // this.state.filteredProducts.forEach(product => {
             // filtering by name or description
             if (product.name.toLowerCase().includes(searchValue) || product.description.toLowerCase().includes(searchValue)){
-                filteredProducts.push(product);
+                newFilteredProducts.push(product);
             };
         });
 
         // update state
         this.setState({
-            products: filteredProducts,
+            products: newFilteredProducts,
             loading: false,
         });
         
     };
 
-    
+    // this is using the category filter
+    filterProductByCategory(categoryIndex) {
+        // alert("filter by category")
+        // console.log(categoryIndex);
+
+        this.setState({ loading: true });
+
+        // new filtered products
+        var newFilteredProducts = [];
+        const searchValue = this.state.categories[categoryIndex];
+
+        // basic implementation (search for a product with same name or description). I guess it is fast with few products
+        if (categoryIndex != 0) {
+
+            // filter by initial products
+            this.state.initialProducts.forEach(product => {
+            // this.state.filteredProducts.forEach(product => {
+
+                // filtering by category
+                if (product.category.toLowerCase().includes(searchValue)) {
+                    newFilteredProducts.push(product);
+                };
+            });
+            
+            
+        }
+
+        // this is all products
+        else {
+            // alert("all products");
+            newFilteredProducts = this.state.initialProducts;
+        }
+
+        // update state
+        this.setState({
+            products: newFilteredProducts,
+            loading: false,
+            filterCategoryIndex: categoryIndex,
+        });
+    };
+
     render() {
 
         return (
@@ -192,9 +249,6 @@ class ProductsCatalog extends React.Component {
                     //     margin: 10,
                     // }}
                 >
-
-
-
 
                     {/* store information */}
                     <StoreInformation
@@ -212,27 +266,110 @@ class ProductsCatalog extends React.Component {
                     />
 
 
-                    {/* search bar */}
-                    <SearchBar
-                        value={this.state.searchBarValue}
-                        onChange={(newValue) => this.setState({ searchBarValue: newValue })}
-                        onRequestSearch={() => {
-                            // doSomethingWith(this.state.value)
-                            // alert(this.state.searchBarValue);
-                            this.filterProduct();
-                        }}
-                        placeholder = "Buscar producto"
+                    {/* search bar and filter */}
+                    <Grid
+                        container
                         style = {{
-                            marginTop: 30,
-                            marginBottom: 30,
+                            // display: "flex",
+                            // flexDirection: "row",
+                            justifyContent: "center",
+                            alignContent: "center",
                         }}
-                    />
-                    
-                    {/* <Container>
-                        
-                        <TextField id="standard-basic" label="Standard" />
+                    >
 
-                    </Container> */}
+                        {/* search bar */}
+                        <Grid
+                            item
+                            xs = {12}
+                            md = {6}
+                            // style = {{
+                            //     backgroundColor: "red",
+                            // }}
+                        >
+
+                            <SearchBar
+                                value={this.state.searchBarValue}
+                                onChange={(newValue) => this.setState({ searchBarValue: newValue })}
+                                onRequestSearch={() => {
+                                    // doSomethingWith(this.state.value)
+                                    // alert(this.state.searchBarValue);
+                                    this.filterProduct();
+                                }}
+                                placeholder = "Buscar producto"
+                                style = {{
+                                    marginTop: 30,
+                                    marginBottom: 30,
+                                }}
+                                onCancelSearch = {() => {
+                                    this.setState({
+                                        products: this.state.initialProducts,
+                                    })
+                                }}
+                            />
+                        
+                        </Grid>
+
+                        {/* filter by categories */}
+                        {
+                            this.state.categories != null & this.state.categories.length > 0 &&
+                            
+                            <Grid
+                                item
+                                xs={12}
+                                md={6}
+                                style={{
+                                    // backgroundColor: "yellow",
+                                    justifyContent: "center",
+                                    // alignContent: "center",
+                                    display: "flex",
+                                    flexDirection: "row",
+                                }}
+                            >
+
+                                <Typography
+                                    gutterBottom
+                                    variant="body2"
+                                    component="p"
+                                    style={{
+                                        // marginTop: 20,
+                                        // fontSize: 30,
+                                        // flex: 1,
+                                        // marginBottom: 30,
+                                    }}
+                                >
+                                    Filtrar por categoría
+                                </Typography>
+
+                                <Select
+                                    style = {{
+                                        // backgroundColor: "green",
+                                        // alignSelf: "center",
+                                        // flex: 1,
+                                        height:"40%",
+                                        margin: 10,
+                                        // top: 0,
+                                    }}
+                                    // align= "center"
+                                    // labelId="demo-simple-select-label"
+                                    // id="demo-simple-select"
+                                    value={this.state.filterCategoryIndex}
+                                    onChange={(e)=> {this.filterProductByCategory(e.target.value)}}
+                                >
+                                    {
+                                        this.state.categories.map((category, idx) => {
+                                            return (
+                                                <option style = {{marginTop: 10,}}value = {idx}>
+                                                    {category}
+                                                </option>
+                                            )
+                                        })
+                                    }
+                                </Select>
+
+                            </Grid>
+                        }
+
+                    </Grid>
 
 
                     {/* catalog of products */}
