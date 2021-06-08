@@ -169,27 +169,29 @@ class ProductsCatalog extends React.Component {
 
 
     filterProduct() {
-        // alert(this.state.searchBarValue);
 
-        this.setState({loading: true});
+        if (this.state.searchBarValue != null) {
 
-        var newFilteredProducts = [];
-        const searchValue = this.state.searchBarValue.toLowerCase();
-
-        // basic implementation (search for a product with same name or description). I guess it is fast with few products
-        this.state.initialProducts.forEach(product => {
-        // this.state.filteredProducts.forEach(product => {
-            // filtering by name or description
-            if (product.name.toLowerCase().includes(searchValue) || product.description.toLowerCase().includes(searchValue)){
-                newFilteredProducts.push(product);
-            };
-        });
-
-        // update state
-        this.setState({
-            products: newFilteredProducts,
-            loading: false,
-        });
+            this.setState({loading: true});
+    
+            var newFilteredProducts = [];
+            const searchValue = this.state.searchBarValue.toLowerCase();
+    
+            // basic implementation (search for a product with same name or description). I guess it is fast with few products
+            this.state.initialProducts.forEach(product => {
+            // this.state.filteredProducts.forEach(product => {
+                // filtering by name or description
+                if (product.name.toLowerCase().includes(searchValue) || product.description.toLowerCase().includes(searchValue)){
+                    newFilteredProducts.push(product);
+                };
+            });
+    
+            // update state
+            this.setState({
+                products: newFilteredProducts,
+                loading: false,
+            });
+        }
         
     };
 
@@ -282,9 +284,12 @@ class ProductsCatalog extends React.Component {
                             item
                             xs = {12}
                             md = {6}
-                            // style = {{
-                            //     backgroundColor: "red",
-                            // }}
+                            style = {{
+                                // backgroundColor: "red",
+                                display:"flex",
+                                flexDirection:"row",
+                                justifyContent:"center",
+                            }}
                         >
 
                             <SearchBar
@@ -306,6 +311,28 @@ class ProductsCatalog extends React.Component {
                                     })
                                 }}
                             />
+
+                            {/* button because it does not work on mobiel when press enter */}
+                            <Button
+                                align="center"
+                                size="small"
+                                color="primary"
+                                // variant="contained"
+                                onClick={() => {
+                                    // window.open("https://wa.me/" + workshop.teacherMobileNumber + "?text=Hola, quiero tomar una clase en tu curso de '" + workshop.title + "' que aparece en la plataforma online")
+                                    // this.setState({
+                                    //     toBuyModal: true,
+                                    // });
+
+                                    // alert("See details")
+                                    // this.props.history.push('/productDetails/' + this.state.store.id + "/" + product.id);
+                                    this.filterProduct();
+                                }}
+                            >
+
+                                Buscar
+
+                            </Button>
                         
                         </Grid>
 

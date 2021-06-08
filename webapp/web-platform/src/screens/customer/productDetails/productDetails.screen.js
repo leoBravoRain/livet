@@ -187,8 +187,8 @@ class ProductDetails extends React.Component {
                                 margin: 10,
                                 alignContent: "left",
                                 justifyContent: "left",
-                                // display: "flex",
-                                // flexDirection: "column",
+                                display: "flex",
+                                flexDirection: "column",
                                 // backgroundColor: "red",
                             }}
                         >
@@ -213,18 +213,18 @@ class ProductDetails extends React.Component {
                             </Typography>
 
                             {/* extra information */}
-                            <Typography 
+                            {/* <Typography 
                             // align="center" 
                             variant="body2" component="p" gutterBottom>
                                 {this.state.product.extraInformation}
-                            </Typography>
+                            </Typography> */}
 
                             {/* var 1 */}
-                            <Typography 
+                            {/* <Typography 
                                 // align="center" 
                                 variant="body2" component="p" gutterBottom>
                                 {this.state.product.var1}
-                            </Typography>
+                            </Typography> */}
 
                             {/* price */}
                             <Typography 
@@ -233,11 +233,25 @@ class ProductDetails extends React.Component {
                                 component="p" 
                                 gutterBottom
                                 style = {{
-                                    margin: 20,
+                                    marginTop: 20,
+                                    // marginBottom: 20,
                                 }}
                             >
                                 Precio: $ {this.state.product.price.toLocaleString()}
                             </Typography>
+
+                            {/* select units */}
+                            <TextField
+                                // id="standard-uncontrolled"
+                                label="Unidades"
+                                type="number"
+                                defaultValue={1}
+                                margin="normal"
+                                // onChange={(e) => this.setState({ productName: e.target.value })}
+                                // onChange={this.props.changeNewProductCategory}
+                                // value={this.state.productName}
+                                // value={this.props.newProductCategory}
+                            />
 
                             {/* to buy button */}
                             <Button 

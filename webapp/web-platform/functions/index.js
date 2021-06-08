@@ -38,8 +38,8 @@ exports.getAPIToken = functions.https.onRequest(async (req, res) => {
         if (requestType === "posts") {
 
             // redirect in authorization API
-            // redirect_uri = "https://livet2.web.app/loginSocialNetworks";
-            redirect_uri = "https://localhost:3000/loginSocialNetworks/";
+            redirect_uri = "https://livet2.web.app/loginSocialNetworks";
+            // redirect_uri = "https://localhost:3000/loginSocialNetworks/";
             console.error("change url because it is pointing to localhost")
 
             // // information request to IG API
