@@ -46,7 +46,7 @@ import Sales from "./screens/owner/sales/sales.screen";
 import AddNewProductHome from "./screens/owner/createNewProduct/addNewProductHome.screen";
 import EditProduct from "./screens/owner/editProduct/editProduct.screen";
 import EditStore from "./screens/owner/editStore/editStore.screen";
-
+import SaleForm from "./screens/owner/sales/addNewSale.screen";
 
 // customer
 import ProductsCatalog from "./screens/customer/productsCatalog/productsCatalog.screen";
@@ -61,6 +61,7 @@ import SaleConfirmation from "./screens/customer/saleConfirmation/saleConfirmati
 
 // ifrebase
 import { auth } from "./libraries/firebase/firebase";
+import AddNewSale from "./screens/owner/sales/addNewSale.screen";
 
 
 // Component 
@@ -129,6 +130,7 @@ class App extends Component {
               <Route path="/addNewProductHome/:store_id" exact component={AddNewProductHome} />
               <Route path="/editProduct/:store_id/:product_id" exact component={EditProduct} />
               <Route path="/editStore/:store_id" exact component={EditStore} />
+              <Route path="/addNewSaleManually/:store_id" exact component={AddNewSale} />
 
               {/* customer */}
               <Route path="/:store_id" exact component={ProductsCatalog} />

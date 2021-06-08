@@ -6,7 +6,7 @@ import React from "react";
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 // import TextField from '@material-ui/core/TextField';
-// import { Button } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 // import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
 // import CircularProgress from "@material-ui/core/CircularProgress";
@@ -19,7 +19,7 @@ import Typography from '@material-ui/core/Typography';
 // import CardMedia from '@material-ui/core/CardMedia';
 // // import Modal from '@material-ui/core/Modal';
 // // import PlayArrow from '@material-ui/icons/PlayArrow';
-// import Add from '@material-ui/icons/Add';
+import Add from '@material-ui/icons/Add';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -283,6 +283,28 @@ class Sales extends React.Component {
                         Por cada venta generada, te enviaremos el pago a tu cuenta bancaria registrada en esta plataforma dentro de las próximas 12 horas
                     </Typography> */}   
 
+                    {/* add new sale manually */}
+                    <Button
+                        // variant = "outlined"
+                        align="center" 
+                        // variant="contained" 
+                        color="primary"
+                        // width = "10%"
+                        onClick={() => {
+                            // alert("go to add new sale");
+                            // set store id as local varibale because IG API cannot receive the store id in the url (becaus it has to be exact url and it changes with the store ids)
+                            // localStorage.setItem('store_id', this.props.match.params.store_id);
+
+                            // this.props.history.push("/loginSocialNetworks/" + this.props.match.params.store_id);
+                            this.props.history.push("/addNewSaleManually/" + this.props.match.params.store_id);
+                        }}
+                    >
+                        <Add />
+                        Agregar venta manual
+                    </Button>
+
+
+                    {/* general infroamtion */}
                     <Typography
                         gutterBottom
                         variant="body2"
