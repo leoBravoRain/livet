@@ -3,23 +3,30 @@ import React from "react";
 // import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 // material ui
-// import Paper from '@material-ui/core/Paper';
+import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 // import TextField from '@material-ui/core/TextField';
-import { Button } from "@material-ui/core";
+// import { Button } from "@material-ui/core";
 // import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Grid from '@material-ui/core/Grid';
+// import CircularProgress from "@material-ui/core/CircularProgress";
+// import Grid from '@material-ui/core/Grid';
 
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-// import Modal from '@material-ui/core/Modal';
-// import PlayArrow from '@material-ui/icons/PlayArrow';
-import Add from '@material-ui/icons/Add';
+// import Card from '@material-ui/core/Card';
+// import CardActionArea from '@material-ui/core/CardActionArea';
+// import CardActions from '@material-ui/core/CardActions';
+// import CardContent from '@material-ui/core/CardContent';
+// import CardMedia from '@material-ui/core/CardMedia';
+// // import Modal from '@material-ui/core/Modal';
+// // import PlayArrow from '@material-ui/icons/PlayArrow';
+// import Add from '@material-ui/icons/Add';
+
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 // import Select from '@material-ui/core/Select';
 
@@ -73,6 +80,7 @@ class Sales extends React.Component {
         this.state = {
             loading: false,
             products: [],
+            sales: null,
         }
 
     }
@@ -90,37 +98,40 @@ class Sales extends React.Component {
 
             if (user) {
 
-                // redirect
-                // this.props.history.push('/productsToSell');
+                // demo sales
+                const sales = [
+                    {
+                        "date": "10-07-2021",
+                        "productName": "Product demo 1",
+                        "units": 1,
+                        "priceUnit": 1000,
+                        "totalSale": 1000,
+                    },
+                    {
+                        "date": "11-07-2021",
+                        "productName": "Product demo 2",
+                        "units": 2,
+                        "priceUnit": 6000,
+                        "totalSale": 12000,
+                    }
+                ];
 
-                // // get products from store
-                // fs.collection("stores").doc(this.props.match.params.store_id).collection("products")
-                //     .get()
-                //     .then(snapshotquery => {
 
-                //         // // get data from API
-                //         var products = [];
+                var totalSales = 0;
+                sales.forEach(sale => {
+                    totalSales += sale.totalSale;
+                });
 
-                //         // iterate over each item
-                //         snapshotquery.forEach(doc => {
+                // update state
+                this.setState({
 
-                //             // console.log(doc.data());
-                //             let product = doc.data();
-                //             product["id"] = doc.id;
-                //             products.push(product);
+                    // update products
+                    // products: products,
+                    sales: sales,
+                    totalSales: totalSales,
+                    loading: false,
 
-                //         });
-
-                        // update state
-                        this.setState({
-
-                            // update products
-                            // products: products,
-                            loading: false,
-
-                        });
-
-                //     })
+                });
 
             }
 
@@ -213,7 +224,7 @@ class Sales extends React.Component {
                     </Typography>
 
                     {/* infromation */}
-                    <Typography
+                    {/* <Typography
                         gutterBottom
                         variant="body2"
                         component="p"
@@ -230,10 +241,10 @@ class Sales extends React.Component {
                         }}
                     >
                         Estas son las ventas que has tenido en tu tienda
-                    </Typography>
+                    </Typography> */}
 
                     {/* more inforation */}
-                    <Typography
+                    {/* <Typography
                         gutterBottom
                         variant="body2"
                         component="p"
@@ -251,7 +262,26 @@ class Sales extends React.Component {
                         Por el momento, por cada venta que generes, te enviaremos un email con los datos del cliente y del pago.
 
                         Además te enviaremos una planilla ordenada con todas las ventas generadas hasta el momento por mes
-                    </Typography>
+                    </Typography> */}
+
+                    {/* <Typography
+                        gutterBottom
+                        variant="body2"
+                        component="p"
+                        // align = "center"
+                        style={{
+                            // margin: 50,
+                            display: "flex",
+                            flexWrap: "wrap",
+                            backgroundColor: "rgba(173, 216, 230, 0.5)",
+                            borderRadius: 50,
+                            textAlign: "center",
+                            justifyContent: "center",
+                            padding: 10,
+                        }}
+                    >
+                        Por cada venta generada, te enviaremos el pago a tu cuenta bancaria registrada en esta plataforma dentro de las próximas 12 horas
+                    </Typography> */}   
 
                     <Typography
                         gutterBottom
@@ -269,8 +299,52 @@ class Sales extends React.Component {
                             padding: 10,
                         }}
                     >
-                        Por cada venta generada, te enviaremos el pago a tu cuenta bancaria registrada en esta plataforma dentro de las próximas 12 horas
+                        Estas son ventas ficticias para que sepas como se verían las ventas que generas por nuestra plataforma
                     </Typography>
+
+                    {/* list of sales */}
+                    <TableContainer>
+                        <Table aria-label="simple table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>Fecha</TableCell>
+                                    <TableCell align="right">Producto</TableCell>
+                                    <TableCell align="right">Cantidad</TableCell>
+                                    <TableCell align="right">Precio</TableCell>
+                                    <TableCell align="right">Total</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {
+                                    this.state.sales != null && 
+
+                                        this.state.sales.map((row) => (
+                                            <TableRow key={row.date}>
+                                                <TableCell component="th" scope="row">
+                                                    {row.date}
+                                                </TableCell>
+                                                <TableCell align="right">{row.productName}</TableCell>
+                                                <TableCell align="right">{row.units}</TableCell>
+                                                <TableCell align="right">{row.priceUnit}</TableCell>
+                                                <TableCell align="right">{row.totalSale}</TableCell>
+                                            </TableRow>
+                                        ))
+                                }
+
+                                <TableRow style = {{fontWeight: "bold"}} >
+                                    <TableCell component="th" scope="row">
+                                        {/* {row.date} */}
+                                    </TableCell>
+                                    <TableCell align="right" style = {{fontWeight: "bold"}}>Total</TableCell>
+                                    <TableCell align="right"> </TableCell>
+                                    <TableCell align="right"> </TableCell>
+                                    <TableCell align="right" style={{ fontWeight: "bold" }}>{this.state.totalSales}</TableCell>
+                                </TableRow>
+
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+
 
                 </Container>
 

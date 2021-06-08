@@ -109,7 +109,7 @@ class EditStore extends React.Component {
 
                 // if there is user image
                 if (selectedFile != null) {
-                    alert("image");
+                    // alert("image");
                     // resolve(
                     // Create a root reference
                     var storageRef = st.ref('stores/' + loggedUser.uid + "/profileStore/" + selectedFile.name);
@@ -126,7 +126,7 @@ class EditStore extends React.Component {
                 }
 
                 else {
-                    alert("no image");
+                    // alert("no image");
                     resolve(this.state.profilePhoto);
                 }
 
