@@ -9,7 +9,7 @@ import Container from '@material-ui/core/Container';
 import { Button } from "@material-ui/core";
 // import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
-// import CircularProgress from "@material-ui/core/CircularProgress";
+import CircularProgress from "@material-ui/core/CircularProgress";
 // import Grid from '@material-ui/core/Grid';
 
 // import Card from '@material-ui/core/Card';
@@ -19,7 +19,7 @@ import Typography from '@material-ui/core/Typography';
 // import CardMedia from '@material-ui/core/CardMedia';
 // // import Modal from '@material-ui/core/Modal';
 // // import PlayArrow from '@material-ui/icons/PlayArrow';
-import Add from '@material-ui/icons/Add';
+// import Add from '@material-ui/icons/Add';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -27,6 +27,9 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+
+import StoreInformation from "../generalComponents/storeInformation/storeInformation.component";
+import FooterStore from "../generalComponents/footerStore/footerStore.component";
 
 // import Select from '@material-ui/core/Select';
 
@@ -39,10 +42,10 @@ import TableRow from '@material-ui/core/TableRow';
 // import MenuBar from "../../generalComponents/menuBar.component";
 
 // firebase
-// import {
-//     auth,
-//     fs,
-// } from "../../../libraries/firebase/firebase";
+import {
+    // auth,
+    fs,
+} from "../../../libraries/firebase/firebase";
 
 
 class ShoppingCart extends React.Component {
@@ -55,9 +58,10 @@ class ShoppingCart extends React.Component {
 
         // initial states
         this.state = {
-            loading: false,
+            loading: true,
             products: [],
-            totalSales: null,
+            totalSales: 0,
+            store: null,
         }
         this.removeItemFromCart = this.removeItemFromCart.bind(this);
 
@@ -71,25 +75,48 @@ class ShoppingCart extends React.Component {
             loading: true,
         });
 
-        // get shopping cart products
-        var productsArrayCart = JSON.parse(localStorage.getItem('productsArrayCart'));
 
-        // if there is any product
-        if (productsArrayCart != null & productsArrayCart.length > 0) {
+        // get store data
+        fs.collection("stores").doc(this.props.match.params.store_id).get()
+            .then(doc => {
+                // if store exists
+                if (doc.exists) {
 
-            // get total sale
-            var totalSales = 0.0;
-            productsArrayCart.forEach(product => {
-                totalSales += parseFloat(product.product.price);
+                    // get store data
+                    var store = doc.data();
+
+                    // get shopping cart products
+                    var productsArrayCart = JSON.parse(localStorage.getItem('productsArrayCart'));
+            
+                    // if there is any product
+                    if (productsArrayCart != null & productsArrayCart.length > 0) {
+            
+                        // get total sale
+                        var totalSales = 0.0;
+                        productsArrayCart.forEach(product => {
+                            totalSales += parseInt(product.units) * parseFloat(product.product.price);
+                        });
+                        
+                    }
+
+                    // no products on cart
+                    else{
+                        // alert("no products on cart");
+                        productsArrayCart = [];
+                        totalSales = 0;
+                    };
+
+                    // update
+                    this.setState({
+                        sales: productsArrayCart,
+                        loading:false,
+                        totalSales: totalSales,
+                        store: store,
+                    });
+                }
+
             });
 
-            // update
-            this.setState({
-                sales: productsArrayCart,
-                loading:false,
-                totalSales: totalSales,
-            });
-        };
 
     }
 
@@ -104,7 +131,7 @@ class ShoppingCart extends React.Component {
         // get shopping cart products
         var productsArrayCart = JSON.parse(localStorage.getItem('productsArrayCart'));
         
-        console.log(productsArrayCart);
+        // console.log(productsArrayCart);
 
         // remove item
         // if there is any product
@@ -116,7 +143,7 @@ class ShoppingCart extends React.Component {
             // get new total sale
             var totalSales = 0.0;
             productsArrayCart.forEach(product => {
-                totalSales += parseFloat(product.product.price);
+                totalSales += parseInt(product.units) * parseFloat(product.product.price);
             });
 
             // update state
@@ -138,83 +165,164 @@ class ShoppingCart extends React.Component {
 
         return (
 
-            <Container
-                // container
-                // spacing={3}
-                style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    // backgroundColor: "red",
-                    justifyContent: "center",
-                }}
-            >
+            !this.state.loading
 
+                ?
 
-                {/* products list */}
                 <Container
+                    // container
+                    // spacing={3}
                     style={{
-                        justifyContent: "center",
                         display: "flex",
                         flexDirection: "column",
+                        // backgroundColor: "red",
+                        justifyContent: "center",
                     }}
                 >
 
-                    {/* title */}
-                    <Typography align="center" variant="h4" component="h4" gutterBottom>
-                        Tu carrito de compra
-                    </Typography>
 
-                    {/* list of products */}
-                    <TableContainer>
-                        <Table aria-label="simple table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell align="right">Producto</TableCell>
-                                    <TableCell align="right">Cantidad</TableCell>
-                                    <TableCell align="right">Precio</TableCell>
-                                    <TableCell align="right">Total</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {
-                                    this.state.sales != null &&
+                    {/* store information */}
+                    <StoreInformation
+                        profilePhoto={this.state.store.profilePhoto}
+                        name={this.state.store.name}
+                        description={this.state.store.description}
+                        goToHome={() => {
+                            // alert("Go to home")
+                            this.props.history.push('/' + this.props.match.params.store_id);
+                        }}
+                        goToInstagram={() => {
+                            // alert("Go to home")
+                            window.open(this.state.store.instagramUrl);
+                        }}
+                        goToShoppingCart={() => {
+                            // alert("go to cart");
+                            this.props.history.push('/shoppingCart/' + this.props.match.params.store_id);
+                        }}
+                    />
 
-                                    this.state.sales.map((row, idx) => (
-                                        <TableRow>
-                                            <TableCell align="right">{row.product.name}</TableCell>
-                                            <TableCell align="right">{row.units}</TableCell>
-                                            <TableCell align="right">{row.product.price}</TableCell>
-                                            <TableCell align="right">{row.units * row.product.price}</TableCell>
 
-                                            {/* remove from cart */}
-                                            <TableCell align="right">
-                                                <Button
-                                                    onClick={() => this.removeItemFromCart(idx)}
-                                                >
 
-                                                    Eliminar
-                                                </Button>
-                                            </TableCell>
+                    {/* products list */}
+                    <Container
+                        style={{
+                            justifyContent: "center",
+                            display: "flex",
+                            flexDirection: "column",
+                        }}
+                    >
 
-                                        </TableRow>
-                                    ))
-                                }
+                        {/* title */}
+                        <Typography align="center" variant="h4" component="h4" gutterBottom>
+                            Tu carrito de compra
+                        </Typography>
 
-                                <TableRow style={{ fontWeight: "bold" }} >
-                                    <TableCell align="right" style={{ fontWeight: "bold" }}>Total</TableCell>
-                                    <TableCell align="right"> </TableCell>
-                                    <TableCell align="right"> </TableCell>
-                                    <TableCell align="right" style={{ fontWeight: "bold" }}>{this.state.totalSales}</TableCell>
-                                </TableRow>
+                        {/* list of products */}
+                        {
+                            this.state.sales != null
 
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
+                            &&
 
+                            this.state.sales.length > 0
+
+                            ?
+
+
+                                <TableContainer>
+                                    <Table aria-label="simple table">
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell align="right">Producto</TableCell>
+                                                <TableCell align="right">Cantidad</TableCell>
+                                                <TableCell align="right">Precio</TableCell>
+                                                <TableCell align="right">Total</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+
+                                        {
+                                            this.state.sales.map((row, idx) => (
+                                                <TableRow>
+                                                    <TableCell align="right">{row.product.name}</TableCell>
+                                                    <TableCell align="right">{row.units}</TableCell>
+                                                    <TableCell align="right">{row.product.price}</TableCell>
+                                                    <TableCell align="right">{row.units * row.product.price}</TableCell>
+
+                                                    {/* remove from cart */}
+                                                    <TableCell align="right">
+                                                        <Button
+                                                            onClick={() => this.removeItemFromCart(idx)}
+                                                            >
+
+                                                            Eliminar
+                                                        </Button>
+                                                    </TableCell>
+
+                                                </TableRow>
+                                            ))
+
+                                        }
+
+                                            <TableRow style={{ fontWeight: "bold" }} >
+                                                <TableCell align="right" style={{ fontWeight: "bold" }}>Total</TableCell>
+                                                <TableCell align="right"> </TableCell>
+                                                <TableCell align="right"> </TableCell>
+                                                <TableCell align="right" style={{ fontWeight: "bold" }}>{this.state.totalSales}</TableCell>
+                                            </TableRow>
+
+                                        </TableBody>
+                                    </Table>
+                                </TableContainer>
+
+                            :
+
+                                <Typography 
+                                    align="center" 
+                                    variant="body1" 
+                                    component="p" 
+                                    gutterBottom
+                                    style = {{
+                                        // backgroundColor: "red",
+                                        borderRadius: 10,
+                                        margin: 20,
+                                        fontSize: 20,
+                                    }}
+                                >
+                                    Aun no has agregado nada al carrito
+                                </Typography>
+                        }
+
+                    </Container>
+
+                    {/* button to go to buy */}
+                    <Button
+                        align="center"
+                        variant="contained"
+                        color="primary"
+                        disabled = {!this.state.sales.length>0}
+                        onClick={() => {
+                            this.props.history.push('/saleConfirmation/' + this.props.match.params.store_id);
+                            // alert("go to pay");
+                        }}
+                    >
+                        Confirmar compra
+                    </Button>
+
+                    
+                    {/* footer */}
+                    <FooterStore
+                        goToInstagram={() => {
+                            // alert("Go to home")
+                            window.open(this.state.store.instagramUrl);
+                        }}
+                    />
 
                 </Container>
 
-            </Container>
+            :
+
+                <CircularProgress />
+
+
         );
 
     }

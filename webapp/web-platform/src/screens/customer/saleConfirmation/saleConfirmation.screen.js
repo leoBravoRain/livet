@@ -197,6 +197,10 @@ class SaleConfirmation extends React.Component {
                             // alert("Go to home")
                             window.open(this.state.store.instagramUrl);
                         }}
+                        goToShoppingCart={() => {
+                            // alert("go to cart");
+                            this.props.history.push('/shoppingCart/' + this.props.match.params.store_id);
+                        }}
                     />
 
                     {/* section title */}
