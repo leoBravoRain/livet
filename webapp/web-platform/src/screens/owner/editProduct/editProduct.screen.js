@@ -14,6 +14,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 
 import ProductInformationForm from "../generalComponents/productInformationForm.screen";
 
+import firebase from "firebase";
 // import Card from '@material-ui/core/Card';
 // import CardActionArea from '@material-ui/core/CardActionArea';
 // import CardActions from '@material-ui/core/CardActions';
@@ -77,8 +78,19 @@ class EditProduct extends React.Component {
             productPrice: null,
             productVisible: false,
             productStock: null,
+            
             // productImage: "https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg",
             // productExtraInformation: null,
+
+            // category
+            // select a created category
+            selectedCategory: null,
+            selectedCategoryIndex: 0,
+            // productCategories: ["tortas", "kuchen"],
+            productCategories: ["Agregar nueva categoría"],
+            // create a new category
+            newProductCategory: null,
+            
         }
 
         this.editProduct = this.editProduct.bind(this);
@@ -104,17 +116,46 @@ class EditProduct extends React.Component {
                 // // redirect
                 // this.props.history.push('/productsToSell');
 
-                this.setState({
+                // get store infromation (categories)
+                // get products from store
+                fs.collection("stores")
+                    .doc(this.props.match.params.store_id)
+                    .get()
+                    .then(doc => {
 
-                    // previous page send this data
-                    productName: this.props.location.state.product.name,
-                    productDescription: this.props.location.state.product.description,
-                    productPrice: this.props.location.state.product.price,
-                    productImage: this.props.location.state.product.image,
-                    productVisible: this.props.location.state.product.visible,
-                    productStock: this.props.location.state.product.stock,
-                    loading: false,
-                });
+                        if (doc.exists) {
+
+                            // console.log(doc.data());
+
+                            // add categories
+                            var categories = this.state.productCategories;
+                            // console.log(categories);
+                            if (doc.data().categories != null) {
+                                // console.log(doc.data().categories);
+                                categories = categories.concat(doc.data().categories);
+                            }
+
+                            // update state
+                            this.setState({
+            
+                                // previous page send this data
+                                productName: this.props.location.state.product.name,
+                                productDescription: this.props.location.state.product.description,
+                                productPrice: this.props.location.state.product.price,
+                                productImage: this.props.location.state.product.image,
+                                productVisible: this.props.location.state.product.visible,
+                                productStock: this.props.location.state.product.stock,
+                                loading: false,
+
+                                productCategories: categories,
+                                // get category
+                                // category is a string, and the store has the array with categories names
+                                selectedCategoryIndex: this.props.location.state.product.category != null ? categories.indexOf(this.props.location.state.product.category) : 0,
+
+                            });
+                        }
+                    });
+                    
             }
 
             else {
@@ -124,9 +165,6 @@ class EditProduct extends React.Component {
                 this.props.history.push('/');
             }
 
-            this.setState({
-                loading: false,
-            });
 
         });
 
@@ -141,8 +179,16 @@ class EditProduct extends React.Component {
             loading: true,
         });
 
+
+        // add new category condition
+        const addNewCategoryCondition = this.state.selectedCategoryIndex == 0 & this.state.newProductCategory != null;
+
+        // select a created category condition
+        const selectCreatedCategory = this.state.selectedCategoryIndex != null & this.state.selectedCategoryIndex != 0;
+
+
         // check information isn't null
-        if (this.state.productName != null & this.state.productDescription != null & this.state.productPrice != null & this.state.productStock != null) {
+        if (this.state.productName != null & this.state.productDescription != null & this.state.productPrice != null & this.state.productStock != null & (addNewCategoryCondition || selectCreatedCategory)) {
 
             // take image
             const selectedFile = document.getElementById('file_input').files[0];
@@ -189,6 +235,7 @@ class EditProduct extends React.Component {
                         "image": downloadURL,
                         "visible": this.state.productVisible,
                         "stock": this.state.productStock,
+                        "category": addNewCategoryCondition ? this.state.newProductCategory : this.state.productCategories[this.state.selectedCategoryIndex],
                         // "extraInformation": this.state.productExtraInformation,
                         "paymentUrl": "https://app.payku.cl/botonpago/index?idboton=14257&verif=0f7014ea",
                     };
@@ -201,18 +248,93 @@ class EditProduct extends React.Component {
                         .update(
                             newProduct
                         )
+
+                        // this is to redirect after updating product
+                        // .then(ref_ => {
+
+                        //     alert("El producto ha sido editado exitosamente");
+
+
+                        //     this.setState({
+                        //         loading: false,
+                        //     });
+
+                        //     // navigate to products to sell
+                        //     // + store id
+                        //     this.props.history.push("/productsToSell/" + this.props.match.params.store_id);
+
+                        // })
+
+                        // .catch(e => {
+
+                        //     this.setState({
+                        //         loading: false
+                        //     });
+
+
+                        //     alert("Tuvimos un error, inténtalo nuevamente porfavor");
+
+                        // });
+
+                        // this is to update store categories if user added a new category
                         .then(ref_ => {
 
-                            alert("El producto ha sido editado exitosamente");
+                            new Promise((resolve) => {
 
+                                // if new category created
+                                if (addNewCategoryCondition) {
+                                    // alert("create new category");
+                                    // update store with new category
+                                    fs.collection('stores')
+                                        .doc(this.props.match.params.store_id)
+                                        .update({
+                                            "categories": firebase.firestore.FieldValue.arrayUnion(this.state.newProductCategory),
+                                        })
+                                        .then(ref_ => {
+                                            // alert("category created");
+                                            resolve(true);
+                                        })
+                                        .catch(e => {
+                                            console.log(e);
+                                            this.setState({
+                                                loading: false
+                                            });
+                                            alert("Tuvimos un error, inténtalo nuevamente porfavor");
+                                            // alert("error adding new category");
+                                        })
 
-                            this.setState({
-                                loading: false,
-                            });
+                                }
 
-                            // navigate to products to sell
-                            // + store id
-                            this.props.history.push("/productsToSell/" + this.props.match.params.store_id);
+                                // not new category created
+                                else {
+                                    // alert("not new category");
+                                    resolve(true);
+                                };
+
+                            })
+
+                                // returning from possible creating a new category 
+                                .then(() => {
+
+                                    alert("El producto ha sido agregado exitosamente");
+
+                                    this.setState({
+                                        loading: false,
+                                    });
+
+                                    // navigate to products to sell
+                                    // + store id
+                                    this.props.history.push("/productsToSell/" + this.props.match.params.store_id);
+
+                                })
+                                .catch(e => {
+                                    console.log(e);
+                                    this.setState({
+                                        loading: false
+                                    });
+                                    alert("Tuvimos un error, inténtalo nuevamente porfavor");
+                                    // alert("error trying to create new product");
+                                });
 
                         })
 
@@ -226,6 +348,7 @@ class EditProduct extends React.Component {
                             alert("Tuvimos un error, inténtalo nuevamente porfavor");
 
                         });
+
                 })
 
                 // error trying to upload photo
@@ -324,6 +447,14 @@ class EditProduct extends React.Component {
                         changeVisible={(e) => this.setState({ productVisible: !this.state.productVisible })}
                         changeProductStock={(e) => this.setState({ productStock: e.target.value })}
                         productStock={this.state.productStock}
+
+                        // category
+                        changeSelectedCategory={(e) => this.setState({ selectedCategoryIndex: e.target.value })}
+                        selectedCategoryIndex={this.state.selectedCategoryIndex}
+                        productCategories={this.state.productCategories}
+                        changeNewProductCategory={(e) => this.setState({ newProductCategory: e.target.value })}
+                        newProductCategory={this.state.newProductCategory}
+
                     />
 
 

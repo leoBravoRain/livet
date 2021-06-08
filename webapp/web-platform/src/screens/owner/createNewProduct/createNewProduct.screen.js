@@ -15,6 +15,8 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 
 import ProductInformationForm from "../generalComponents/productInformationForm.screen";
 
+import firebase from "firebase";
+
 // import Card from '@material-ui/core/Card';
 // import CardActionArea from '@material-ui/core/CardActionArea';
 // import CardActions from '@material-ui/core/CardActions';
@@ -79,6 +81,16 @@ class CreateNewProduct extends React.Component {
             // if product is visible in final eccommerce
             productVisible: true,
             productStock: null,
+
+            // category
+            // select a created category
+            selectedCategory: null,
+            selectedCategoryIndex: 0,
+            // productCategories: ["tortas", "kuchen"],
+            productCategories: ["Agregar nueva categoría"],
+            // create a new category
+            newProductCategory: null,
+
             // productImage: "https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg",
             // productExtraInformation: null,
         }
@@ -106,18 +118,51 @@ class CreateNewProduct extends React.Component {
                 // // redirect
                 // this.props.history.push('/productsToSell');
 
-                this.setState({
+                
+                // get store infromation (categories)
+                // get products from store
+                fs.collection("stores")
+                .doc(this.props.match.params.store_id)
+                .get()
+                .then(doc => {
+                    
+                    if (doc.exists) {
+                        
+                        // console.log(doc.data());
+                        
+                        // add categories
+                        var categories = this.state.productCategories;
+                        // console.log(categories);
+                        if (doc.data().categories != null) {
+                            // console.log(doc.data().categories);
+                            categories = categories.concat(doc.data().categories);
+                        }
 
-                    // it's because it can come from IG data or from user manual data
-                    post: this.props.location.state != null ? this.props.location.state.post : null,
+                        // console.log(categories);
 
-                    productDescription: this.props.location.state != null ? this.props.location.state.post.caption : null,
-                    // initial image
-                    productImage: this.props.location.state != null ? this.props.location.state.post.media_url : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAMFBMVEXp7vG6vsG3u77s8fTCxsnn7O/f5OfFyczP09bM0dO8wMPk6ezY3eDd4uXR1tnJzdBvAX/cAAACVElEQVR4nO3b23KDIBRA0ShGU0n0//+2KmO94gWZ8Zxmr7fmwWEHJsJUHw8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwO1MHHdn+L3rIoK6eshsNJ8kTaJI07fERPOO1Nc1vgQm2oiBTWJ+d8+CqV1heplLzMRNonED+4mg7L6p591FC+133/xCRNCtd3nL9BlxWP++MOaXFdEXFjZ7r8D9l45C8y6aG0cWtP/SUGhs2d8dA/ZfGgrzYX+TVqcTNRRO9l+fS5eSYzQs85psUcuzk6igcLoHPz2J8gvzWaH/JLS+95RfOD8o1p5CU5R7l5LkfKEp0mQ1UX7hsVXqDpRrifILD/3S9CfmlUQFhQfuFu0STTyJ8gsP3PH7GVxN1FC4t2sbBy4TNRTu7LyHJbqaqKFw+/Q0ncFloo7CjRPwMnCWqKXQZ75El4nKC9dmcJaou9AXOE5UXbi+RGeJygrz8Uf+GewSn9uXuplnWDZJ7d8f24F/s6iq0LYf9olbS3Q8i5oKrRu4S9ybwaQ/aCkqtP3I28QDgeoK7TBya/aXqL5COx67PTCD2grtdOwH+pQV2r0a7YVBgZoKwwIVFQYG6ikMDVRTGByopjD8ATcKb0UhhRTe77sKs2DV7FKSjId18TUEBYVyLhUThWfILHTDqmI85/2RWWjcE/bhP6OD7maT3h20MHsA47JC3PsW0wcwLhv9t0OOPOIkCn21y2bXXwlyylxiYMPk1SuCSmpfK8bNQvIrpAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwNX4BCbAju9/X67UAAAAASUVORK5CYII=",
+                        // update state
+                        this.setState({
+        
+                            // it's because it can come from IG data or from user manual data
+                            post: this.props.location.state != null ? this.props.location.state.post : null,
+        
+                            productDescription: this.props.location.state != null ? this.props.location.state.post.caption : null,
+                            // initial image
+                            productImage: this.props.location.state != null ? this.props.location.state.post.media_url : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAMFBMVEXp7vG6vsG3u77s8fTCxsnn7O/f5OfFyczP09bM0dO8wMPk6ezY3eDd4uXR1tnJzdBvAX/cAAACVElEQVR4nO3b23KDIBRA0ShGU0n0//+2KmO94gWZ8Zxmr7fmwWEHJsJUHw8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwO1MHHdn+L3rIoK6eshsNJ8kTaJI07fERPOO1Nc1vgQm2oiBTWJ+d8+CqV1heplLzMRNonED+4mg7L6p591FC+133/xCRNCtd3nL9BlxWP++MOaXFdEXFjZ7r8D9l45C8y6aG0cWtP/SUGhs2d8dA/ZfGgrzYX+TVqcTNRRO9l+fS5eSYzQs85psUcuzk6igcLoHPz2J8gvzWaH/JLS+95RfOD8o1p5CU5R7l5LkfKEp0mQ1UX7hsVXqDpRrifILD/3S9CfmlUQFhQfuFu0STTyJ8gsP3PH7GVxN1FC4t2sbBy4TNRTu7LyHJbqaqKFw+/Q0ncFloo7CjRPwMnCWqKXQZ75El4nKC9dmcJaou9AXOE5UXbi+RGeJygrz8Uf+GewSn9uXuplnWDZJ7d8f24F/s6iq0LYf9olbS3Q8i5oKrRu4S9ybwaQ/aCkqtP3I28QDgeoK7TBya/aXqL5COx67PTCD2grtdOwH+pQV2r0a7YVBgZoKwwIVFQYG6ikMDVRTGByopjD8ATcKb0UhhRTe77sKs2DV7FKSjId18TUEBYVyLhUThWfILHTDqmI85/2RWWjcE/bhP6OD7maT3h20MHsA47JC3PsW0wcwLhv9t0OOPOIkCn21y2bXXwlyylxiYMPk1SuCSmpfK8bNQvIrpAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwNX4BCbAju9/X67UAAAAASUVORK5CYII=",
+        
+                            loading: false,
 
-                    loading: false,
+                            productCategories: categories,
+        
+                            // add store categories
+                            // productCategories: categories,
+        
+                        });
+                    }
 
-                });
+
+                })
+                    
             }
 
             else {
@@ -142,8 +187,17 @@ class CreateNewProduct extends React.Component {
             loading: true,
         });
 
+        // add new category condition
+        const addNewCategoryCondition = this.state.selectedCategoryIndex == 0 & this.state.newProductCategory != null;
+
+        // select a created category condition
+        const selectCreatedCategory = this.state.selectedCategoryIndex != null & this.state.selectedCategoryIndex != 0;
+
+        // console.log(addNewCategoryCondition);
+        // console.log(selectCreatedCategory);
+
         // check information isn't null
-        if (this.state.productName != null & this.state.productDescription != null & this.state.productPrice != null & this.state.productStock != null) {
+        if (this.state.productName != null & this.state.productDescription != null & this.state.productPrice != null & this.state.productStock != null & (addNewCategoryCondition || selectCreatedCategory)) {
 
             // take image
             const selectedFile = document.getElementById('file_input').files[0];
@@ -154,6 +208,10 @@ class CreateNewProduct extends React.Component {
 
                 // if there is user image
                 if (selectedFile != null) {
+
+                    // console.log("CHANGE CODE 184 creare new product screen");
+                    // resolve(this.state.productImage);
+                    
                     // alert("image");
                     // resolve(
                     // Create a root reference
@@ -180,7 +238,11 @@ class CreateNewProduct extends React.Component {
                 // if it's ok
                 .then(downloadURL => {
 
-
+                    // console.log("hello");
+                    // console.log(this.state.categories);
+                    // console.log(this.state);
+                    // console.log(addNewCategoryCondition ? this.state.newProductCategory : this.state.productCategories[this.state.selectedCategoryIndex]);
+                    
                     // define store
                     const newProduct = {
                         "name": this.state.productName,
@@ -191,6 +253,7 @@ class CreateNewProduct extends React.Component {
                         "image": downloadURL,
                         "visible": this.state.productVisible,
                         "stock": this.state.productStock,
+                        "category": addNewCategoryCondition ? this.state.newProductCategory : this.state.productCategories[this.state.selectedCategoryIndex],
                         // "extraInformation": this.state.productExtraInformation,
                         "paymentUrl": "https://app.payku.cl/botonpago/index?idboton=14257&verif=0f7014ea",
                     };
@@ -203,16 +266,63 @@ class CreateNewProduct extends React.Component {
                             newProduct
                         )
                         .then(ref_ => {
-        
-                            alert("El producto ha sido agregado exitosamente");
-        
-                            this.setState({
-                                loading: false,
+                            
+                            new Promise((resolve) => {
+                                
+                                // if new category created
+                                if (addNewCategoryCondition) {
+                                    // alert("create new category");
+                                    // update store with new category
+                                    fs.collection('stores')
+                                        .doc(this.props.match.params.store_id)
+                                        .update({
+                                            "categories": firebase.firestore.FieldValue.arrayUnion(this.state.newProductCategory),
+                                        })
+                                        .then(ref_ => {
+                                            // alert("category created");
+                                            resolve(true);
+                                        })
+                                        .catch(e => {
+                                            console.log(e);
+                                            this.setState({
+                                                loading: false
+                                            });
+                                            alert("Tuvimos un error, inténtalo nuevamente porfavor");
+                                            // alert("error adding new category");
+                                        })
+                                    
+                                }
+                                
+                                // not new category created
+                                else {
+                                    // alert("not new category");
+                                    resolve(true);
+                                };
+
+                            })
+
+                            // returning from possible creating a new category 
+                            .then(() => {
+
+                                alert("El producto ha sido agregado exitosamente");
+            
+                                this.setState({
+                                    loading: false,
+                                });
+            
+                                // navigate to products to sell
+                                // + store id
+                                this.props.history.push("/productsToSell/" + this.props.match.params.store_id);
+
+                            })
+                            .catch(e => {
+                                console.log(e);
+                                this.setState({
+                                    loading: false
+                                });
+                                alert("Tuvimos un error, inténtalo nuevamente porfavor");
+                                // alert("error trying to create new product");
                             });
-        
-                            // navigate to products to sell
-                            // + store id
-                            this.props.history.push("/productsToSell/" + this.props.match.params.store_id);
         
                         })
         
@@ -323,6 +433,11 @@ class CreateNewProduct extends React.Component {
                             changeVisible={(e) => this.setState({ productVisible: !this.state.productVisible })}
                             changeProductStock={(e) => this.setState({ productStock: e.target.value })}
                             productStock={this.state.productStock}
+                            changeSelectedCategory={(e) => this.setState({ selectedCategoryIndex: e.target.value })}
+                            selectedCategoryIndex={this.state.selectedCategoryIndex}
+                            productCategories = {this.state.productCategories}
+                            changeNewProductCategory={(e) => this.setState({ newProductCategory: e.target.value })}
+                            newProductCategory={this.state.newProductCategory}
                         />
 
 

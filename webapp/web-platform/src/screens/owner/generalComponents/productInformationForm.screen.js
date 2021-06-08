@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 // import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from '@material-ui/core/Grid';
 import Switch from '@material-ui/core/Switch';
+import Select from '@material-ui/core/Select';
 // import Add from "@material-ui/icons/Add";
 // import Close from "@material-ui/icons/Close";
 // import Storefront from "@material-ui/icons/Storefront";
@@ -302,6 +303,65 @@ class ProductInformationForm extends React.Component {
                             color="primary"
                         />
                     </Container>
+
+                    {/* category */}
+                    {/* select category */}
+                    <Typography
+                        gutterBottom
+                        variant="body2"
+                        component="p"
+                    // style={{
+                    //     // margin: 50,
+                    //     display: "flex",
+                    //     flexWrap: "wrap",
+                    //     backgroundColor: "rgba(173, 216, 230, 0.5)",
+                    //     borderRadius: 50,
+                    //     textAlign: "center",
+                    //     justifyContent: "center",
+                    //     padding: 10,
+                    // }}
+                    >
+                        Categoría del producto
+                    </Typography>
+
+                    {/* {
+                        // greater than 1 because it is 1 elmeent by default (add new category)
+                        this.props.productCategories != null && this.props.productCategories.length > 1 && */}
+
+                    <Select
+                        // labelId="demo-simple-select-label"
+                        // id="demo-simple-select"
+                        value={this.props.selectedCategoryIndex}
+                        onChange={this.props.changeSelectedCategory}
+                    >
+                        {
+                            this.props.productCategories.map((category, idx) => {
+                                return (
+                                    <option value={idx}>{category}</option>
+                                )
+                            })
+                        }
+                    </Select>
+                    {/* } */}
+
+                    {/* Create new category */}
+                    {
+                        this.props.selectedCategoryIndex == 0 && 
+
+                            <TextField
+                                // id="standard-uncontrolled"
+                                label="Crear nueva categoría"
+                                // type="Nombre producto"
+                                // defaultValue="Correo electrónico"
+                                margin="normal"
+                                // onChange={(e) => this.setState({ productName: e.target.value })}
+                                onChange={this.props.changeNewProductCategory}
+                                // value={this.state.productName}
+                                value={this.props.newProductCategory}
+                            />
+                    }
+                    
+
 
                     {/* convert to post button */}
                     <Button
