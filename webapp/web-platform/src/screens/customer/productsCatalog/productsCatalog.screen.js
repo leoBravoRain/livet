@@ -24,6 +24,8 @@ import AttachMoney from '@material-ui/icons/AttachMoney';
 import Search from '@material-ui/icons/Search';
 // import Select from '@material-ui/core/Select';
 
+import SearchBar from "material-ui-search-bar";
+
 import InputBase from '@material-ui/core/InputBase';
 
 import StoreInformation from "../generalComponents/storeInformation/storeInformation.component";
@@ -80,8 +82,17 @@ class ProductsCatalog extends React.Component {
         this.state = {
             loading: true,
             products: [],
+
+            // to save initial because current filtering in search box create a new array and update products list
+            initialProducts: [],
+
             store: null,
+
+            // value to search in search bar
+            searchBarValue: null,
         }
+
+        this.filterProduct = this.filterProduct.bind(this);
 
     }
 
@@ -129,6 +140,7 @@ class ProductsCatalog extends React.Component {
 
                             // update products
                             products: products,
+                            initialProducts: products,
                             store: store,
                             loading: false,
 
@@ -139,6 +151,32 @@ class ProductsCatalog extends React.Component {
 
     }
 
+
+    filterProduct() {
+        // alert(this.state.searchBarValue);
+
+        this.setState({loading: true});
+
+        var filteredProducts = [];
+        const searchValue = this.state.searchBarValue.toLowerCase();
+
+        // basic implementation (search for a product with same name or description). I guess it is fast with few products
+        this.state.initialProducts.forEach(product => {
+            // filtering by name or description
+            if (product.name.toLowerCase().includes(searchValue) || product.description.toLowerCase().includes(searchValue)){
+                filteredProducts.push(product);
+            };
+        });
+
+        // update state
+        this.setState({
+            products: filteredProducts,
+            loading: false,
+        });
+        
+    };
+
+    
     render() {
 
         return (
@@ -175,6 +213,21 @@ class ProductsCatalog extends React.Component {
 
 
                     {/* search bar */}
+                    <SearchBar
+                        value={this.state.searchBarValue}
+                        onChange={(newValue) => this.setState({ searchBarValue: newValue })}
+                        onRequestSearch={() => {
+                            // doSomethingWith(this.state.value)
+                            // alert(this.state.searchBarValue);
+                            this.filterProduct();
+                        }}
+                        placeholder = "Buscar producto"
+                        style = {{
+                            marginTop: 30,
+                            marginBottom: 30,
+                        }}
+                    />
+                    
                     {/* <Container>
                         
                         <TextField id="standard-basic" label="Standard" />
