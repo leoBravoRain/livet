@@ -89,18 +89,22 @@ class ShoppingCart extends React.Component {
                     var productsArrayCart = JSON.parse(localStorage.getItem('productsArrayCart'));
             
                     // if there is any product
-                    if (productsArrayCart != null & productsArrayCart.length > 0) {
+                    if (productsArrayCart != null && productsArrayCart.length > 0) {
                         
-                        console.log(productsArrayCart);
+                        // console.log(productsArrayCart);
 
                         // get total sale
                         var totalSales = 0.0;
                         productsArrayCart.forEach(product => {
-
                             // console.log(product);
-                            
-                            totalSales += parseInt(product.units) * parseFloat(product.product.saleFormats[product.formatIndex].price);
+                            // iterate through formats
+                            product.formatIndexList.forEach((formatIndex, index) => {
+                                // totalSales += parseInt(product.units) * parseFloat(product.product.saleFormats[product.formatIndex].price);
+                                totalSales += parseInt(product.unitsList[index]) * parseFloat(product.product.saleFormats[formatIndex].price);
+                            });
                         });
+
+                        // console.log(totalSales);
                         
                     }
 
@@ -126,7 +130,8 @@ class ShoppingCart extends React.Component {
     }
 
     // remove from cart
-    removeItemFromCart(idx) {
+    // removeItemFromCart(idx) {
+    removeItemFromCart(idxProduct, formatIndex, idxFormat) {
         
         this.setState({
             loading: true,
@@ -142,13 +147,35 @@ class ShoppingCart extends React.Component {
         // if there is any product
         if (productsArrayCart != null & productsArrayCart.length > 0) {
 
+            // check if there is no format
+            if (productsArrayCart[idxProduct]["formatIndexList"].length == 1) {
+
+                // remove product from cart
+                productsArrayCart.splice(idxProduct, 1);
+
+            }
+
+            else {
+                
+                // remove format from list
+                productsArrayCart[idxProduct]["formatIndexList"].splice(idxFormat, 1);
+    
+                // remove units from list
+                productsArrayCart[idxProduct]["unitsList"].splice(idxFormat, 1);
+
+            }
+
             // remove item
-            productsArrayCart.splice(idx, 1);
+            // productsArrayCart.splice(idx, 1);
 
             // get new total sale
             var totalSales = 0.0;
             productsArrayCart.forEach(product => {
-                totalSales += parseInt(product.units) * parseFloat(product.product.saleFormats[product.formatIndex].price);
+                // totalSales += parseInt(product.units) * parseFloat(product.product.saleFormats[product.formatIndex].price);
+                product.formatIndexList.forEach((formatIndex, index) => {
+                    // totalSales += parseInt(product.units) * parseFloat(product.product.saleFormats[product.formatIndex].price);
+                    totalSales += parseInt(product.unitsList[index]) * parseFloat(product.product.saleFormats[formatIndex].price);
+                });
             });
 
             // update state
@@ -246,25 +273,32 @@ class ShoppingCart extends React.Component {
                                         <TableBody>
 
                                         {
-                                            this.state.sales.map((row, idx) => (
-                                                <TableRow>
-                                                    <TableCell align="right">{row.product.name}</TableCell>
-                                                    <TableCell align="right">{row.product.saleFormats[row.formatIndex].format}</TableCell>
-                                                    <TableCell align="right">{row.units}</TableCell>
-                                                    <TableCell align="right">{row.product.saleFormats[row.formatIndex].price}</TableCell>
-                                                    <TableCell align="right">{row.units * row.product.saleFormats[row.formatIndex].price}</TableCell>
+                                            // this is because product is an array with each element being [product object, array of format index, array of units]
+                                            this.state.sales.map((product, idxProduct) => (
 
-                                                    {/* remove from cart */}
-                                                    <TableCell align="right">
-                                                        <Button
-                                                            onClick={() => this.removeItemFromCart(idx)}
-                                                            >
+                                                product.formatIndexList.map((formatIndex, idxFormat) => {
 
-                                                            Eliminar
-                                                        </Button>
-                                                    </TableCell>
+                                                    return(
+                                                        <TableRow>
+                                                            <TableCell align="right">{product.product.name}</TableCell>
+                                                            <TableCell align="right">{product.product.saleFormats[formatIndex].format}</TableCell>
+                                                            <TableCell align="right">{product.unitsList[idxFormat]}</TableCell>
+                                                            <TableCell align="right">{product.product.saleFormats[formatIndex].price}</TableCell>
+                                                            <TableCell align="right">{product.unitsList[idxFormat] * product.product.saleFormats[formatIndex].price}</TableCell>
 
-                                                </TableRow>
+                                                            {/* remove from cart */}
+                                                            <TableCell align="right">
+                                                                <Button
+                                                                    onClick={() => this.removeItemFromCart(idxProduct, formatIndex, idxFormat)}
+                                                                >
+
+                                                                    Eliminar
+                                                                </Button>
+                                                            </TableCell>
+
+                                                        </TableRow>
+                                                    );
+                                                })
                                             ))
 
                                         }

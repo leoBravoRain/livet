@@ -157,6 +157,8 @@ class ProductDetails extends React.Component {
                 // add product to cart
                 if (!productIsInCart) {
 
+                    alert("Product isn't in cart");
+
                     // add new product
                     productsArrayCart.push({
                         "product": this.state.product,
@@ -164,6 +166,8 @@ class ProductDetails extends React.Component {
                         "unitsList": [this.state.units],
                     });
             
+                    console.log(productsArrayCart);
+                    
                     // save new array
                     localStorage.setItem('productsArrayCart', JSON.stringify(productsArrayCart));
             
@@ -179,6 +183,8 @@ class ProductDetails extends React.Component {
                 // if product is in cart but no format
                 // add format to product cart
                 else if (productIsInCart & !formatIsInCart) {
+
+                    alert("Product is in cart but format is not");
 
                     // add format index to list
                     var formatIndexList = productsArrayCart[indexProduct]["formatIndexList"];
@@ -221,6 +227,9 @@ class ProductDetails extends React.Component {
                     // if it can add all units, so add to the cart
                     if (this.state.units <= availableProducts) {
 
+
+                        alert("product is in car and can add these units");
+
                         // add units to element in units array
                         productsArrayCart[indexProduct]["unitsList"][indexFormatIndex] = productsArrayCart[indexProduct]["unitsList"][indexFormatIndex] + this.state.units;
 
@@ -239,10 +248,13 @@ class ProductDetails extends React.Component {
                     }
                     
                     else if (availableProducts == 0) {
+                        alert("product is in car but cann't add more units");
+
                         alert("Ya has agregado el máximo de unidades de este formato. Revisa tu carrito de compra para confirmar");
                     }
                     // else, alert message with differecen available
                     else {
+                        alert("product is in cart but cann't add that number of units");
                         alert("Solo puedes agregar hasta " + availableProducts + " unidades de este formato");
                     };
 
