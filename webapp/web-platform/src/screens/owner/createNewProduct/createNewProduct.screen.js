@@ -59,6 +59,10 @@ import {
 // logged user
 var loggedUser = null;
 
+// structure new product format
+// it is used multiple times
+// const newProductFormat = { "format": null, "price": null };
+
 class CreateNewProduct extends React.Component {
 
     // constructor
@@ -77,10 +81,10 @@ class CreateNewProduct extends React.Component {
             productDescription: null,
             // this can be for example "size" or "units"
             // productVar1: null,
-            productPrice: null,
+            // productPrice: null,
             // if product is visible in final eccommerce
             productVisible: true,
-            productStock: null,
+            // productStock: null,
 
             // category
             // select a created category
@@ -91,11 +95,18 @@ class CreateNewProduct extends React.Component {
             // create a new category
             newProductCategory: null,
 
+            // sale formats product
+            // productSaleFormats: [newProductFormat],
+            productSaleFormats: [{ "format": null, "price": null, "stock": null}]
+
             // productImage: "https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg",
             // productExtraInformation: null,
         }
 
         this.convert_to_product = this.convert_to_product.bind(this);
+        this.addOtherSaleFormat = this.addOtherSaleFormat.bind(this);
+        this.removeSaleFormat = this.removeSaleFormat.bind(this);
+        this.changeProductSaleFormat = this.changeProductSaleFormat.bind(this);
 
     };
 
@@ -195,9 +206,21 @@ class CreateNewProduct extends React.Component {
 
         // console.log(addNewCategoryCondition);
         // console.log(selectCreatedCategory);
+        // const validateStock = false;
+        // const validatePrice = false;
+        // const validateSaleFormat = false;
+        var validateSaleFormats = true;
+
+        // validate if any data is null
+        this.state.productSaleFormats.forEach(product => {
+            if(product.format == null || product.price == null || product.stock == null) {
+                validateSaleFormats = false;
+            }
+        });
+
 
         // check information isn't null
-        if (this.state.productName != null & this.state.productDescription != null & this.state.productPrice != null & this.state.productStock != null & (addNewCategoryCondition || selectCreatedCategory)) {
+        if (this.state.productName != null & this.state.productDescription != null & validateSaleFormats & (addNewCategoryCondition || selectCreatedCategory)) {
 
             // take image
             const selectedFile = document.getElementById('file_input').files[0];
@@ -248,11 +271,12 @@ class CreateNewProduct extends React.Component {
                         "name": this.state.productName,
                         "description": this.state.productDescription,
                         // "var1": this.state.productVar1,
-                        "price": this.state.productPrice,
+                        // "price": this.state.productPrice,
+                        // "stock": this.state.productStock,
+                        "saleFormats": this.state.productSaleFormats,
                         // "image": this.state.productImage,
                         "image": downloadURL,
                         "visible": this.state.productVisible,
-                        "stock": this.state.productStock,
                         "category": addNewCategoryCondition ? this.state.newProductCategory : this.state.productCategories[this.state.selectedCategoryIndex],
                         // "extraInformation": this.state.productExtraInformation,
                         "paymentUrl": "https://app.payku.cl/botonpago/index?idboton=14257&verif=0f7014ea",
@@ -364,6 +388,73 @@ class CreateNewProduct extends React.Component {
     }
 
 
+    addOtherSaleFormat() {
+
+        // get current
+        var productSaleFormats = this.state.productSaleFormats;
+
+        // console.log(productSaleFormats);
+
+        // add element
+        productSaleFormats.push({ "format": null, "price": null, "stock": null});
+
+        // console.log(productSaleFormats);
+
+        // update state
+        this.setState({
+            productSaleFormats: productSaleFormats,
+        });
+        
+    }
+
+    removeSaleFormat(idx) {
+
+        // alert(idx);
+        // get current
+        var productSaleFormats = this.state.productSaleFormats;
+
+        // add element
+        productSaleFormats.splice(idx, 1);
+
+        // update state
+        this.setState({
+            productSaleFormats: productSaleFormats,
+        });
+
+    };
+
+    // change product sale format of specific product
+    changeProductSaleFormat(e, idx, item){
+
+        // alert(item);
+        // console.log("Executed");
+        // console.log(idx);
+        // console.log(e.target.value);
+
+        // get current
+        var productSaleFormats = this.state.productSaleFormats;
+
+        // console.log(productSaleFormats);
+
+        // console.log(productSaleFormats[idx]);
+
+        // update value
+        productSaleFormats[idx][item] = e.target.value;
+        // var item = productSaleFormats[idx];
+
+        // item["format"] = e.target.value;
+        // productSaleFormats[idx] = item;
+
+        // console.log(item);
+        // console.log(productSaleFormats);
+
+        // update state
+        this.setState({
+            productSaleFormats: productSaleFormats,
+        });
+        
+    }
+
     render() {
 
         return (
@@ -425,19 +516,23 @@ class CreateNewProduct extends React.Component {
                             productName={this.state.productName}
                             changeProductDescription={(e) => this.setState({ productDescription: e.target.value })}
                             productDescription={this.state.productDescription}
-                            changeProductPrice={(e) => this.setState({ productPrice: e.target.value })}
-                            productPrice={this.state.productPrice}
+                            // changeProductPrice={(e) => this.setState({ productPrice: e.target.value })}
+                            // productPrice={this.state.productPrice}
                             convert_to_product={this.convert_to_product}
                             buttonText = "Crear producto"
                             visible = {this.state.productVisible}
                             changeVisible={(e) => this.setState({ productVisible: !this.state.productVisible })}
-                            changeProductStock={(e) => this.setState({ productStock: e.target.value })}
-                            productStock={this.state.productStock}
+                            // changeProductStock={(e) => this.setState({ productStock: e.target.value })}
+                            // productStock={this.state.productStock}
                             changeSelectedCategory={(e) => this.setState({ selectedCategoryIndex: e.target.value })}
                             selectedCategoryIndex={this.state.selectedCategoryIndex}
                             productCategories = {this.state.productCategories}
                             changeNewProductCategory={(e) => this.setState({ newProductCategory: e.target.value })}
                             newProductCategory={this.state.newProductCategory}
+                            productSaleFormats={this.state.productSaleFormats}
+                            addOtherSaleFormat={this.addOtherSaleFormat}
+                            removeSaleFormat={e=>this.removeSaleFormat(e)}
+                            changeProductSaleFormat={(e, idx, item) => this.changeProductSaleFormat(e, idx, item)}
                         />
 
 

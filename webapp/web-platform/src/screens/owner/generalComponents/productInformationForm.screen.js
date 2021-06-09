@@ -3,7 +3,7 @@ import React from "react";
 // import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 // material ui
-import Paper from '@material-ui/core/Paper';
+// import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 import { Button } from "@material-ui/core";
@@ -237,34 +237,6 @@ class ProductInformationForm extends React.Component {
                                 value={this.state.productVar1}
                             /> */}
 
-                    {/* product price */}
-                    <TextField
-                        // id="standard-uncontrolled"
-                        label="Precio del producto"
-                        type="number"
-                        // defaultValue="Correo electrónico"
-                        margin="normal"
-                        // onChange={(e) => this.setState({ productPrice: e.target.value })}
-                        onChange={this.props.changeProductPrice}
-
-                        // value={this.state.productDescription}
-                        value={this.props.productPrice}
-                        // value={this.state.productPrice}
-
-                    />
-
-                    {/* stock */}
-                    <TextField
-                        // id="standard-uncontrolled"
-                        label="Unidades en stock"
-                        // multiline
-                        type="number"
-                        // defaultValue="Correo electrónico"
-                        margin="normal"
-                        onChange={this.props.changeProductStock}
-                        value={this.props.productStock}
-                    />
-
                     {/* activate / deactivate product */}
                     <Container
                         style = {{
@@ -360,6 +332,113 @@ class ProductInformationForm extends React.Component {
                             />
                     }
                     
+
+                    {/* sale formats */}
+                    <Container
+                        style = {{
+                            backgroundColor: "red",
+                        }}
+                    >
+
+                        {/* lsit of formats */}
+                        {
+                            this.props.productSaleFormats.map((format, idx) => {
+                            // for(var i = 0; )
+                            // for (var i = 0; i < productSaleFormats.length; i++) {
+
+                                return(
+                                    <Container>
+
+                                        {/* product format */}
+                                        <TextField
+                                            // id="standard-uncontrolled"
+                                            label="Formato de venta"
+                                            // type="number"
+                                            key = {idx}
+                                            // defaultValue="Correo electrónico"
+                                            margin="normal"
+                                            // onChange={(e) => this.setState({ productPrice: e.target.value })}
+                                            onChange={(e)=>this.props.changeProductSaleFormat(e, idx,"format")}
+                                            // onChange={this.props.changeProductSaleFormat(e, idx)}
+                                            
+                                            // value={this.state.productDescription}
+                                            value={this.props.productSaleFormats[idx].format}
+                                            // value={this.state.productPrice}
+                                            
+                                            />
+                
+                                        {/* product price */}
+                                        <TextField
+                                            // id="standard-uncontrolled"
+                                            label="Precio del producto"
+                                            type="number"
+                                            // defaultValue="Correo electrónico"
+                                            margin="normal"
+                                            // onChange={(e) => this.setState({ productPrice: e.target.value })}
+                                            // onChange={this.props.changeProductPrice}
+                                            
+                                            // // value={this.state.productDescription}
+                                            // value={this.props.productPrice}
+                                            onChange={(e) => this.props.changeProductSaleFormat(e, idx, "price")}
+                                            value={this.props.productSaleFormats[idx].price}
+                                            // value={this.state.productPrice}
+                                            
+                                            />
+                
+                                        {/* stock */}
+                                        <TextField
+                                            // id="standard-uncontrolled"
+                                            label="Unidades en stock"
+                                            // multiline
+                                            type="number"
+                                            // defaultValue="Correo electrónico"
+                                            margin="normal"
+                                            // onChange={this.props.changeProductStock}
+                                            // value={this.props.productStock}
+                                            onChange={(e) => this.props.changeProductSaleFormat(e, idx, "stock")}
+                                            value={this.props.productSaleFormats[idx].stock}
+
+                                        />
+
+                                        {/* remove from formats */}
+                                        <Button
+                                            align="center"
+                                            // variant="contained"
+                                            color="primary"
+                                            onClick={() => {
+                                                // console.log("2ojsad");
+                                                // alert("add other");
+                                                this.props.removeSaleFormat(idx);
+
+                                            }}
+                                        >
+                                            Eliminar
+                                        </Button>
+
+                                    </Container>
+                                )
+
+                            })
+
+                        }
+
+                        {/* add other format */}
+                        <Button
+                            align="center"
+                            variant="contained"
+                            color="primary"
+                            onClick={() => {
+                                // console.log("2ojsad");
+                                // alert("add other");
+                                this.props.addOtherSaleFormat();
+                            }}
+                        >
+                            Agregar formato de venta
+                        </Button>
+
+                    {/* sale formats */}
+                    </Container>
+
                     {/* original information */}
                     <Grid
                         container
@@ -368,7 +447,7 @@ class ProductInformationForm extends React.Component {
                             justifyContent: "center",
                             // alignContent: "center",
                             // backgroundColor: "green",
-
+                            
                         }}
                     >
 
