@@ -482,7 +482,7 @@ class ProductsCatalog extends React.Component {
                                                             {product.description.substring(0, 80)} ...
                                                         </Typography>
 
-                                                        <Container
+                                                        {/* <Container
                                                             style = {{
                                                                 display: "flex",
                                                                 flexDirection: "row",
@@ -491,7 +491,7 @@ class ProductsCatalog extends React.Component {
                                                                 marginTop: 40,
                                                                 marginBottom: 30,
                                                             }}
-                                                        >
+                                                        > */}
 
                                                             {/* size */}
                                                             {/* <Container
@@ -521,7 +521,7 @@ class ProductsCatalog extends React.Component {
                                                             </Container> */}
 
                                                             {/* price */}
-                                                            <Container
+                                                            {/* <Container
                                                                 style={{
                                                                     display: "flex",
                                                                     flex: 1,
@@ -543,9 +543,9 @@ class ProductsCatalog extends React.Component {
                                                                 >
                                                                     {product.price}
                                                                 </Typography>
-                                                            </Container>
+                                                            </Container> */}
 
-                                                        </Container>
+                                                        {/* </Container> */}
 
                                                     </CardContent>
 

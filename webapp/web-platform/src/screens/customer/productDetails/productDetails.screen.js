@@ -3,14 +3,19 @@ import React from "react";
 // import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 // material ui
-import Paper from '@material-ui/core/Paper';
+// import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 import { Button } from "@material-ui/core";
-import FormControl from '@material-ui/core/FormControl';
+// import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from '@material-ui/core/Grid';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+// import FormControl from '@material-ui/core/FormControl';
+// import FormLabel from '@material-ui/core/FormLabel';
 
 // import Card from '@material-ui/core/Card';
 // import CardActionArea from '@material-ui/core/CardActionArea';
@@ -59,6 +64,7 @@ class ProductDetails extends React.Component {
             product: null,
             store: null,
             units: 1,
+            formatIndex: 0,
         }
 
         // this.convert_to_product = this.convert_to_product.bind(this);
@@ -125,6 +131,7 @@ class ProductDetails extends React.Component {
         // add new product
         productsArrayCart.push({
             "product": this.state.product,
+            "formatIndex": this.state.formatIndex,
             "units": this.state.units,
         });
 
@@ -260,19 +267,40 @@ class ProductDetails extends React.Component {
                                 {this.state.product.var1}
                             </Typography> */}
 
-                            {/* price */}
-                            <Typography 
-                            // align="center" 
-                                variant="subtitle2" 
-                                component="p" 
-                                gutterBottom
-                                style = {{
-                                    marginTop: 20,
-                                    // marginBottom: 20,
+
+                            {/* sale formats */}
+                            {/* it  has an array of options */}
+                            <RadioGroup 
+                                aria-label="gender" 
+                                // name="gender1" 
+                                value={this.state.formatIndex} 
+                                onChange={(e) => {
+                                    // console.log("before");
+                                    // console.log(this.state.formatIndex);
+                                    // console.log(e.target.value);
+
+                                    this.setState({ 
+                                        formatIndex: parseInt(e.target.value),
+                                    });
+                                    // ,() => {
+                                    //     // console.log("after");
+                                    //     // console.log(this.state.formatIndex);
+                                    // })
                                 }}
                             >
-                                Precio: $ {this.state.product.price.toLocaleString()}
-                            </Typography>
+                                {
+                                    this.state.product.saleFormats.map((saleFormat,idx)=> {
+                                        return (
+                                            <FormControlLabel 
+                                                value={idx} 
+                                                control={<Radio />} 
+                                                label={saleFormat.format + " - $ " + saleFormat.price} 
+                                            />
+                                        )
+                                    })
+                                }
+
+                            </RadioGroup>
 
                             {/* select units */}
                             <TextField

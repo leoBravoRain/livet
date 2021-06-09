@@ -90,11 +90,16 @@ class ShoppingCart extends React.Component {
             
                     // if there is any product
                     if (productsArrayCart != null & productsArrayCart.length > 0) {
-            
+                        
+                        console.log(productsArrayCart);
+
                         // get total sale
                         var totalSales = 0.0;
                         productsArrayCart.forEach(product => {
-                            totalSales += parseInt(product.units) * parseFloat(product.product.price);
+
+                            // console.log(product);
+                            
+                            totalSales += parseInt(product.units) * parseFloat(product.product.saleFormats[product.formatIndex].price);
                         });
                         
                     }
@@ -143,7 +148,7 @@ class ShoppingCart extends React.Component {
             // get new total sale
             var totalSales = 0.0;
             productsArrayCart.forEach(product => {
-                totalSales += parseInt(product.units) * parseFloat(product.product.price);
+                totalSales += parseInt(product.units) * parseFloat(product.product.saleFormats[product.formatIndex].price);
             });
 
             // update state
@@ -232,6 +237,7 @@ class ShoppingCart extends React.Component {
                                         <TableHead>
                                             <TableRow>
                                                 <TableCell align="right">Producto</TableCell>
+                                                <TableCell align="right">Formato</TableCell>
                                                 <TableCell align="right">Cantidad</TableCell>
                                                 <TableCell align="right">Precio</TableCell>
                                                 <TableCell align="right">Total</TableCell>
@@ -243,9 +249,10 @@ class ShoppingCart extends React.Component {
                                             this.state.sales.map((row, idx) => (
                                                 <TableRow>
                                                     <TableCell align="right">{row.product.name}</TableCell>
+                                                    <TableCell align="right">{row.product.saleFormats[row.formatIndex].format}</TableCell>
                                                     <TableCell align="right">{row.units}</TableCell>
-                                                    <TableCell align="right">{row.product.price}</TableCell>
-                                                    <TableCell align="right">{row.units * row.product.price}</TableCell>
+                                                    <TableCell align="right">{row.product.saleFormats[row.formatIndex].price}</TableCell>
+                                                    <TableCell align="right">{row.units * row.product.saleFormats[row.formatIndex].price}</TableCell>
 
                                                     {/* remove from cart */}
                                                     <TableCell align="right">
@@ -264,6 +271,7 @@ class ShoppingCart extends React.Component {
 
                                             <TableRow style={{ fontWeight: "bold" }} >
                                                 <TableCell align="right" style={{ fontWeight: "bold" }}>Total</TableCell>
+                                                <TableCell align="right"> </TableCell>
                                                 <TableCell align="right"> </TableCell>
                                                 <TableCell align="right"> </TableCell>
                                                 <TableCell align="right" style={{ fontWeight: "bold" }}>{this.state.totalSales}</TableCell>
