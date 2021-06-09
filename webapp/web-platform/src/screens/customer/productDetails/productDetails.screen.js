@@ -105,6 +105,7 @@ class ProductDetails extends React.Component {
                                 product: product,
                                 store: store,
                                 loading: false,
+                                units: product.saleFormats[this.state.formatIndex].stock != 0 ? 1 : 0,
         
                             });
         
@@ -120,31 +121,48 @@ class ProductDetails extends React.Component {
     // add product to cart
     addToShoppingCart() {
 
-        // get shpping cart
-        var productsArrayCart = JSON.parse(localStorage.getItem('productsArrayCart'));
+        // units is greater than zero
+        if (this.state.units != 0){
 
-        // console.log(productsArrayCart);
-        if (productsArrayCart == null) {
-            productsArrayCart = [];
+            // validate stock
+            if (this.state.units <= this.state.product.saleFormats[this.state.formatIndex].stock) {
+    
+                // get shpping cart
+                var productsArrayCart = JSON.parse(localStorage.getItem('productsArrayCart'));
+        
+                // console.log(productsArrayCart);
+                if (productsArrayCart == null) {
+                    productsArrayCart = [];
+                };
+        
+                // add new product
+                productsArrayCart.push({
+                    "product": this.state.product,
+                    "formatIndex": this.state.formatIndex,
+                    "units": this.state.units,
+                });
+        
+                // save new array
+                localStorage.setItem('productsArrayCart', JSON.stringify(productsArrayCart));
+        
+                // console.log(productsArrayCart);
+        
+                // console.log(localStorage);
+                alert("Producto agregado al carrito de compra");
+        
+                // redirect
+                this.props.history.push('/' + this.props.match.params.store_id);
+    
+            }
+    
+            else{
+                alert("Sólo puedes ordenar " + this.state.product.saleFormats[this.state.formatIndex].stock + " unidades de este formato");
+            };
+        }
+        
+        else {
+            alert("Debes elegir al menos una unidad de este producto");
         };
-
-        // add new product
-        productsArrayCart.push({
-            "product": this.state.product,
-            "formatIndex": this.state.formatIndex,
-            "units": this.state.units,
-        });
-
-        // save new array
-        localStorage.setItem('productsArrayCart', JSON.stringify(productsArrayCart));
-
-        // console.log(productsArrayCart);
-
-        // console.log(localStorage);
-        alert("Producto agregado al carrito de compra");
-
-        // redirect
-        this.props.history.push('/' + this.props.match.params.store_id);
 
     }
 
@@ -294,7 +312,7 @@ class ProductDetails extends React.Component {
                                             <FormControlLabel 
                                                 value={idx} 
                                                 control={<Radio />} 
-                                                label={saleFormat.format + " - $ " + saleFormat.price} 
+                                                label={saleFormat.format + " - $ " + saleFormat.price + (saleFormat.stock != 0 ? " (stock: " + saleFormat.stock + ")" : " (sin stock disponible)")} 
                                             />
                                         )
                                     })
@@ -312,6 +330,12 @@ class ProductDetails extends React.Component {
                                 onChange={(e) => this.setState({ units: e.target.value })}
                                 // onChange={this.props.changeNewProductCategory}
                                 value={this.state.units}
+                                InputProps={{
+                                    inputProps: {
+                                        max: this.state.product.saleFormats[this.state.formatIndex].stock, 
+                                        min: parseInt(this.state.product.saleFormats[this.state.formatIndex].stock) == 0 ? 0: 1,
+                                    }
+                                }}
                                 // value={this.props.newProductCategory}
                             />
 
@@ -321,6 +345,7 @@ class ProductDetails extends React.Component {
                                 size="small" 
                                 color="primary"
                                 variant="contained"
+                                disabled={this.state.product.saleFormats[this.state.formatIndex].stock == 0}
                                 onClick={() => {
                                     // window.open("https://wa.me/" + workshop.teacherMobileNumber + "?text=Hola, quiero tomar una clase en tu curso de '" + workshop.title + "' que aparece en la plataforma online")
                                     // this.setState({
