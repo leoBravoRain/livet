@@ -134,25 +134,120 @@ class ProductDetails extends React.Component {
                 if (productsArrayCart == null) {
                     productsArrayCart = [];
                 };
-        
-                // add new product
-                productsArrayCart.push({
-                    "product": this.state.product,
-                    "formatIndex": this.state.formatIndex,
-                    "units": this.state.units,
+                
+                
+                // validate if product with specific format already is in cart
+                var productIsInCart = false;
+                var formatIsInCart = false;
+                var indexProduct = 0;
+                productsArrayCart.forEach((product, idx) => {
+                    // validate if product is in array
+                    if (product.product.id == this.state.product.id) {
+                        productIsInCart=true;
+                        indexProduct= idx;
+
+                        // validate if format is in array
+                        if (product.formatIndexList.includes(this.state.formatIndex)) {
+                            formatIsInCart = true;
+                        }
+                    }
                 });
-        
-                // save new array
-                localStorage.setItem('productsArrayCart', JSON.stringify(productsArrayCart));
-        
-                // console.log(productsArrayCart);
-        
-                // console.log(localStorage);
-                alert("Producto agregado al carrito de compra");
-        
-                // redirect
-                this.props.history.push('/' + this.props.match.params.store_id);
-    
+
+                // if product is not
+                // add product to cart
+                if (!productIsInCart) {
+
+                    // add new product
+                    productsArrayCart.push({
+                        "product": this.state.product,
+                        "formatIndexList": [this.state.formatIndex],
+                        "unitsList": [this.state.units],
+                    });
+            
+                    // save new array
+                    localStorage.setItem('productsArrayCart', JSON.stringify(productsArrayCart));
+            
+                    // console.log(productsArrayCart);
+            
+                    // console.log(localStorage);
+                    alert("Producto agregado al carrito de compra");
+            
+                    // redirect
+                    this.props.history.push('/' + this.props.match.params.store_id);
+                }
+
+                // if product is in cart but no format
+                // add format to product cart
+                else if (productIsInCart & !formatIsInCart) {
+
+                    // add format index to list
+                    var formatIndexList = productsArrayCart[indexProduct]["formatIndexList"];
+                    formatIndexList.push(this.state.formatIndex);
+
+                    // add units
+                    var unitsList = productsArrayCart[indexProduct]["unitsList"];
+                    unitsList.push(this.state.units);
+
+                    // update item on product cart array
+                    productsArrayCart[indexProduct]["formatIndexList"] = formatIndexList
+                    productsArrayCart[indexProduct]["unitsList"] = unitsList;
+
+                    // save new array
+                    localStorage.setItem('productsArrayCart', JSON.stringify(productsArrayCart));
+
+                    // console.log(productsArrayCart);
+
+                    // console.log(localStorage);
+                    alert("Producto agregado al carrito de compra");
+
+                    // redirect
+                    this.props.history.push('/' + this.props.match.params.store_id);
+
+
+                }
+
+                // if product and format is in cart
+                else if (productIsInCart & formatIsInCart) {
+
+                    // get index of format index
+                    const indexFormatIndex = productsArrayCart[indexProduct]["formatIndexList"].indexOf(this.state.formatIndex);
+
+                    // get product format stock
+                    const productFormatStock = this.state.product.saleFormats[this.state.formatIndex].stock;
+
+                    // get products availables (dif between stock and units )
+                    const availableProducts = productFormatStock - productsArrayCart[indexProduct]["unitsList"][indexFormatIndex]
+
+                    // if it can add all units, so add to the cart
+                    if (this.state.units <= availableProducts) {
+
+                        // add units to element in units array
+                        productsArrayCart[indexProduct]["unitsList"][indexFormatIndex] = productsArrayCart[indexProduct]["unitsList"][indexFormatIndex] + this.state.units;
+
+                        // save new array
+                        localStorage.setItem('productsArrayCart', JSON.stringify(productsArrayCart));
+
+                        // console.log(productsArrayCart);
+
+                        // console.log(localStorage);
+                        alert("Producto agregado al carrito de compra");
+
+                        // redirect
+                        this.props.history.push('/' + this.props.match.params.store_id);
+
+                        
+                    }
+                    
+                    else if (availableProducts == 0) {
+                        alert("Ya has agregado el máximo de unidades de este formato. Revisa tu carrito de compra para confirmar");
+                    }
+                    // else, alert message with differecen available
+                    else {
+                        alert("Solo puedes agregar hasta " + availableProducts + " unidades de este formato");
+                    };
+
+                }
+
             }
     
             else{
@@ -327,7 +422,7 @@ class ProductDetails extends React.Component {
                                 type="number"
                                 // defaultValue={1}
                                 margin="normal"
-                                onChange={(e) => this.setState({ units: e.target.value })}
+                                onChange={(e) => this.setState({ units: parseInt(e.target.value) })}
                                 // onChange={this.props.changeNewProductCategory}
                                 value={this.state.units}
                                 InputProps={{
