@@ -529,6 +529,8 @@ class CreateNewProduct extends React.Component {
                             productCategories = {this.state.productCategories}
                             changeNewProductCategory={(e) => this.setState({ newProductCategory: e.target.value })}
                             newProductCategory={this.state.newProductCategory}
+
+                            // sales
                             productSaleFormats={this.state.productSaleFormats}
                             addOtherSaleFormat={this.addOtherSaleFormat}
                             removeSaleFormat={e=>this.removeSaleFormat(e)}
