@@ -335,10 +335,28 @@ class ProductInformationForm extends React.Component {
 
                     {/* sale formats */}
                     <Container
-                        style = {{
-                            backgroundColor: "red",
-                        }}
+                        // style = {{
+                        //     backgroundColor: "red",
+                        // }}
                     >
+
+                        <Typography
+                            gutterBottom
+                            variant="body2"
+                            component="p"
+                            style={{
+                                margin: 30,
+                                // display: "flex",
+                                // flexWrap: "wrap",
+                                // backgroundColor: "rgba(173, 216, 230, 0.5)",
+                                // borderRadius: 50,
+                                // textAlign: "center",
+                                // justifyContent: "center",
+                                // padding: 10,
+                            }}
+                        >
+                            Formatos de venta
+                        </Typography>
 
                         {/* lsit of formats */}
                         {
@@ -393,6 +411,9 @@ class ProductInformationForm extends React.Component {
                                             type="number"
                                             // defaultValue="Correo electrónico"
                                             margin="normal"
+                                            style = {{
+                                                backgroundColor: this.props.productSaleFormats[idx].stock != null && this.props.productSaleFormats[idx].stock == 0 ? "red": "white",
+                                            }}
                                             // onChange={this.props.changeProductStock}
                                             // value={this.props.productStock}
                                             onChange={(e) => this.props.changeProductSaleFormat(e, idx, "stock")}
