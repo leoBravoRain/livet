@@ -149,15 +149,15 @@ class StoreInformationForm extends React.Component {
                     />
 
                     {/* profile photo */}
-                    {/* <TextField
-                                // id="standard-uncontrolled"
-                                label="Foto de perfil"
-                                // type="Precio"
-                                // defaultValue="Correo electrónico"
-                                margin="normal"
-                                onChange={(e) => this.setState({ profilePhoto: e.target.value })}
-                                value={this.state.profilePhoto}
-                            /> */}
+                    <TextField
+                        // id="standard-uncontrolled"
+                        label="Número de Whatsapp (ejemlpo: +56987654231)"
+                        // type="Precio"
+                        // defaultValue="Correo electrónico"
+                        margin="normal"
+                        onChange={this.props.changeWhatsappNumber}
+                        value={this.props.whatsappNumber}
+                    />
 
 
                     {/* create store */}

@@ -67,7 +67,7 @@ class SaleConfirmation extends React.Component {
             customerRegion: null,
             customerCity: null,
             customerStreet: null,
-            customerStreetNumber: null,
+            customerHouseNumber: null,
             customerPhone: null,
             // store
             store: null,
@@ -118,7 +118,59 @@ class SaleConfirmation extends React.Component {
 
         // THIS CODE IS TO DEMO
         // redirect to payment
-        window.location.href = "https://app.payku.cl/botonpago/index?idboton=14257&verif=0f7014ea";
+        // window.location.href = "https://app.payku.cl/botonpago/index?idboton=14257&verif=0f7014ea";
+
+        // alert("go to wsp");
+
+        // // validate if cusomter data is filled
+        if (this.state.customerName != null & this.state.customerEmail != null & this.state.customerRegion != null & this.state.customerCity != null & this.state.customerStreet != null & this.state.customerHouseNumber != null) {
+
+            // get cart
+            var productsArrayCart = JSON.parse(localStorage.getItem('productsArrayCart'));
+
+            // list of produts string
+            var listProductsString = "";
+            var totalSales = 0.0;
+
+            // string with products, formats and units
+            productsArrayCart.forEach((product, idxProd) => {
+                // totalSales += parseInt(product.units) * parseFloat(product.product.saleFormats[product.formatIndex].price);
+                product.formatIndexList.forEach((formatIndex, index) => {
+                    // totalSales += parseInt(product.units) * parseFloat(product.product.saleFormats[product.formatIndex].price);
+                    totalSales += parseInt(product.unitsList[index]) * parseFloat(product.product.saleFormats[formatIndex].price);
+                    // console.log(product.product.saleFormats[formatIndex].format + " : " + product.unitsList[index])
+                    listProductsString = listProductsString + "\n-- " + product.unitsList[index] + " unidades de '" + product.product.saleFormats[formatIndex].format + "'";
+                });
+            });
+
+
+            // user data
+            const userData = "Mis datos. Nombre: " + this.state.customerName + ", email: " + this.state.customerEmail + ", celular: " + this.state.customerPhone;
+            const userAddress = "Mi dirección de envío es: " + this.state.customerStreet + ", # " + this.state.customerHouseNumber + ", " + this.state.customerCity + ", " + this.state.customerRegion;
+
+            // go to Wsp
+            // const message = `!Hola!\n\nQuiero comprar los siguientes productos:\n\n` + listProductsString +`\n\nSiendo un total de $`+ totalSales.toString();
+            const message = `!Hola! Quiero comprar los siguientes productos: ` + listProductsString + `. El total de la compra es de $` + totalSales.toString() + ". " + userData + ". " + userAddress;
+
+            // console.log(message);
+
+            // // go to whatsapp
+            // window.open("https://wa.me/" + store.whatsappNumber+ "?text=" + message);
+            window.open("https://wa.me/+56937827142?text=" + message);
+
+            this.setState({
+                loading: false,
+            });
+
+        }
+
+        else {
+            alert("Debes rellenar toda la información antes de continuar");
+            this.setState({
+                loading: false,
+            });
+
+        }
 
         // THIS IS THE REAL CODE
         // // validate if cusomter data is filled
@@ -314,7 +366,7 @@ class SaleConfirmation extends React.Component {
 
 
 
-                        <Typography align="center" variant="body2" component="p" gutterBottom>
+                        {/* <Typography align="center" variant="body2" component="p" gutterBottom>
                         
                             ***
 
@@ -331,7 +383,7 @@ class SaleConfirmation extends React.Component {
 
                             ***
 
-                        </Typography>
+                        </Typography> */}
 
 
                         {/* convert to post button */}
@@ -341,7 +393,7 @@ class SaleConfirmation extends React.Component {
                             color="primary"
                             onClick={this.confirm_sale}
                         >
-                            Ir a pagar
+                            Finalizar compra
                         </Button>
 
                     </FormControl>
