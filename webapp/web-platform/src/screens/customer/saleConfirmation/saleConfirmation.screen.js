@@ -69,6 +69,18 @@ class SaleConfirmation extends React.Component {
             customerStreet: null,
             customerHouseNumber: null,
             customerPhone: null,
+
+            // demo
+            // customerName: "null",
+            // customerEmail: "null",
+            // // customerAddress: null,
+            // customerRegion: "null",
+            // customerCity: "null",
+            // customerStreet: "null",
+            // customerHouseNumber: "null",
+            // customerPhone: "null",
+
+
             // store
             store: null,
 
@@ -139,24 +151,28 @@ class SaleConfirmation extends React.Component {
                     // totalSales += parseInt(product.units) * parseFloat(product.product.saleFormats[product.formatIndex].price);
                     totalSales += parseInt(product.unitsList[index]) * parseFloat(product.product.saleFormats[formatIndex].price);
                     // console.log(product.product.saleFormats[formatIndex].format + " : " + product.unitsList[index])
-                    listProductsString = listProductsString + "\n-- " + product.unitsList[index] + " unidades de '" + product.product.saleFormats[formatIndex].format + "'";
+                    listProductsString = listProductsString + "\n-- " + product.product.name + " - " + product.product.saleFormats[formatIndex].format + " x " + product.unitsList[index];
                 });
             });
 
 
             // user data
-            const userData = "Mis datos. Nombre: " + this.state.customerName + ", email: " + this.state.customerEmail + ", celular: " + this.state.customerPhone;
-            const userAddress = "Mi dirección de envío es: " + this.state.customerStreet + ", # " + this.state.customerHouseNumber + ", " + this.state.customerCity + ", " + this.state.customerRegion;
+            const userData = `Mis datos. Nombre: ` + this.state.customerName + `, email: ` + this.state.customerEmail + `, celular: ` + this.state.customerPhone;
+            const userAddress = `Mi dirección de envío es: ` + this.state.customerStreet + `, ` + this.state.customerHouseNumber.toString() + `, ` + this.state.customerCity + `, ` + this.state.customerRegion;
+            // const userAddress = `Mi dirección de envío es: ` + this.state.customerStreet + `, ` + this.state.customerHouseNumber.toString();
+
 
             // go to Wsp
-            // const message = `!Hola!\n\nQuiero comprar los siguientes productos:\n\n` + listProductsString +`\n\nSiendo un total de $`+ totalSales.toString();
-            const message = `!Hola! Quiero comprar los siguientes productos: ` + listProductsString + `. El total de la compra es de $` + totalSales.toString() + ". " + userData + ". " + userAddress;
+            const message = `!Hola!\n\nQuiero comprar los siguientes productos:\n\n` + listProductsString + `\n\nTotal: $` + totalSales.toString() + `.\n\n` + userData + `.\n\n` + userAddress + `.\n\n` + `¿Cómo debo realizarte el pago?`;
+            // const message = userAddress;
+            // const message = `!Hola! Quiero comprar los siguientes productos: ` + listProductsString + `. El total de la compra es de $` + totalSales.toString() + `. ` + userData + `. ` + userAddress + `. ¿Cómo debo realizarte el pago?`;
 
+            // alert(message);
             // console.log(message);
 
             // // go to whatsapp
             // window.open("https://wa.me/" + store.whatsappNumber+ "?text=" + message);
-            window.open("https://wa.me/+56937827142?text=" + message);
+            window.open("https://wa.me/+56937827142/?text=" + encodeURI(message));
 
             this.setState({
                 loading: false,
