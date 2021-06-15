@@ -193,7 +193,7 @@ class Login extends React.Component {
                             <Button 
                                 align="center" 
                                 variant="contained" 
-                                color="secondary"
+                                color="primary"
                                 onClick={() => {
                                     this.props.history.push('/register');
                                     // alert("go to register");

@@ -249,7 +249,12 @@ class SaleConfirmation extends React.Component {
                 ?
 
                 <Container
-                // style={{ backgroundColor: "yellow" }}
+                    style={{ 
+                        // backgroundColor: "yellow" 
+                        display: "flex",
+                        flexDirection: "column",
+
+                    }}
                 >
                     
                     {/* store information */}
