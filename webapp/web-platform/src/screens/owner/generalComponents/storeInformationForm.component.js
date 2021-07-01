@@ -148,6 +148,19 @@ class StoreInformationForm extends React.Component {
                         value={this.props.storeInstagramUrl}
                     />
 
+                    {/* aditional information */}
+                    <TextField
+                        // id="standard-uncontrolled"
+                        label="Información adicional que quieras mostrar en cada producto (por ejemplo, condiciones de envío)"
+                        // type="Tamaño"
+                        // defaultValue="Correo electrónico"
+                        margin="normal"
+                        // onChange={(e) => this.setState({ instagramUrl: e.target.value })}
+                        onChange={this.props.changeAditionAlInformationToDisplayToCustomer}
+                        // value={this.state.instagramUrl}
+                        value={this.props.aditionalInformationToDisplayToCustomer}
+                    />
+
                     {/* profile photo */}
                     <TextField
                         // id="standard-uncontrolled"

@@ -282,7 +282,11 @@ class ProductDetails extends React.Component {
             ?
 
                 // this is to center content
-                <Container>
+                <Container
+                    style = {{
+                        // backgroundColor: "red"
+                    }}
+                >
 
                     {/* store information */}
                     <StoreInformation
@@ -293,10 +297,10 @@ class ProductDetails extends React.Component {
                             // alert("Go to home")
                             this.props.history.push('/' + this.props.match.params.store_id);
                         }}
-                        goToInstagram={() => {
-                            // alert("Go to home")
-                            window.open(this.state.store.instagramUrl);
-                        }}
+                        // goToInstagram={() => {
+                        //     // alert("Go to home")
+                        //     window.open(this.state.store.instagramUrl);
+                        // }}
                         goToShoppingCart={() => {
                             // alert("go to cart");
                             this.props.history.push('/shoppingCart/' + this.props.match.params.store_id);
@@ -337,9 +341,49 @@ class ProductDetails extends React.Component {
                             <img
                                 src={this.state.product.image}
                                 alt="image"
-                                width="300px"
-                                heigh="300px"
-                                />
+                                width="400px"
+                                heigh="400px"
+                            />
+
+                            {/* aditinoal information */}
+                            {
+                                this.state.store.aditionalInformationToDisplayToCustomer.length > 0 &&
+
+                                <Container
+                                    style = {{
+                                        marginTop:20,
+                                    }}
+                                >
+
+                                    {/* title */}
+                                    <Typography
+                                        align="left"
+                                        variant="h6"
+                                        component="p"
+                                        gutterBottom
+                                        style={{
+                                            // margin: 15,
+                                        }}
+                                    >
+                                        Recuerda
+                                    </Typography>
+
+                                    {/* aditional information */}
+                                    <Typography
+                                        align="left"
+                                        variant="body2"
+                                        component="p"
+                                        gutterBottom
+                                        style={{
+                                            // margin: 15,
+                                        }}
+                                    >
+                                        {this.state.store.aditionalInformationToDisplayToCustomer}
+                                    </Typography>
+
+                                </Container>
+                            }
+
                         </Grid>
 
 
@@ -361,7 +405,7 @@ class ProductDetails extends React.Component {
                     
                             {/* name */}
                             <Typography 
-                                // align="center" 
+                                align="center" 
                                 variant="h3" 
                                 component="h3" 
                                 gutterBottom
@@ -446,6 +490,20 @@ class ProductDetails extends React.Component {
                                 // value={this.props.newProductCategory}
                             />
 
+                            {/* total price */}
+                            <Typography
+                                align="center" 
+                                variant="h6"
+                                component="p"
+                                gutterBottom
+                                style = {{
+                                    margin: 15,
+                                }}
+                            >
+
+                                Total: $ {parseInt(this.state.product.saleFormats[this.state.formatIndex].price)*this.state.units}
+                            </Typography>
+
                             {/* to buy button */}
                             <Button 
                                 align = "right"
@@ -467,7 +525,7 @@ class ProductDetails extends React.Component {
                             >
 
                                 {/* Comprar */}
-                                Agregar a carrito
+                                Agregar al carrito
 
                             </Button>
 

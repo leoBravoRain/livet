@@ -44,6 +44,9 @@ class CreateNewStoreForm extends React.Component {
             instagramUrl: null,
             profilePhoto: null,
             whatsappNumber: null,
+
+            // this must to be in this way, because in product details it analyzeis if length >0
+            aditionalInformationToDisplayToCustomer: "",
         };
 
         this.createStore = this.createStore.bind(this);
@@ -149,6 +152,7 @@ class CreateNewStoreForm extends React.Component {
                         "profilePhoto": downloadURL,
                         // owner store (user from DB)
                         "ownerId": loggedUser.uid,
+                        "aditionalInformationToDisplayToCustomer": this.state.aditionalInformationToDisplayToCustomer,
                     };
         
                     // console.log("create new store" + newStore);
@@ -262,6 +266,8 @@ class CreateNewStoreForm extends React.Component {
                             buttonText="Crear tienda"
                             whatsappNumber={this.state.whatsappNumber}
                             changeWhatsappNumber={(e) => this.setState({ whatsappNumber: e.target.value})}
+                            changeAditionAlInformationToDisplayToCustomer={(e) => this.setState({ aditionalInformationToDisplayToCustomer: e.target.value })}
+                            aditionalInformationToDisplayToCustomer={this.state.aditionalInformationToDisplayToCustomer}
                         />
 
                     </Container>
