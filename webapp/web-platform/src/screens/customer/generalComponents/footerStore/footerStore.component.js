@@ -10,9 +10,11 @@ import { Button } from "@material-ui/core";
 // import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
 import Instagram from '@material-ui/icons/Instagram';
+import WhatsApp from "@material-ui/icons/WhatsApp";
+import Facebook from "@material-ui/icons/Facebook";
 // import CircularProgress from "@material-ui/core/CircularProgress";
 // import Grid from '@material-ui/core/Grid';
-// import Divider from '@material-ui/core/Divider';
+import Divider from '@material-ui/core/Divider';
 
 class FooterStore extends React.Component {
 
@@ -35,7 +37,7 @@ class FooterStore extends React.Component {
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "center",
-                    marginTop: 50,
+                    marginTop: 100,
                 }}
             >
 
@@ -47,34 +49,93 @@ class FooterStore extends React.Component {
                     component="p"
                     gutterBottom
                 >
-                    Si quires saber mas de nuestra tienda, visita nuestras redes sociales
+                    {/* Si quires saber mas de nuestra tienda, visita nuestras redes sociales */}
+                    Sigueme en mis redes sociales
                 </Typography>
 
 
-                {/* go to IG */}
-                <Button
-                    // align="center"
-                    size="small"
-                    color="primary"
-                    // variant="contained"
-                    onClick={this.props.goToInstagram}
+                {/* social network links */}
+                <Container
+                    style = {{
+                        display:"flex",
+                        flexDirection: "center",
+                        // backgroundColor: "red",
+                        justifyContent: "center",
+                    }}
                 >
 
-                    <Instagram 
-                        color = "primary"
-                    />
+                    {/* go to IG */}
+                    <Button
+                        // align="center"
+                        size="small"
+                        color="primary"
+                        // variant="contained"
+                        onClick={this.props.goToInstagram}
+                        >
+                        <Instagram 
+                            color = "primary"
+                        />
+                    </Button>
 
-                </Button>
+                    {/* go to whatsapp */}
+                    {
+
+                        this.props.displayToWhatsapp &&
+                        
+                        <Button
+                        // align="center"
+                        size="small"
+                        color="primary"
+                        // variant="contained"
+                        onClick={this.props.goToWhatsapp}
+                        >
+                            <WhatsApp
+                                color="primary"
+                                />
+                        </Button>
+                    }
+
+                    {/* go to facebook */}
+                    {
+
+                        this.props.displayToFacebook &&
+
+                        <Button
+                            // align="center"
+                            size="small"
+                            color="primary"
+                            // variant="contained"
+                            onClick={this.props.goToFacebook}
+                        >
+                            <Facebook
+                                color="primary"
+                            />
+                        </Button>
+
+                    }
+
+                </Container>
 
                 {/* livet */}
-                <Typography
+                {/* <Typography
                     align="center"
                     variant="body2"
                     component="p"
                     gutterBottom
-                >
+                    >
                     Esta página fue creada usando Livet
-                </Typography>
+                </Typography> */}
+
+                <Divider
+                    // light = {false}
+                    variant="middle"
+                    style={{
+                        marginTop: 50,
+                        // marginBottom: 20,
+                        // color: "red"
+                        // backgroundColor: "red",
+                    }}
+                />
 
                 {/* go to Livet */}
                 <Button
@@ -82,12 +143,15 @@ class FooterStore extends React.Component {
                     size="small"
                     color="primary"
                     // variant="outlined"
+                    style = {{
+                        // marginBottom: 30,
+                    }}
                     onClick={() => {
                         window.open("https://www.livetnow.com/");
                     }}
                 >
 
-                    Visitar Livet
+                    Crea tu tienda aquí
 
                 </Button>
 
