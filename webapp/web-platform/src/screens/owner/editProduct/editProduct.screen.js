@@ -6,7 +6,7 @@ import React from "react";
 // import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 // import TextField from '@material-ui/core/TextField';
-// import { Button } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 // import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -104,6 +104,8 @@ class EditProduct extends React.Component {
         this.addOtherSaleFormat = this.addOtherSaleFormat.bind(this);
         this.removeSaleFormat = this.removeSaleFormat.bind(this);
         this.changeProductSaleFormat = this.changeProductSaleFormat.bind(this);
+        this.deleteProduct = this.deleteProduct.bind(this);
+
     };
 
     componentDidMount() {
@@ -466,6 +468,42 @@ class EditProduct extends React.Component {
     }
 
 
+    deleteProduct() {
+
+        // alert("remove");
+
+        this.setState({
+            loading: true,
+        });
+
+        fs.collection('stores').doc(this.props.match.params.store_id).collection("products")
+            .doc(this.props.location.state.product.id)
+            .delete()
+
+        .then(() => {
+            console.log("Document successfully deleted!");
+
+            alert("Producto eliminado correctamente");
+            
+            // navigate to products to sell
+            // + store id
+            this.props.history.push("/productsToSell/" + this.props.match.params.store_id);
+
+            this.setState({
+                loading: false,
+            });
+
+        }).catch((error) => {
+            console.error("Error removing document: ", error);
+
+            this.setState({
+                loading: false,
+            });
+
+        });
+
+    };
+
     render() {
 
         return (
@@ -551,7 +589,19 @@ class EditProduct extends React.Component {
 
                     />
 
-
+                    <Button
+                        align="center"
+                        variant="contained"
+                        color = "secondary"
+                        // width = "50%"
+                        style = {{
+                            width: "10%",
+                            alignSelf: "center",
+                        }}
+                        onClick = {this.deleteProduct}
+                    >
+                        Eliminar
+                    </Button>
                     {/* Here it was the origanl form component */}
 
                 </Container>

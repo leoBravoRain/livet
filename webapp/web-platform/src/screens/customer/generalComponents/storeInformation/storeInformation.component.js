@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 
+import ShoppingCart from "@material-ui/icons/ShoppingCart";
+
 class StoreInformation extends React.Component {
 
     // constructor
@@ -44,6 +46,7 @@ class StoreInformation extends React.Component {
                     >
 
                     {/* profile photo */}
+                    {/* title */}
                     <Grid
                         item
                         xs={12}
@@ -51,7 +54,9 @@ class StoreInformation extends React.Component {
                         style={{
                             display: "flex",
                             justifyContent: "center",
-                            // backgroundColor: "green",
+                            // alignContent: "center",
+                            // backgroundColor: "red",
+                            flexDirection: "row",
                         }}
                         >
 
@@ -62,11 +67,38 @@ class StoreInformation extends React.Component {
                             height="100px"
                         />
 
+                        {/* title */}
+                        <Container
+                            style={{
+                                // backgroundColor: "green",
+                                // this is to justify hor and ver
+                                justifyContent: "center",
+                                textAlign: "left",
+                                display: "flex",
+                                flexDirection:"column",
+                                // finish here: this is to justify hor and ver
+                            }}
+                        >
+
+                            <Typography
+                                // align="center" 
+                                variant="h4"
+                                component="h4"
+                                gutterBottom
+                                // style = {{
+                                //     backgroundColor: "green",
+                                // }}
+                                
+                                >
+                                {this.props.name}
+                            </Typography>
+                        </Container>
+
                     </Grid>
 
 
                     {/* store description */}
-                    <Grid
+                    {/* <Grid
                         item
                         xs={12}
                         md={4}
@@ -76,20 +108,20 @@ class StoreInformation extends React.Component {
                             flexDirection: "column",
                             justifyContent: "left",
                         }}
-                        >
+                        > */}
 
                         {/* title */}
-                        <Typography 
+                        {/* <Typography 
                             // align="center" 
                             variant="h4" 
                             component="h4" 
                             gutterBottom
                         >
                             {this.props.name}
-                        </Typography>
+                        </Typography> */}
 
                         {/* description */}
-                        <Typography
+                        {/* <Typography
                             display="inline"
                             // inline
                             // style={{ display: 'inline-block' }} 
@@ -99,9 +131,9 @@ class StoreInformation extends React.Component {
                             gutterBottom
                             >
                             {this.props.description}
-                        </Typography>
+                        </Typography> */}
 
-                    </Grid>
+                    {/* </Grid> */}
 
 
                     {/* buttons */}
@@ -121,7 +153,7 @@ class StoreInformation extends React.Component {
                         <Button
                             // align="center"
                             size="small"
-                            color="primary"
+                            color="black"
                             // variant="contained"
                             onClick={this.props.goToHome}
                             >
@@ -131,7 +163,7 @@ class StoreInformation extends React.Component {
                         </Button>
 
                         {/* go to IG */}
-                        <Button
+                        {/* <Button
                             // align="center"
                             size="small"
                             color="primary"
@@ -141,10 +173,10 @@ class StoreInformation extends React.Component {
 
                             Ir a mi Instagram
 
-                        </Button>
+                        </Button> */}
 
                         {/* go to IG */}
-                        <Button
+                        {/* <Button
                             // align="center"
                             size="small"
                             color="primary"
@@ -153,6 +185,33 @@ class StoreInformation extends React.Component {
                         >
 
                             Ir a carrito
+
+                        </Button> */}
+
+                    </Grid>
+
+                    <Grid 
+                        item
+                        xs={12}
+                        md={4}
+                        style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            // alignContent: "center",
+                            // backgroundColor: "red",
+                        }}
+                    >
+
+                        <Button
+                            // align="center"
+                            size="small"
+                            color="primary"
+                            // variant="contained"
+                            onClick={this.props.goToShoppingCart}
+                        >
+
+                            {/* Ir a carrito */}
+                            <ShoppingCart/>                            
 
                         </Button>
 
