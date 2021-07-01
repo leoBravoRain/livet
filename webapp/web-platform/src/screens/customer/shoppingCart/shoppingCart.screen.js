@@ -19,7 +19,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 // import CardMedia from '@material-ui/core/CardMedia';
 // // import Modal from '@material-ui/core/Modal';
 // // import PlayArrow from '@material-ui/icons/PlayArrow';
-// import Add from '@material-ui/icons/Add';
+import Delete from '@material-ui/icons/Delete';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -245,7 +245,7 @@ class ShoppingCart extends React.Component {
 
                         {/* title */}
                         <Typography align="center" variant="h4" component="h4" gutterBottom>
-                            Tu carrito de compra
+                            Tu carrito de compras
                         </Typography>
 
                         {/* list of products */}
@@ -292,7 +292,8 @@ class ShoppingCart extends React.Component {
                                                                     onClick={() => this.removeItemFromCart(idxProduct, formatIndex, idxFormat)}
                                                                 >
 
-                                                                    Eliminar
+                                                                    <Delete />
+                                                                    {/* Eliminar */}
                                                                 </Button>
                                                             </TableCell>
 
@@ -304,7 +305,7 @@ class ShoppingCart extends React.Component {
                                         }
 
                                             <TableRow style={{ fontWeight: "bold" }} >
-                                                <TableCell align="right" style={{ fontWeight: "bold" }}>Total</TableCell>
+                                                <TableCell align="right" style={{ fontWeight: "bold", fontSize: "20px" }}>Total</TableCell>
                                                 <TableCell align="right"> </TableCell>
                                                 <TableCell align="right"> </TableCell>
                                                 <TableCell align="right"> </TableCell>
