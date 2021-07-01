@@ -141,6 +141,16 @@ class ProductsCatalog extends React.Component {
                             product["id"] = doc.id;
                             products.push(product);
 
+                            // get minimum price
+                            var prices = [];
+                            product.saleFormats.forEach(saleFormat => {
+                                // console.log(saleFormat);
+                                prices.push(parseFloat(saleFormat.price));
+                            })
+                            // console.log(prices);
+                            // console.log(prices.sort())
+                            product["minPrice"] = prices.sort()[prices.length - 1];
+
                             // add category
                             if (!categories.includes(product.category)){
                                 categories.push(product.category);
@@ -276,10 +286,12 @@ class ProductsCatalog extends React.Component {
                     <Grid
                         container
                         style = {{
-                            // display: "flex",
-                            // flexDirection: "row",
-                            justifyContent: "center",
-                            alignContent: "center",
+                            display: "flex",
+                            flexDirection: "column",
+                            // justifyContent: "center",
+                            // alignContent: "center",
+                            // backgroundColor: "yellow",
+                            width: "100%",
                         }}
                     >
 
@@ -292,7 +304,9 @@ class ProductsCatalog extends React.Component {
                                 // backgroundColor: "red",
                                 display:"flex",
                                 flexDirection:"row",
-                                justifyContent:"center",
+                                // justifyContent:"center",
+                                alignSelf: "center",
+                                width: "100%",
                             }}
                         >
 
@@ -308,6 +322,7 @@ class ProductsCatalog extends React.Component {
                                 style = {{
                                     marginTop: 30,
                                     marginBottom: 30,
+                                    width: "100%",
                                 }}
                                 onCancelSearch = {() => {
                                     this.setState({
@@ -349,11 +364,12 @@ class ProductsCatalog extends React.Component {
                                 xs={12}
                                 md={6}
                                 style={{
-                                    // backgroundColor: "yellow",
-                                    justifyContent: "center",
+                                    // backgroundColor: "green",
+                                    justifyContent: "left",
                                     // alignContent: "center",
                                     display: "flex",
                                     flexDirection: "row",
+                                    margin: 20,
                                 }}
                             >
 
@@ -368,7 +384,7 @@ class ProductsCatalog extends React.Component {
                                         // marginBottom: 30,
                                     }}
                                 >
-                                    Filtrar por categoría
+                                    Categoría / 
                                 </Typography>
 
                                 <Select
@@ -376,8 +392,8 @@ class ProductsCatalog extends React.Component {
                                         // backgroundColor: "green",
                                         // alignSelf: "center",
                                         // flex: 1,
-                                        height:"40%",
-                                        margin: 10,
+                                        // height:"40%",
+                                        marginLeft: 10,
                                         // top: 0,
                                     }}
                                     // align= "center"
@@ -404,7 +420,11 @@ class ProductsCatalog extends React.Component {
 
 
                     {/* catalog of products */}
-                    <Container>
+                    <Container
+                        style = {{
+                            marginTop: 15,
+                        }}
+                    >
 
                             {/* title */}
                             <Typography 
@@ -457,13 +477,22 @@ class ProductsCatalog extends React.Component {
                                                 //     backgroundColor: "red",
                                                 //     // borderRadius: 10,
                                                 // }}
+                                                onClick={() => {
+                                                    // window.open("https://wa.me/" + workshop.teacherMobileNumber + "?text=Hola, quiero tomar una clase en tu curso de '" + workshop.title + "' que aparece en la plataforma online")
+                                                    // this.setState({
+                                                    //     toBuyModal: true,
+                                                    // });
+
+                                                    // alert("See details")
+                                                    this.props.history.push('/productDetails/' + this.state.store.id + "/" + product.id);
+                                                }}
                                             >
                                                 <CardActionArea
                                                 >
                                                     <CardMedia
                                                         image={product.image}
                                                         component="img"
-                                                        alt="Contemplative Reptile"
+                                                        alt="Foto de producto"
                                                         height="200"
 
                                                     // title={workshop.name}
@@ -473,13 +502,17 @@ class ProductsCatalog extends React.Component {
                                                     <CardContent>
 
                                                         {/* product name */}
-                                                        <Typography gutterBottom variant="h6" component="h6">
+                                                        <Typography 
+                                                            align = "center"
+                                                            gutterBottom 
+                                                            variant="h6" 
+                                                            component="h6">
                                                             {product.name}
                                                         </Typography>
 
                                                         {/* description */}
-                                                        <Typography variant="body2" color="textSecondary" component="p">
-                                                            {product.description.substring(0, 80)} ...
+                                                        <Typography align="center" variant="body2" color="textSecondary" component="p">
+                                                            {product.description.length < 80 ? product.description : product.description.substring(0, 80) + "..."}
                                                         </Typography>
 
                                                         {/* <Container
@@ -521,15 +554,16 @@ class ProductsCatalog extends React.Component {
                                                             </Container> */}
 
                                                             {/* price */}
-                                                            {/* <Container
+                                                            <Container
                                                                 style={{
                                                                     display: "flex",
-                                                                    flex: 1,
+                                                                    // flex: 1,
                                                                     flexDirection: "row",
                                                                     // backgroundColor: "red",
                                                                     textAlign: "center",
                                                                     justifyContent: "center",
                                                                     alignContent: "center",
+                                                                    marginTop: 15,
                                                                 }}
                                                             >
 
@@ -541,9 +575,9 @@ class ProductsCatalog extends React.Component {
                                                                     variant="subtitle2"
                                                                     component="p"
                                                                 >
-                                                                    {product.price}
+                                                                    {product.minPrice}
                                                                 </Typography>
-                                                            </Container> */}
+                                                            </Container>
 
                                                         {/* </Container> */}
 
@@ -552,7 +586,7 @@ class ProductsCatalog extends React.Component {
                                                 </CardActionArea>
 
 
-                                                <CardActions
+                                                {/* <CardActions
                                                     style = {{
                                                         // display: "flex",
                                                         justifyContent: "center",
@@ -580,7 +614,7 @@ class ProductsCatalog extends React.Component {
 
                                                     </Button>
 
-                                                </CardActions>
+                                                </CardActions> */}
 
                                             </Card>
 
