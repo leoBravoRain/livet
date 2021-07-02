@@ -310,49 +310,77 @@ class ProductsCatalog extends React.Component {
                             }}
                         >
 
-                            <SearchBar
-                                value={this.state.searchBarValue}
-                                onChange={(newValue) => this.setState({ searchBarValue: newValue })}
-                                onRequestSearch={() => {
-                                    // doSomethingWith(this.state.value)
-                                    // alert(this.state.searchBarValue);
-                                    this.filterProduct();
-                                }}
-                                placeholder = "Buscar producto"
-                                style = {{
-                                    marginTop: 30,
-                                    marginBottom: 30,
-                                    width: "100%",
-                                }}
-                                onCancelSearch = {() => {
-                                    this.setState({
-                                        products: this.state.initialProducts,
-                                    })
-                                }}
-                            />
-
-                            {/* button because it does not work on mobiel when press enter */}
-                            <Button
-                                align="center"
-                                size="small"
-                                color="primary"
-                                // variant="contained"
-                                onClick={() => {
-                                    // window.open("https://wa.me/" + workshop.teacherMobileNumber + "?text=Hola, quiero tomar una clase en tu curso de '" + workshop.title + "' que aparece en la plataforma online")
-                                    // this.setState({
-                                    //     toBuyModal: true,
-                                    // });
-
-                                    // alert("See details")
-                                    // this.props.history.push('/productDetails/' + this.state.store.id + "/" + product.id);
-                                    this.filterProduct();
-                                }}
+                            <Grid
+                                container
                             >
+                                <Grid
+                                    item 
+                                    xs = {12}
+                                    md = {8}
+                                    // style={{
+                                    //     backgroundColor: "red",
+                                    // }}
+                                >
 
-                                Buscar
+                                    <SearchBar
+                                        value={this.state.searchBarValue}
+                                        onChange={(newValue) => this.setState({ searchBarValue: newValue })}
+                                        onRequestSearch={() => {
+                                            // doSomethingWith(this.state.value)
+                                            // alert(this.state.searchBarValue);
+                                            this.filterProduct();
+                                        }}
+                                        placeholder = "Buscar producto"
+                                        style = {{
+                                            marginTop: 30,
+                                            marginBottom: 30,
+                                            width: "100%",
+                                        }}
+                                        onCancelSearch = {() => {
+                                            this.setState({
+                                                products: this.state.initialProducts,
+                                            })
+                                        }}
+                                        />
+                                </Grid>
 
-                            </Button>
+                                {/* button because it does not work on mobiel when press enter */}
+                                <Grid
+                                    item
+                                    xs={12}
+                                    md={4}
+                                    style = {{
+                                        display: "flex",
+                                        // backgroundColor: "yellow",
+                                        justifyContent: "center",
+                                        // alignContent: "center",
+                                    }}
+                                >
+                                
+                                    <Button
+                                        // align="center"
+                                        size="small"
+                                        color="primary"
+                                        // variant="contained"
+                                        onClick={() => {
+                                            // window.open("https://wa.me/" + workshop.teacherMobileNumber + "?text=Hola, quiero tomar una clase en tu curso de '" + workshop.title + "' que aparece en la plataforma online")
+                                            // this.setState({
+                                                //     toBuyModal: true,
+                                                // });
+                                                
+                                                // alert("See details")
+                                                // this.props.history.push('/productDetails/' + this.state.store.id + "/" + product.id);
+                                                this.filterProduct();
+                                            }}
+                                            >
+
+                                        Buscar
+
+                                    </Button>
+
+                                </Grid>
                         
+                            </Grid>
                         </Grid>
 
                         {/* filter by categories */}
@@ -375,7 +403,7 @@ class ProductsCatalog extends React.Component {
 
                                 <Typography
                                     gutterBottom
-                                    variant="body2"
+                                    variant="body1"
                                     component="p"
                                     style={{
                                         // marginTop: 20,
@@ -572,10 +600,10 @@ class ProductsCatalog extends React.Component {
                                                                 <Typography
                                                                     align="center" 
                                                                     gutterBottom
-                                                                    variant="subtitle2"
+                                                                    variant="body1"
                                                                     component="p"
                                                                 >
-                                                                    {product.minPrice}
+                                                                    {product.minPrice.toLocaleString()}
                                                                 </Typography>
                                                             </Container>
 

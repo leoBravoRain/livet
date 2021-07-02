@@ -50,7 +50,7 @@ class StoreInformation extends React.Component {
                     <Grid
                         item
                         xs={12}
-                        md={4}
+                        md={8}
                         style={{
                             display: "flex",
                             justifyContent: "center",
@@ -82,7 +82,7 @@ class StoreInformation extends React.Component {
 
                             <Typography
                                 // align="center" 
-                                variant="h4"
+                                variant="h5"
                                 component="h4"
                                 gutterBottom
                                 // style = {{
@@ -144,6 +144,7 @@ class StoreInformation extends React.Component {
                         style={{
                             display: "flex",
                             justifyContent: "center",
+                            flexDirection: "row",
                             // alignContent: "center",
                             // backgroundColor: "red",
                         }}
@@ -151,7 +152,7 @@ class StoreInformation extends React.Component {
 
                         {/* go to home */}
                         <Button
-                            // align="center"
+                            align="left"
                             size="small"
                             color="black"
                             // variant="contained"
@@ -188,22 +189,8 @@ class StoreInformation extends React.Component {
 
                         </Button> */}
 
-                    </Grid>
-
-                    <Grid 
-                        item
-                        xs={12}
-                        md={4}
-                        style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            // alignContent: "center",
-                            // backgroundColor: "red",
-                        }}
-                    >
-
                         <Button
-                            // align="center"
+                            align="right"
                             size="small"
                             color="primary"
                             // variant="contained"
@@ -211,11 +198,13 @@ class StoreInformation extends React.Component {
                         >
 
                             {/* Ir a carrito */}
-                            <ShoppingCart/>                            
+                            <ShoppingCart />
 
                         </Button>
 
+
                     </Grid>
+
 
                 </Grid>
 

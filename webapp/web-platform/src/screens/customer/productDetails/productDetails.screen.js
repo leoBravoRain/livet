@@ -366,10 +366,11 @@ class ProductDetails extends React.Component {
                                     <Typography
                                         align="left"
                                         variant="h6"
-                                        component="p"
+                                        component="h6"
                                         gutterBottom
                                         style={{
                                             // margin: 15,
+                                            fontWeight: "bold",
                                         }}
                                     >
                                         Recuerda

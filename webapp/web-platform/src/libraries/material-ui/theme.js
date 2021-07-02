@@ -16,6 +16,28 @@ const accent = "#66FBD1";
 // const accent = purple.A200; // #E040FB (alternative method)
 
 export default createMuiTheme({
+    // typography: {
+    //     // title1: {
+    //     //     fontSize: 30,
+    //     //     fontWeight: 50, // semibold
+    //     // },
+    //     // subtitle1: {
+    //     //     fontSize: 30,
+    //     //     fontWeight: 10, // semibold
+    //     // },
+    //     // body1: {
+    //     //     fontSize: 25,
+    //     //     fontWeight: 5, // light
+    //     // },
+    //     // body2: {
+    //     //     fontSize: 20,
+    //     //     fontWeight: 1, // light
+    //     // },
+    //     // button: {
+    //     //     fontStyle: 'italic',
+    //     // },
+    // },
+
     overrides: {
         MuiButton: {
             root: {
