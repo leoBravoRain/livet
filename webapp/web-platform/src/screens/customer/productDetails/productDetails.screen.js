@@ -549,6 +549,18 @@ class ProductDetails extends React.Component {
                             // alert("Go to home")
                             window.open(this.state.store.instagramUrl);
                         }}
+
+                        // display whatsapp
+                        displayToWhatsapp={this.state.store.whatsappNumber != null}
+                        goToWhatsapp={() => {
+                            window.open("https://wa.me/" + this.state.store.whatsappNumber);
+                        }}
+
+                        // display facebook
+                        displayToFacebook={this.state.store.facebookUrl != null}
+                        goToFacebook={() => {
+                            window.open(this.state.store.facebookUrl);
+                        }}
                     />
 
                 </Container>

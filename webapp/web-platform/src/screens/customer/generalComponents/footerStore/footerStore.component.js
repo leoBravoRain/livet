@@ -68,12 +68,12 @@ class FooterStore extends React.Component {
                     <Button
                         // align="center"
                         size="small"
-                        color="primary"
+                        color="black"
                         // variant="contained"
                         onClick={this.props.goToInstagram}
                         >
                         <Instagram 
-                            color = "primary"
+                            // color = "black"
                         />
                     </Button>
 
@@ -85,12 +85,12 @@ class FooterStore extends React.Component {
                         <Button
                         // align="center"
                         size="small"
-                        color="primary"
+                        color="black"
                         // variant="contained"
                         onClick={this.props.goToWhatsapp}
                         >
                             <WhatsApp
-                                color="primary"
+                                // color="black"
                                 />
                         </Button>
                     }
@@ -103,12 +103,12 @@ class FooterStore extends React.Component {
                         <Button
                             // align="center"
                             size="small"
-                            color="primary"
+                            color="black"
                             // variant="contained"
                             onClick={this.props.goToFacebook}
                         >
                             <Facebook
-                                color="primary"
+                                // colsor="black"
                             />
                         </Button>
 

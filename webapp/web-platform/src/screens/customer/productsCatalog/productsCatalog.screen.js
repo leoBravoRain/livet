@@ -360,7 +360,8 @@ class ProductsCatalog extends React.Component {
                                     <Button
                                         // align="center"
                                         size="small"
-                                        color="primary"
+                                        // color="primary"
+                                        color = "black"
                                         // variant="contained"
                                         onClick={() => {
                                             // window.open("https://wa.me/" + workshop.teacherMobileNumber + "?text=Hola, quiero tomar una clase en tu curso de '" + workshop.title + "' que aparece en la plataforma online")
