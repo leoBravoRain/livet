@@ -284,7 +284,9 @@ class ProductDetails extends React.Component {
                 // this is to center content
                 <Container
                     style = {{
-                        // backgroundColor: "red"
+                        // backgroundColor: "red",
+                        // display: "flex",
+                        // flexGrow: 1,
                     }}
                 >
 
@@ -310,6 +312,7 @@ class ProductDetails extends React.Component {
                     {/* this is real container */}
                     <Grid
                         container
+                        spacing={3}
                         style={{
                             // padding: 20,
                             // margin: 5,
@@ -318,6 +321,7 @@ class ProductDetails extends React.Component {
                             // display: "flex",
                             // flexDirection: "column",
                             // backgroundColor: "yellow",
+                            // flexGrow: 1,
                         }}
                     >
 
@@ -325,6 +329,9 @@ class ProductDetails extends React.Component {
 
                         {/* pictures */}
                         <Grid
+                            item
+                            xs={12}
+                            md={4}
                             item
                             style={{
                                 // padding: 20,
@@ -341,8 +348,8 @@ class ProductDetails extends React.Component {
                             <img
                                 src={this.state.product.image}
                                 alt="image"
-                                width="400px"
-                                heigh="400px"
+                                width="300px"
+                                heigh="300px"
                             />
 
                             {/* aditinoal information */}
@@ -392,6 +399,8 @@ class ProductDetails extends React.Component {
                         {/* general information */}
                         <Grid
                             item
+                            xs={12}
+                            md={4}
                             style={{
                                 // padding: 20,
                                 margin: 10,

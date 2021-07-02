@@ -305,10 +305,10 @@ class ShoppingCart extends React.Component {
                                         }
 
                                             <TableRow style={{ fontWeight: "bold" }} >
-                                                <TableCell align="right" style={{ fontWeight: "bold", fontSize: "20px" }}>Total</TableCell>
                                                 <TableCell align="right"> </TableCell>
                                                 <TableCell align="right"> </TableCell>
                                                 <TableCell align="right"> </TableCell>
+                                                <TableCell align="right" style={{ fontWeight: "bold", fontSize: "25px" }}> Total </TableCell>
                                                 <TableCell align="right" style={{ fontWeight: "bold" }}>{this.state.totalSales}</TableCell>
                                             </TableRow>
 
@@ -337,18 +337,27 @@ class ShoppingCart extends React.Component {
                     </Container>
 
                     {/* button to go to buy */}
-                    <Button
-                        align="center"
-                        variant="contained"
-                        color="primary"
-                        disabled = {!this.state.sales.length>0}
-                        onClick={() => {
-                            this.props.history.push('/saleConfirmation/' + this.props.match.params.store_id);
-                            // alert("go to pay");
+                    <Container
+                        style = {{
+                            display: "flex",
+                            justifyContent: "center",
                         }}
                     >
-                        Confirmar compra
-                    </Button>
+
+                        <Button
+                            align="center"
+                            variant="contained"
+                            color="primary"
+                            // size = "small"
+                            disabled = {!this.state.sales.length>0}
+                            onClick={() => {
+                                this.props.history.push('/saleConfirmation/' + this.props.match.params.store_id);
+                                // alert("go to pay");
+                            }}
+                            >
+                            Confirmar compra
+                        </Button>
+                    </Container>
 
                     
                     {/* footer */}

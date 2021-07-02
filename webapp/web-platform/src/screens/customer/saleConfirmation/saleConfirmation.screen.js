@@ -108,12 +108,32 @@ class SaleConfirmation extends React.Component {
                     store["id"] = doc.id;
                     // console.log(store);
 
+                    // getting total sales
+
+                    // get cart
+                    var productsArrayCart = JSON.parse(localStorage.getItem('productsArrayCart'));
+
+                    // list of produts string
+                    var totalSales = 0.0;
+
+                    // string with products, formats and units
+                    productsArrayCart.forEach((product, idxProd) => {
+                        // totalSales += parseInt(product.units) * parseFloat(product.product.saleFormats[product.formatIndex].price);
+                        product.formatIndexList.forEach((formatIndex, index) => {
+                            // totalSales += parseInt(product.units) * parseFloat(product.product.saleFormats[product.formatIndex].price);
+                            totalSales += parseInt(product.unitsList[index]) * parseFloat(product.product.saleFormats[formatIndex].price);
+                        });
+                    });
+
                     // update state
                     this.setState({
 
                         // update products
                         store: store,
                         loading: false,
+
+                        // total sales
+                        totalSales: totalSales,
 
                     });
                 }
@@ -253,6 +273,8 @@ class SaleConfirmation extends React.Component {
                         // backgroundColor: "yellow" 
                         display: "flex",
                         flexDirection: "column",
+                        // justifyContent: "center",
+                        // alignContent: "center",
 
                     }}
                 >
@@ -278,15 +300,15 @@ class SaleConfirmation extends React.Component {
 
                     {/* section title */}
                     <Typography align="center" variant="h4" component="h4" gutterBottom>
-                        Confirmar la compra
+                        Completa tus datos
                     </Typography>
 
                     {/* informatino to fill */}
                     <FormControl
-                    // style={{
-                    //     width: "50%",
-                    //     alignSelf: "center",
-                    // }}
+                        style={{
+                            // width: "50%",
+                            // alignSelf: "center",
+                        }}
                     >
 
                         {/* customer address */}
@@ -296,6 +318,7 @@ class SaleConfirmation extends React.Component {
 
                         {/* customer name */}
                         <TextField
+                            variant="outlined"
                             required
                             // id="standard-uncontrolled"
                             label="Nombre"
@@ -308,6 +331,7 @@ class SaleConfirmation extends React.Component {
 
                         {/* customer email */}
                         <TextField
+                            variant="outlined"
                             required
                             // id="standard-uncontrolled"
                             label="Correo Electrónico"
@@ -320,6 +344,7 @@ class SaleConfirmation extends React.Component {
 
                         {/* customer phone mobiel */}
                         <TextField
+                            variant="outlined"
                             required
                             // id="standard-uncontrolled"
                             label="Celular"
@@ -337,6 +362,7 @@ class SaleConfirmation extends React.Component {
                         
                         {/* region */}
                         <TextField
+                            variant="outlined"
                             required
                             // id="standard-uncontrolled"
                             label="Región"
@@ -349,6 +375,7 @@ class SaleConfirmation extends React.Component {
 
                         {/* city */}
                         <TextField
+                            variant="outlined"
                             required
                             // id="standard-uncontrolled"
                             label="Ciudad"
@@ -361,6 +388,7 @@ class SaleConfirmation extends React.Component {
 
                         {/* street */}
                         <TextField
+                            variant="outlined"
                             required
                             // id="standard-uncontrolled"
                             label="Calle"
@@ -373,6 +401,7 @@ class SaleConfirmation extends React.Component {
 
                         {/* number */}
                         <TextField
+                            variant="outlined"
                             required
                             // id="standard-uncontrolled"
                             label="Número"
@@ -406,16 +435,37 @@ class SaleConfirmation extends React.Component {
 
                         </Typography> */}
 
+                        {/* total sales */}
+                        <Container
+                            style = {{
+                                margin: 30,
+                                // backgrousndColor: "yellow",
+                                alignSelf:"center",
+                            }}
+                        >
+                            <Typography align="center" variant="h6" component="h6" gutterBottom>
+                                Total: $ {this.state.totalSales}
+                            </Typography>
+                        </Container>
 
                         {/* convert to post button */}
-                        <Button
-                            align="center"
-                            variant="contained"
-                            color="primary"
-                            onClick={this.confirm_sale}
+                        <Container
+                            style = {{
+                                display: "flex",
+                                justifyContent: "center",
+                            }}
                         >
-                            Finalizar compra
-                        </Button>
+
+                            <Button
+                                align="center"
+                                variant="contained"
+                                color="primary"
+                                onClick={this.confirm_sale}
+                                >
+                                Finalizar compra
+                            </Button>
+
+                        </Container>
 
                     </FormControl>
 
