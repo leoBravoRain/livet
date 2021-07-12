@@ -466,10 +466,11 @@ class CreateNewProduct extends React.Component {
                     <Container
                         // item xs={12} sm={12}
                         style={{
-                            // backgroundColor: "yellow" 
+                            // backgroundColor: "yellow",
                             display: "flex",
                             flexDirection: "column",
                             justifyContent: "center",
+                            alignItems: "center",
                         }}
                     >
 
@@ -535,6 +536,8 @@ class CreateNewProduct extends React.Component {
                             addOtherSaleFormat={this.addOtherSaleFormat}
                             removeSaleFormat={e=>this.removeSaleFormat(e)}
                             changeProductSaleFormat={(e, idx, item) => this.changeProductSaleFormat(e, idx, item)}
+
+                            changeProductImage = {e => {this.setState({ productImage: URL.createObjectURL(e.target.files[0])})}}
                         />
 
 

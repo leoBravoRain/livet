@@ -20,6 +20,8 @@ import Select from '@material-ui/core/Select';
 // import Loyalty from "@material-ui/icons/Loyalty";
 // import MonetizationOn from "@material-ui/icons/MonetizationOn";
 
+import Delete from '@material-ui/icons/Delete';
+
 // firebase
 // import { auth } from "../../../libraries/firebase/firebase";
 
@@ -46,33 +48,75 @@ class ProductInformationForm extends React.Component {
                     flexDirection: "row",
                     flexWrap: "wrap",
                     justifyContent: "center",
+                    alignItems: "center",
                     // backgroundColor: "green",
                     // // marginTop:10,
                     // // marginBottom: 10,
                 }}
             >
 
-                {/* original information */}
-                {/* <Grid
-                    container
+                {/* activate / deactivate product */}
+                <Container
                     style={{
-                        // display: "flex",
+                        // backgroundColor: "red",
+                        display: "flex",
+                        flexDirection: "row",
+                        margin: 20,
                         justifyContent: "center",
-                        // alignContent: "center",
-                        // backgroundColor: "green",
-
                     }}
-                > */}
+                >
 
-                    {/* original image */}
-                    {/* <Grid
+                    <Typography
+                        gutterBottom
+                        variant="body1"
+                        component="p"
+                    // style={{
+                    //     // margin: 50,
+                    //     display: "flex",
+                    //     flexWrap: "wrap",
+                    //     backgroundColor: "rgba(173, 216, 230, 0.5)",
+                    //     borderRadius: 50,
+                    //     textAlign: "center",
+                    //     justifyContent: "center",
+                    //     padding: 10,
+                    // }}
+                    >
+                        Visible en tienda
+                        </Typography>
+
+                    <Switch
+                        checked={this.props.visible}
+                        onChange={this.props.changeVisible}
+                        // name="checkedA"
+                        // inputProps={{ 'aria-label': 'secondary checkbox' }}
+                        // label = "oaisjd"
+                        // name="checkedB"
+                        color="primary"
+                    />
+                </Container>
+
+               
+               {/* image */}
+                <Grid
+                    container
+                    // style={{
+                    //     // display: "flex",
+                    //     // justifyContent: "center",
+                    //     // alignContent: "center",
+                    //     // backgroundColor: "green",
+
+                    // }}
+                >
+
+                    {/* image */}
+                    <Grid
                         item
                         xs={12}
                         md={6}
                         style={{
                             display: "flex",
                             justifyContent: "center",
-                            // alignContent: "center",
+                            alignItems: "center",
                             // backgroundColor: "red",
 
                         }}
@@ -81,21 +125,55 @@ class ProductInformationForm extends React.Component {
                         <img
                             // src={this.state.post.image} 
                             // src={this.state.post != null ? this.state.post.media_url : this.state.productImage}
-                            src = {this.props.productImage}
+                            src={this.props.productImage}
                             alt="image"
                             width="300px"
                             heigh="300px"
-                        /> */}
+                        />
+                    </Grid>
 
+
+                    <Grid
+                        item
+                        xs={12}
+                        md={6}
+                        style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            // backgroundColor: "yellow",
+
+                        }}
+                    >
+
+                        <Typography
+                            gutterBottom
+                            variant="body2"
+                            component="p"
+                            // style={{
+                            //     // margin: 50,
+                            //     display: "flex",
+                            //     flexWrap: "wrap",
+                            //     backgroundColor: "rgba(173, 216, 230, 0.5)",
+                            //     borderRadius: 50,
+                            //     textAlign: "center",
+                            //     justifyContent: "center",
+                            //     padding: 10,
+                            // }}
+                        >
+                            Foto del producto
+                        </Typography>
                         {/* upload photo */}
-                        {/* <input
+                        <input
                             style={{ margin: 10 }}
                             id="file_input"
                             type="file"
                             name="agregar foto"
                             // className="form-control p-1"
                             accept="image/png, image/jpeg"
-                        /> */}
+                            onChange={this.props.changeProductImage}
+                        />
 
 
                         {/* <Typography
@@ -117,78 +195,15 @@ class ProductInformationForm extends React.Component {
                         </Typography> */}
 
 
-                    {/* </Grid> */}
+                    </Grid>
 
-                    {/* <Grid
-                        item
-                        xs={12}
-                        md={6}
-                        style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            // alignContent: "center",
-                            flexDirection: "column",
-                            // backgroundColor: "yellow",
+                </Grid>
 
-                        }}
-                    > */}
-
-                        {/* <Chip 
-                                    label="Si quieres puedes copiar parte de este texto y pegarlo en alguno de los campos de tu producto" 
-                                    // color="primary"
-                                    // margin = "100"
-                                    style = {{
-                                        margin: 20,
-                                    }}
-
-                                /> */}
-
-                        {/* <Typography
-                            gutterBottom
-                            variant="body2"
-                            component="p"
-                            style={{
-                                // margin: 50,
-                                display: "flex",
-                                flexWrap: "wrap",
-                                backgroundColor: "rgba(173, 216, 230, 0.5)",
-                                borderRadius: 50,
-                                textAlign: "center",
-                                // justifyContent: "center",
-                                padding: 10,
-                            }}
-                        >
-                            Si quieres puedes copiar parte de este texto y pegarlo en alguno de los campos de tu producto
-
-                                </Typography> */}
-
-                        {/* originla text */}
-                        {/* <Typography align="center" variant="body2" component="p" gutterBottom> */}
-                            {/* {this.state.post.text} */}
-                            {/* {this.state.post != null ? this.state.post.caption : ""} */}
-                            {/* {this.props.defaultIGCaption} */}
-                        {/* </Typography> */}
-
-                        {/* button to copy text */}
-                        {/* <Button
-                                    align="center"
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={() => {
-                                        console.log(2ojsad);
-                                    }}
-                                >
-                                    Copiar texto
-                                </Button> */}
-
-                    {/* </Grid> */}
-
-                {/* </Grid> */}
 
                 {/* informatino to fill */}
                 <FormControl
                 // style={{
-                //     width: "50%",
+                //     // width: "50%",
                 //     alignSelf: "center",
                 // }}
                 >
@@ -202,6 +217,7 @@ class ProductInformationForm extends React.Component {
                     <TextField
                         // id="standard-uncontrolled"
                         label="Nombre producto"
+                        variant = "outlined"
                         // type="Nombre producto"
                         // defaultValue="Correo electrónico"
                         margin="normal"
@@ -215,6 +231,7 @@ class ProductInformationForm extends React.Component {
                     <TextField
                         // id="standard-uncontrolled"
                         label="Descripción del producto"
+                        variant="outlined"
                         // type="Descripción"
                         multiline
                         // defaultValue="Correo electrónico"
@@ -237,50 +254,14 @@ class ProductInformationForm extends React.Component {
                                 value={this.state.productVar1}
                             /> */}
 
-                    {/* activate / deactivate product */}
-                    <Container
-                        style = {{
-                            display: "flex",
-                            flexDirection: "row",
-                            margin: 10,
-                        }}
-                    >
-                        
-                        <Typography
-                            gutterBottom
-                            variant="body2"
-                            component="p"
-                            // style={{
-                            //     // margin: 50,
-                            //     display: "flex",
-                            //     flexWrap: "wrap",
-                            //     backgroundColor: "rgba(173, 216, 230, 0.5)",
-                            //     borderRadius: 50,
-                            //     textAlign: "center",
-                            //     justifyContent: "center",
-                            //     padding: 10,
-                            // }}
-                        >
-                            Visible en tienda
-                        </Typography>
-
-                        <Switch
-                            checked={this.props.visible}
-                            onChange={this.props.changeVisible}
-                            // name="checkedA"
-                            // inputProps={{ 'aria-label': 'secondary checkbox' }}
-                            // label = "oaisjd"
-                            // name="checkedB"
-                            color="primary"
-                        />
-                    </Container>
 
                     {/* category */}
                     {/* select category */}
                     <Typography
+                        align = "center"
                         gutterBottom
-                        variant="body2"
-                        component="p"
+                        variant="h6"
+                        component="h6"
                     // style={{
                     //     // margin: 50,
                     //     display: "flex",
@@ -321,7 +302,8 @@ class ProductInformationForm extends React.Component {
 
                             <TextField
                                 // id="standard-uncontrolled"
-                                label="Crear nueva categoría"
+                                label="Nombre de nueva categoría"
+                                variant="outlined"
                                 // type="Nombre producto"
                                 // defaultValue="Correo electrónico"
                                 margin="normal"
@@ -335,25 +317,30 @@ class ProductInformationForm extends React.Component {
 
                     {/* sale formats */}
                     <Container
-                        // style = {{
-                        //     backgroundColor: "red",
-                        // }}
+                        style = {{
+                            // backgroundColor: "red",
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent:"center",
+                            alignItems: "center",
+                        }}
                     >
 
                         <Typography
+                            align="center"
                             gutterBottom
-                            variant="body2"
-                            component="p"
-                            style={{
-                                margin: 30,
-                                // display: "flex",
-                                // flexWrap: "wrap",
-                                // backgroundColor: "rgba(173, 216, 230, 0.5)",
-                                // borderRadius: 50,
-                                // textAlign: "center",
-                                // justifyContent: "center",
-                                // padding: 10,
-                            }}
+                            variant="h6"
+                            component="h6"
+                            // style={{
+                            //     margin: 30,
+                            //     // display: "flex",
+                            //     // flexWrap: "wrap",
+                            //     // backgroundColor: "rgba(173, 216, 230, 0.5)",
+                            //     // borderRadius: 50,
+                            //     // textAlign: "center",
+                            //     // justifyContent: "center",
+                            //     // padding: 10,
+                            // }}
                         >
                             Formatos de venta
                         </Typography>
@@ -365,78 +352,119 @@ class ProductInformationForm extends React.Component {
                             // for (var i = 0; i < productSaleFormats.length; i++) {
 
                                 return(
-                                    <Container>
+                                    <Grid
+                                        container
+                                        spacing = {3}
+                                    >
 
                                         {/* product format */}
-                                        <TextField
-                                            // id="standard-uncontrolled"
-                                            label="Formato de venta"
-                                            // type="number"
-                                            key = {idx}
-                                            // defaultValue="Correo electrónico"
-                                            margin="normal"
-                                            // onChange={(e) => this.setState({ productPrice: e.target.value })}
-                                            onChange={(e)=>this.props.changeProductSaleFormat(e, idx,"format")}
-                                            // onChange={this.props.changeProductSaleFormat(e, idx)}
-                                            
-                                            // value={this.state.productDescription}
-                                            value={this.props.productSaleFormats[idx].format}
-                                            // value={this.state.productPrice}
-                                            
-                                            />
+                                        <Grid
+                                            item
+                                            xs={12}
+                                            md={3}
+                                        >
+
+                                            <TextField
+                                                // id="standard-uncontrolled"
+                                                label="Formato de venta"
+                                                variant="outlined"
+                                                // type="number"
+                                                key = {idx}
+                                                // defaultValue="Correo electrónico"
+                                                margin="normal"
+                                                // onChange={(e) => this.setState({ productPrice: e.target.value })}
+                                                onChange={(e)=>this.props.changeProductSaleFormat(e, idx,"format")}
+                                                // onChange={this.props.changeProductSaleFormat(e, idx)}
+                                                
+                                                // value={this.state.productDescription}
+                                                value={this.props.productSaleFormats[idx].format}
+                                                // value={this.state.productPrice}
+                                                
+                                                />
+
+                                        </Grid>
                 
                                         {/* product price */}
-                                        <TextField
-                                            // id="standard-uncontrolled"
-                                            label="Precio del producto"
-                                            type="number"
-                                            // defaultValue="Correo electrónico"
-                                            margin="normal"
-                                            // onChange={(e) => this.setState({ productPrice: e.target.value })}
-                                            // onChange={this.props.changeProductPrice}
-                                            
-                                            // // value={this.state.productDescription}
-                                            // value={this.props.productPrice}
-                                            onChange={(e) => this.props.changeProductSaleFormat(e, idx, "price")}
-                                            value={this.props.productSaleFormats[idx].price}
-                                            // value={this.state.productPrice}
-                                            
-                                            />
+                                        <Grid
+                                            item
+                                            xs={12}
+                                            md={3}
+                                        >
+                                            <TextField
+                                                variant="outlined"
+                                                // id="standard-uncontrolled"
+                                                label="Precio del producto"
+                                                type="number"
+                                                // defaultValue="Correo electrónico"
+                                                margin="normal"
+                                                // onChange={(e) => this.setState({ productPrice: e.target.value })}
+                                                // onChange={this.props.changeProductPrice}
+                                                
+                                                // // value={this.state.productDescription}
+                                                // value={this.props.productPrice}
+                                                onChange={(e) => this.props.changeProductSaleFormat(e, idx, "price")}
+                                                value={this.props.productSaleFormats[idx].price}
+                                                // value={this.state.productPrice}
+                                                
+                                                />
+                                        </Grid>
                 
                                         {/* stock */}
-                                        <TextField
-                                            // id="standard-uncontrolled"
-                                            label="Unidades en stock"
-                                            // multiline
-                                            type="number"
-                                            // defaultValue="Correo electrónico"
-                                            margin="normal"
-                                            style = {{
-                                                backgroundColor: this.props.productSaleFormats[idx].stock != null && this.props.productSaleFormats[idx].stock == 0 ? "red": "white",
-                                            }}
-                                            // onChange={this.props.changeProductStock}
-                                            // value={this.props.productStock}
-                                            onChange={(e) => this.props.changeProductSaleFormat(e, idx, "stock")}
-                                            value={this.props.productSaleFormats[idx].stock}
+                                        <Grid
+                                            item
+                                            xs={12}
+                                            md={3}
+                                        >
+                                            <TextField
+                                                variant = "outlined"
+                                                // id="standard-uncontrolled"
+                                                label="Unidades en stock"
+                                                // multiline
+                                                type="number"
+                                                // defaultValue="Correo electrónico"
+                                                margin="normal"
+                                                style = {{
+                                                    backgroundColor: this.props.productSaleFormats[idx].stock != null && this.props.productSaleFormats[idx].stock == 0 ? "red": "white",
+                                                }}
+                                                // onChange={this.props.changeProductStock}
+                                                // value={this.props.productStock}
+                                                onChange={(e) => this.props.changeProductSaleFormat(e, idx, "stock")}
+                                                value={this.props.productSaleFormats[idx].stock}
 
-                                        />
+                                            />
+
+                                        </Grid>
 
                                         {/* remove from formats */}
-                                        <Button
-                                            align="center"
-                                            // variant="contained"
-                                            color="primary"
-                                            onClick={() => {
-                                                // console.log("2ojsad");
-                                                // alert("add other");
-                                                this.props.removeSaleFormat(idx);
-
+                                        <Grid
+                                            item
+                                            xs={12}
+                                            md={3}
+                                            style = {{
+                                                // backgroundColor: "red",
+                                                display: "flex",
+                                                // justifyContent: "left",
+                                                // alignItems: "left",
                                             }}
                                         >
-                                            Eliminar
-                                        </Button>
+                                            <Button
+                                                align="center"
+                                                // variant="contained"
+                                                color="primary"
+                                                onClick={() => {
+                                                    // console.log("2ojsad");
+                                                    // alert("add other");
+                                                    this.props.removeSaleFormat(idx);
 
-                                    </Container>
+                                                }}
+                                            >   
+                                                <Delete />
+                                                {/* Eliminar */}
+                                            </Button>
+
+                                        </Grid>
+
+                                    </Grid>
                                 )
 
                             })
@@ -459,140 +487,6 @@ class ProductInformationForm extends React.Component {
 
                     {/* sale formats */}
                     </Container>
-
-                    {/* original information */}
-                    <Grid
-                        container
-                        style={{
-                            // display: "flex",
-                            justifyContent: "center",
-                            // alignContent: "center",
-                            // backgroundColor: "green",
-                            
-                        }}
-                    >
-
-                        {/* original image */}
-                        <Grid
-                            item
-                            xs={12}
-                            md={6}
-                            style={{
-                                display: "flex",
-                                justifyContent: "center",
-                                // alignContent: "center",
-                                // backgroundColor: "red",
-
-                            }}
-                        >
-
-                            <img
-                                // src={this.state.post.image} 
-                                // src={this.state.post != null ? this.state.post.media_url : this.state.productImage}
-                                src={this.props.productImage}
-                                alt="image"
-                                width="300px"
-                                heigh="300px"
-                            />
-
-                            {/* upload photo */}
-                            <input
-                                style={{ margin: 10 }}
-                                id="file_input"
-                                type="file"
-                                name="agregar foto"
-                                // className="form-control p-1"
-                                accept="image/png, image/jpeg"
-                            />
-
-
-                            <Typography
-                                gutterBottom
-                                variant="body2"
-                                component="p"
-                                style={{
-                                    // margin: 50,
-                                    display: "flex",
-                                    flexWrap: "wrap",
-                                    backgroundColor: "rgba(173, 216, 230, 0.5)",
-                                    borderRadius: 50,
-                                    textAlign: "center",
-                                    justifyContent: "center",
-                                    padding: 10,
-                                }}
-                            >
-                                {/* Si contratas Livet, puedes agregar tu propia foto de perfil. Si es que no, te aparecerá esta foto por defecto */}
-                                Esta imagen se actualizará una vez que crees o actualices el producto
-                        </Typography>
-
-
-                        </Grid>
-
-                        {/* <Grid
-                        item
-                        xs={12}
-                        md={6}
-                        style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            // alignContent: "center",
-                            flexDirection: "column",
-                            // backgroundColor: "yellow",
-
-                        }}
-                    > */}
-
-                        {/* <Chip 
-                                    label="Si quieres puedes copiar parte de este texto y pegarlo en alguno de los campos de tu producto" 
-                                    // color="primary"
-                                    // margin = "100"
-                                    style = {{
-                                        margin: 20,
-                                    }}
-
-                                /> */}
-
-                        {/* <Typography
-                            gutterBottom
-                            variant="body2"
-                            component="p"
-                            style={{
-                                // margin: 50,
-                                display: "flex",
-                                flexWrap: "wrap",
-                                backgroundColor: "rgba(173, 216, 230, 0.5)",
-                                borderRadius: 50,
-                                textAlign: "center",
-                                // justifyContent: "center",
-                                padding: 10,
-                            }}
-                        >
-                            Si quieres puedes copiar parte de este texto y pegarlo en alguno de los campos de tu producto
-
-                                </Typography> */}
-
-                        {/* originla text */}
-                        {/* <Typography align="center" variant="body2" component="p" gutterBottom> */}
-                        {/* {this.state.post.text} */}
-                        {/* {this.state.post != null ? this.state.post.caption : ""} */}
-                        {/* {this.props.defaultIGCaption} */}
-                        {/* </Typography> */}
-
-                        {/* button to copy text */}
-                        {/* <Button
-                                    align="center"
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={() => {
-                                        console.log(2ojsad);
-                                    }}
-                                >
-                                    Copiar texto
-                                </Button> */}
-
-                        {/* </Grid> */}
-
-                    </Grid>
 
 
                     {/* convert to post button */}
