@@ -34,6 +34,10 @@ import Send from "@material-ui/icons/Send";
 
 // import MenuBar from "../generalComponents/menuBar.component";
 
+// remove this comment
+
+
+
 // firebase
 import {
     auth,
