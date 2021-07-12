@@ -7,6 +7,7 @@ import React from "react";
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 import { Button } from "@material-ui/core";
+import Link from '@material-ui/core/Link';
 import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -93,13 +94,14 @@ class Register extends React.Component {
                 >
 
                     {/* information */}
-                    <Typography align="center" variant="h4" component="h4" gutterBottom>
-                        Registro en Livet
+                    <Typography align="center" variant="h3" component="h3" gutterBottom>
+                        {/* Registro en Livet */}
+                        Registrate
                     </Typography>
 
-                    <Typography align="center" variant="body2" component="p" gutterBottom>
+                    {/* <Typography align="center" variant="body2" component="p" gutterBottom>
                         Ingresa tu email  y una contraseña
-                    </Typography>
+                    </Typography> */}
 
 
                     {/* formulario para registro */}
@@ -112,6 +114,7 @@ class Register extends React.Component {
 
                         <TextField
                             // id="standard-uncontrolled"
+                            variant="outlined"
                             label="Email"
                             // defaultValue="Correo electrónico"
                             margin="normal"
@@ -120,6 +123,7 @@ class Register extends React.Component {
                         />
 
                         <TextField
+                            variant="outlined"
                             // id="standard-uncontrolled"
                             label="Contraseña"
                             type="password"
@@ -130,10 +134,23 @@ class Register extends React.Component {
                         />
 
                         <Button align="center" variant="contained" color="primary" onClick={this.on_submit}>
-                            Registrarme
+                            {/* Registrarme */}
+                            Comenzar
                         </Button>
 
                     </FormControl>
+
+                    {/* <Typography align="center" variant="body2" component="p" gutterBottom */}
+                    <Link 
+                        href="#"
+                        align="center"
+                        // gutterBottom
+                        // margin = "normal"
+                        onClick={() => this.props.history.push('/login')}
+                    >
+                        {/* Registro en Livet */}
+                        <a href> ¿Ya estas registrado? Pincha aquí </a>
+                    </Link>
 
                 </Container>
 

@@ -416,8 +416,8 @@ class ProductDetails extends React.Component {
                             {/* name */}
                             <Typography 
                                 align="center" 
-                                variant="h3" 
-                                component="h3" 
+                                variant="h4" 
+                                component="h4" 
                                 gutterBottom
                             >
                                 {this.state.product.name}
