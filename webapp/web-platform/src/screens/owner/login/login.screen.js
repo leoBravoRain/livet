@@ -10,6 +10,7 @@ import { Button } from "@material-ui/core";
 import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Link from '@material-ui/core/Link';
 // import Grid from '@material-ui/core/Grid';
 
 // firebase
@@ -133,9 +134,9 @@ class Login extends React.Component {
                             Transforma tu Instagram en un E-commerce en solo minutos
                         </Typography> */}
 
-                        <Typography align="center" variant="body2" component="p" gutterBottom>
+                        {/* <Typography align="center" variant="body2" component="p" gutterBottom>
                             Ingresa tu email y contraseña
-                        </Typography>
+                        </Typography> */}
 
 
                         <FormControl
@@ -148,6 +149,7 @@ class Login extends React.Component {
                             <TextField
                                 // id="standard-uncontrolled"
                                 label="Email"
+                                variant = "outlined"
                                 // defaultValue="Correo electrónico"
                                 margin="normal"
                                 onChange={(e) => this.setState({ email: e.target.value })}
@@ -158,6 +160,7 @@ class Login extends React.Component {
                                 // id="standard-uncontrolled"
                                 label="Contraseña"
                                 type="password"
+                                variant="outlined"
                                 // defaultValue="Correo electrónico"
                                 margin="normal"
                                 onChange={(e) => this.setState({ password: e.target.value })}
@@ -185,12 +188,17 @@ class Login extends React.Component {
                         >
 
                             {/* information */}
-                            <Typography align="center" variant="body2" component="p" gutterBottom>
-                                Si aún no estas registrado, inscribete aquí
-                            </Typography>
+                            {/* <Typography align="center" variant="body2" component="p" gutterBottom> */}
+                            <Link
+                                href="#"
+                                align="center"
+                            onClick={() => this.props.history.push('/register')}
+                            >
+                                Si aún no estas registrado, registrate aquí
+                            </Link>
 
                             {/* register button */}
-                            <Button 
+                            {/* <Button 
                                 align="center" 
                                 variant="contained" 
                                 color="primary"
@@ -200,7 +208,7 @@ class Login extends React.Component {
                                 }}
                             >
                                 Registrarme
-                            </Button>
+                            </Button> */}
                         </Container>
 
                     </Container>
