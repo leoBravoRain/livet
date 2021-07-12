@@ -156,8 +156,8 @@ class ChooseStore extends React.Component {
                         </Button>
 
                         {/* title */}
-                        <Typography align="center" variant="h4" component="h4" gutterBottom>
-                            Tus tiendas asociadas
+                        <Typography align="center" variant="h3" component="h3" gutterBottom>
+                            Tus tiendas creadas
                         </Typography>
 
                         {/* create new store */}
@@ -259,12 +259,12 @@ class ChooseStore extends React.Component {
 
                                 <Typography 
                                     align="center" 
-                                    variant="body2" 
+                                    variant="body1" 
                                     component="p" 
                                     gutterBottom 
                                     // onClick={() => alert("oaijsd")}
                                 >
-                                    No tienes tiendas asociadas, ¡Comienza creando una!
+                                    No tienes tiendas creadas, ¡Comienza creando una!
                                 </Typography>
                         }
 
