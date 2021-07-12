@@ -3,24 +3,24 @@ import React from "react";
 // import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 // material ui
-import Paper from '@material-ui/core/Paper';
+// import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 // import TextField from '@material-ui/core/TextField';
 import { Button } from "@material-ui/core";
 // import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from "@material-ui/core/CircularProgress";
-// import Grid from '@material-ui/core/Grid';
+import Grid from '@material-ui/core/Grid';
 
-// import Card from '@material-ui/core/Card';
-// import CardActionArea from '@material-ui/core/CardActionArea';
-// import CardActions from '@material-ui/core/CardActions';
-// import CardContent from '@material-ui/core/CardContent';
-// import CardMedia from '@material-ui/core/CardMedia';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
 // import Modal from '@material-ui/core/Modal';
 import Close from '@material-ui/icons/Close';
 import Add from "@material-ui/icons/Add";
-import Send from "@material-ui/icons/Send";
+// import Send from "@material-ui/icons/Send";
 
 // import Schedule from '@material-ui/icons/Schedule';
 
@@ -137,6 +137,8 @@ class ChooseStore extends React.Component {
                             display: "flex",
                             flexDirection: "column",
                             justifyContent: "center",
+                            // alignContent: "center",
+                            alignItems: "center",
                         }}
                     >
 
@@ -175,6 +177,10 @@ class ChooseStore extends React.Component {
                                 // alert("go to create new store");
                                 this.props.history.push('/createNewStoreForm')
                             }}
+                            // style = {{
+                            //     width: "50%"
+                            // }}
+                            // width = {0.1}
                         >
                             <Add/>
                             Crear nueva tienda
@@ -188,76 +194,199 @@ class ChooseStore extends React.Component {
 
                             ?
 
-                                // stores list
-                                <Container
-                                    style = {{
-                                        marginTop: 20,
+                            <Grid
+                                    container
+                                    spacing={3}
+                                    style={{
+                                        // padding: 20,
+                                        // margin: 5,
+                                        // alignContent: "center",
+                                        justifyContent: "center",
+                                        display: "flex",
+                                        // flexDirection: "column",
+                                        // backgroundColor: "green",
                                     }}
+
+                                // elevation={3}
                                 >
 
+                                    {/* each post */}
                                     {
-                                        this.state.stores.map((store) => {
 
-                                            return (
+                                        // check if there are posts
 
-                                                <Container
-                                                    style = {{
-                                                        display: "flex",
-                                                        flexDirection: "row",
-                                                        justifyContent: "center",
-                                                    }}
-                                                >
+                                            this.state.stores.map((store) => {
 
-                                                    {/* store name */}
-                                                    <Typography 
-                                                        align="center" 
-                                                        variant="body2" 
-                                                        component="p" 
-                                                        gutterBottom 
-                                                        // onClick = {() => alert("oaijsd")}
-                                                    >
-                                                        {store.name}
-                                                    </Typography>
+                                                return (
+
                                                     
-                                                    {/* go to */}
-                                                    <Button 
-                                                        align="center" 
-                                                        variant="contained" 
-                                                        color="primary" 
-                                                        onClick={() => {
-                                                            // console.log('/productsToSell/' + store.id)
-                                                            this.props.history.push('/productsToSell/' + store.id)
-                                                            // this.props.history.push('/postsFromSocialNetworks/' + store.id)
-                                                        }}
+                                                    // each product structure
+                                                    <Grid
+                                                        item
+                                                        xs={12}
+                                                        md={4}
                                                     >
-                                                        <Send />
-                                                        Ver tienda
-                                                    </Button>
 
-                                                    {/* go to */}
-                                                    <Button
-                                                        align="center"
-                                                        variant="contained"
-                                                        color="primary"
-                                                        onClick={() => {
-                                                            // console.log('/productsToSell/' + store.id)
-                                                            // alert("go to store");
-                                                            this.props.history.push('/editStore/' + store.id, {store: store})
-                                                            // this.props.history.push('/postsFromSocialNetworks/' + store.id)
-                                                        }}
-                                                    >
-                                                        <Send />
-                                                        Editar tienda
-                                                    </Button>
+                                                        <Card
+                                                            onClick={() => {
+                                                                // console.log('/productsToSell/' + store.id)
+                                                                this.props.history.push('/productsToSell/' + store.id)
+                                                                // this.props.history.push('/postsFromSocialNetworks/' + store.id)
+                                                            }}
+                                                            style = {{
+                                                                textAlign: "center",
+                                                            }}
+                                                        >
+                                                            <CardActionArea
+                                                            >
+                                                                <CardMedia
+                                                                    image={store.profilePhoto}
+                                                                    component="img"
+                                                                    alt="Contemplative Reptile"
+                                                                    height="200"
 
-                                                </Container>
+                                                                // title={workshop.name}
+                                                                />
 
-                                            );
-                                        })
+                                                                {/* contentn */}
+                                                                <CardContent>
+
+                                                                    {/* product name */}
+                                                                    <Typography gutterBottom variant="h5" component="h2">
+                                                                        {store.name}
+                                                                    </Typography>
+
+                                                                    {/* description */}
+                                                                    <Typography variant="body2" color="textSecondary" component="p">
+                                                                        {store.description}
+                                                                    </Typography>
+
+                                                                </CardContent>
+
+                                                            </CardActionArea>
+
+                                                            <CardActions
+                                                                style = {{
+                                                                    // backgroundColor: "red",
+                                                                    justifyContent: "center",
+                                                                }}
+                                                            >
+
+                                                                {/* go to */}
+                                                                <Button
+                                                                    align="center" 
+                                                                    variant="contained" 
+                                                                    color="primary" 
+                                                                    onClick={() => {
+                                                                        // console.log('/productsToSell/' + store.id)
+                                                                        this.props.history.push('/productsToSell/' + store.id)
+                                                                        // this.props.history.push('/postsFromSocialNetworks/' + store.id)
+                                                                    }}
+                                                                >
+                                                                    {/* <Send /> */}
+                                                                    Ver
+                                                                </Button>
+
+                                                                {/* go to */}
+                                                                <Button
+                                                                    align="center"
+                                                                    variant="contained"
+                                                                    color="primary"
+                                                                    onClick={() => {
+                                                                        // console.log('/productsToSell/' + store.id)
+                                                                        // alert("go to store");
+                                                                        this.props.history.push('/editStore/' + store.id, {store: store})
+                                                                        // this.props.history.push('/postsFromSocialNetworks/' + store.id)
+                                                                    }}
+                                                                >
+                                                                    {/* <Send /> */}
+                                                                    Editar
+                                                                </Button>
+                                
+                                                            </CardActions>
+
+                                                        </Card>
+
+                                                    </Grid>
+
+                                                );
+                                            })
 
                                     }
 
-                                </Container>
+                                </Grid>
+
+
+                                // stores list
+                                // <Container
+                                //     style = {{
+                                //         marginTop: 20,
+                                //     }}
+                                // >
+
+                                //     {
+                                //         this.state.stores.map((store) => {
+
+                                //             return (
+
+                                //                 <Container
+                                //                     style = {{
+                                //                         display: "flex",
+                                //                         flexDirection: "row",
+                                //                         justifyContent: "center",
+                                //                     }}
+                                //                 >
+
+                                //                     {/* store name */}
+                                //                     <Typography 
+                                //                         align="center" 
+                                //                         variant="body2" 
+                                //                         component="p" 
+                                //                         gutterBottom 
+                                //                         // onClick = {() => alert("oaijsd")}
+                                //                     >
+                                //                         {store.name}
+                                //                     </Typography>
+                                                    
+                                //                     {/* go to */}
+                                //                     <Button 
+                                //                         align="center" 
+                                //                         variant="contained" 
+                                //                         color="primary" 
+                                //                         onClick={() => {
+                                //                             // console.log('/productsToSell/' + store.id)
+                                //                             this.props.history.push('/productsToSell/' + store.id)
+                                //                             // this.props.history.push('/postsFromSocialNetworks/' + store.id)
+                                //                         }}
+                                //                     >
+                                //                         <Send />
+                                //                         Ver tienda
+                                //                     </Button>
+
+                                //                     {/* go to */}
+                                //                     <Button
+                                //                         align="center"
+                                //                         variant="contained"
+                                //                         color="primary"
+                                //                         onClick={() => {
+                                //                             // console.log('/productsToSell/' + store.id)
+                                //                             // alert("go to store");
+                                //                             this.props.history.push('/editStore/' + store.id, {store: store})
+                                //                             // this.props.history.push('/postsFromSocialNetworks/' + store.id)
+                                //                         }}
+                                //                     >
+                                //                         <Send />
+                                //                         Editar tienda
+                                //                     </Button>
+
+                                //                 </Container>
+
+                                //             );
+                                //         })
+
+                                //     }
+
+                                // </Container>
 
                             :
 

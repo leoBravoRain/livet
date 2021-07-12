@@ -123,6 +123,7 @@ class Login extends React.Component {
                             display: "flex",
                             flexDirection: "column",
                             justifyContent: "center",
+                            alignItems: "center",
                         }}
                     >
 
@@ -140,10 +141,10 @@ class Login extends React.Component {
 
 
                         <FormControl
-                            style={{
-                                width: "50%",
-                                alignSelf: "center",
-                            }}
+                            // style={{
+                            //     width: "50%",
+                            //     alignSelf: "center",
+                            // }}
                         >
 
                             <TextField

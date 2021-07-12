@@ -45,6 +45,7 @@ class StoreInformationForm extends React.Component {
                     flexDirection: "row",
                     flexWrap: "wrap",
                     justifyContent: "center",
+                    alignItems: "center",
                     // backgroundColor: "green",
                     // // marginTop:10,
                     // // marginBottom: 10,
@@ -53,10 +54,10 @@ class StoreInformationForm extends React.Component {
 
                 {/* informatino to fill */}
                 <FormControl
-                    style={{
-                        width: "100%",
-                        alignSelf: "center",
-                    }}
+                    // style={{
+                    //     width: "100%",
+                    //     alignSelf: "center",
+                    // }}
                 >
 
                     {/* name */}

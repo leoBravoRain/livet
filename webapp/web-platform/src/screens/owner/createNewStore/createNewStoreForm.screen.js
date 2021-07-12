@@ -235,6 +235,7 @@ class CreateNewStoreForm extends React.Component {
                             display: "flex",
                             flexDirection: "column",
                             justifyContent: "center",
+                            alignItems: "center",
                         }}
                     >
 

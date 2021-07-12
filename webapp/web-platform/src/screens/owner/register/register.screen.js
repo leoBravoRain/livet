@@ -90,6 +90,7 @@ class Register extends React.Component {
                         display: "flex",
                         flexDirection: "column",
                         justifyContent: "center",
+                        alignItems: "center",
                     }}
                 >
 
@@ -106,10 +107,10 @@ class Register extends React.Component {
 
                     {/* formulario para registro */}
                     <FormControl
-                        style={{
-                            width: "50%",
-                            alignSelf: "center",
-                        }}
+                        // style={{
+                        //     // width: "50%",
+                        //     // alignSelf: "center",
+                        // }}
                     >
 
                         <TextField
