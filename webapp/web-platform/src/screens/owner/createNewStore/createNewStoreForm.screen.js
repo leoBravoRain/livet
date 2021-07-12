@@ -249,7 +249,9 @@ class CreateNewStoreForm extends React.Component {
                         </Typography> */}
 
                         <Typography align="center" variant="body2" component="p" gutterBottom>
-                            Para poder crear la página, agrega la siguiente información general sobre tu tienda, la cual podrá ser vista por cualquier cliente que llegue a tu página
+                            {/* Para poder crear la página, agrega la siguiente información general sobre tu tienda, la cual podrá ser vista por cualquier cliente que llegue a tu página */}
+                            Agrega la información general sobre tu tienda, la cual podrá ser
+                            vista por cualquier cliente que llegue a tu página.
                         </Typography>
 
 
