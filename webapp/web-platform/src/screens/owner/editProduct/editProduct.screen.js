@@ -472,35 +472,39 @@ class EditProduct extends React.Component {
 
         // alert("remove");
 
-        this.setState({
-            loading: true,
-        });
+        if (window.confirm("¿Estás seguro de que quieres eliminar este producto de forma permanente?")) {
 
-        fs.collection('stores').doc(this.props.match.params.store_id).collection("products")
-            .doc(this.props.location.state.product.id)
-            .delete()
-
-        .then(() => {
-            console.log("Document successfully deleted!");
-
-            alert("Producto eliminado correctamente");
+            this.setState({
+                loading: true,
+            });
+    
+            fs.collection('stores').doc(this.props.match.params.store_id).collection("products")
+                .doc(this.props.location.state.product.id)
+                .delete()
+    
+            .then(() => {
+                console.log("Document successfully deleted!");
+    
+                alert("Producto eliminado correctamente");
+                
+                // navigate to products to sell
+                // + store id
+                this.props.history.push("/productsToSell/" + this.props.match.params.store_id);
+    
+                this.setState({
+                    loading: false,
+                });
+    
+            }).catch((error) => {
+                console.error("Error removing document: ", error);
+    
+                this.setState({
+                    loading: false,
+                });
+    
+            });
             
-            // navigate to products to sell
-            // + store id
-            this.props.history.push("/productsToSell/" + this.props.match.params.store_id);
-
-            this.setState({
-                loading: false,
-            });
-
-        }).catch((error) => {
-            console.error("Error removing document: ", error);
-
-            this.setState({
-                loading: false,
-            });
-
-        });
+        }
 
     };
 
@@ -519,6 +523,7 @@ class EditProduct extends React.Component {
                         display: "flex",
                         flexDirection: "column",
                         justifyContent: "center",
+                        alignItems: "center",
                     }}
                 >
 
@@ -594,13 +599,13 @@ class EditProduct extends React.Component {
                         variant="contained"
                         color = "secondary"
                         // width = "50%"
-                        style = {{
-                            width: "10%",
-                            alignSelf: "center",
-                        }}
+                        // style = {{
+                        //     width: "10%",
+                        //     alignSelf: "center",
+                        // }}
                         onClick = {this.deleteProduct}
                     >
-                        Eliminar
+                        Eliminar producto
                     </Button>
                     {/* Here it was the origanl form component */}
 

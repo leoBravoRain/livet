@@ -19,14 +19,14 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 // import Modal from '@material-ui/core/Modal';
-import PlayArrow from '@material-ui/icons/PlayArrow';
+// import PlayArrow from '@material-ui/icons/PlayArrow';
 import AttachMoney from '@material-ui/icons/AttachMoney';
-import Search from '@material-ui/icons/Search';
+// import Search from '@material-ui/icons/Search';
 import Select from '@material-ui/core/Select';
 
 import SearchBar from "material-ui-search-bar";
 
-import InputBase from '@material-ui/core/InputBase';
+// import InputBase from '@material-ui/core/InputBase';
 
 import StoreInformation from "../generalComponents/storeInformation/storeInformation.component";
 import FooterStore from "../generalComponents/footerStore/footerStore.component";
@@ -544,69 +544,32 @@ class ProductsCatalog extends React.Component {
                                                             {product.description.length < 80 ? product.description : product.description.substring(0, 80) + "..."}
                                                         </Typography>
 
-                                                        {/* <Container
-                                                            style = {{
+
+                                                        {/* price */}
+                                                        <Container
+                                                            style={{
                                                                 display: "flex",
+                                                                // flex: 1,
                                                                 flexDirection: "row",
-                                                                // justifyContent: "right",
-                                                                // alignContent: "right",
-                                                                marginTop: 40,
-                                                                marginBottom: 30,
+                                                                // backgroundColor: "red",
+                                                                textAlign: "center",
+                                                                justifyContent: "center",
+                                                                alignContent: "center",
+                                                                marginTop: 15,
                                                             }}
-                                                        > */}
+                                                        >
 
-                                                            {/* size */}
-                                                            {/* <Container
-                                                                style={{
-                                                                    display: "flex",
-                                                                    flex: 1,
-                                                                    flexDirection: "row",
-                                                                    // backgroundColor: "red",
-                                                                    textAlign: "center",
-                                                                    justifyContent: "center",
-                                                                    alignContent: "center",
-                                                                }}
+                                                            <AttachMoney fontSize="small" />
+
+                                                            <Typography
+                                                                align="center" 
+                                                                gutterBottom
+                                                                variant="body1"
+                                                                component="p"
                                                             >
-
-                                                                <Search fontSize="small" />
-
-                                                                <Typography 
-                                                                    // style = {{flex:1}}
-                                                                    gutterBottom 
-                                                                    variant="subtitle2" 
-                                                                    component="p"
-                                                                    align="center" 
-                                                                >
-                                                                    {product.var1}
-                                                                </Typography>
-
-                                                            </Container> */}
-
-                                                            {/* price */}
-                                                            <Container
-                                                                style={{
-                                                                    display: "flex",
-                                                                    // flex: 1,
-                                                                    flexDirection: "row",
-                                                                    // backgroundColor: "red",
-                                                                    textAlign: "center",
-                                                                    justifyContent: "center",
-                                                                    alignContent: "center",
-                                                                    marginTop: 15,
-                                                                }}
-                                                            >
-
-                                                                <AttachMoney fontSize="small" />
-
-                                                                <Typography
-                                                                    align="center" 
-                                                                    gutterBottom
-                                                                    variant="body1"
-                                                                    component="p"
-                                                                >
-                                                                    {product.minPrice.toLocaleString()}
-                                                                </Typography>
-                                                            </Container>
+                                                                {product.minPrice.toLocaleString()}
+                                                            </Typography>
+                                                        </Container>
 
                                                         {/* </Container> */}
 
@@ -614,36 +577,6 @@ class ProductsCatalog extends React.Component {
 
                                                 </CardActionArea>
 
-
-                                                {/* <CardActions
-                                                    style = {{
-                                                        // display: "flex",
-                                                        justifyContent: "center",
-                                                        // backgroundColor: "red",
-                                                    }}
-                                                >
-
-                                                    <Button 
-                                                        align="center" 
-                                                        size="small" 
-                                                        color="primary"
-                                                        variant="contained"
-                                                        onClick={() => {
-                                                            // window.open("https://wa.me/" + workshop.teacherMobileNumber + "?text=Hola, quiero tomar una clase en tu curso de '" + workshop.title + "' que aparece en la plataforma online")
-                                                            // this.setState({
-                                                            //     toBuyModal: true,
-                                                            // });
-
-                                                            // alert("See details")
-                                                            this.props.history.push('/productDetails/' + this.state.store.id + "/" + product.id);
-                                                        }}
-                                                    >
-
-                                                        Ver detalles
-
-                                                    </Button>
-
-                                                </CardActions> */}
 
                                             </Card>
 

@@ -20,6 +20,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 // import Modal from '@material-ui/core/Modal';
 // import PlayArrow from '@material-ui/icons/PlayArrow';
 import Add from '@material-ui/icons/Add';
+import AttachMoney from '@material-ui/icons/AttachMoney';
 
 // import Select from '@material-ui/core/Select';
 
@@ -109,8 +110,19 @@ class ProductsToSell extends React.Component {
                         product["id"] = doc.id;
                         products.push(product);
 
+                        // get minimum price
+                        var prices = [];
+                        product.saleFormats.forEach(saleFormat => {
+                            // console.log(saleFormat);
+                            prices.push(parseFloat(saleFormat.price));
+                        })
+                        // console.log(prices);
+                        // console.log(prices.sort())
+                        product["minPrice"] = prices.sort()[prices.length - 1];
+
                     });
 
+                    
                     // update state
                     this.setState({
 
@@ -210,7 +222,9 @@ class ProductsToSell extends React.Component {
                 >
 
                     {/* title */}
-                    <Typography align="center" variant="h4" component="h4" gutterBottom>
+                    <Typography align="center" variant="h4" component="h4" gutterBottom
+                        // margin={20}
+                    >
                         Productos a la venta en tu página
                     </Typography>
 
@@ -231,7 +245,7 @@ class ProductsToSell extends React.Component {
                         }}
 
                     > */}
-                    <Typography 
+                    {/* <Typography 
                         gutterBottom 
                         variant="body2" 
                         component="p"
@@ -247,7 +261,7 @@ class ProductsToSell extends React.Component {
                         }}
                     >
                         Estos son todos los productos que estan disponibles en tu página y que un cliente puede comprar
-                    </Typography>
+                    </Typography> */}
 
                     {/* </Container> */}
 
@@ -293,7 +307,21 @@ class ProductsToSell extends React.Component {
                                                         md={4}
                                                     >
 
-                                                        <Card>
+                                                        <Card
+                                                            // style={{
+                                                            //     backgroundColor: "red",
+                                                            //     // borderRadius: 10,
+                                                            // }}
+                                                            onClick={() => {
+                                                                // window.open("https://wa.me/" + workshop.teacherMobileNumber + "?text=Hola, quiero tomar una clase en tu curso de '" + workshop.title + "' que aparece en la plataforma online")
+                                                                // this.setState({
+                                                                //     toBuyModal: true,
+                                                                // });
+
+                                                                // alert("See details")
+                                                                this.props.history.push('/editProduct/' + this.props.match.params.store_id + "/" + product.id, { product: product });
+                                                            }}
+                                                        >
                                                             <CardActionArea
                                                             >
                                                                 <CardMedia
@@ -309,30 +337,56 @@ class ProductsToSell extends React.Component {
                                                                 <CardContent>
 
                                                                     {/* product name */}
-                                                                    <Typography gutterBottom variant="h5" component="h2">
+                                                                    <Typography
+                                                                        align="center"
+                                                                        gutterBottom
+                                                                        variant="h6"
+                                                                        component="h6">
                                                                         {product.name}
                                                                     </Typography>
 
                                                                     {/* description */}
-                                                                    <Typography variant="body2" color="textSecondary" component="p">
-                                                                        {product.description}
-                                                                    </Typography>
-
-                                                                    {/* size */}
-                                                                    <Typography gutterBottom variant="h5" component="h2">
-                                                                        {product.var1}
+                                                                    <Typography align="center" variant="body2" color="textSecondary" component="p">
+                                                                        {product.description.length < 80 ? product.description : product.description.substring(0, 80) + "..."}
                                                                     </Typography>
 
                                                                     {/* price */}
-                                                                    <Typography gutterBottom variant="h5" component="h2">
-                                                                        {product.price}
-                                                                    </Typography>
+                                                                    <Container
+                                                                        style={{
+                                                                            display: "flex",
+                                                                            // flex: 1,
+                                                                            flexDirection: "row",
+                                                                            // backgroundColor: "red",
+                                                                            textAlign: "center",
+                                                                            justifyContent: "center",
+                                                                            alignContent: "center",
+                                                                            marginTop: 15,
+                                                                        }}
+                                                                    >
+
+                                                                        <AttachMoney fontSize="small" />
+
+                                                                        <Typography
+                                                                            align="center"
+                                                                            gutterBottom
+                                                                            variant="body1"
+                                                                            component="p"
+                                                                        >
+                                                                            {product.minPrice.toLocaleString()}
+                                                                        </Typography>
+                                                                    </Container>
+
 
                                                                 </CardContent>
 
                                                             </CardActionArea>
 
-                                                            <CardActions>
+                                                            <CardActions
+                                                                style = {{
+                                                                    // backgroundColor: "red",
+                                                                    justifyContent:"center",
+                                                                }}
+                                                            >
 
                                                                 <Button
                                                                     align="center"

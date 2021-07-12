@@ -159,6 +159,7 @@ class LoginSocialNetworks extends React.Component {
                             display: "flex",
                             flexDirection: "column",
                             justifyContent: "center",
+                            alignItems: "center",
                         }}
                     >
 
@@ -181,7 +182,7 @@ class LoginSocialNetworks extends React.Component {
                             }}
                         >
 
-                            Autorizar y obtener posteos desde mi tienda IG
+                            Sincronizar con mi tienda de Instagram
 
                         </Button>
 

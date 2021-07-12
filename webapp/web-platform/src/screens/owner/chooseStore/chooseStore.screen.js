@@ -228,16 +228,18 @@ class ChooseStore extends React.Component {
                                                     >
 
                                                         <Card
-                                                            onClick={() => {
-                                                                // console.log('/productsToSell/' + store.id)
-                                                                this.props.history.push('/productsToSell/' + store.id)
-                                                                // this.props.history.push('/postsFromSocialNetworks/' + store.id)
-                                                            }}
                                                             style = {{
                                                                 textAlign: "center",
                                                             }}
                                                         >
                                                             <CardActionArea
+
+                                                                onClick={() => {
+                                                                    // console.log('/productsToSell/' + store.id)
+                                                                    this.props.history.push('/productsToSell/' + store.id)
+                                                                    // this.props.history.push('/postsFromSocialNetworks/' + store.id)
+                                                                }}
+
                                                             >
                                                                 <CardMedia
                                                                     image={store.profilePhoto}

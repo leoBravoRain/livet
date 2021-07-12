@@ -271,6 +271,7 @@ class EditStore extends React.Component {
                         changeWhatsappNumber={(e) => this.setState({ whatsappNumber: e.target.value })}
                         changeAditionAlInformationToDisplayToCustomer={(e) => this.setState({ aditionalInformationToDisplayToCustomer: e.target.value })}
                         aditionalInformationToDisplayToCustomer={this.state.aditionalInformationToDisplayToCustomer}
+                        changeProfileImage={e => { this.setState({ profilePhoto: URL.createObjectURL(e.target.files[0]) }) }}
                     />
 
                     {/* Here it should be the orignal form */}

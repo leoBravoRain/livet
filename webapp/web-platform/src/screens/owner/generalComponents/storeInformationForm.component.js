@@ -191,6 +191,7 @@ class StoreInformationForm extends React.Component {
                             // hint =" ioasjd"
                             // className="form-control p-1"
                             accept="image/png, image/jpeg"
+                            onChange={this.props.changeProfileImage}
                         />
 
 
