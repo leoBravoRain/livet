@@ -499,27 +499,58 @@ class Sales extends React.Component {
                         Por cada venta generada, te enviaremos el pago a tu cuenta bancaria registrada en esta plataforma dentro de las próximas 12 horas
                     </Typography> */}   
 
-                    {/* add new sale manually */}
-                    <Button
-                        // variant = "outlined"
-                        align="center" 
-                        // variant="contained" 
-                        color="primary"
-                        // width = "10%"
-                        onClick={() => {
-                            // alert("go to add new sale");
-                            // set store id as local varibale because IG API cannot receive the store id in the url (becaus it has to be exact url and it changes with the store ids)
-                            // localStorage.setItem('store_id', this.props.match.params.store_id);
-
-                            // this.props.history.push("/loginSocialNetworks/" + this.props.match.params.store_id);
-                            // this.props.history.push("/addNewSaleManually/" + this.props.match.params.store_id);
-                            alert("Esta opción estará disponible en el plan pagado de Livet");
+                    {/* option buttons */}
+                    <Container
+                        style = {{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "center",
                         }}
                     >
-                        <Add />
-                        Agregar venta manual
-                    </Button>
 
+                        {/* add new sale manually */}
+                        <Button
+                            // variant = "outlined"
+                            align="center" 
+                            // variant="contained" 
+                            color="primary"
+                            // width = "10%"
+                            onClick={() => {
+                                // alert("go to add new sale");
+                                // set store id as local varibale because IG API cannot receive the store id in the url (becaus it has to be exact url and it changes with the store ids)
+                                // localStorage.setItem('store_id', this.props.match.params.store_id);
+                                
+                                // this.props.history.push("/loginSocialNetworks/" + this.props.match.params.store_id);
+                                // this.props.history.push("/addNewSaleManually/" + this.props.match.params.store_id);
+                                alert("Esta opción estará disponible en el plan pagado de Livet");
+                            }}
+                            >
+                            {/* <Add /> */}
+                            Agregar venta manual
+                        </Button>
+
+                        {/* download as csv */}
+                        <Button
+                            // variant = "outlined"
+                            align="center"
+                            // variant="contained" 
+                            color="primary"
+                            // width = "10%"
+                            onClick={() => {
+                                // alert("go to add new sale");
+                                // set store id as local varibale because IG API cannot receive the store id in the url (becaus it has to be exact url and it changes with the store ids)
+                                // localStorage.setItem('store_id', this.props.match.params.store_id);
+                                
+                                // this.props.history.push("/loginSocialNetworks/" + this.props.match.params.store_id);
+                                // this.props.history.push("/addNewSaleManually/" + this.props.match.params.store_id);
+                                alert("Esta opción estará disponible en el plan pagado de Livet");
+                            }}
+                            >
+                            {/* <Add /> */}
+                            Descargar como archivo Excel
+                        </Button>
+
+                    </Container>
 
                     {/* general infroamtion */}
                     {/* <Typography

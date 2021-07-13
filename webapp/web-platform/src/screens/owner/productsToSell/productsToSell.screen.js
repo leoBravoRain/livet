@@ -3,6 +3,9 @@ import React from "react";
 // import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 // material ui
+// import { IconButton } from '@material-ui/core';
+
+
 // import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 // import TextField from '@material-ui/core/TextField';
@@ -17,10 +20,15 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+
+// import Drawer from '@material-ui/core/Drawer';
+// import MenuItem from "@material-ui/core/MenuItem";
+
 // import Modal from '@material-ui/core/Modal';
 // import PlayArrow from '@material-ui/icons/PlayArrow';
 import Add from '@material-ui/icons/Add';
 import AttachMoney from '@material-ui/icons/AttachMoney';
+// import MenuIcon from '@material-ui/icons/Menu';
 
 // import Select from '@material-ui/core/Select';
 
@@ -74,6 +82,9 @@ class ProductsToSell extends React.Component {
         this.state = {
             loading: false,
             products: [],
+
+            // nav bar
+            openNavMenu: false,
         }
 
     }
@@ -151,7 +162,10 @@ class ProductsToSell extends React.Component {
 
     }
 
+    
+
     render() {
+
 
         return (
 
@@ -163,9 +177,43 @@ class ProductsToSell extends React.Component {
                     flexDirection: "column",
                     // backgroundColor: "red",
                     justifyContent: "center",
+                    alignItems: "center",
                 }}
             >
                 
+                {/* <Drawer 
+                    variant="temporary"
+                    width={200} 
+                    openSecondary={true} 
+                    open={this.state.openNavMenu} 
+                    onClose = {() => this.setState({openNavMenu: false})}
+                >
+                    <MenuItem onClick={() => alert("hello")}>Menu Item</MenuItem>
+                </Drawer>
+
+                <Container
+                    style={{
+                        alignSelf: "right",
+                        // left: 
+                        backgroundColor: "red",
+                    }}
+                >
+                    <IconButton
+                        onClick = {() => {this.setState({openNavMenu: true})}}
+                        // align = "left"
+                        style = {{
+                            alignSelf: "right",
+                            // left: 
+                            backgroundColor: "yellow",
+                        }}
+                    >
+
+                        <MenuIcon />
+
+                    </IconButton>
+
+                </Container> */}
+
                 {/* menu */}
                 <MenuBar
                     goToSocialNetworkPosts = {() => {
@@ -209,8 +257,11 @@ class ProductsToSell extends React.Component {
                     goToSales = {() => {
                         this.props.history.push("/sales/" + this.props.match.params.store_id);
                     }}
-                    
-                />
+
+                    openNavMenu = {this.state.openNavMenu}
+                    onCloseNavMenu={() => this.setState({ openNavMenu: false })}
+                    onClickOpenNavMenu={() => { this.setState({ openNavMenu: true }) }}
+            />
 
                 {/* products list */}
                 <Container
