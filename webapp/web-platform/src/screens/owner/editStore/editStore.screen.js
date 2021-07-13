@@ -45,6 +45,15 @@ class EditStore extends React.Component {
             profilePhoto: null,
             whatsappNumber: null,
             aditionalInformationToDisplayToCustomer: "",
+
+            // bank data
+            addBankAccountData: false,
+            bankName: null,
+            accountType: null,
+            bankAccountNumber: null,
+            bankOwnerAccount: null,
+            bankRutOwner: null,
+            bankAccountEmail: null,
         };
 
         this.createStore = this.createStore.bind(this);
@@ -79,6 +88,16 @@ class EditStore extends React.Component {
                     description: this.props.location.state.store.description,
                     profilePhoto: this.props.location.state.store.profilePhoto,
                     aditionalInformationToDisplayToCustomer: this.props.location.state.store.aditionalInformationToDisplayToCustomer,
+
+                    // bank data
+                    addBankAccountData: this.props.location.state.store.addBankAccountData,
+                    bankName: this.props.location.state.store.bankName,
+                    accountType: this.props.location.state.store.accountType,
+                    bankAccountNumber: this.props.location.state.store.bankAccountNumber,
+                    bankOwnerAccount: this.props.location.state.store.bankOwnerAccount,
+                    bankRutOwner: this.props.location.state.store.bankRutOwner,
+                    bankAccountEmail: this.props.location.state.store.bankAccountEmail,
+
                 });
 
 
@@ -152,6 +171,24 @@ class EditStore extends React.Component {
                         "aditionalInformationToDisplayToCustomer": this.state.aditionalInformationToDisplayToCustomer,
                         // owner store (user from DB)
                         // "ownerId": loggedUser.uid,
+
+                        // bank data
+                        "addBankAccountData": this.state.addBankAccountData,
+
+                    };
+
+                    // if add bank account
+                    if (this.state.addBankAccountData) {
+
+                        // bankAccountEmail
+
+                        newStore["bankName"] = this.state.bankName;
+                        newStore["accountType"] = this.state.accountType;
+                        newStore["bankAccountNumber"] = this.state.bankAccountNumber;
+                        newStore["bankOwnerAccount"] = this.state.bankOwnerAccount;
+                        newStore["bankRutOwner"] = this.state.bankRutOwner;
+                        newStore["bankAccountEmail"] = this.state.bankAccountEmail;
+
                     };
 
                     console.log("create new store");
@@ -322,6 +359,22 @@ class EditStore extends React.Component {
                         changeAditionAlInformationToDisplayToCustomer={(e) => this.setState({ aditionalInformationToDisplayToCustomer: e.target.value })}
                         aditionalInformationToDisplayToCustomer={this.state.aditionalInformationToDisplayToCustomer}
                         changeProfileImage={e => { this.setState({ profilePhoto: URL.createObjectURL(e.target.files[0]) }) }}
+
+                        // bank data
+                        changeAddAccountData={(e) => this.setState({ addBankAccountData: !this.state.addBankAccountData })}
+                        addBankAccountData={this.state.addBankAccountData}
+                        changeBankName={(e) => this.setState({ bankName: e.target.value })}
+                        bankName={this.state.bankName}
+                        changeAccountType={(e) => this.setState({ accountType: e.target.value })}
+                        accountType={this.state.accountType}
+                        changeBankAccountNumber={(e) => this.setState({ bankAccountNumber: e.target.value })}
+                        bankAccountNumber={this.state.bankAccountNumber}
+                        changeBankOwnerAccount={(e) => this.setState({ bankOwnerAccount: e.target.value })}
+                        bankOwnerAccount={this.state.bankOwnerAccount}
+                        changeBankRutOwner={(e) => this.setState({ bankRutOwner: e.target.value })}
+                        bankRutOwner={this.state.bankRutOwner}
+                        changeBankAccountEmail={(e) => this.setState({ bankAccountEmail: e.target.value })}
+                        bankAccountEmail={this.state.bankAccountEmail}
                     />
 
                     {/* Here it should be the orignal form */}

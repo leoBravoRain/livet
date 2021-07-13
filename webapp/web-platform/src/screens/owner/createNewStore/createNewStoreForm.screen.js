@@ -5,9 +5,9 @@ import React from "react";
 // material ui
 // import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
-import TextField from '@material-ui/core/TextField';
-import { Button } from "@material-ui/core";
-import FormControl from '@material-ui/core/FormControl';
+// import TextField from '@material-ui/core/TextField';
+// import { Button } from "@material-ui/core";
+// import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from "@material-ui/core/CircularProgress";
 // import Grid from '@material-ui/core/Grid';
@@ -50,7 +50,14 @@ class CreateNewStoreForm extends React.Component {
             aditionalInformationToDisplayToCustomer: "",
 
             // bank data
-            addBankAccountData: true,
+            addBankAccountData: false,
+            bankName: null,
+            accountType: null,
+            bankAccountNumber: null,
+            bankOwnerAccount: null,
+            bankRutOwner: null,
+            bankAccountEmail: null,
+
         };
 
         this.createStore = this.createStore.bind(this);
@@ -148,7 +155,7 @@ class CreateNewStoreForm extends React.Component {
                     console.log(downloadURL);
                     
                     // define store
-                    const newStore = {
+                    var newStore = {
                         "name": this.state.name,
                         "instagramUrl": this.state.instagramUrl,
                         "whatsappNumber": this.state.whatsappNumber,
@@ -159,6 +166,23 @@ class CreateNewStoreForm extends React.Component {
                         // owner store (user from DB)
                         "ownerId": loggedUser.uid,
                         "aditionalInformationToDisplayToCustomer": this.state.aditionalInformationToDisplayToCustomer,
+
+                        // bank data
+                        "addBankAccountData": this.state.addBankAccountData,
+                    };
+
+                    // if add bank account
+                    if (this.state.addBankAccountData){
+
+                        // bankAccountEmail
+
+                        newStore["bankName"] = this.state.bankName;
+                        newStore["accountType"] = this.state.accountType;
+                        newStore["bankAccountNumber"] = this.state.bankAccountNumber;
+                        newStore["bankOwnerAccount"] = this.state.bankOwnerAccount;
+                        newStore["bankRutOwner"] = this.state.bankRutOwner;
+                        newStore["bankAccountEmail"] = this.state.bankAccountEmail;
+                        
                     };
         
                     // console.log("create new store" + newStore);
@@ -332,8 +356,28 @@ class CreateNewStoreForm extends React.Component {
                                 // alert("ioasd");
                             }}
 
+                        // bankName
+                        // accountType
+                        // bankAccountNumber
+                        // bankOwnerAccount
+                        // bankRutOwner
+                        // bankAccountEmail
+
                             // bank data
+                            changeAddAccountData={(e) => this.setState({ addBankAccountData: !this.state.addBankAccountData })}
                             addBankAccountData={this.state.addBankAccountData}
+                            changeBankName={(e) => this.setState({ bankName: e.target.value })}
+                            bankName={this.state.bankName}
+                            changeAccountType={(e) => this.setState({ accountType: e.target.value })}
+                            accountType={this.state.accountType}
+                            changeBankAccountNumber={(e) => this.setState({ bankAccountNumber: e.target.value })}
+                            bankAccountNumber={this.state.bankAccountNumber}
+                            changeBankOwnerAccount={(e) => this.setState({ bankOwnerAccount: e.target.value })}
+                            bankOwnerAccount={this.state.bankOwnerAccount}
+                            changeBankRutOwner={(e) => this.setState({ bankRutOwner: e.target.value })}
+                            bankRutOwner={this.state.bankRutOwner}
+                            changeBankAccountEmail={(e) => this.setState({ bankAccountEmail: e.target.value })}
+                            bankAccountEmail={this.state.bankAccountEmail}
                         />
 
                     </Container>

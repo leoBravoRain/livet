@@ -260,8 +260,8 @@ class StoreInformationForm extends React.Component {
                             </Typography>
 
                             <Switch
-                                // checked={this.props.visible}
-                                // onChange={this.props.changeVisible}
+                                checked={this.props.addBankAccountData}
+                                onChange={this.props.changeAddAccountData}
                                 // name="checkedA"
                                 // inputProps={{ 'aria-label': 'secondary checkbox' }}
                                 // label = "oaisjd"
@@ -286,7 +286,7 @@ class StoreInformationForm extends React.Component {
                                     fontSize: 12,
                                 }}
                             >
-                                Cada vez que un cliente finalice su compra, le enviaremos estos datos para que realice la transferencia bancaria
+                                Cada vez que un cliente finalice su compra, le enviaremos estos datos para que realice la transferencia bancaria directamente a la cuenta
                             </Typography>
 
                         </Container>
@@ -311,8 +311,8 @@ class StoreInformationForm extends React.Component {
                                         // type="Precio"
                                         // defaultValue="Correo electrónico"
                                         margin="normal"
-                                        // onChange={this.props.changeWhatsappNumber}
-                                        // value={this.props.whatsappNumber}
+                                        onChange={this.props.changeBankName}
+                                        value={this.props.bankName}
                                     />
 
                                     {/* account type */}
@@ -323,8 +323,8 @@ class StoreInformationForm extends React.Component {
                                         // type="Precio"
                                         // defaultValue="Correo electrónico"
                                         margin="normal"
-                                    // onChange={this.props.changeWhatsappNumber}
-                                    // value={this.props.whatsappNumber}
+                                        onChange={this.props.changeAccountType}
+                                        value={this.props.accountType}
                                     />
 
                                     {/* N° de cuenta */}
@@ -335,8 +335,8 @@ class StoreInformationForm extends React.Component {
                                         // type="Precio"
                                         // defaultValue="Correo electrónico"
                                         margin="normal"
-                                    // onChange={this.props.changeWhatsappNumber}
-                                    // value={this.props.whatsappNumber}
+                                    onChange={this.props.changeBankAccountNumber}
+                                    value={this.props.bankAccountNumber}
                                     />
 
                                     {/* owner account name */}
@@ -347,8 +347,8 @@ class StoreInformationForm extends React.Component {
                                         // type="Precio"
                                         // defaultValue="Correo electrónico"
                                         margin="normal"
-                                    // onChange={this.props.changeWhatsappNumber}
-                                    // value={this.props.whatsappNumber}
+                                    onChange={this.props.changeBankOwnerAccount}
+                                    value={this.props.bankOwnerAccount}
                                     />
 
                                     {/* RUT owner */}
@@ -359,8 +359,8 @@ class StoreInformationForm extends React.Component {
                                         // type="Precio"
                                         // defaultValue="Correo electrónico"
                                         margin="normal"
-                                    // onChange={this.props.changeWhatsappNumber}
-                                    // value={this.props.whatsappNumber}
+                                    onChange={this.props.changeBankRutOwner}
+                                    value={this.props.bankRutOwner}
                                     />
 
                                     {/* bank name */}
@@ -371,8 +371,8 @@ class StoreInformationForm extends React.Component {
                                         // type="Precio"
                                         // defaultValue="Correo electrónico"
                                         margin="normal"
-                                    // onChange={this.props.changeWhatsappNumber}
-                                    // value={this.props.whatsappNumber}
+                                        onChange={this.props.changeBankAccountEmail}
+                                    value={this.props.bankAccountEmail}
                                     />
 
 
