@@ -48,6 +48,9 @@ class CreateNewStoreForm extends React.Component {
 
             // this must to be in this way, because in product details it analyzeis if length >0
             aditionalInformationToDisplayToCustomer: "",
+
+            // bank data
+            addBankAccountData: true,
         };
 
         this.createStore = this.createStore.bind(this);
@@ -328,6 +331,9 @@ class CreateNewStoreForm extends React.Component {
                                 // console.log("hlelo");
                                 // alert("ioasd");
                             }}
+
+                            // bank data
+                            addBankAccountData={this.state.addBankAccountData}
                         />
 
                     </Container>

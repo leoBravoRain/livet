@@ -9,6 +9,7 @@ import TextField from '@material-ui/core/TextField';
 import { Button } from "@material-ui/core";
 import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
+import Switch from '@material-ui/core/Switch';
 // import CircularProgress from "@material-ui/core/CircularProgress";
 // import Grid from '@material-ui/core/Grid';
 
@@ -30,6 +31,11 @@ class StoreInformationForm extends React.Component {
         // constructur of parent
         super(props);
 
+
+    }
+
+    componentDidMount() {
+        console.log(this.props.addBankAccountData);
     }
 
     render() {
@@ -215,6 +221,167 @@ class StoreInformationForm extends React.Component {
 
                     </Container>
 
+                    {/* bank data infomration */}
+                    <Container
+                        // style = {{
+                        //     backgroundColor: "red",
+                        // }}
+                    >
+
+                        {/* question to add data */}
+                        <Container
+                            style={{
+                                // backgroundColor: "red",
+                                display: "flex",
+                                flexDirection: "column",
+                                margin: 20,
+                                justifyContent: "center",
+                                alignItems: "center",
+                            }}
+                            >
+
+                            <Typography
+                                gutterBottom
+                                variant="body1"
+                                component="p"
+                                align="center"
+                                // style={{
+                                    //     // margin: 50,
+                                    //     display: "flex",
+                                    //     flexWrap: "wrap",
+                                    //     backgroundColor: "rgba(173, 216, 230, 0.5)",
+                                    //     borderRadius: 50,
+                                    //     textAlign: "center",
+                                    //     justifyContent: "center",
+                                    //     padding: 10,
+                                    // }}
+                                    >
+                                ¿Agregar mi información bancaria para enviarsela directamente a mis clientes?
+                            </Typography>
+
+                            <Switch
+                                // checked={this.props.visible}
+                                // onChange={this.props.changeVisible}
+                                // name="checkedA"
+                                // inputProps={{ 'aria-label': 'secondary checkbox' }}
+                                // label = "oaisjd"
+                                // name="checkedB"
+                                color="primary"
+                            />
+
+                            <Typography
+                                gutterBottom
+                                variant="body2"
+                                component="p"
+                                align = "center"
+                                style={{
+                                    // margin: 50,
+                                    // display: "flex",
+                                    // flexWrap: "wrap",
+                                    // backgroundColor: "rgba(173, 216, 230, 0.5)",
+                                    // borderRadius: 50,
+                                    // textAlign: "center",
+                                    // justifyContent: "center",
+                                    // padding: 10,
+                                    fontSize: 12,
+                                }}
+                            >
+                                Cada vez que un cliente finalice su compra, le enviaremos estos datos para que realice la transferencia bancaria
+                            </Typography>
+
+                        </Container>
+
+                        {/* display fields to fill bank information */}
+                        {
+                            this.props.addBankAccountData &&
+
+                                <Container
+                                    style = {{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        // backgroundColor: "yellow"
+                                    }}
+                                >
+
+                                    {/* bank name */}
+                                    <TextField
+                                        variant="outlined"
+                                        // id="standard-uncontrolled"
+                                        label="Banco"
+                                        // type="Precio"
+                                        // defaultValue="Correo electrónico"
+                                        margin="normal"
+                                        // onChange={this.props.changeWhatsappNumber}
+                                        // value={this.props.whatsappNumber}
+                                    />
+
+                                    {/* account type */}
+                                    <TextField
+                                        variant="outlined"
+                                        // id="standard-uncontrolled"
+                                        label="Tipo de cuenta (ej: Cuenta Corriente)"
+                                        // type="Precio"
+                                        // defaultValue="Correo electrónico"
+                                        margin="normal"
+                                    // onChange={this.props.changeWhatsappNumber}
+                                    // value={this.props.whatsappNumber}
+                                    />
+
+                                    {/* N° de cuenta */}
+                                    <TextField
+                                        variant="outlined"
+                                        // id="standard-uncontrolled"
+                                        label="N° de cuenta"
+                                        // type="Precio"
+                                        // defaultValue="Correo electrónico"
+                                        margin="normal"
+                                    // onChange={this.props.changeWhatsappNumber}
+                                    // value={this.props.whatsappNumber}
+                                    />
+
+                                    {/* owner account name */}
+                                    <TextField
+                                        variant="outlined"
+                                        // id="standard-uncontrolled"
+                                        label="Nombre persona asociada a la cuenta"
+                                        // type="Precio"
+                                        // defaultValue="Correo electrónico"
+                                        margin="normal"
+                                    // onChange={this.props.changeWhatsappNumber}
+                                    // value={this.props.whatsappNumber}
+                                    />
+
+                                    {/* RUT owner */}
+                                    <TextField
+                                        variant="outlined"
+                                        // id="standard-uncontrolled"
+                                        label="RUT persona asociada a la cuenta"
+                                        // type="Precio"
+                                        // defaultValue="Correo electrónico"
+                                        margin="normal"
+                                    // onChange={this.props.changeWhatsappNumber}
+                                    // value={this.props.whatsappNumber}
+                                    />
+
+                                    {/* bank name */}
+                                    <TextField
+                                        variant="outlined"
+                                        // id="standard-uncontrolled"
+                                        label="Correo electrónico de titular"
+                                        // type="Precio"
+                                        // defaultValue="Correo electrónico"
+                                        margin="normal"
+                                    // onChange={this.props.changeWhatsappNumber}
+                                    // value={this.props.whatsappNumber}
+                                    />
+
+
+
+                                </Container>
+                        }
+
+                    </Container>
+                    {/* finish bank information */}
 
                     {/* create store */}
                     <Button
