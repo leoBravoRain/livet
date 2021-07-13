@@ -494,6 +494,7 @@ class SaleConfirmation extends React.Component {
                 :
 
                 <CircularProgress />
+               
 
         );
 

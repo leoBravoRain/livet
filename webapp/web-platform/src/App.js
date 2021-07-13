@@ -5,7 +5,7 @@ import React, { Component } from "react";
 
 import { 
   BrowserRouter as Router, Route, Link,
-  Switch,
+  // Switch,
   // Router,
   // Route,
   // Link
@@ -16,14 +16,14 @@ import {
 
 // Material ui
 // import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-// import { makeStyles } from '@material-ui/core/styles';
-import Info from '@material-ui/icons/Info';
-import Add from "@material-ui/icons/Add";
-import MailOutline from "@material-ui/icons/MailOutline";
+// import AppBar from '@material-ui/core/AppBar'
+// import Toolbar from '@material-ui/core/Toolbar';
+// import Button from '@material-ui/core/Button';
+// import Typography from '@material-ui/core/Typography';
+// // import { makeStyles } from '@material-ui/core/styles';
+// import Info from '@material-ui/icons/Info';
+// import Add from "@material-ui/icons/Add";
+// import MailOutline from "@material-ui/icons/MailOutline";
 
 // import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 // import { MuiThemeProvider } from '@material-ui/core/styles';
@@ -63,7 +63,7 @@ import ShoppingCart from "./screens/customer/shoppingCart/shoppingCart.screen";
 
 // ifrebase
 import { auth } from "./libraries/firebase/firebase";
-import AddNewSale from "./screens/owner/sales/addNewSale.screen";
+// import AddNewSale from "./screens/owner/sales/addNewSale.screen";
 
 
 // Component 
@@ -151,13 +151,13 @@ class App extends Component {
               <Route path="/addNewProductHome/:store_id" exact component={AddNewProductHome} />
               <Route path="/editProduct/:store_id/:product_id" exact component={EditProduct} />
               <Route path="/editStore/:store_id" exact component={EditStore} />
-              <Route path="/addNewSaleManually/:store_id" exact component={AddNewSale} />
+              {/* <Route path="/addNewSaleManually/:store_id" exact component={AddNewSale} /> */}
 
               {/* customer */}
-              <Route path="/:store_id" exact component={ProductsCatalog} />
+              <Route path="/store/:store_id" exact component={ProductsCatalog} />
               <Route path="/productDetails/:store_id/:product_id" exact component={ProductDetails} />
               {/* <Route path="/saleConfirmation/:store_id/:product_id" exact component={SaleConfirmation} /> */}
-          <Route path="/saleConfirmation/:store_id" exact component={SaleConfirmation} />
+              <Route path="/saleConfirmation/:store_id" exact component={SaleConfirmation} />
               <Route path="/shoppingCart/:store_id" exact component={ShoppingCart}/>
               {/* <Route path="/" exact component={Home} />
 

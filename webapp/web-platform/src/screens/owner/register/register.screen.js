@@ -97,7 +97,7 @@ class Register extends React.Component {
                     {/* information */}
                     <Typography align="center" variant="h3" component="h3" gutterBottom>
                         {/* Registro en Livet */}
-                        Registrate
+                        Registrate en Livet
                     </Typography>
 
                     {/* <Typography align="center" variant="body2" component="p" gutterBottom>
@@ -158,6 +158,7 @@ class Register extends React.Component {
             :
 
                 <CircularProgress/>
+               
 
                         
         );

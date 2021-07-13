@@ -127,7 +127,7 @@ class Login extends React.Component {
                         }}
                     >
 
-                        <Typography align="center" variant="h4" component="h4" gutterBottom>
+                        <Typography align="center" variant="h3" component="h3" gutterBottom>
                             Entrar a Livet
                         </Typography>
 
@@ -193,7 +193,7 @@ class Login extends React.Component {
                             <Link
                                 href="#"
                                 align="center"
-                            onClick={() => this.props.history.push('/register')}
+                                onClick={() => this.props.history.push('/')}
                             >
                                 Si aún no estas registrado, registrate aquí
                             </Link>
@@ -217,6 +217,7 @@ class Login extends React.Component {
                 :
 
                     <CircularProgress />
+                    
 
         );
 
