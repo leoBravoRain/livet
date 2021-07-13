@@ -68,6 +68,189 @@ import {
 // ];
 
 
+// const shoppingCart = [
+//     {
+//         "product": {
+//             "category": "Perros",
+//             "saleFormats": [
+//                 {
+//                     "price": "19990",
+//                     "stock": "10",
+//                     "format": "Pequeño"
+//                 },
+//                 {
+//                     "price": "29999",
+//                     "format": "Mediano",
+//                     "stock": "23"
+//                 }
+//             ],
+//             "description": "El mejor perrito de la vida",
+//             "image": "https://firebasestorage.googleapis.com/v0/b/livet2.appspot.com/o/stores%2Fc5ucsOlH6LbW9My3ZyxkDmjZra82%2FkIkfrV3nRGwAblBYnvgZ%2Fproducts%2FIMG_20190305_153649.jpg?alt=media&token=e9e8f385-0c18-4ef5-b6b7-7594a6c8956c",
+//             "name": "Perrito",
+//             "visible": true,
+//             "paymentUrl": "https://app.payku.cl/botonpago/index?idboton=14257&verif=0f7014ea",
+//             "id": "0Ppnn0iyigN6CKUBulcc"
+//         },
+//         "formatIndexList": [
+//             0
+//         ],
+//         "unitsList": [
+//             1
+//         ]
+//     },
+//     {
+//         "product": {
+//             "category": "Perros",
+//             "saleFormats": [
+//                 {
+//                     "format": "123",
+//                     "stock": "2",
+//                     "price": "123123"
+//                 },
+//                 {
+//                     "price": "1231",
+//                     "format": "123",
+//                     "stock": "12312"
+//                 },
+//                 {
+//                     "stock": "123",
+//                     "format": "123",
+//                     "price": "123"
+//                 }
+//             ],
+//             "name": "Perritos",
+//             "paymentUrl": "https://app.payku.cl/botonpago/index?idboton=14257&verif=0f7014ea",
+//             "visible": true,
+//             "image": "https://firebasestorage.googleapis.com/v0/b/livet2.appspot.com/o/stores%2Fc5ucsOlH6LbW9My3ZyxkDmjZra82%2FkIkfrV3nRGwAblBYnvgZ%2Fproducts%2FIMG-20190307-WA0008.jpeg?alt=media&token=a1645d00-1b0d-4d56-b789-05d4a35feaef",
+//             "description": "2 perritos",
+//             "id": "p9ctFiIP2edBiEiE8atc"
+//         },
+//         "formatIndexList": [
+//             2
+//         ],
+//         "unitsList": [
+//             1
+//         ]
+//     }
+// ];
+
+const sale1 = {
+    "date": "20-02-2021",
+    "totalSale": 20000,
+    "shoppingCart":
+    [
+
+        // 1 product
+        {
+            "product": {
+                "category": "Perros",
+                "saleFormats": [
+                    {
+                        "price": "19990",
+                        "stock": "10",
+                        "format": "Pequeño"
+                    },
+                    {
+                        "price": "29999",
+                        "format": "Mediano",
+                        "stock": "23"
+                    }
+                ],
+                "description": "El mejor perrito de la vida",
+                "image": "https://firebasestorage.googleapis.com/v0/b/livet2.appspot.com/o/stores%2Fc5ucsOlH6LbW9My3ZyxkDmjZra82%2FkIkfrV3nRGwAblBYnvgZ%2Fproducts%2FIMG_20190305_153649.jpg?alt=media&token=e9e8f385-0c18-4ef5-b6b7-7594a6c8956c",
+                "name": "Perro 1",
+                "visible": true,
+                "paymentUrl": "https://app.payku.cl/botonpago/index?idboton=14257&verif=0f7014ea",
+                "id": "0Ppnn0iyigN6CKUBulcc"
+            },
+            "formatIndexList": [
+                0
+            ],
+            "unitsList": [
+                10
+            ]
+        },
+
+        // 2 product
+        {
+            "product": {
+                "category": "Perros",
+                "saleFormats": [
+                    {
+                        "format": "123",
+                        "stock": "2",
+                        "price": "123123"
+                    },
+                    {
+                        "price": "1231",
+                        "format": "123",
+                        "stock": "12312"
+                    },
+                    {
+                        "stock": "123",
+                        "format": "123",
+                        "price": "123"
+                    }
+                ],
+                "name": "Perro 2",
+                "paymentUrl": "https://app.payku.cl/botonpago/index?idboton=14257&verif=0f7014ea",
+                "visible": true,
+                "image": "https://firebasestorage.googleapis.com/v0/b/livet2.appspot.com/o/stores%2Fc5ucsOlH6LbW9My3ZyxkDmjZra82%2FkIkfrV3nRGwAblBYnvgZ%2Fproducts%2FIMG-20190307-WA0008.jpeg?alt=media&token=a1645d00-1b0d-4d56-b789-05d4a35feaef",
+                "description": "2 perritos",
+                "id": "p9ctFiIP2edBiEiE8atc"
+            },
+            "formatIndexList": [
+                2
+            ],
+            "unitsList": [
+                1
+            ]
+        }
+    ]
+}
+
+const sale2 = {
+    "date": "30-02-2021",
+    "totalSale": 19000,
+    "shoppingCart":
+    [
+        {
+            "product": {
+                "category": "Perros",
+                "saleFormats": [
+                    {
+                        "price": "19990",
+                        "stock": "10",
+                        "format": "Pequeño"
+                    },
+                    {
+                        "price": "29999",
+                        "format": "Mediano",
+                        "stock": "23"
+                    }
+                ],
+                "description": "El mejor perrito de la vida",
+                "image": "https://firebasestorage.googleapis.com/v0/b/livet2.appspot.com/o/stores%2Fc5ucsOlH6LbW9My3ZyxkDmjZra82%2FkIkfrV3nRGwAblBYnvgZ%2Fproducts%2FIMG_20190305_153649.jpg?alt=media&token=e9e8f385-0c18-4ef5-b6b7-7594a6c8956c",
+                "name": "Gato 1",
+                "visible": true,
+                "paymentUrl": "https://app.payku.cl/botonpago/index?idboton=14257&verif=0f7014ea",
+                "id": "0Ppnn0iyigN6CKUBulcc"
+            },
+            "formatIndexList": [
+                0
+            ],
+            "unitsList": [
+                1
+            ]
+        },
+    ]
+}
+
+const sales = [
+    sale1,
+    sale2,
+];
+
 class Sales extends React.Component {
 
     // constructor
@@ -81,6 +264,7 @@ class Sales extends React.Component {
             loading: false,
             products: [],
             sales: null,
+            totalSalesStore: 0,
         }
 
     }
@@ -97,30 +281,59 @@ class Sales extends React.Component {
         auth.onAuthStateChanged((user) => {
 
             if (user) {
-
+                
                 // demo sales
-                const sales = [
-                    {
-                        "date": "10-07-2021",
-                        "productName": "Product demo 1",
-                        "units": 1,
-                        "priceUnit": 1000,
-                        "totalSale": 1000,
-                    },
-                    {
-                        "date": "11-07-2021",
-                        "productName": "Product demo 2",
-                        "units": 2,
-                        "priceUnit": 6000,
-                        "totalSale": 12000,
-                    }
-                ];
-
-
-                var totalSales = 0;
+                // const sales = [
+                //     {
+                //         "date": "10-07-2021",
+                //         "productName": "Product demo 1",
+                //         "units": 1,
+                //         "priceUnit": 1000,
+                //         "totalSale": 1000,
+                //     },
+                //     {
+                //         "date": "11-07-2021",
+                //         "productName": "Product demo 2",
+                //         "units": 2,
+                //         "priceUnit": 6000,
+                //         "totalSale": 12000,
+                //     }
+                // ];
+                var totalSalesStore = 0.0;
                 sales.forEach(sale => {
-                    totalSales += sale.totalSale;
+                    totalSalesStore += sale.totalSale;
                 });
+
+                // const sales = shoppingCart;
+
+                // var totalSales = 0.0;
+
+                // // if there is any product
+                // if (sales != null && sales.length > 0) {
+
+                //     // console.log(sales);
+
+                //     // get total sale
+                //     sales.forEach(product => {
+                //         // console.log(product);
+                //         // iterate through formats
+                //         product.formatIndexList.forEach((formatIndex, index) => {
+                //             // totalSales += parseInt(product.units) * parseFloat(product.product.saleFormats[product.formatIndex].price);
+                //             totalSales += parseInt(product.unitsList[index]) * parseFloat(product.product.saleFormats[formatIndex].price);
+                //         });
+                //     });
+
+                //     // console.log(totalSales);
+
+                // }
+
+                // // no products on cart
+                // else {
+                //     // alert("no products on cart");
+                //     sales = [];
+                //     totalSales = 0;
+                // };
+
 
                 // update state
                 this.setState({
@@ -128,7 +341,8 @@ class Sales extends React.Component {
                     // update products
                     // products: products,
                     sales: sales,
-                    totalSales: totalSales,
+                    totalSalesStore: totalSalesStore,
+                    // totalSales: totalSales,
                     loading: false,
 
                 });
@@ -162,6 +376,7 @@ class Sales extends React.Component {
                     flexDirection: "column",
                     // backgroundColor: "red",
                     justifyContent: "center",
+                    // alignItems: "center",
                 }}
             >
 
@@ -215,6 +430,7 @@ class Sales extends React.Component {
                         justifyContent: "center",
                         display: "flex",
                         flexDirection: "column",
+                        alignItems: "center",
                     }}
                 >
 
@@ -296,7 +512,8 @@ class Sales extends React.Component {
                             // localStorage.setItem('store_id', this.props.match.params.store_id);
 
                             // this.props.history.push("/loginSocialNetworks/" + this.props.match.params.store_id);
-                            this.props.history.push("/addNewSaleManually/" + this.props.match.params.store_id);
+                            // this.props.history.push("/addNewSaleManually/" + this.props.match.params.store_id);
+                            alert("Esta opción estará disponible en el plan pagado de Livet");
                         }}
                     >
                         <Add />
@@ -305,7 +522,7 @@ class Sales extends React.Component {
 
 
                     {/* general infroamtion */}
-                    <Typography
+                    {/* <Typography
                         gutterBottom
                         variant="body2"
                         component="p"
@@ -322,10 +539,10 @@ class Sales extends React.Component {
                         }}
                     >
                         Estas son ventas ficticias para que sepas como se verían las ventas que generas por nuestra plataforma
-                    </Typography>
+                    </Typography> */}
 
                     {/* list of sales */}
-                    <TableContainer>
+                    {/* <TableContainer>
                         <Table aria-label="simple table">
                             <TableHead>
                                 <TableRow>
@@ -355,7 +572,6 @@ class Sales extends React.Component {
 
                                 <TableRow style = {{fontWeight: "bold"}} >
                                     <TableCell component="th" scope="row">
-                                        {/* {row.date} */}
                                     </TableCell>
                                     <TableCell align="right" style = {{fontWeight: "bold"}}>Total</TableCell>
                                     <TableCell align="right"> </TableCell>
@@ -365,7 +581,107 @@ class Sales extends React.Component {
 
                             </TableBody>
                         </Table>
-                    </TableContainer>
+                    </TableContainer> */}
+                    {
+                        this.state.sales != null
+
+                            &&
+
+                            this.state.sales.length > 0
+
+                            ?
+
+
+                            <TableContainer>
+                                <Table aria-label="simple table">
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell align="right">Número de pedido</TableCell>
+                                            <TableCell align="right">Fecha</TableCell>
+                                            <TableCell align="right">Producto</TableCell>
+                                            <TableCell align="right">Formato</TableCell>
+                                            <TableCell align="right">Cantidad</TableCell>
+                                            <TableCell align="right">Precio</TableCell>
+                                            <TableCell align="right">Total</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+
+                                        {
+                                            // this is because product is an array with each element being [product object, array of format index, array of units]
+                                            // this.state.sales.map((product, idxProduct) => (
+
+                                            // this.state.sales.map((sale, idxSale) => {
+                                            this.state.sales.map((sale, idxSale) => (
+
+                                                        sale.shoppingCart.map((product, idxProduct) => (
+
+                                                            // console.log(product);
+
+                                                            product.formatIndexList.map((formatIndex, idxFormat) => {
+                                                                
+                                                                // console.log(formatIndex);
+
+                                                                // console.log(product.product.name);
+
+                                                                return (
+                                                                    <TableRow>
+                                                                        <TableCell align="right">{idxProduct != 0 ? "" : idxSale + 1}</TableCell>
+                                                                        <TableCell align="right">{idxProduct != 0 ? "" : sale.date}</TableCell>
+                                                                        <TableCell align="right">{product.product.name}</TableCell>
+                                                                        <TableCell align="right">{product.product.saleFormats[formatIndex].format}</TableCell>
+                                                                        <TableCell align="right">{product.unitsList[idxFormat]}</TableCell>
+                                                                        <TableCell align="right">{product.product.saleFormats[formatIndex].price}</TableCell>
+                                                                        <TableCell align="right">{product.unitsList[idxFormat] * product.product.saleFormats[formatIndex].price}</TableCell>
+
+                                                                    </TableRow>
+                                                                )
+
+                                                            })
+
+                                                        ))
+                                                        
+                                                        // }
+
+                                                    // </TableRow>
+
+                                                // )
+                                            // })
+                                            ))
+
+                                        }
+
+                                        <TableRow style={{ fontWeight: "bold" }} >
+                                            <TableCell align="right"> </TableCell>
+                                            <TableCell align="right"> </TableCell>
+                                            <TableCell align="right"> </TableCell>
+                                            <TableCell align="right"> </TableCell>
+                                            <TableCell align="right"> </TableCell>
+                                            <TableCell align="right" style={{ fontWeight: "bold", fontSize: "25px" }}> Total </TableCell>
+                                            <TableCell align="right" style={{ fontWeight: "bold" }}>{this.state.totalSalesStore}</TableCell>
+                                        </TableRow>
+
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+
+                            :
+
+                            <Typography
+                                align="center"
+                                variant="body1"
+                                component="p"
+                                gutterBottom
+                                style={{
+                                    // backgroundColor: "red",
+                                    borderRadius: 10,
+                                    margin: 20,
+                                    fontSize: 20,
+                                }}
+                            >
+                                Aun no has agregado nada al carrito
+                                </Typography>
+                    }
 
 
                 </Container>

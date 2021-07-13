@@ -121,7 +121,9 @@ class ShoppingCart extends React.Component {
                         loading:false,
                         totalSales: totalSales,
                         store: store,
-                    });
+                    }, 
+                        // () => console.log(this.state.sales)
+                    );
                 }
 
             });
