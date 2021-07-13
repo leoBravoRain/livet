@@ -387,7 +387,9 @@ class Sales extends React.Component {
                         localStorage.setItem('store_id', this.props.match.params.store_id);
 
                         // this.props.history.push("/loginSocialNetworks/" + this.props.match.params.store_id);
-                        this.props.history.push("/loginSocialNetworks/");
+                        // this.props.history.push("/loginSocialNetworks/");
+                        this.props.history.push("/addNewProductHome/" + this.props.match.params.store_id);
+
                     }}
 
                     goToProductsToSell={() => {
@@ -422,6 +424,9 @@ class Sales extends React.Component {
                         this.props.history.push("/sales/" + this.props.match.params.store_id);
                     }}
 
+                    openNavMenu={this.state.openNavMenu}
+                    onCloseNavMenu={() => this.setState({ openNavMenu: false })}
+                    onClickOpenNavMenu={() => { this.setState({ openNavMenu: true }) }}
                 />
 
                 {/* products list */}

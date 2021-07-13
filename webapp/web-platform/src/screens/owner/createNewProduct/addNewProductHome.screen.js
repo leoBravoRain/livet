@@ -32,7 +32,7 @@ import Send from "@material-ui/icons/Send";
 // import DialogTitle from '@material-ui/core/DialogTitle';
 // import Chip from '@material-ui/core/Chip';
 
-// import MenuBar from "../generalComponents/menuBar.component";
+import MenuBar from "../generalComponents/menuBar.component";
 
 // firebase
 import {
@@ -141,7 +141,55 @@ class AddNewProductHome extends React.Component {
                     }}
                 >
 
+                    {/* menu */}
+                    <MenuBar
+                        goToSocialNetworkPosts={() => {
+                            // set store id as local varibale because IG API cannot receive the store id in the url (becaus it has to be exact url and it changes with the store ids)
+                            localStorage.setItem('store_id', this.props.match.params.store_id);
 
+                            // this.props.history.push("/loginSocialNetworks/" + this.props.match.params.store_id);
+                            // this.props.history.push("/loginSocialNetworks/");
+                            this.props.history.push("/addNewProductHome/" + this.props.match.params.store_id);
+
+                        }}
+
+                        goToProductsToSell={() => {
+                            this.props.history.push("/productsToSell/" + this.props.match.params.store_id);
+                        }}
+
+                        goToChooseStore={() => {
+                            this.props.history.push("/chooseStore");
+                        }}
+
+                        goToStore={() => {
+                            // open store
+                            window.open(window.location.origin + "/" + this.props.match.params.store_id);
+                        }}
+
+                        logout={() => {
+
+                            // logout
+                            auth.signOut().then(res => {
+
+                                alert("Has cerrado tu sesión");
+
+                            }).catch(error => {
+
+                                console.log(error);
+
+                            });
+
+                        }}
+
+                        goToSales={() => {
+                            this.props.history.push("/sales/" + this.props.match.params.store_id);
+                        }}
+
+                        openNavMenu={this.state.openNavMenu}
+                        onCloseNavMenu={() => this.setState({ openNavMenu: false })}
+                        onClickOpenNavMenu={() => { this.setState({ openNavMenu: true }) }}
+                    />
+                    
                     {/* title */}
                     <Typography align="center" variant="h4" component="h4" gutterBottom>
                         Agregar nuevo producto

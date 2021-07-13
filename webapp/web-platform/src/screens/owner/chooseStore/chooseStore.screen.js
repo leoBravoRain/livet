@@ -22,6 +22,9 @@ import Close from '@material-ui/icons/Close';
 import Add from "@material-ui/icons/Add";
 // import Send from "@material-ui/icons/Send";
 
+import MenuBar from "../generalComponents/menuBar.component";
+
+
 // import Schedule from '@material-ui/icons/Schedule';
 
 // import Select from '@material-ui/core/Select';
@@ -142,8 +145,57 @@ class ChooseStore extends React.Component {
                         }}
                     >
 
+                        {/* menu */}
+                        <MenuBar
+                            goToSocialNetworkPosts={() => {
+                                // set store id as local varibale because IG API cannot receive the store id in the url (becaus it has to be exact url and it changes with the store ids)
+                                localStorage.setItem('store_id', this.props.match.params.store_id);
+
+                                // this.props.history.push("/loginSocialNetworks/" + this.props.match.params.store_id);
+                                // this.props.history.push("/loginSocialNetworks/");
+                                this.props.history.push("/addNewProductHome/" + this.props.match.params.store_id);
+
+                            }}
+
+                            goToProductsToSell={() => {
+                                this.props.history.push("/productsToSell/" + this.props.match.params.store_id);
+                            }}
+
+                            goToChooseStore={() => {
+                                this.props.history.push("/chooseStore");
+                            }}
+
+                            goToStore={() => {
+                                // open store
+                                window.open(window.location.origin + "/" + this.props.match.params.store_id);
+                            }}
+
+                            logout={() => {
+
+                                // logout
+                                auth.signOut().then(res => {
+
+                                    alert("Has cerrado tu sesión");
+
+                                }).catch(error => {
+
+                                    console.log(error);
+
+                                });
+
+                            }}
+
+                            goToSales={() => {
+                                this.props.history.push("/sales/" + this.props.match.params.store_id);
+                            }}
+
+                            openNavMenu={this.state.openNavMenu}
+                            onCloseNavMenu={() => this.setState({ openNavMenu: false })}
+                            onClickOpenNavMenu={() => { this.setState({ openNavMenu: true }) }}
+                        />
+
                         {/* logout */}
-                        <Button align="center" variant="contained" color="primary"
+                        {/* <Button align="center" variant="contained" color="primary"
                             onClick={() => {
                                 // logout
                                 auth.signOut().then(res => {
@@ -159,7 +211,7 @@ class ChooseStore extends React.Component {
                         >
                             <Close />
                             Cerrar sesión
-                        </Button>
+                        </Button> */}
 
                         {/* title */}
                         <Typography align="center" variant="h3" component="h3" gutterBottom>

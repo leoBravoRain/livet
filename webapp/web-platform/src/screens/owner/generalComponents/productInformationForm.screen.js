@@ -474,7 +474,7 @@ class ProductInformationForm extends React.Component {
                         {/* add other format */}
                         <Button
                             align="center"
-                            variant="contained"
+                            variant="outlined"
                             color="primary"
                             onClick={() => {
                                 // console.log("2ojsad");

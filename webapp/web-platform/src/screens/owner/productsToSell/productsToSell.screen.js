@@ -261,7 +261,7 @@ class ProductsToSell extends React.Component {
                     openNavMenu = {this.state.openNavMenu}
                     onCloseNavMenu={() => this.setState({ openNavMenu: false })}
                     onClickOpenNavMenu={() => { this.setState({ openNavMenu: true }) }}
-            />
+                />
 
                 {/* products list */}
                 <Container
@@ -488,6 +488,7 @@ class ProductsToSell extends React.Component {
                                                     display: "flex",
                                                     flexDirection: "column",
                                                     justifyContent: "center",
+                                                    alignItems: "center",
                                                     margin: 50,
                                                 }}
                                             >
@@ -495,11 +496,13 @@ class ProductsToSell extends React.Component {
                                                 <Typography 
                                                     align = "center"
                                                     gutterBottom variant="body2" component="p">
-                                                    Aún no has agregado productos a tu tienda ¡Comienza a agregar productos directamente desde tu tienda de Instagram!
+                                                    Aún no has agregado productos a tu tienda ¡Comienza a agregar productos!
                                                 </Typography>
                                             
                                                 {/* go to post from SN */}
                                                 <Button
+                                                    variant = "contained"
+                                                    color = "primary"
                                                     onClick={() => {
 
                                                         // set store id as local varibale because IG API cannot receive the store id in the url (becaus it has to be exact url and it changes with the store ids)
@@ -512,7 +515,7 @@ class ProductsToSell extends React.Component {
                                                     }}
                                                 >
                                                     <Add/>
-                                                    Agregar productos desde mi cuenta de Instagram
+                                                    Agregar productos
                                                 </Button>
                                             </Container>
                                     }

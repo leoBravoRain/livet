@@ -21,6 +21,7 @@ import {
     st,
 } from "../../../libraries/firebase/firebase";
 
+import MenuBar from "../generalComponents/menuBar.component";
 
 // logged user
 var loggedUser = null;
@@ -239,6 +240,55 @@ class EditStore extends React.Component {
                         justifyContent: "center",
                     }}
                 >
+
+                    {/* menu */}
+                    <MenuBar
+                        goToSocialNetworkPosts={() => {
+                            // set store id as local varibale because IG API cannot receive the store id in the url (becaus it has to be exact url and it changes with the store ids)
+                            localStorage.setItem('store_id', this.props.match.params.store_id);
+
+                            // this.props.history.push("/loginSocialNetworks/" + this.props.match.params.store_id);
+                            // this.props.history.push("/loginSocialNetworks/");
+                            this.props.history.push("/addNewProductHome/" + this.props.match.params.store_id);
+
+                        }}
+
+                        goToProductsToSell={() => {
+                            this.props.history.push("/productsToSell/" + this.props.match.params.store_id);
+                        }}
+
+                        goToChooseStore={() => {
+                            this.props.history.push("/chooseStore");
+                        }}
+
+                        goToStore={() => {
+                            // open store
+                            window.open(window.location.origin + "/" + this.props.match.params.store_id);
+                        }}
+
+                        logout={() => {
+
+                            // logout
+                            auth.signOut().then(res => {
+
+                                alert("Has cerrado tu sesión");
+
+                            }).catch(error => {
+
+                                console.log(error);
+
+                            });
+
+                        }}
+
+                        goToSales={() => {
+                            this.props.history.push("/sales/" + this.props.match.params.store_id);
+                        }}
+
+                        openNavMenu={this.state.openNavMenu}
+                        onCloseNavMenu={() => this.setState({ openNavMenu: false })}
+                        onClickOpenNavMenu={() => { this.setState({ openNavMenu: true }) }}
+                    />
 
                     {/* sync with IG account */}
                     <Typography align="center" variant="h4" component="h4" gutterBottom>
