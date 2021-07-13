@@ -199,10 +199,21 @@ class PostsFromSocialNetworks extends React.Component {
                 />
 
                 {/* products list */}
-                <Container>
+                <Container
+                    style={{
+                        justifyContent: "center",
+                        display: "flex",
+                        flexDirection: "column",
+                    }}
+                >
 
                     {/* title */}
-                    <Typography align="center" variant="h4" component="h4" gutterBottom>
+                    <Typography 
+                        align="center" 
+                        variant="h4" 
+                        component="h4" 
+                        gutterBottom
+                    >
                         Posteos desde tu cuenta de Instagram
                     </Typography>
 
@@ -217,7 +228,7 @@ class PostsFromSocialNetworks extends React.Component {
                         }}
 
                     /> */}
-                    <Typography
+                    {/* <Typography
                         gutterBottom
                         variant="body2"
                         component="p"
@@ -235,7 +246,7 @@ class PostsFromSocialNetworks extends React.Component {
                         // align = "center"
                     >
                         Estos son los posteos que obtuvimos directamente desde tu cuenta de Instagram. Si alguno de ellos corresponde a un producto que deseas agregar a tu tienda, ¡seleccionalo!
-                    </Typography>
+                    </Typography> */}
 
                     {/* list of products */}
                     {
@@ -275,6 +286,17 @@ class PostsFromSocialNetworks extends React.Component {
 
                                                 <Card>
                                                     <CardActionArea
+                                                        onClick={() => {
+                                                            // window.open("https://wa.me/" + workshop.teacherMobileNumber + "?text=Hola, quiero tomar una clase en tu curso de '" + workshop.title + "' que aparece en la plataforma online")
+                                                            // this.setState({
+                                                            //     toBuyModal: true,
+                                                            // });
+
+                                                            // alert("See details")
+                                                            // this.props.history.push('/editProduct/' + this.props.match.params.store_id + "/" + product.id, { product: product });
+                                                            this.props.history.push('/createNewProduct/' + this.props.match.params.store_id, { "post": post });
+                                                        }}
+
                                                     >
                                                         <CardMedia
                                                             image={post.media_url}
@@ -289,7 +311,8 @@ class PostsFromSocialNetworks extends React.Component {
                                                         <CardContent>
 
                                                             {/* product name */}
-                                                            <Typography gutterBottom variant="h5" component="h2">
+                                                            {/* <Typography gutterBottom variant="h5" component="h2"> */}
+                                                            <Typography align="center" variant="body2" color="textSecondary" component="p">
                                                                 {post.caption.substring(0, 80)} ...
                                                             </Typography>
 
@@ -297,7 +320,12 @@ class PostsFromSocialNetworks extends React.Component {
 
                                                     </CardActionArea>
 
-                                                    <CardActions>
+                                                    <CardActions
+                                                        style={{
+                                                            // backgroundColor: "red",
+                                                            justifyContent: "center",
+                                                        }}
+                                                    >
 
                                                         <Button
                                                             align="center"

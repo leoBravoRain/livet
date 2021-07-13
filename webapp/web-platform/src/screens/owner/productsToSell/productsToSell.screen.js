@@ -312,22 +312,33 @@ class ProductsToSell extends React.Component {
                                                             //     backgroundColor: "red",
                                                             //     // borderRadius: 10,
                                                             // }}
-                                                            onClick={() => {
-                                                                // window.open("https://wa.me/" + workshop.teacherMobileNumber + "?text=Hola, quiero tomar una clase en tu curso de '" + workshop.title + "' que aparece en la plataforma online")
-                                                                // this.setState({
-                                                                //     toBuyModal: true,
-                                                                // });
+                                                            // onClick={() => {
+                                                            //     // window.open("https://wa.me/" + workshop.teacherMobileNumber + "?text=Hola, quiero tomar una clase en tu curso de '" + workshop.title + "' que aparece en la plataforma online")
+                                                            //     // this.setState({
+                                                            //     //     toBuyModal: true,
+                                                            //     // });
 
-                                                                // alert("See details")
-                                                                this.props.history.push('/editProduct/' + this.props.match.params.store_id + "/" + product.id, { product: product });
-                                                            }}
+                                                            //     // alert("See details")
+                                                            //     this.props.history.push('/editProduct/' + this.props.match.params.store_id + "/" + product.id, { product: product });
+                                                            // }}
                                                         >
                                                             <CardActionArea
+
+                                                                onClick={() => {
+                                                                    // window.open("https://wa.me/" + workshop.teacherMobileNumber + "?text=Hola, quiero tomar una clase en tu curso de '" + workshop.title + "' que aparece en la plataforma online")
+                                                                    // this.setState({
+                                                                    //     toBuyModal: true,
+                                                                    // });
+
+                                                                    // alert("See details")
+                                                                    this.props.history.push('/editProduct/' + this.props.match.params.store_id + "/" + product.id, { product: product });
+                                                                }}
+
                                                             >
                                                                 <CardMedia
                                                                     image={product.image}
                                                                     component="img"
-                                                                    alt="Contemplative Reptile"
+                                                                    alt="Imágen del producto"
                                                                     height="200"
 
                                                                 // title={workshop.name}
