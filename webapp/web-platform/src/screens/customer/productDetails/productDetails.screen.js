@@ -352,10 +352,10 @@ class ProductDetails extends React.Component {
                             style={{
                                 // padding: 20,
                                 margin: 10,
-                                // alignContent: "center",
-                                // justifyContent: "center",
-                                // display: "flex",
-                                // flexDirection: "column",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                display: "flex",
+                                flexDirection: "column",
                                 // backgroundColor: "green",
                             }}
                         >
@@ -368,45 +368,6 @@ class ProductDetails extends React.Component {
                                 heigh="300px"
                             />
 
-                            {/* aditinoal information */}
-                            {
-                                this.state.store.aditionalInformationToDisplayToCustomer.length > 0 &&
-
-                                <Container
-                                    style = {{
-                                        marginTop:20,
-                                    }}
-                                >
-
-                                    {/* title */}
-                                    <Typography
-                                        align="left"
-                                        variant="h6"
-                                        component="h6"
-                                        gutterBottom
-                                        style={{
-                                            // margin: 15,
-                                            fontWeight: "bold",
-                                        }}
-                                    >
-                                        Recuerda
-                                    </Typography>
-
-                                    {/* aditional information */}
-                                    <Typography
-                                        align="left"
-                                        variant="body2"
-                                        component="p"
-                                        gutterBottom
-                                        style={{
-                                            // margin: 15,
-                                        }}
-                                    >
-                                        {this.state.store.aditionalInformationToDisplayToCustomer}
-                                    </Typography>
-
-                                </Container>
-                            }
 
                         </Grid>
 
@@ -554,6 +515,48 @@ class ProductDetails extends React.Component {
                                 Agregar al carrito
 
                             </Button>
+
+
+                            {/* aditinoal information */}
+                            {
+                                this.state.store.aditionalInformationToDisplayToCustomer.length > 0 &&
+
+                                <Container
+                                    style={{
+                                        marginTop: 20,
+                                    }}
+                                >
+
+                                    {/* title */}
+                                    <Typography
+                                        align="left"
+                                        variant="h6"
+                                        component="h6"
+                                        gutterBottom
+                                        style={{
+                                            // margin: 15,
+                                            fontWeight: "bold",
+                                        }}
+                                    >
+                                        Recuerda
+                                    </Typography>
+
+                                    {/* aditional information */}
+                                    <Typography
+                                        align="left"
+                                        variant="body2"
+                                        component="p"
+                                        gutterBottom
+                                        style={{
+                                            // margin: 15,
+                                        }}
+                                    >
+                                        {this.state.store.aditionalInformationToDisplayToCustomer}
+                                    </Typography>
+
+                                </Container>
+                            }
+                            
 
                         </Grid>
 
