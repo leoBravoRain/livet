@@ -94,6 +94,9 @@ class ProductsCatalog extends React.Component {
             // to filter by category
             categories: null,
             filterCategoryIndex: 0,
+
+            // products on shopping cart
+            productsOnCart: 0,
         };
 
         this.filterProduct = this.filterProduct.bind(this);
@@ -160,6 +163,17 @@ class ProductsCatalog extends React.Component {
 
                         // console.log(categories);
 
+                        // get if there is products on shopping cart
+                        const productsArrayCart = JSON.parse(localStorage.getItem('productsArrayCart'));
+                        var productsOnCart = 0;
+                        productsArrayCart.forEach(prod => {
+                            productsOnCart += prod.formatIndexList.length
+                        });
+
+                        // const productsOnCart = productsArrayCart != null && productsArrayCart.length > 0 ? productsArrayCart.length : 0;
+
+                        // console.log(productsOnCart);
+
                         // update state
                         this.setState({
 
@@ -169,6 +183,9 @@ class ProductsCatalog extends React.Component {
                             store: store,
                             loading: false,
                             categories: categories,
+
+                            // products on shopping cart
+                            productsOnCart: productsOnCart,
 
                         });
                     });
@@ -279,6 +296,7 @@ class ProductsCatalog extends React.Component {
                             // alert("go to cart");
                             this.props.history.push('/shoppingCart/' + this.props.match.params.store_id);
                         }}
+                        productsOnCart={this.state.productsOnCart}
                     />
 
 

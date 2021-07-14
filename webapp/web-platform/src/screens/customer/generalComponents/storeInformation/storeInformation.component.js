@@ -6,7 +6,10 @@ import React from "react";
 // import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 // // import TextField from '@material-ui/core/TextField';
-import { Button } from "@material-ui/core";
+import { 
+    Button,
+    Badge,
+} from "@material-ui/core";
 // import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
 // import CircularProgress from "@material-ui/core/CircularProgress";
@@ -192,13 +195,20 @@ class StoreInformation extends React.Component {
                         <Button
                             align="right"
                             size="small"
-                            color="primary"
+                            // color={this.props.productsOnCart > 0 ? "yellow" : "black"}
                             // variant="contained"
                             onClick={this.props.goToShoppingCart}
                         >
 
                             {/* Ir a carrito */}
-                            <ShoppingCart />
+                            <Badge badgeContent={this.props.productsOnCart} 
+                                color = "primary"
+                                // color={this.props.productsOnCart > 0 ? "red" : "black"}
+                                >
+                                <ShoppingCart 
+                                    // style={{ color: this.props.productsOnCart > 0 ? "red" : "black" }}
+                                />
+                            </Badge>
 
                         </Button>
 

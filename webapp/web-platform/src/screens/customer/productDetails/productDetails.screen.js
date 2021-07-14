@@ -65,6 +65,10 @@ class ProductDetails extends React.Component {
             store: null,
             units: 1,
             formatIndex: 0,
+
+            // products on shopping cart
+            productsOnCart: 0,
+
         }
 
         // this.convert_to_product = this.convert_to_product.bind(this);
@@ -97,7 +101,16 @@ class ProductDetails extends React.Component {
                             // get store data
                             var product = doc.data();
                             product["id"] = doc.id;
-        
+                            
+
+                            // get if there is products on shopping cart
+                            const productsArrayCart = JSON.parse(localStorage.getItem('productsArrayCart'));
+                            var productsOnCart = 0;
+                            productsArrayCart.forEach(prod => {
+                                productsOnCart += prod.formatIndexList.length
+                            });
+
+
                             // update state
                             this.setState({
         
@@ -106,6 +119,8 @@ class ProductDetails extends React.Component {
                                 store: store,
                                 loading: false,
                                 units: product.saleFormats[this.state.formatIndex].stock != 0 ? 1 : 0,
+                                // products on shopping cart
+                                productsOnCart: productsOnCart,
         
                             });
         
@@ -307,6 +322,7 @@ class ProductDetails extends React.Component {
                             // alert("go to cart");
                             this.props.history.push('/shoppingCart/' + this.props.match.params.store_id);
                         }}
+                        productsOnCart={this.state.productsOnCart}
                     />
 
                     {/* this is real container */}

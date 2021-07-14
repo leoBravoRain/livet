@@ -85,6 +85,9 @@ class SaleConfirmation extends React.Component {
             // store
             store: null,
 
+            // products on shopping cart
+            productsOnCart: 0,
+
         };
 
         this.confirm_sale = this.confirm_sale.bind(this);
@@ -126,6 +129,12 @@ class SaleConfirmation extends React.Component {
                         });
                     });
 
+                    // get if there is products on shopping cart
+                    var productsOnCart = 0;
+                    productsArrayCart.forEach(prod => {
+                        productsOnCart += prod.formatIndexList.length
+                    });
+
                     // update state
                     this.setState({
 
@@ -135,6 +144,9 @@ class SaleConfirmation extends React.Component {
 
                         // total sales
                         totalSales: totalSales,
+
+                        // products on shopping cart
+                        productsOnCart: productsOnCart,
 
                     });
                 }
@@ -353,6 +365,7 @@ class SaleConfirmation extends React.Component {
                             // alert("go to cart");
                             this.props.history.push('/shoppingCart/' + this.props.match.params.store_id);
                         }}
+                        productsOnCart={this.state.productsOnCart}
                     />
 
                     {/* section title */}

@@ -62,6 +62,10 @@ class ShoppingCart extends React.Component {
             products: [],
             totalSales: 0,
             store: null,
+
+            // products on shopping cart
+            productsOnCart: 0,
+
         }
         this.removeItemFromCart = this.removeItemFromCart.bind(this);
 
@@ -115,12 +119,24 @@ class ShoppingCart extends React.Component {
                         totalSales = 0;
                     };
 
+
+                    // get if there is products on shopping cart
+                    var productsOnCart = 0;
+                    productsArrayCart.forEach(prod => {
+                        productsOnCart += prod.formatIndexList.length
+                    });
+
+
                     // update
                     this.setState({
                         sales: productsArrayCart,
                         loading:false,
                         totalSales: totalSales,
                         store: store,
+
+                        // products on shopping cart
+                        productsOnCart: productsOnCart,
+
                     }, 
                         // () => console.log(this.state.sales)
                     );
@@ -232,6 +248,8 @@ class ShoppingCart extends React.Component {
                             // alert("go to cart");
                             this.props.history.push('/shoppingCart/' + this.props.match.params.store_id);
                         }}
+                        productsOnCart={this.state.productsOnCart}
+
                     />
 
 
