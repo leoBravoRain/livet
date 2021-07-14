@@ -450,7 +450,7 @@ class ProductDetails extends React.Component {
                                             <FormControlLabel 
                                                 value={idx} 
                                                 control={<Radio />} 
-                                                label={saleFormat.format + " - $ " + saleFormat.price + (saleFormat.stock != 0 ? " (stock: " + saleFormat.stock + ")" : " (sin stock disponible)")} 
+                                                label={saleFormat.format + " - $ " + parseInt(saleFormat.price).toLocaleString("es-SP") + (saleFormat.stock != 0 ? " (stock: " + saleFormat.stock + ")" : " (sin stock disponible)")} 
                                             />
                                         )
                                     })
@@ -488,7 +488,7 @@ class ProductDetails extends React.Component {
                                 }}
                             >
 
-                                Total: $ {parseInt(this.state.product.saleFormats[this.state.formatIndex].price)*this.state.units}
+                                Total: $ {(parseInt(this.state.product.saleFormats[this.state.formatIndex].price) * this.state.units).toLocaleString("es-SP")}
                             </Typography>
 
                             {/* to buy button */}
