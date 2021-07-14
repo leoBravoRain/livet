@@ -664,8 +664,8 @@ class Sales extends React.Component {
                                                                             <TableCell align="right">{product.product.name}</TableCell>
                                                                             <TableCell align="right">{product.product.saleFormats[formatIndex].format}</TableCell>
                                                                             <TableCell align="right">{product.unitsList[idxFormat]}</TableCell>
-                                                                            <TableCell align="right">{product.product.saleFormats[formatIndex].price}</TableCell>
-                                                                            <TableCell align="right">{product.unitsList[idxFormat] * product.product.saleFormats[formatIndex].price}</TableCell>
+                                                                            <TableCell align="right">{parseInt(product.product.saleFormats[formatIndex].price).toLocaleString("es-SP")}</TableCell>
+                                                                            <TableCell align="right">{parseInt(product.unitsList[idxFormat] * product.product.saleFormats[formatIndex].price).toLocaleString("es-SP")}</TableCell>
 
                                                                         </TableRow>
                                                                     )

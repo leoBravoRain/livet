@@ -434,7 +434,7 @@ class ProductsToSell extends React.Component {
                                                                             variant="body1"
                                                                             component="p"
                                                                         >
-                                                                            {product.minPrice.toLocaleString()}
+                                                                            {product.minPrice.toLocaleString("es-SP")}
                                                                         </Typography>
                                                                     </Container>
 
