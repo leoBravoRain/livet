@@ -269,7 +269,7 @@ class ProductsCatalog extends React.Component {
                         description={this.state.store.description}
                         goToHome={() => {
                             // alert("Go to home")
-                            this.props.history.push('/' + this.props.match.params.store_id);
+                            this.props.history.push('/store/' + this.props.match.params.store_id);
                         }}
                         goToInstagram={() => {
                             // alert("Go to home")

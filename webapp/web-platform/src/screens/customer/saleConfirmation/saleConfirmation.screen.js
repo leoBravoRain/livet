@@ -177,13 +177,27 @@ class SaleConfirmation extends React.Component {
 
 
             // user data
-            const userData = `Mis datos. Nombre: ` + this.state.customerName + `, email: ` + this.state.customerEmail + `, celular: ` + this.state.customerPhone;
-            const userAddress = `Mi dirección de envío es: ` + this.state.customerStreet + `, ` + this.state.customerHouseNumber.toString() + `, ` + this.state.customerCity + `, ` + this.state.customerRegion;
+            const userData = `Mis datos son:\n\nnombre: ` + this.state.customerName + `\nemail: ` + this.state.customerEmail + `\ncelular: ` + this.state.customerPhone;
+            const userAddress = `Mi dirección de envío es:\n\n` + this.state.customerStreet + `, ` + this.state.customerHouseNumber.toString() + `, ` + this.state.customerCity + `, ` + this.state.customerRegion;
             // const userAddress = `Mi dirección de envío es: ` + this.state.customerStreet + `, ` + this.state.customerHouseNumber.toString();
 
-
             // go to Wsp
-            const message = `!Hola!\n\nQuiero comprar los siguientes productos:\n\n` + listProductsString + `\n\nTotal: $` + totalSales.toString() + `.\n\n` + userData + `.\n\n` + userAddress + `.\n\n` + `¿Cómo debo realizarte el pago?`;
+            var message = `!Hola!\n\nQuiero comprar los siguientes productos:\n` + listProductsString + `\n\nTotal: $` + totalSales.toString() + `.\n\n` + userData + `.\n\n` + userAddress + `.\n\n`
+
+            var storeBankData = "";
+
+            // store data to add bank data
+            if (this.state.store.addBankAccountData) {
+
+                storeBankData = `-----------------------------------\n\nMensaje para cliente: Debes hacer el depósito a la siguiente cuenta:\n\n` + this.state.store.bankName + `\n` + this.state.store.accountType + `\n` + this.state.store.bankAccountNumber + `\n` + this.state.store.bankOwnerAccount + `\n` + this.state.store.bankRutOwner + `\n` + this.state.store.bankAccountEmail + `\nMonto total: $` + totalSales.toString(); 
+                
+            }
+            
+            else {
+                storeBankData = `¿Cómo debo realizarte el pago?`;
+            }
+            
+            message = message + storeBankData;
             // const message = userAddress;
             // const message = `!Hola! Quiero comprar los siguientes productos: ` + listProductsString + `. El total de la compra es de $` + totalSales.toString() + `. ` + userData + `. ` + userAddress + `. ¿Cómo debo realizarte el pago?`;
 
@@ -286,7 +300,7 @@ class SaleConfirmation extends React.Component {
                         description={this.state.store.description}
                         goToHome={() => {
                             // alert("Go to home")
-                            this.props.history.push('/' + this.props.match.params.store_id);
+                            this.props.history.push('/store/' + this.props.match.params.store_id);
                         }}
                         goToInstagram={() => {
                             // alert("Go to home")

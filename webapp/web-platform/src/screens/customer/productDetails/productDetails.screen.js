@@ -177,7 +177,7 @@ class ProductDetails extends React.Component {
                     alert("Producto agregado al carrito de compra");
             
                     // redirect
-                    this.props.history.push('/' + this.props.match.params.store_id);
+                    this.props.history.push('/store/' + this.props.match.params.store_id);
                 }
 
                 // if product is in cart but no format
@@ -207,7 +207,7 @@ class ProductDetails extends React.Component {
                     alert("Producto agregado al carrito de compra");
 
                     // redirect
-                    this.props.history.push('/' + this.props.match.params.store_id);
+                    this.props.history.push('/store/' + this.props.match.params.store_id);
 
 
                 }
@@ -242,7 +242,7 @@ class ProductDetails extends React.Component {
                         alert("Producto agregado al carrito de compra");
 
                         // redirect
-                        this.props.history.push('/' + this.props.match.params.store_id);
+                        this.props.history.push('/store/' + this.props.match.params.store_id);
 
                         
                     }
@@ -297,7 +297,7 @@ class ProductDetails extends React.Component {
                         description={this.state.store.description}
                         goToHome={() => {
                             // alert("Go to home")
-                            this.props.history.push('/' + this.props.match.params.store_id);
+                            this.props.history.push('/store/' + this.props.match.params.store_id);
                         }}
                         // goToInstagram={() => {
                         //     // alert("Go to home")
