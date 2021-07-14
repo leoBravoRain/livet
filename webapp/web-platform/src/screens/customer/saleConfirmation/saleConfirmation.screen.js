@@ -160,57 +160,96 @@ class SaleConfirmation extends React.Component {
             // get cart
             var productsArrayCart = JSON.parse(localStorage.getItem('productsArrayCart'));
 
-            // list of produts string
-            var listProductsString = "";
-            var totalSales = 0.0;
+            // creaste new sale
+            const sale = {
+                "date": "20-02-2021",
+                "totalSale": this.state.totalSales,
+                "shoppingCart": productsArrayCart,
+                "customerData": {
+                    "name": this.state.customerName,
+                    "email": this.state.customerEmail,
+                    "region": this.state.customerRegion,
+                    "city": this.state.customerCity,
+                    "street": this.state.customerStreet,
+                    "houseNumber":this.state.customerHouseNumber,
+                },
+            };
+            
+            // console.log(sale);
+            
+            // save sale on DB
+            fs.collection('stores').doc(this.props.match.params.store_id).collection("sales")
+                .add(
+                    sale
+                )
+                .then(ref_ => {
 
-            // string with products, formats and units
-            productsArrayCart.forEach((product, idxProd) => {
-                // totalSales += parseInt(product.units) * parseFloat(product.product.saleFormats[product.formatIndex].price);
-                product.formatIndexList.forEach((formatIndex, index) => {
-                    // totalSales += parseInt(product.units) * parseFloat(product.product.saleFormats[product.formatIndex].price);
-                    totalSales += parseInt(product.unitsList[index]) * parseFloat(product.product.saleFormats[formatIndex].price);
-                    // console.log(product.product.saleFormats[formatIndex].format + " : " + product.unitsList[index])
-                    listProductsString = listProductsString + "\n-- " + product.product.name + " - " + product.product.saleFormats[formatIndex].format + " x " + product.unitsList[index];
+
+
+                    // list of produts string
+                    var listProductsString = "";
+                    // var totalSales = 0.0;
+        
+                    // string with products, formats and units
+                    productsArrayCart.forEach((product, idxProd) => {
+                        // totalSales += parseInt(product.units) * parseFloat(product.product.saleFormats[product.formatIndex].price);
+                        product.formatIndexList.forEach((formatIndex, index) => {
+                            // totalSales += parseInt(product.units) * parseFloat(product.product.saleFormats[product.formatIndex].price);
+                            // totalSales += parseInt(product.unitsList[index]) * parseFloat(product.product.saleFormats[formatIndex].price);
+                            // console.log(product.product.saleFormats[formatIndex].format + " : " + product.unitsList[index])
+                            listProductsString = listProductsString + "\n-- " + product.product.name + " - " + product.product.saleFormats[formatIndex].format + " x " + product.unitsList[index];
+                        });
+                    });
+        
+        
+                    // user data
+                    const userData = `Mis datos son:\n\nnombre: ` + this.state.customerName + `\nemail: ` + this.state.customerEmail + `\ncelular: ` + this.state.customerPhone;
+                    const userAddress = `Mi dirección de envío es:\n\n` + this.state.customerStreet + `, ` + this.state.customerHouseNumber.toString() + `, ` + this.state.customerCity + `, ` + this.state.customerRegion;
+                    // const userAddress = `Mi dirección de envío es: ` + this.state.customerStreet + `, ` + this.state.customerHouseNumber.toString();
+        
+                    // go to Wsp
+                    var message = `!Hola!\n\nQuiero comprar los siguientes productos:\n` + listProductsString + `\n\nTotal: $` + this.state.totalSales.toString() + `.\n\n` + userData + `.\n\n` + userAddress + `.\n\n`
+        
+                    var storeBankData = "";
+        
+                    // store data to add bank data
+                    if (this.state.store.addBankAccountData) {
+        
+                        storeBankData = `-----------------------------------\n\nMensaje para cliente: Debes hacer el depósito a la siguiente cuenta:\n\n` + this.state.store.bankName + `\n` + this.state.store.accountType + `\n` + this.state.store.bankAccountNumber + `\n` + this.state.store.bankOwnerAccount + `\n` + this.state.store.bankRutOwner + `\n` + this.state.store.bankAccountEmail + `\nMonto total: $` + this.state.totalSales.toString(); 
+                        
+                    }
+                    
+                    else {
+                        storeBankData = `¿Cómo debo realizarte el pago?`;
+                    }
+                    
+                    message = message + storeBankData;
+                    // const message = userAddress;
+                    // const message = `!Hola! Quiero comprar los siguientes productos: ` + listProductsString + `. El total de la compra es de $` + totalSales.toString() + `. ` + userData + `. ` + userAddress + `. ¿Cómo debo realizarte el pago?`;
+        
+                    // alert(message);
+                    // console.log(message);
+        
+                    // // go to whatsapp
+                    // window.open("https://wa.me/" + store.whatsappNumber+ "?text=" + message);
+                    window.open("https://wa.me/+56937827142/?text=" + encodeURI(message));
+        
+                    this.setState({
+                        loading: false,
+                    });
+
+                })
+
+                .catch(e => {
+
+                    this.setState({
+                        loading: false
+                    });
+
+
+                    alert("Tuvimos un error, inténtalo nuevamente porfavor");
+
                 });
-            });
-
-
-            // user data
-            const userData = `Mis datos son:\n\nnombre: ` + this.state.customerName + `\nemail: ` + this.state.customerEmail + `\ncelular: ` + this.state.customerPhone;
-            const userAddress = `Mi dirección de envío es:\n\n` + this.state.customerStreet + `, ` + this.state.customerHouseNumber.toString() + `, ` + this.state.customerCity + `, ` + this.state.customerRegion;
-            // const userAddress = `Mi dirección de envío es: ` + this.state.customerStreet + `, ` + this.state.customerHouseNumber.toString();
-
-            // go to Wsp
-            var message = `!Hola!\n\nQuiero comprar los siguientes productos:\n` + listProductsString + `\n\nTotal: $` + totalSales.toString() + `.\n\n` + userData + `.\n\n` + userAddress + `.\n\n`
-
-            var storeBankData = "";
-
-            // store data to add bank data
-            if (this.state.store.addBankAccountData) {
-
-                storeBankData = `-----------------------------------\n\nMensaje para cliente: Debes hacer el depósito a la siguiente cuenta:\n\n` + this.state.store.bankName + `\n` + this.state.store.accountType + `\n` + this.state.store.bankAccountNumber + `\n` + this.state.store.bankOwnerAccount + `\n` + this.state.store.bankRutOwner + `\n` + this.state.store.bankAccountEmail + `\nMonto total: $` + totalSales.toString(); 
-                
-            }
-            
-            else {
-                storeBankData = `¿Cómo debo realizarte el pago?`;
-            }
-            
-            message = message + storeBankData;
-            // const message = userAddress;
-            // const message = `!Hola! Quiero comprar los siguientes productos: ` + listProductsString + `. El total de la compra es de $` + totalSales.toString() + `. ` + userData + `. ` + userAddress + `. ¿Cómo debo realizarte el pago?`;
-
-            // alert(message);
-            // console.log(message);
-
-            // // go to whatsapp
-            // window.open("https://wa.me/" + store.whatsappNumber+ "?text=" + message);
-            window.open("https://wa.me/+56937827142/?text=" + encodeURI(message));
-
-            this.setState({
-                loading: false,
-            });
 
         }
 

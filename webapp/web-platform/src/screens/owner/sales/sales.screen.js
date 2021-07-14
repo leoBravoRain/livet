@@ -9,7 +9,7 @@ import Container from '@material-ui/core/Container';
 import { Button } from "@material-ui/core";
 // import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
-// import CircularProgress from "@material-ui/core/CircularProgress";
+import CircularProgress from "@material-ui/core/CircularProgress";
 // import Grid from '@material-ui/core/Grid';
 
 // import Card from '@material-ui/core/Card';
@@ -282,69 +282,41 @@ class Sales extends React.Component {
 
             if (user) {
                 
-                // demo sales
-                // const sales = [
-                //     {
-                //         "date": "10-07-2021",
-                //         "productName": "Product demo 1",
-                //         "units": 1,
-                //         "priceUnit": 1000,
-                //         "totalSale": 1000,
-                //     },
-                //     {
-                //         "date": "11-07-2021",
-                //         "productName": "Product demo 2",
-                //         "units": 2,
-                //         "priceUnit": 6000,
-                //         "totalSale": 12000,
-                //     }
-                // ];
-                var totalSalesStore = 0.0;
-                sales.forEach(sale => {
-                    totalSalesStore += sale.totalSale;
-                });
-
-                // const sales = shoppingCart;
-
-                // var totalSales = 0.0;
-
-                // // if there is any product
-                // if (sales != null && sales.length > 0) {
-
-                //     // console.log(sales);
-
-                //     // get total sale
-                //     sales.forEach(product => {
-                //         // console.log(product);
-                //         // iterate through formats
-                //         product.formatIndexList.forEach((formatIndex, index) => {
-                //             // totalSales += parseInt(product.units) * parseFloat(product.product.saleFormats[product.formatIndex].price);
-                //             totalSales += parseInt(product.unitsList[index]) * parseFloat(product.product.saleFormats[formatIndex].price);
-                //         });
-                //     });
-
-                //     // console.log(totalSales);
-
-                // }
-
-                // // no products on cart
-                // else {
-                //     // alert("no products on cart");
-                //     sales = [];
-                //     totalSales = 0;
-                // };
-
-
-                // update state
-                this.setState({
-
-                    // update products
-                    // products: products,
-                    sales: sales,
-                    totalSalesStore: totalSalesStore,
-                    // totalSales: totalSales,
-                    loading: false,
-
+                // get sales from DB
+                fs.collection('stores').doc(this.props.match.params.store_id).collection("sales")
+                .get()
+                .then(snapshotquery => {
+                    
+                    // // get data from API
+                    var sales = [];
+                    
+                    // iterate over each item
+                    snapshotquery.forEach(doc => {
+                        
+                        // console.log(doc.data());
+                        let sale = doc.data();
+                        // sale["id"] = doc.id;
+                        sales.push(sale);
+                        
+                    });
+                        
+                    var totalSalesStore = 0.0;
+                    sales.forEach(sale => {
+                        totalSalesStore += sale.totalSale;
+                    });
+                    
+                    // update state
+                    this.setState({
+                        
+                        // update products
+                        // products: products,
+                        sales: sales,
+                        totalSalesStore: totalSalesStore,
+                        // totalSales: totalSales,
+                        loading: false,
+                        
+                    });
+                    
                 });
 
             }
@@ -619,104 +591,125 @@ class Sales extends React.Component {
                         </Table>
                     </TableContainer> */}
                     {
-                        this.state.sales != null
+                        !this.state.loading
 
-                            &&
+                        ?
 
-                            this.state.sales.length > 0
+                            this.state.sales != null
 
-                            ?
+                                &&
+
+                                this.state.sales.length > 0
+
+                                ?
 
 
-                            <TableContainer>
-                                <Table aria-label="simple table">
-                                    <TableHead>
-                                        <TableRow>
-                                            <TableCell align="right">Número de pedido</TableCell>
-                                            <TableCell align="right">Fecha</TableCell>
-                                            <TableCell align="right">Producto</TableCell>
-                                            <TableCell align="right">Formato</TableCell>
-                                            <TableCell align="right">Cantidad</TableCell>
-                                            <TableCell align="right">Precio</TableCell>
-                                            <TableCell align="right">Total</TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
+                                <TableContainer>
+                                    <Table aria-label="simple table">
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell align="right">Número de pedido</TableCell>
+                                                <TableCell align="right">Fecha</TableCell>
+                                                <TableCell align="right">Cliente</TableCell>
+                                                <TableCell align="right">Producto</TableCell>
+                                                <TableCell align="right">Formato</TableCell>
+                                                <TableCell align="right">Cantidad</TableCell>
+                                                <TableCell align="right">Precio</TableCell>
+                                                <TableCell align="right">Total</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
 
-                                        {
-                                            // this is because product is an array with each element being [product object, array of format index, array of units]
-                                            // this.state.sales.map((product, idxProduct) => (
+                                            {
+                                                // this is because product is an array with each element being [product object, array of format index, array of units]
+                                                // this.state.sales.map((product, idxProduct) => (
 
-                                            // this.state.sales.map((sale, idxSale) => {
-                                            this.state.sales.map((sale, idxSale) => (
+                                                // this.state.sales.map((sale, idxSale) => {
+                                                this.state.sales.map((sale, idxSale) => (
 
-                                                        sale.shoppingCart.map((product, idxProduct) => (
+                                                            sale.shoppingCart.map((product, idxProduct) => (
 
-                                                            // console.log(product);
+                                                                // console.log(product);
 
-                                                            product.formatIndexList.map((formatIndex, idxFormat) => {
-                                                                
-                                                                // console.log(formatIndex);
+                                                                product.formatIndexList.map((formatIndex, idxFormat) => {
+                                                                    
+                                                                    // console.log(formatIndex);
 
-                                                                // console.log(product.product.name);
+                                                                    // console.log(product.product.name);
 
-                                                                return (
-                                                                    <TableRow>
-                                                                        <TableCell align="right">{idxProduct != 0 ? "" : idxSale + 1}</TableCell>
-                                                                        <TableCell align="right">{idxProduct != 0 ? "" : sale.date}</TableCell>
-                                                                        <TableCell align="right">{product.product.name}</TableCell>
-                                                                        <TableCell align="right">{product.product.saleFormats[formatIndex].format}</TableCell>
-                                                                        <TableCell align="right">{product.unitsList[idxFormat]}</TableCell>
-                                                                        <TableCell align="right">{product.product.saleFormats[formatIndex].price}</TableCell>
-                                                                        <TableCell align="right">{product.unitsList[idxFormat] * product.product.saleFormats[formatIndex].price}</TableCell>
+                                                                    return (
+                                                                        <TableRow>
+                                                                            <TableCell align="right">{idxProduct != 0 ? "" : idxSale + 1}</TableCell>
+                                                                            <TableCell align="right">{idxProduct != 0 ? "" : sale.date}</TableCell>
+                                                                            <TableCell align="right">
+                                                                                <Button
+                                                                                    onClick = {() => {
+                                                                                        const userData = `Datos son:\n\nnombre: ` + sale.customerData.name + `\nemail: ` + sale.customerData.email + `\ncelular: ` + sale.customerData.mobilePhone;
+                                                                                        const userAddress = `Dirección de envío es:\n\n` + sale.customerData.street + `, ` + sale.customerData.houseNumber.toString() + `, ` + sale.customerData.city + `, ` + sale.customerData.region;
+                                                                                        alert(userData + "\n\n" + userAddress);
+                                                                                    }}
+                                                                                >
+                                                                                    {idxProduct != 0 ? "" : sale.customerData.name}
+                                                                                </Button>
+                                                                                
+                                                                            </TableCell>
+                                                                            <TableCell align="right">{product.product.name}</TableCell>
+                                                                            <TableCell align="right">{product.product.saleFormats[formatIndex].format}</TableCell>
+                                                                            <TableCell align="right">{product.unitsList[idxFormat]}</TableCell>
+                                                                            <TableCell align="right">{product.product.saleFormats[formatIndex].price}</TableCell>
+                                                                            <TableCell align="right">{product.unitsList[idxFormat] * product.product.saleFormats[formatIndex].price}</TableCell>
 
-                                                                    </TableRow>
-                                                                )
+                                                                        </TableRow>
+                                                                    )
 
-                                                            })
+                                                                })
 
-                                                        ))
-                                                        
-                                                        // }
+                                                            ))
+                                                            
+                                                            // }
 
-                                                    // </TableRow>
+                                                        // </TableRow>
 
-                                                // )
-                                            // })
-                                            ))
+                                                    // )
+                                                // })
+                                                ))
 
-                                        }
+                                            }
 
-                                        <TableRow style={{ fontWeight: "bold" }} >
-                                            <TableCell align="right"> </TableCell>
-                                            <TableCell align="right"> </TableCell>
-                                            <TableCell align="right"> </TableCell>
-                                            <TableCell align="right"> </TableCell>
-                                            <TableCell align="right"> </TableCell>
-                                            <TableCell align="right" style={{ fontWeight: "bold", fontSize: "25px" }}> Total </TableCell>
-                                            <TableCell align="right" style={{ fontWeight: "bold" }}>{this.state.totalSalesStore}</TableCell>
-                                        </TableRow>
+                                            <TableRow style={{ fontWeight: "bold" }} >
+                                                <TableCell align="right"> </TableCell>
+                                                <TableCell align="right"> </TableCell>
+                                                <TableCell align="right"> </TableCell>
+                                                <TableCell align="right"> </TableCell>
+                                                <TableCell align="right"> </TableCell>
+                                                <TableCell align="right" style={{ fontWeight: "bold", fontSize: "25px" }}> Total </TableCell>
+                                                <TableCell align="right" style={{ fontWeight: "bold" }}>{this.state.totalSalesStore}</TableCell>
+                                            </TableRow>
 
-                                    </TableBody>
-                                </Table>
-                            </TableContainer>
+                                        </TableBody>
+                                    </Table>
+                                </TableContainer>
 
-                            :
+                                :
 
-                            <Typography
-                                align="center"
-                                variant="body1"
-                                component="p"
-                                gutterBottom
-                                style={{
-                                    // backgroundColor: "red",
-                                    borderRadius: 10,
-                                    margin: 20,
-                                    fontSize: 20,
-                                }}
-                            >
-                                Aun no has agregado nada al carrito
-                                </Typography>
+                                <Typography
+                                    align="center"
+                                    variant="body1"
+                                    component="p"
+                                    gutterBottom
+                                    style={{
+                                        // backgroundColor: "red",
+                                        borderRadius: 10,
+                                        margin: 20,
+                                        fontSize: 20,
+                                    }}
+                                >
+                                    Aun no has agregado nada al carrito
+                                    </Typography>
+
+                        :
+
+                            <CircularProgress/>
                     }
 
 
