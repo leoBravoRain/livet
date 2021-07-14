@@ -296,6 +296,13 @@ class Sales extends React.Component {
                         // console.log(doc.data());
                         let sale = doc.data();
                         // sale["id"] = doc.id;
+
+
+                        // var date = new Date(sale.date);
+                        // console.log(date);
+                        sale["date"] = sale.date.toDate().toLocaleString();
+                        // console.log(sale.date.toDate().toString())
+
                         sales.push(sale);
                         
                     });
@@ -303,6 +310,7 @@ class Sales extends React.Component {
                     var totalSalesStore = 0.0;
                     sales.forEach(sale => {
                         totalSalesStore += sale.totalSale;
+
                     });
                     
                     // update state

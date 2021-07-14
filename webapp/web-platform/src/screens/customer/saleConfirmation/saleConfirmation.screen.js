@@ -33,6 +33,7 @@ import FooterStore from "../generalComponents/footerStore/footerStore.component"
 
 // firebase
 import { fs } from "../../../libraries/firebase/firebase";
+import firebase from "firebase";
 
 
 // // prototype post
@@ -155,14 +156,16 @@ class SaleConfirmation extends React.Component {
         // alert("go to wsp");
 
         // // validate if cusomter data is filled
-        if (this.state.customerName != null & this.state.customerEmail != null & this.state.customerRegion != null & this.state.customerCity != null & this.state.customerStreet != null & this.state.customerHouseNumber != null) {
+        if (this.state.customerName != null & this.state.customerEmail != null & this.state.customerRegion != null & this.state.customerCity != null & this.state.customerStreet != null & this.state.customerHouseNumber != null & this.state.customerPhone != null) {
 
             // get cart
             var productsArrayCart = JSON.parse(localStorage.getItem('productsArrayCart'));
 
             // creaste new sale
             const sale = {
-                "date": "20-02-2021",
+                // "date": "20-02-2021",
+                "date": firebase.firestore.Timestamp.now(),
+
                 "totalSale": this.state.totalSales,
                 "shoppingCart": productsArrayCart,
                 "customerData": {
@@ -172,6 +175,7 @@ class SaleConfirmation extends React.Component {
                     "city": this.state.customerCity,
                     "street": this.state.customerStreet,
                     "houseNumber":this.state.customerHouseNumber,
+                    "mobilePhone": this.state.customerPhone, 
                 },
             };
             
