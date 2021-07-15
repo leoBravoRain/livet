@@ -303,8 +303,8 @@ class ShoppingCart extends React.Component {
                                                             <TableCell align="right">{product.product.name}</TableCell>
                                                             <TableCell align="right">{product.product.saleFormats[formatIndex].format}</TableCell>
                                                             <TableCell align="right">{product.unitsList[idxFormat]}</TableCell>
-                                                            <TableCell align="right">{parseInt(product.product.saleFormats[formatIndex].price).toLocaleString("es-SP")}</TableCell>
-                                                            <TableCell align="right">{parseInt(product.unitsList[idxFormat] * product.product.saleFormats[formatIndex].price).toLocaleString("es-SP")}</TableCell>
+                                                            <TableCell align="right">{parseInt(product.product.saleFormats[formatIndex].price).toLocaleString("nl-NL")}</TableCell>
+                                                            <TableCell align="right">{parseInt(product.unitsList[idxFormat] * product.product.saleFormats[formatIndex].price).toLocaleString("nl-NL")}</TableCell>
 
                                                             {/* remove from cart */}
                                                             <TableCell align="right">
@@ -329,7 +329,7 @@ class ShoppingCart extends React.Component {
                                                 <TableCell align="right"> </TableCell>
                                                 <TableCell align="right"> </TableCell>
                                                 <TableCell align="right" style={{ fontWeight: "bold", fontSize: "25px" }}> Total </TableCell>
-                                                <TableCell align="right" style={{ fontWeight: "bold" }}>{parseInt(this.state.totalSales).toLocaleString("es-SP")}</TableCell>
+                                                <TableCell align="right" style={{ fontWeight: "bold" }}>{parseInt(this.state.totalSales).toLocaleString("nl-NL")}</TableCell>
                                             </TableRow>
 
                                         </TableBody>

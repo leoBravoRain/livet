@@ -514,7 +514,7 @@ class SaleConfirmation extends React.Component {
                             }}
                         >
                             <Typography align="center" variant="h6" component="h6" gutterBottom>
-                                Total: $ {parseInt(this.state.totalSales).toLocaleString("es-SP")}
+                                Total: $ {parseInt(this.state.totalSales).toLocaleString("nl-NL")}
                             </Typography>
                         </Container>
 

@@ -585,7 +585,7 @@ class ProductsCatalog extends React.Component {
                                                                 variant="body1"
                                                                 component="p"
                                                             >
-                                                                {product.minPrice.toLocaleString("es-SP")}
+                                                                {product.minPrice.toLocaleString("nl-NL")}
                                                             </Typography>
                                                         </Container>
 
