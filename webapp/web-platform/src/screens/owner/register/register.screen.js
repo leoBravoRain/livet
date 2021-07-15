@@ -91,6 +91,11 @@ class Register extends React.Component {
                         flexDirection: "column",
                         justifyContent: "center",
                         alignItems: "center",
+                        marginTop: 50,
+                        // alignSelf: "center",
+                        // justifySelf: "center",
+                        // msJustifySelf: "center",
+                        // backgroundColor: "red",
                     }}
                 >
 

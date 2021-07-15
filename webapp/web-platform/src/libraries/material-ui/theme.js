@@ -37,8 +37,24 @@ export default createMuiTheme({
     //     //     fontStyle: 'italic',
     //     // },
     // },
+    // MuiCircularProgress:{
+    //     colorPrimary: {
+    //         color: "black"
+    //     },
 
+    // },
     overrides: {
+        // MuiCircularProgress: {
+        //     // colorPrimary: {
+        //     // },
+        //     root: {
+        //         color: "black",
+        //         size: 2,
+        //         justifySelf: "center",
+        //         alignSelf: "center",
+        //     },
+
+        // },
         MuiButton: {
             root: {
                 margin: "10px",
