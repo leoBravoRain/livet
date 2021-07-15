@@ -248,7 +248,7 @@ class SaleConfirmation extends React.Component {
         
                     // // go to whatsapp
                     // window.open("https://wa.me/" + store.whatsappNumber+ "?text=" + message);
-                    window.open("https://wa.me/+56937827142/?text=" + encodeURI(message));
+                    window.open("https://wa.me/" + this.state.store.whatsappNumber + "/?text=" + encodeURI(message));
         
                     this.setState({
                         loading: false,
