@@ -166,9 +166,11 @@ class ProductsCatalog extends React.Component {
                         // get if there is products on shopping cart
                         const productsArrayCart = JSON.parse(localStorage.getItem('productsArrayCart'));
                         var productsOnCart = 0;
-                        productsArrayCart.forEach(prod => {
-                            productsOnCart += prod.formatIndexList.length
-                        });
+                        if (productsArrayCart != null) {
+                            productsArrayCart.forEach(prod => {
+                                productsOnCart += prod.formatIndexList.length
+                            });
+                        }
 
                         // const productsOnCart = productsArrayCart != null && productsArrayCart.length > 0 ? productsArrayCart.length : 0;
 

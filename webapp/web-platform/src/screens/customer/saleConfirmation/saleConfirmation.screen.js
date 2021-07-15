@@ -120,20 +120,28 @@ class SaleConfirmation extends React.Component {
                     // list of produts string
                     var totalSales = 0.0;
 
-                    // string with products, formats and units
-                    productsArrayCart.forEach((product, idxProd) => {
-                        // totalSales += parseInt(product.units) * parseFloat(product.product.saleFormats[product.formatIndex].price);
-                        product.formatIndexList.forEach((formatIndex, index) => {
-                            // totalSales += parseInt(product.units) * parseFloat(product.product.saleFormats[product.formatIndex].price);
-                            totalSales += parseInt(product.unitsList[index]) * parseFloat(product.product.saleFormats[formatIndex].price);
-                        });
-                    });
-
                     // get if there is products on shopping cart
                     var productsOnCart = 0;
-                    productsArrayCart.forEach(prod => {
-                        productsOnCart += prod.formatIndexList.length
-                    });
+
+                    // string with products, formats and units
+                    if (productsArrayCart != null) {
+
+                        productsArrayCart.forEach((product, idxProd) => {
+                            
+                            // update products on cart
+                            productsOnCart += product.formatIndexList.length
+                            
+                            // totalSales += parseInt(product.units) * parseFloat(product.product.saleFormats[product.formatIndex].price);
+                            product.formatIndexList.forEach((formatIndex, index) => {
+                                // totalSales += parseInt(product.units) * parseFloat(product.product.saleFormats[product.formatIndex].price);
+                                totalSales += parseInt(product.unitsList[index]) * parseFloat(product.product.saleFormats[formatIndex].price);
+                            });
+                        });
+
+                    }
+
+                    // productsArrayCart.forEach(prod => {
+                    // });
 
                     // update state
                     this.setState({

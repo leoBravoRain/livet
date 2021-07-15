@@ -91,15 +91,23 @@ class ShoppingCart extends React.Component {
 
                     // get shopping cart products
                     var productsArrayCart = JSON.parse(localStorage.getItem('productsArrayCart'));
-            
+                    
+                    var productsOnCart = 0;
+
+                    var totalSales = 0.0;
+
                     // if there is any product
                     if (productsArrayCart != null && productsArrayCart.length > 0) {
                         
                         // console.log(productsArrayCart);
 
                         // get total sale
-                        var totalSales = 0.0;
                         productsArrayCart.forEach(product => {
+
+                            // update products on cart
+                            // format list leght is the number of products
+                            productsOnCart += product.formatIndexList.length
+
                             // console.log(product);
                             // iterate through formats
                             product.formatIndexList.forEach((formatIndex, index) => {
@@ -109,6 +117,12 @@ class ShoppingCart extends React.Component {
                         });
 
                         // console.log(totalSales);
+                        
+                        // // get if there is products on shopping cart
+                        // var productsOnCart = 0;
+                        // productsArrayCart.forEach(prod => {
+                        //     productsOnCart += prod.formatIndexList.length
+                        // });
                         
                     }
 
@@ -120,11 +134,6 @@ class ShoppingCart extends React.Component {
                     };
 
 
-                    // get if there is products on shopping cart
-                    var productsOnCart = 0;
-                    productsArrayCart.forEach(prod => {
-                        productsOnCart += prod.formatIndexList.length
-                    });
 
 
                     // update
