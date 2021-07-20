@@ -233,7 +233,9 @@ class ProductsCatalog extends React.Component {
 
         // new filtered products
         var newFilteredProducts = [];
-        const searchValue = this.state.categories[categoryIndex];
+        const searchValue = this.state.categories[categoryIndex].toLowerCase().trim();
+
+        // console.log(searchValue);
 
         // basic implementation (search for a product with same name or description). I guess it is fast with few products
         if (categoryIndex != 0) {
@@ -243,7 +245,7 @@ class ProductsCatalog extends React.Component {
             // this.state.filteredProducts.forEach(product => {
 
                 // filtering by category
-                if (product.category.toLowerCase().includes(searchValue)) {
+                if (product.category.toLowerCase().trim().includes(searchValue)) {
                     newFilteredProducts.push(product);
                 };
             });
@@ -256,6 +258,8 @@ class ProductsCatalog extends React.Component {
             // alert("all products");
             newFilteredProducts = this.state.initialProducts;
         }
+
+        // console.log(newFilteredProducts);
 
         // update state
         this.setState({
