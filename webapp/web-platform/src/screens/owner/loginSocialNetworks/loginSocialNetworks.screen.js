@@ -139,7 +139,7 @@ class LoginSocialNetworks extends React.Component {
 
         // redirect to IG authorization
         const urlRedirect = "https://livet2.web.app/loginSocialNetworks";
-        // const urlRedirect = "https://localhost:3000/loginSocialNetworks/";
+        // const urlRedirect = "https://localhost:5000/loginSocialNetworks/";
         window.location.replace('https://api.instagram.com/oauth/authorize?client_id=477247573594243&redirect_uri=' + urlRedirect + '&scope=user_profile,user_media&response_type=code');
 
     };

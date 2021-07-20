@@ -304,7 +304,7 @@ class PostsFromSocialNetworks extends React.Component {
 
                                                             // alert("See details")
                                                             // this.props.history.push('/editProduct/' + this.props.match.params.store_id + "/" + product.id, { product: product });
-                                                            this.props.history.push('/createNewProduct/' + this.props.match.params.store_id, { "post": post });
+                                                            this.props.history.push('/createNewProduct/' + this.props.match.params.store_id, { "post": post, "posts": this.props.location.state.posts });
                                                         }}
 
                                                     >
@@ -349,11 +349,12 @@ class PostsFromSocialNetworks extends React.Component {
                                                                 // });
 
                                                                 // alert("See details")
-                                                                this.props.history.push('/createNewProduct/' + this.props.match.params.store_id, { "post": post });
+                                                                // this.props.history.push('/createNewProduct/' + this.props.match.params.store_id, { "post": post });
+                                                                this.props.history.push('/createNewProduct/' + this.props.match.params.store_id, { "post": post, "posts": this.props.location.state.posts});
                                                             }}
                                                         >
 
-                                                            <PlayArrow /> Ver
+                                                            <PlayArrow /> Editar
     
                                                         </Button>
 

@@ -6,7 +6,7 @@ import React from "react";
 // import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 // import TextField from '@material-ui/core/TextField';
-// import { Button } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 // import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -193,7 +193,8 @@ class CreateNewProduct extends React.Component {
     }
 
 
-    convert_to_product() {
+    // redirect to is used just to compare if it is not null 
+    convert_to_product(redirectToProductsToSell= true) {
 
         this.setState({
             loading: true,
@@ -335,9 +336,23 @@ class CreateNewProduct extends React.Component {
                                     loading: false,
                                 });
             
-                                // navigate to products to sell
-                                // + store id
-                                this.props.history.push("/productsToSell/" + this.props.match.params.store_id);
+                                // check if redirect
+                                // redirect to default
+                                if (redirectToProductsToSell) {
+
+                                    // navigate to products to sell
+                                    // + store id
+                                    this.props.history.push("/productsToSell/" + this.props.match.params.store_id);
+                                    
+                                }
+                                
+                                // redirect to other url
+                                else {
+                                    
+                                    // this is redirecting to this onlyu page
+                                    this.props.history.push("/postsFromSocialNetworks/" + this.props.match.params.store_id, { "posts": this.props.location.state.posts});
+
+                                }
 
                             })
                             .catch(e => {
@@ -592,6 +607,25 @@ class CreateNewProduct extends React.Component {
 
 
                         {/* Here it was the origanl form component */}
+                        {
+                            this.state.post != null &&
+
+                                <Button
+                                    align="center"
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={() => {
+                                        // console.log("2ojsad");
+                                        // alert("add other");
+                                        this.convert_to_product(false);
+
+                                    }}
+                                >
+                                    {/* <Delete /> */}
+                                    {/* Eliminar */}
+                                    Crear producto y agregar otro desde Instagram
+                                </Button>
+                        }
 
                     </Container>
 
