@@ -105,9 +105,10 @@ class Register extends React.Component {
                         Registrate en Livet
                     </Typography>
 
-                    {/* <Typography align="center" variant="body2" component="p" gutterBottom>
-                        Ingresa tu email  y una contraseña
-                    </Typography> */}
+                    <Typography align="center" variant="body2" component="p" gutterBottom>
+                        {/* Ingresa tu email  y una contraseña */}
+                        Registrate y crea tu tienda gratis por los primeros 14 días 🥳 Sin tarjeta de crédito requerida 💳 Si no te gusta el servicio, te retiras sin ningún problema 😏
+                    </Typography>
 
 
                     {/* formulario para registro */}
