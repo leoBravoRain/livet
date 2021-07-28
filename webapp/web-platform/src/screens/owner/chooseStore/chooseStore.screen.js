@@ -445,15 +445,42 @@ class ChooseStore extends React.Component {
 
                             :
 
-                                <Typography 
-                                    align="center" 
-                                    variant="body1" 
-                                    component="p" 
-                                    gutterBottom 
-                                    // onClick={() => alert("oaijsd")}
-                                >
-                                    No tienes tiendas creadas, ¡Comienza creando una!
-                                </Typography>
+                                    <Container
+                                        style = {{
+                                            display:"flex",
+                                            flexDirection: "column",
+                                            alignItems: "center",
+                                        }}
+                                    >
+
+                                        <Typography 
+                                            align="center" 
+                                            variant="body1" 
+                                            component="p" 
+                                            gutterBottom 
+                                            // onClick={() => alert("oaijsd")}
+                                        >
+                                            No tienes tiendas creadas, ¡Comienza creando una!
+                                        </Typography>
+                                        
+                                        <Button
+                                            // margin = {200}
+                                            style = {{
+                                                marginTop: 50,
+                                            }}
+                                            variant = "outlined"
+                                            onClick = {()=>{
+
+                                                const message = "¡Hola! Necesito ayuda para crear mi propia tienda en Livet";
+
+                                                // go to wstp
+                                                window.open("https://wa.me/" + "+56937827142" + "/?text=" + encodeURI(message));
+                                                
+                                            }}
+                                        >
+                                            ¿Necesitas ayuda para crear tu tienda? ¡Háblanos directamente pinchando aquí!
+                                        </Button>
+                                    </Container>
                         }
 
 
