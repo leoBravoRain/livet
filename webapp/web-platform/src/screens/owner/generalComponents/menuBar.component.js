@@ -21,6 +21,7 @@ import Storefront from "@material-ui/icons/Storefront";
 import Search from "@material-ui/icons/Search";
 import Loyalty from "@material-ui/icons/Loyalty";
 import MonetizationOn from "@material-ui/icons/MonetizationOn";
+import WhatsApp from "@material-ui/icons/WhatsApp";
 
 import Drawer from '@material-ui/core/Drawer';
 import MenuItem from "@material-ui/core/MenuItem";
@@ -91,6 +92,19 @@ class MenuBar extends React.Component {
                         <Storefront style={{ marginRight: 10 }}/>
                         Ir a la tienda
                     </MenuItem>
+
+
+                    <MenuItem onClick={() => {
+                        const message = "¡Hola! Necesito ayuda con Livet";
+
+                        // go to wstp
+                        window.open("https://wa.me/" + "+56937827142" + "/?text=" + encodeURI(message));
+                    }}>
+
+                        <WhatsApp style={{ marginRight: 10 }} />
+                        Hablar con Livet ahora
+                    </MenuItem>
+
 
                     <MenuItem onClick={this.props.logout}>
                         <Close style={{ marginRight: 10 }}/>
