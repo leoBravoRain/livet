@@ -145,8 +145,35 @@ class ChooseStore extends React.Component {
                         }}
                     >
 
+                        {
+                            this.state.stores.length == 0 &&
+
+                                <Container
+                                    style={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        justifyContent: "center",
+                                        // alignContent: "center",
+                                        alignItems: "center",
+                                    }}
+                                >
+                                    <Typography align="center" variant="h5" component="h5" gutterBottom
+                                        // backgroundColor = "primary"
+                                        style = {{
+                                            backgroundColor: "rgba(66, 135, 245,0.1)",
+                                            margin: 40,
+                                            padding: 15,
+                                            borderRadius: 20,
+                                        }}
+                                    >
+                                        🎊 Bienvenid@ a Livet 🎊
+                                    </Typography>
+
+                                </Container>
+
+                        }
                         {/* menu */}
-                        <MenuBar
+                        {/* <MenuBar
                             goToSocialNetworkPosts={() => {
                                 // set store id as local varibale because IG API cannot receive the store id in the url (becaus it has to be exact url and it changes with the store ids)
                                 localStorage.setItem('store_id', this.props.match.params.store_id);
@@ -192,7 +219,7 @@ class ChooseStore extends React.Component {
                             openNavMenu={this.state.openNavMenu}
                             onCloseNavMenu={() => this.setState({ openNavMenu: false })}
                             onClickOpenNavMenu={() => { this.setState({ openNavMenu: true }) }}
-                        />
+                        /> */}
 
                         {/* logout */}
                         {/* <Button align="center" variant="contained" color="primary"
