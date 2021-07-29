@@ -495,9 +495,21 @@ class ProductsToSell extends React.Component {
                                             >
 
                                                 <Typography 
+                                                style={{
+                                                    display: "flex",
+                                                    flexDirection: "column",
+                                                    justifyContent: "center",
+                                                    // alignContent: "center",
+                                                    alignItems: "center",
+
+                                                    backgroundColor: "rgba(66, 135, 245,0.1)",
+                                                    margin: 40,
+                                                    padding: 15,
+                                                    borderRadius: 20,
+                                                }}
                                                     align = "center"
                                                     gutterBottom variant="body2" component="p">
-                                                    Aún no has agregado productos a tu tienda ¡Comienza a agregar productos!
+                                                    Aún no has agregado productos a tu tienda ¡Comienza a agregar productos! 🤓
                                                 </Typography>
                                             
                                                 {/* go to post from SN */}

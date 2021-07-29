@@ -195,6 +195,40 @@ class AddNewProductHome extends React.Component {
                         Agregar nuevo producto
                     </Typography>
 
+                    <Container
+                        style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                            // alignContent: "center",
+                            alignItems: "center",
+
+                            backgroundColor: "rgba(66, 135, 245,0.1)",
+                            // margin: 40,
+                            padding: 15,
+                            borderRadius: 20,
+                        }}
+                    >
+                        {/* <Typography align="center" variant="h5" component="h5" gutterBottom
+                        // backgroundColor = "primary"
+                        // style = {{
+                        //     backgroundColor: "rgba(66, 135, 245,0.1)",
+                        //     margin: 40,
+                        //     padding: 15,
+                        //     borderRadius: 20,
+                        // }}
+                        >
+                            🎊 Bienvenid@ a Livet 🎊
+                                        </Typography> */}
+
+                        <Typography align="center" variant="body2" component="p" gutterBottom
+                        >
+                            Puedes agregar un producto directamente desde el Instagram de tu tienda 📱
+                            o puedes agregarlo de forma manual ✍️
+                        </Typography>
+
+                    </Container>
+
                     {/* add from IG */}
                     <Button
                         align="center"
