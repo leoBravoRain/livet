@@ -317,11 +317,12 @@ class CreateNewStoreForm extends React.Component {
                             flexDirection: "column",
                             justifyContent: "center",
                             alignItems: "center",
+                            // marginTop: 
                         }}
                     >
 
                         {/* menu */}
-                        <MenuBar
+                        {/* <MenuBar
                             goToSocialNetworkPosts={() => {
                                 // set store id as local varibale because IG API cannot receive the store id in the url (becaus it has to be exact url and it changes with the store ids)
                                 localStorage.setItem('store_id', this.props.match.params.store_id);
@@ -367,7 +368,40 @@ class CreateNewStoreForm extends React.Component {
                             openNavMenu={this.state.openNavMenu}
                             onCloseNavMenu={() => this.setState({ openNavMenu: false })}
                             onClickOpenNavMenu={() => { this.setState({ openNavMenu: true }) }}
-                        />
+                        /> */}
+
+                        <Container
+                            style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                justifyContent: "center",
+                                // alignContent: "center",
+                                alignItems: "center",
+
+                                backgroundColor: "rgba(66, 135, 245,0.1)",
+                                margin: 40,
+                                padding: 15,
+                                borderRadius: 20,
+                            }}
+                        >
+                            {/* <Typography align="center" variant="h5" component="h5" gutterBottom
+                            // backgroundColor = "primary"
+                            // style = {{
+                            //     backgroundColor: "rgba(66, 135, 245,0.1)",
+                            //     margin: 40,
+                            //     padding: 15,
+                            //     borderRadius: 20,
+                            // }}
+                            >
+                                🎊 Bienvenid@ a Livet 🎊
+                                        </Typography> */}
+
+                            <Typography align="center" variant="body2" component="p" gutterBottom
+                            >
+                                Ingresa toda la información sobre tu tienda 🤓
+                            </Typography>
+
+                        </Container>
 
                         {/* sync with IG account */}
                         <Typography align="center" variant="h4" component="h4" gutterBottom>

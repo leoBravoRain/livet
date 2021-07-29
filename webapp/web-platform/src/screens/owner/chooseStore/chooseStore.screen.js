@@ -146,30 +146,52 @@ class ChooseStore extends React.Component {
                     >
 
                         {
-                            this.state.stores.length == 0 &&
+                            this.state.stores.length == 0 
+                            
+                                ?
 
-                                <Container
-                                    style={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        justifyContent: "center",
-                                        // alignContent: "center",
-                                        alignItems: "center",
-                                    }}
-                                >
-                                    <Typography align="center" variant="h5" component="h5" gutterBottom
-                                        // backgroundColor = "primary"
-                                        style = {{
+                                    <Container
+                                        style={{
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            justifyContent: "center",
+                                            // alignContent: "center",
+                                            alignItems: "center",
+
                                             backgroundColor: "rgba(66, 135, 245,0.1)",
                                             margin: 40,
                                             padding: 15,
                                             borderRadius: 20,
                                         }}
                                     >
-                                        🎊 Bienvenid@ a Livet 🎊
-                                    </Typography>
+                                        <Typography align="center" variant="h5" component="h5" gutterBottom
+                                            // backgroundColor = "primary"
+                                            // style = {{
+                                            //     backgroundColor: "rgba(66, 135, 245,0.1)",
+                                            //     margin: 40,
+                                            //     padding: 15,
+                                            //     borderRadius: 20,
+                                            // }}
+                                        >
+                                            🎊 Bienvenid@ a Livet 🎊
+                                        </Typography>
 
-                                </Container>
+                                        <Typography align="center" variant="body2" component="p" gutterBottom
+                                        >
+                                            El primer paso es crear tu tienda
+                                        </Typography>
+
+                                    </Container>
+
+                                :
+                                    // add margin
+                                    <Container
+                                        style = {{
+                                            marginTop: 50,
+                                        }}
+                                    >
+
+                                    </Container>
 
                         }
                         {/* menu */}
@@ -241,9 +263,13 @@ class ChooseStore extends React.Component {
                         </Button> */}
 
                         {/* title */}
-                        <Typography align="center" variant="h3" component="h3" gutterBottom>
-                            Tus tiendas creadas
-                        </Typography>
+                        {
+                            this.state.stores.length > 0 &&
+
+                            <Typography align="center" variant="h3" component="h3" gutterBottom>
+                                Tus tiendas creadas
+                            </Typography>
+                        }
 
                         {/* create new store */}
                         <Button
@@ -480,7 +506,7 @@ class ChooseStore extends React.Component {
                                         }}
                                     >
 
-                                        <Typography 
+                                        {/* <Typography 
                                             align="center" 
                                             variant="body1" 
                                             component="p" 
@@ -488,7 +514,7 @@ class ChooseStore extends React.Component {
                                             // onClick={() => alert("oaijsd")}
                                         >
                                             No tienes tiendas creadas, ¡Comienza creando una!
-                                        </Typography>
+                                        </Typography> */}
                                         
                                         <Button
                                             // margin = {200}
