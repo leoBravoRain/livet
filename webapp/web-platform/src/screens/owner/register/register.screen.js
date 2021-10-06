@@ -61,7 +61,9 @@ class Register extends React.Component {
                 });
 
                 // go to social network login
-                this.props.history.push('/loginSocialNetworks');
+                // this.props.history.push('/loginSocialNetworks');
+                // redirect
+                this.props.history.push('/chooseStore');
 
             })
 
